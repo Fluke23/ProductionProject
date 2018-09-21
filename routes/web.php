@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::any('/test',function(){
+    return view('test');
+});
 
 Route::get('/', function () {
     return view('/auth/login');
@@ -92,3 +95,4 @@ Route::get('/Student/question/{id?}','StudentQuestionController@index')->name('q
 //Student/answerBlankquestion 
 Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('question.AnswerBlankQuestion'); //name for reditect in update
 Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@storeFiles')->name('question.AnswerBlankQuestion'); //name 
+
