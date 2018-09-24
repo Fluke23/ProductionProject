@@ -65,9 +65,9 @@ Route::post('/Admin/userManager/saveUser','UserController@store')->name('saveUse
 Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
 
 //Admin/blankQuestion
-Route::get('/Admin/blankQuestion','blankQuestionController@showUploadForms')->name('blankQuestion.file');
-Route::post ('/Admin/blankQuestion','blankQuestionController@storeFiles') ;
-Route::post('/Admin/blankQuestion/submit','blankQuestionController@submit');
+Route::get('/Admin/question/blankQuestion','blankQuestionController@showUploadForms')->name('blankQuestion.file');
+Route::post ('/Admin/question/blankQuestion','blankQuestionController@storeFiles') ;
+Route::post('/Admin/question/blankQuestion/submit','blankQuestionController@submit');
 
 //Admin/shortanswer
 Route::get('/Admin/shortAnswer','shortAnswerQuestionController@showUploadForms')->name('shortAnswer.file');
@@ -93,6 +93,6 @@ Route::get('/Student/quiz/{subject_id?}','QuizController@index')->name('quiz.Stu
 //Student/question 
 Route::get('/Student/question/{id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
 //Student/answerBlankquestion 
-Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('question.AnswerBlankQuestion'); //name for reditect in update
+Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
 Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
 Route::post('/Student/AnswerBlankQuestion/submit/{id?}','AnswerBlankController@submit');

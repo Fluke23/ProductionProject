@@ -17,7 +17,8 @@
             
             @foreach($question as $q)
                 <ul class="list-group">
-                        <li class="list-group">{{$q->img_url}}</li>
+                        <img src= "{{$q->img_url}} " >
+                       
                         <li class="list-group">Number: {{$q->number}}</li>
                         <li class="list-group">solution: {{$q->solution}}</li>
                         <li class="list-group">Question:{{$q->question}}</li>

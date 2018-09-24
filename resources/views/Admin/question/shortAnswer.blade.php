@@ -23,7 +23,7 @@
             <form action="{{route('shortAnswer.file')}}" method = "post"class="form-horizontal" enctype="multipart/form-data"> 
                 {{csrf_field()}}
             
-                <input type="file" name ="fileName[]" multiple>
+                <input type="file" name ="fileName" multiple>
                 
                 <div class="form-group">
             {{Form::hidden('Shortanswe', 'Shortanswe')}}

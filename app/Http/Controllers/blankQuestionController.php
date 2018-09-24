@@ -28,7 +28,7 @@ class blankQuestionController  extends Controller
 
         
 
-        foreach($request->fileName as $files){
+     //  foreach($request->fileName as $files){
 
 
 
@@ -56,7 +56,7 @@ class blankQuestionController  extends Controller
             $picPath = public_path('/images/Photo');
             $blankQuestionImg->move($picPath,$input['fileName']);
             $picName = $input['fileName'];
-            $blankQuestion ->img_url = $picName;
+            $blankQuestion ->img_url = '/images/Photo/'.$picName;
             $blankQuestion ->questions_id =$lastestQuestinID;
            
             //$blankQuestion ->size = $size;
@@ -67,7 +67,7 @@ class blankQuestionController  extends Controller
            return redirect()->route('question.index', [$quiz_id]);
            
             //return'yes';
-        }
+       // }
         
 
         

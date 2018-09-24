@@ -23,11 +23,11 @@ class shortAnswerQuestionController extends Controller
         
          $lastestQuestinID = $currentQuestionId+1;
        
-        foreach($request->fileName as $files){
+       // foreach($request->fileName as $files){
 
-            $fileName =  $files->getClientOriginalName();
-            $size =  $files->getClientSize();
-            $files->storeAs('public/upload',$fileName);
+         //   $fileName =  $files->getClientOriginalName();
+           // $size =  $files->getClientSize();
+            //$files->storeAs('public/upload',$fileName);
         
 
              //create new message
@@ -44,7 +44,13 @@ class shortAnswerQuestionController extends Controller
 
             /*add file into database */
             $shortAnswerQuestion = new shortAnswerQuestion;
-            $shortAnswerQuestion ->img_url =$fileName;
+           // $shortAnswerQuestion ->img_url =$fileName;
+           $shortAnswerQuestionImg =$request->file('fileName');
+           $input['fileName'] = time().'.'.$shortAnswerQuestionImg->getClientOriginalExtension();
+           $picPath = public_path('/images/Photo');
+           $shortAnswerQuestionImg->move($picPath,$input['fileName']);
+           $picName = $input['fileName'];
+           $shortAnswerQuestion ->img_url = '/images/Photo/'.$picName;
             $shortAnswerQuestion ->questions_id =$lastestQuestinID;
             //$blankQuestion ->size = $size;
             $shortAnswerQuestion -> save();
@@ -59,7 +65,8 @@ class shortAnswerQuestionController extends Controller
             
                 
 
-            }
+           // }
+           
 
  
         }
