@@ -1,4 +1,6 @@
-@extends('layouts.main')
+
+
+    @extends('layouts.student')
 
 @section('content')
 <div class="container">
@@ -6,16 +8,19 @@
         <div class="col-md-4">
             <h2 >Home(Subject Manager)</h2>
             </div>
-              
+            <div class="col-md-8">
+                {{-- @if($permission == 'ADMIN') <a href="{{ URL::to('subject/addSubject')}}" class="btn btn-success float-right">Add Subject</a> @endif --}}
+            </div>   
     </div>
 
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ URL::to('quiz')}}">Home</a></li>
+            
             </ol>
           </nav>
 
-     {{-- body --}}
+     {{-- body      --}}
  <div class="row">
     <div class="row">
         <table class="table table-bordered subject-table">
@@ -34,7 +39,6 @@
 
                     <td >
                     <a href="{{URL::to('/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
-                        
                     </td>
                  
             </tr>
