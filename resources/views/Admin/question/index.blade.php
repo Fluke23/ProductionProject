@@ -22,7 +22,7 @@
                 <a class="dropdown-item" 
                  href="/Admin/question/UploadQuestion/{{$quizs_id}}">UploadQuestion</a> 
                 <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ URL::to('/Admin/question/multipleChoice/{id?}')}}">MultipleQuestion</a>
+                <a class="dropdown-item" href="/Admin/question/MultipleChoice/{{$quizs_id}}">MultipleQuestion</a>
             </div>
       </div>       
             </div>   

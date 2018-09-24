@@ -7,7 +7,7 @@
             <h2 >User Manager</h2>
             </div>
             <div class="col-md-9">
-            <a href="{{ URL::to('/userManager/addGroupUser')}}" class="btn btn-success float-right">Add Group User</a>
+            <a href="{{ URL::to('/Admin/userManager/addGroupUser')}}" class="btn btn-success float-right">Add Group User</a>
             </div>   
     </div>
 

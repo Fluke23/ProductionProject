@@ -29,6 +29,7 @@ class StudentQuestionController extends Controller
             
             return view('/Student/question/StudentQuestion',compact('question','quizs_id'));       
     }
+    
 
     public function view($questions_types_id)
     {

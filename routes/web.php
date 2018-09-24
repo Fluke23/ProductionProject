@@ -50,7 +50,7 @@ Route::post('/Admin/question/updateQuestion','QuestionController@update');
 Route::get('/Admin/question/blankQuestion/{id?}','QuestionController@callBlankQuestion');
 Route::get('/Admin/question/shortAnswer/{id?}','QuestionController@callShortAnswerQuesstion');
 Route::get('/Admin/question/UploadQuestion/{id?}','QuestionController@callUploadFileQuesstion');
-Route::get('/Admin/question/multipleChoice/{id?}','QuestionController@callMultipleChoice');
+Route::get('/Admin/question/MultipleChoice/{id?}','QuestionController@callMultipleChoice');
 
 //testChoice
 Route::get('/Admin/choiceType/addMultiple/{id?}','QuestionController@callMultiple');
@@ -80,9 +80,9 @@ Route::post ('/Admin/UploadQuestion','UploadQuestionController@storeFiles') ;
 Route::post('/Admin/UploadQuestion/submit','UploadQuestionController@submit');
 
 //MultipleQuestion
-Route::get('/Admin/multipleChoice','MultipleChoiceController@showUploadForms')->name('MultipleChoice.file');
-Route::post ('/Admin/multipleChoice','MultipleChoiceController@storeFiles') ;
-Route::post('/Admin/multipleChoice/submit','MultipleChoiceController@submit');
+Route::get('/Admin/question/MultipleChoice','MultipleChoiceController@showUploadForms')->name('MultipleChoice.file');
+Route::post ('/Admin/question/MultipleChoice','MultipleChoiceController@storeFiles') ;
+Route::post('/Admin/question/MultipleChoicesubmit','MultipleChoiceController@submit');
 
 
 
@@ -94,5 +94,5 @@ Route::get('/Student/quiz/{subject_id?}','QuizController@index')->name('quiz.Stu
 Route::get('/Student/question/{id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
 //Student/answerBlankquestion 
 Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('question.AnswerBlankQuestion'); //name for reditect in update
-Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@storeFiles')->name('question.AnswerBlankQuestion'); //name 
-
+Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
+Route::post('/Student/AnswerBlankQuestion/submit/{id?}','AnswerBlankController@submit');

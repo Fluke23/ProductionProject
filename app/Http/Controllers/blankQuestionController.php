@@ -32,9 +32,9 @@ class blankQuestionController  extends Controller
 
 
 
-            $fileName =  $files->getClientOriginalName();
-            $size =  $files->getClientSize();
-            $files->storeAs('public/upload',$fileName);
+            // $fileName =  $files->getClientOriginalName();
+            // $size =  $files->getClientSize();
+            // $files->storeAs('public/upload',$fileName);
 
                         //create new message
                         $blankQuestion1 = new blankQuestion1;
@@ -50,32 +50,30 @@ class blankQuestionController  extends Controller
 
             /*add file into database */
             $blankQuestion = new blankQuestion;
-            $blankQuestion ->img_url =$fileName;
+           // $blankQuestion ->img_url =$fileName;
+            $blankQuestionImg =$request->file('fileName');
+            $input['fileName'] = time().'.'.$blankQuestionImg->getClientOriginalExtension();
+            $picPath = public_path('/images/Photo');
+            $blankQuestionImg->move($picPath,$input['fileName']);
+            $picName = $input['fileName'];
+            $blankQuestion ->img_url = $picName;
             $blankQuestion ->questions_id =$lastestQuestinID;
+           
             //$blankQuestion ->size = $size;
             $blankQuestion -> save();
             $quiz_id = $request->input('quiz_id');
 
            
            return redirect()->route('question.index', [$quiz_id]);
+           
             //return'yes';
-            }
+        }
+        
 
         
 
 
-        // //หนึ่งเพิ่มเอง ลบด้วยถ้าผิด 
-        //  $question_picture = new    
-        //  $question = new ([
-        //     'number' =>$request->get('number'),
-        //     'solution' => $request->get('name'),
-        //     'question' => $request->get('question'),
-        //     'score' => $request->get('score'),
-        //     'questions_types_id' => $request->get('questions_types_id'),
-        // ]);
-
-        // $question->save();
-        // //end of หนึ่งเพิ่มเอง 
+        
 
 
  
@@ -83,5 +81,3 @@ class blankQuestionController  extends Controller
         
         
 }
-  
-

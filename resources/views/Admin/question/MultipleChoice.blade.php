@@ -4,67 +4,134 @@
 <div class="container">
     <div class="row mb-2">
         <div class="col-md-3">
-            <h2 >Multiple Question</h2>
-            </div>
-            <div class="col-md-9">
-            
-                </div>   
+            <h2>Multiple Question</h2>
+        </div>
+        <div class="col-md-9">
+
+        </div>
     </div>
 
     <div class="row">
-    <form action="{{route('MultipleChoice.file')}}" method = "post"class="form-horizontal" enctype="multipart/form-data"> 
-                {{csrf_field()}}
+        <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+            {{csrf_field()}}
 
 
-            <input type="file" name ="fileName[]" multiple>
+             {{-- <input type="file" name ="fileName[]" multiple>  --}}
 
-        <div class="form-group">
-            {{Form::hidden ('Multiple', 'Multiple')}}
- 
-        </div>   
-         <div class="form-group">
-            {{Form::label('number', 'number')}}
-            {{Form::text('number', '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
-            </div>  
+            <div class="form-group">
+                {{Form::hidden ('Multiple', 'Multiple')}}
 
-        <div class="form-group">
-            {{Form::label('name', 'solution')}}
-            {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+            </div>
+            <div class="form-group">
+                {{Form::label('number', 'number')}}
+                {{Form::text('number', '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
-        <div class="form-group">
-            {{Form::label('question', 'question')}}
-            {{Form::textarea('question', '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
-        </div>
+            <div class="form-group">
+                {{Form::label('name', 'solution')}}
+                {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+            </div>
 
-        <div class="form-group">
-            {{Form::label('choice', 'choice')}}
-            {{Form::textarea('choice', '',['class'=>'form-control','placeholder'=> 'Enter Choice 1'])}}
-        </div>
+            <div class="form-group">
+                {{Form::label('question', 'question')}}
+                {{Form::textarea('question', '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
+            </div>
 
-        <div class="form-group">
-            {{Form::label('choice', 'choice')}}
-            {{Form::textarea('choice', '',['class'=>'form-control','placeholder'=> 'Enter Choice 2'])}}
-        </div>
+            <div class="form-group">
+                {{Form::label('score', 'score')}}
+                {{Form::text('score', '',['placeholder'=> 'Enter Score'])}}
+            </div>
 
-        <div class="form-group">
-            {{Form::label('choice', 'choice')}}
-            {{Form::textarea('choice', '',['class'=>'form-control','placeholder'=> 'Enter Choice 3'])}}
-        </div>
+            <div class="form-group">
+                {{Form::hidden('quiz_id',$quiz_id)}}
+            </div>
+                
+            @for ( $question=1 ;  $question<=4 ; $question++)
+            <div class="form-group">
+            {{Form::label('choice_'.$question, 'Choice_'.$question)}}
+            <!-- {{Form::checkbox('choice_type_id_'.$question,'1')}} -->
+            ถูก
+            {{Form::radio('choice_type_id_'.$question, '1')}}
+            ผิด
+            {{Form::radio('choice_type_id_'.$question, '2')}}
+            {{Form::text('choice_'.$question, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
+            </div>
+            @endfor
 
-        <div class="form-group">
-            {{Form::label('choice', 'choice')}}
-            {{Form::textarea('choice', '',['class'=>'form-control','placeholder'=> 'Enter Choice 4'])}}
-        </div>
 
-        <div class="form-group">
-            {{Form::label('score', 'score')}}
-            {{Form::text('score', '',['placeholder'=> 'Enter Score'])}}
-        </div>
 
-            <button type="reset" class="btn btn-danger">ยกเลิก</button>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
-        </form>
+            {{-- <div class="form-group">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <label for="question">Plase Select Number of Choice:</label>
+                            <input class="form-control" type="text" v-model="choice">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary btn-sm" v-on:click="addQuiz(this.choice)">Add
+                                Question</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-danger btn-sm">Delete choice</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="mt-2" v-for="quizs in quiz">
+                            <div class="row" v-for="ch in quizs.choice">
+                                <div class="mt-2">
+                                    <div class="checkbox mt-3">
+                                        {{Form::label('choice', 'choice')}}
+                                        {{Form::text('choice', '',['class'=>'form-control','placeholder'=> 'Enter
+                                        Choice'])}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label for="question">Score:</label><br>
+                                    <input type="text" value="" name="score" style="width:100px;">
+                                </div>
+                            </div>
+                            <br><br><br>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <br> --}}
+                <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+
+                {{--
+            </div> --}}
     </div>
+
+    </form>
+</div>
 </div>
 @endsection
+{{-- @push('script')
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            choice: '4',
+            quiz: [],
+        },
+        methods: {
+            addQuiz: function (choice) {
+                var numQuiz = this.quiz.length + 1
+                var countChocie = []
+                for (var i = 1; i <= this.choice; i++) {
+                    countChocie.push(i)
+                }
+                this.quiz.push({
+                    'value': numQuiz,
+                    'choice': countChocie
+                })
+            }
+        }
+    })
+</script>
+@endpush --}}
