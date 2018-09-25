@@ -22,8 +22,7 @@
     <div class="row">
     <form action="{{URL::to('/Admin/subject/updateSubject')}}" method="post">
        
-        @csrf
-
+        
         {{-- subject id --}}
         <div class="form-group row">
             <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject_id') }}</label>

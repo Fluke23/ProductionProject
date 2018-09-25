@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::any('/test',function(){
-    return view('test');
-});
+
 
 Route::get('/', function () {
     return view('/auth/login');
@@ -27,7 +25,7 @@ Route::group(['middleware' => ['Admin']], function () {
 	Route::get('/Admin/quiz/{subject_id?}','QuizController@index')->name('quiz.quizDetail'); //name use for redirect in update
 
     //Admin/quiz
-    Route::get('/Admin/quiz/{subject_id?}','QuizController@index')->name('quiz.quizDetail'); //name use for redirect in update
+    Route::get('/Admin/quiz/quizDetail/{subject_id?}','QuizController@index')->name('quiz.quizDetail'); //name use for redirect in update
     Route::get('/Admin/quiz/addQuiz/{subject_id?}','QuizController@create')->name('addQuiz');
     Route::post('/Admin/quiz/saveQuiz/{subject_id?}','QuizController@store');
     Route::get('/Admin/quiz/editQuiz/{subject_id?}','QuizController@edit');
@@ -38,7 +36,7 @@ Route::group(['middleware' => ['Admin']], function () {
 
     //Admin/subject
     Route::get('/Admin/subject','SubjectController@index')->name('subject.index'); //name for reditect in update 
-    Route::get('/Admin/subject/addSubject','SubjectController@create');
+    Route::get('/Admin/subject/addSubject','SubjectController@create')->name('addSubject');;
     Route::post('/Admin/subject/saveSubject','SubjectController@store');
     Route::get('/Admin/subject/editSubject/{id?}','SubjectController@edit');
     Route::post('/Admin/subject/updateSubject','SubjectController@update');
@@ -99,7 +97,10 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
     Route::post('/Student/AnswerBlankQuestion/submit/{id?}','AnswerBlankController@submit');
-
+    //Student/answerShortquestion 
+    Route::get('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@store'); //name 
+    Route::post('/Student/AnswerShortQuestion/submit/{id?}','AnswerShortQuestionControllerr@submit');
 
 
     

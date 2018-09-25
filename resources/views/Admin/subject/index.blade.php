@@ -7,8 +7,11 @@
             <h2>Home(Subject Manager)</h2>
         </div>
         <div class="col-md-8">
-            <a href="{{ URL::to('/Admin/subject/addSubject')}}" class="btn btn-success float-right">Add Subject</a>
-        </div>
+            <a href="{{ URL::route('addSubject') }}"  
+            class="btn btn-success float-right" 
+            data-toggle="modal" 
+            data-target="#exampleModal">Add Subject</a>
+            </div>  
     </div>
 
     <nav aria-label="breadcrumb">
@@ -36,7 +39,8 @@
 
                         <td>
                             <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
-                            <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>
+                             
+                         <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>   
                             <a href="{{ URL::to('/Admin/subject/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger">Delete</a>
                         </td>
 
@@ -51,4 +55,84 @@
 
     </div>
 
+
+
+<!-- modal add Subject -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Add Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      <div class="row">
+    <form action="{{URL::to('/Admin/subject/saveSubject')}}" method="post" id="addForm">
+        @csrf
+
+        {{-- subject id --}}
+        <div class="form-group row">
+            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject_id') }}</label>
+
+            <div class="col-md-6">
+                <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}" name="subject_id" value="{{ old('subject_id') }}" required autofocus>
+
+                @if ($errors->has('subject_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('subject_id') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        {{-- subject name --}}
+        <div class="form-group row">
+            <label for="subject_name" class="col-md-4 col-form-label text-md-right">{{ __('subject_name') }}</label>
+
+            <div class="col-md-6">
+                <input id="subject_name" type="text" class="form-control{{ $errors->has('subject_name') ? ' is-invalid' : '' }}" name="subject_name" value="{{ old('subject_name') }}" required autofocus>
+
+                @if ($errors->has('subject_name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('subject_name') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success"  data-dismiss="modal" class="form action" onclick='addForm()'>Add Subject </button>
+        
+        </form>
+    </div>
+    
+
+</div>
+<script>
+    function addForm(){
+        document.getElementById('addForm').submit();
+    }
+</script>
+
+
+ <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+      
     @endsection

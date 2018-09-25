@@ -3,43 +3,46 @@
 @section('content')
 <div class="container">
     <div class="row mb-2">
-        <div class="col-md-3">
+        <div class="col-md-3 display-2">
             <h2>Multiple Question</h2>
         </div>
         <div class="col-md-9">
 
         </div>
     </div>
-
     <div class="row">
         <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
 
 
              {{-- <input type="file" name ="fileName[]" multiple>  --}}
-
+    @for ( $i=1 ;  $i<=$amount ; $i++) 
             <div class="form-group">
-                {{Form::hidden ('Multiple', 'Multiple')}}
-
+                {{Form::hidden ('Multiple'.$i, 'Multiple')}}
             </div>
+
+        <div class="form-group h5">
+            {{Form::label('', 'No.'.$i)}}
+        </div>
+
             <div class="form-group">
                 {{Form::label('number', 'number')}}
-                {{Form::text('number', '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
+                {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
             <div class="form-group">
                 {{Form::label('name', 'solution')}}
-                {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+                {{Form::text('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
             </div>
 
             <div class="form-group">
                 {{Form::label('question', 'question')}}
-                {{Form::textarea('question', '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
+                {{Form::textarea('question'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
             </div>
 
             <div class="form-group">
                 {{Form::label('score', 'score')}}
-                {{Form::text('score', '',['placeholder'=> 'Enter Score'])}}
+                {{Form::text('score'.$i, '',['placeholder'=> 'Enter Score'])}}
             </div>
 
             <div class="form-group">
@@ -51,13 +54,14 @@
             {{Form::label('choice_'.$question, 'Choice_'.$question)}}
             <!-- {{Form::checkbox('choice_type_id_'.$question,'1')}} -->
             ถูก
-            {{Form::radio('choice_type_id_'.$question, '1')}}
+            {{Form::radio('choice_type_id_'.$question.$i, '1')}}
             ผิด
-            {{Form::radio('choice_type_id_'.$question, '2')}}
-            {{Form::text('choice_'.$question, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
+            {{Form::radio('choice_type_id_'.$question.$i, '2')}}
+            {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor
-
+            <br><hr><br>
+    @endfor 
 
 
             {{-- <div class="form-group">

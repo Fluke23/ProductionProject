@@ -45,7 +45,7 @@ class QuizController extends Controller
                 ->where('Subjects.subject_id','=',$subject_id)
                 ->get();
         
-        return view('/Admin/quiz/index',compact('quizzes','subject_id'));
+        return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id'));
         
     }
 
@@ -57,7 +57,7 @@ class QuizController extends Controller
     public function create($subject_id) 
     {
         
-        return view('/Admin/quiz/addQuiz',compact('subject_id'));
+        return view('/Admin/quiz/quizDetail',compact('subject_id'));
     }
 
     /**
@@ -87,7 +87,7 @@ class QuizController extends Controller
 
           $group_quiz->save();
                    
-          return redirect()->route('quiz.index',['subject_id'=>$request->get('subject_id')]);
+          return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
     }
 
     /**
@@ -111,7 +111,7 @@ class QuizController extends Controller
     {
         $quiz = Quiz::findorfail($id);
 
-        return view('quiz/editQuiz', compact('quiz'));
+        return view('/Admin/quiz/editQuiz', compact('quiz'));
     }
 
     /**
@@ -135,7 +135,7 @@ class QuizController extends Controller
         $quiz->quizs_status_id = $request->get('quizs_status_id');
            
         $quiz->save();
-        return redirect()->route('quiz.index',['subject_id'=>$request->get('subject_id')])->with('success', 'Data Updated');
+        return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')])->with('success', 'Data Updated');
     }
 
     /**
@@ -148,7 +148,7 @@ class QuizController extends Controller
     {
         $quiz = Quiz::find($id);
         $quiz->delete();
-        return redirect()->route('quiz.index',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        return redirect()->route('quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
     }
 
 }

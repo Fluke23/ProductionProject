@@ -114,6 +114,7 @@ class QuestionController extends Controller
     }
 
     public function callMultipleChoice($quiz_id){
-        return view('/Admin/question/MultipleChoice',compact('quiz_id')); 
+        $amount = 3;
+        return view('/Admin/question/MultipleChoice',compact('quiz_id','amount')); 
     }
 }
