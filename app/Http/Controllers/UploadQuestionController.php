@@ -23,11 +23,11 @@ class UploadQuestionController  extends Controller
         
         $lastestQuestinID = $currentQuestionId+1;
        
-        foreach($request->fileName as $files){
+       // foreach($request->fileName as $files){
 
-            $fileName =  $files->getClientOriginalName();
-            $size =  $files->getClientSize();
-            $files->storeAs('public/upload',$fileName);
+          //  $fileName =  $files->getClientOriginalName();
+         //   $size =  $files->getClientSize();
+           // $files->storeAs('public/upload',$fileName);
         
 
 
@@ -45,9 +45,13 @@ class UploadQuestionController  extends Controller
 
             /*add file into database */
             $UploadQuestion = new UploadQuestion;
-            $UploadQuestion ->img_url =$fileName;
+            $UploadQuestionImg =$request->file('fileName');
+            $input['fileName'] = time().'.'.$UploadQuestionImg->getClientOriginalExtension();
+            $picPath = public_path('/images/Photo');
+            $UploadQuestionImg->move($picPath,$input['fileName']);
+            $picName = $input['fileName'];
+            $UploadQuestion ->img_url = '/images/Photo/'.$picName;
             $UploadQuestion ->questions_id =$lastestQuestinID;
-            //$UploadQuestion ->size = $size;
             $UploadQuestion -> save();
             
             $quiz_id = $request->input('quiz_id');
@@ -62,7 +66,7 @@ class UploadQuestionController  extends Controller
             
                 
 
-            }
+           // }
 
  
         }
