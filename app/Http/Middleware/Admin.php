@@ -23,6 +23,12 @@ class Admin
             $request->merge(compact('permission'));
             return $next($request);
         }elseif($permission->groups_id == 'STUDENT'){
+            $permission = $permission->groups_id;
+            $request->merge(compact('permission'));
+            return $next($request);
+        }elseif($permission->groups_id == 'LECTURER'){
+            $permission = $permission->groups_id;
+            $request->merge(compact('permission'));
             return $next($request);
         }
         

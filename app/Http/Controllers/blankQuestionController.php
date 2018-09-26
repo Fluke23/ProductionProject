@@ -61,6 +61,7 @@ class blankQuestionController  extends Controller
            
             //$blankQuestion ->size = $size;
             $blankQuestion -> save();
+            //dd($blankQuestion);
             $quiz_id = $request->input('quiz_id');
 
            

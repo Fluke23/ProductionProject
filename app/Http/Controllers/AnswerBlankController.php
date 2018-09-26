@@ -15,44 +15,42 @@ class AnswerBlankController extends Controller
     
     public function index($questions_id)
     {
-    //     $questionType = DB::table('Questions')
-    //     ->select('questions_types_id')
-    //    //->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
-    //     ->where('questions_id','=',$questions_id)
-    //     ->get();
-
-        $data = Question::where('questions_id',$questions_id)->get();
-        $questionType = $data[0]->questions_types_id;
-
-        dd($questionType);
         $question = DB::table('Questions')
-        // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
         
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+      
+
+        $data = Question::where('questions_id',$questions_id)->get();
+        $questionType = $data[0]->questions_types_id;
+
+        //dd($questionType);
+       
+        switch ($questionType) {
+            case 'Blank':
+            return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id'));
+                break;
             
+            case 'Shortanswe':
+            return view('/Student/question/AnswerShortQuestion',compact('question','questions_id'));
+                break;  
+                
+            case 'Upload':
+            return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id'));
+                break;
+                
+            case 'True/False':
+            return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id'));
+                break;        
             
-        if ($questionType == 'Blank'){
-                return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id'));
-                }
-                else if ($questionType == 'Shortanswe'){
-                    return view('/Student/question/AnswerShortQuestion',compact('question','questions_id'));
+            default:
+            return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id'));
+                break;
+        }
 
-                    }
-                    else if ($questionType == 'Upload'){
-                        return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id'));
-
-                    }
-                        else if ($questionType == 'True/False'){
-                            return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id'));
-
-                        }
-                            else{
-                            return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id'));
-                             }
-               
+       
     }
 
 
