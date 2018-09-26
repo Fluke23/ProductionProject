@@ -100,7 +100,12 @@ Route::group(['middleware' => ['Admin']], function () {
     //Student/answerShortquestion 
     Route::get('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@store'); //name 
-    Route::post('/Student/AnswerShortQuestion/submit/{id?}','AnswerShortQuestionControllerr@submit');
+    Route::post('/Student/AnswerShortQuestion/submit/{id?}','AnswerShortQuestionController@submit');
+
+    //Student/answerShortquestion 
+    Route::get('/Student/question/AnswerUploadQuestion/{id?}','answerUploadQuestionController@index')->name('AnswerUploadQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerUploadQuestion/{id?}','answerUploadQuestionController@store'); //name 
+    Route::post('/Student/AnswerUploadQuestion/submit/{id?}','answerUploadController@submit');
 
 
     
