@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['Admin']], function () {
 	Route::get('/Admin/quiz/{subject_id?}','QuizController@index')->name('quiz.quizDetail'); //name use for redirect in update
-
+});
     //Admin/quiz
     Route::get('/Admin/quiz/quizDetail/{subject_id?}','QuizController@index')->name('quiz.quizDetail'); //name use for redirect in update
     Route::get('/Admin/quiz/addQuiz/{subject_id?}','QuizController@create')->name('addQuiz');
@@ -52,7 +52,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/question/blankQuestion/{id?}','QuestionController@callBlankQuestion');
     Route::get('/Admin/question/shortAnswer/{id?}','QuestionController@callShortAnswerQuesstion');
     Route::get('/Admin/question/UploadQuestion/{id?}','QuestionController@callUploadFileQuesstion');
-    Route::get('/Admin/question/MultipleChoice/{id?}','QuestionController@callMultipleChoice');
+    Route::get('/Admin/question/MultipleChoice/{id?}','QuestionController@callMultipleChoice')->name('Question.callMultipleChoice');
+    Route::get('/Admin/question/TrueFalse/{id?}','QuestionController@callTrueFalse');
 
     //testChoice
     Route::get('/Admin/choiceType/addMultiple/{id?}','QuestionController@callMultiple');
@@ -86,11 +87,11 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post ('/Admin/question/MultipleChoice','MultipleChoiceController@storeFiles') ;
     Route::post('/Admin/question/MultipleChoicesubmit','MultipleChoiceController@submit');
 
-    //admin/TrueFalseQuestion
+    //TrueFalseQuestion
     Route::get('/Admin/question/TrueFalse','TrueFalseController@showUploadForms')->name('TrueFalse.file');
     Route::post ('/Admin/question/TrueFalse','TrueFalseController@storeFiles') ;
     Route::post('/Admin/question/TrueFalsesubmit','TrueFalseController@submit');
-    });
+   
 
     //Student/subject
     Route::get('/Student/subject','SubjectController@index')->name('subject.indexStudent'); //name for reditect in update 

@@ -20,7 +20,6 @@ class MultipleChoiceController extends Controller
     }
     
     public function showUploadForms(){
-        dd('test');
         return view('MultipleChoiceQuestion');
     }
     
