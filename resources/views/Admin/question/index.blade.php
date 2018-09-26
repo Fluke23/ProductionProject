@@ -22,7 +22,8 @@
                 <a class="dropdown-item" 
                  href="/Admin/question/UploadQuestion/{{$quizs_id}}">UploadQuestion</a> 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/Admin/question/MultipleChoice/{{$quizs_id}}">MultipleQuestion</a>
+                <a class="dropdown-item" href="/Admin/question/TrueFalse/{{$quizs_id}}">TrueFalseQuestion</a>
+                <a class="dropdown-item" href="/Admin/question/MultipleChoice/{{$quizs_id}}">MultipleChoiceQuestion</a>
             </div>
       </div>       
             </div>   

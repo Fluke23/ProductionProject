@@ -117,4 +117,8 @@ class QuestionController extends Controller
         $amount = 3;
         return view('/Admin/question/MultipleChoice',compact('quiz_id','amount')); 
     }
+
+    public function callTrueFalse($quiz_id){
+        return view('/Admin/question/TrueFalse',compact('quiz_id')); 
+    }
 }
