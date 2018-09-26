@@ -27,6 +27,7 @@ class QuestionController extends Controller
            // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
            // ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
             ->where('quizs.quizs_id','=',$quizs_id)
+            ->orderby('Questions.questions_id','desc')
             ->get();
 
 
@@ -113,8 +114,11 @@ class QuestionController extends Controller
         return view('/Admin/question/UploadQuestion',compact('quiz_id'));  
     }
 
-    public function callMultipleChoice($quiz_id){
-        $amount = 3;
+    public function callMultipleChoice(Request $request,$quiz_id){
+        dd($quiz_id);
+        $amount = $request->input('amount');
+        dd($amount);
+        // $amount = 5;
         return view('/Admin/question/MultipleChoice',compact('quiz_id','amount')); 
     }
 
