@@ -21,16 +21,24 @@ use Html;
 
 class QuizController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->middleware('Admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($subject_id)
+    public function index(Request $request,$subject_id)
     {
+        $permission = $request->get('permission');
+
         $username = Auth::user()->username;
-    
-       
         
         // $data = Quiz::all();
         $quizzes = DB::table('quizs')
@@ -45,8 +53,14 @@ class QuizController extends Controller
                 ->where('Subjects.subject_id','=',$subject_id)
                 ->get();
         
-        return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id'));
         
+        if($permission == 'ADMIN'){
+            return view('/Admin/quiz/index',compact('quizzes','subject_id','$permission'));
+        }elseif($permission == 'STUDENT'){
+            return view('student/quiz/index',compact('quizzes','subject_id','$permission'));
+        }elseif($permission == 'LECTURER'){
+            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission'));
+        }
     }
 
     /**
@@ -56,8 +70,8 @@ class QuizController extends Controller
      */
     public function create($subject_id) 
     {
-        
-        return view('/Admin/quiz/quizDetail',compact('subject_id'));
+        $group = Group::all();
+        return view('/Admin/quiz/addQuiz',compact('subject_id','group'));
     }
 
     /**
@@ -86,7 +100,9 @@ class QuizController extends Controller
           ]);
 
           $group_quiz->save();
-                   
+
+          
+
           return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
     }
 
@@ -111,7 +127,7 @@ class QuizController extends Controller
     {
         $quiz = Quiz::findorfail($id);
 
-        return view('/Admin/quiz/editQuiz', compact('quiz'));
+        return view('admin/quiz/editQuiz', compact('quiz'));
     }
 
     /**
