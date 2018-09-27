@@ -118,13 +118,14 @@ class QuestionController extends Controller
 
     public function callMultipleChoice(Request $request,$quiz_id){
        //dd($quiz_id);
-        $amount = $request->input('amount');
+        // $amount = $request->input('amount');
        // dd($amount);
          $amount = 5;
       return view('/Admin/question/MultipleChoice',compact('quiz_id','amount')); 
     }
 
     public function callTrueFalse($quiz_id){
-        return view('/Admin/question/TrueFalse',compact('quiz_id')); 
+        $amount = 5;
+        return view('/Admin/question/TrueFalse',compact('quiz_id','amount')); 
     }
 }

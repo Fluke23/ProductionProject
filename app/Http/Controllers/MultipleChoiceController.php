@@ -28,7 +28,7 @@ class MultipleChoiceController extends Controller
         // dd($request);
         
         //return $request-> all();
-        for ($j=1; $j <=2 ; $j++) { 
+        for ($j=1; $j <=5 ; $j++) { 
         $currentQuestionId = DB::table('Questions')->max('questions_id');
         
         $lastestQuestinID = $currentQuestionId+1;
@@ -45,7 +45,7 @@ class MultipleChoiceController extends Controller
             $MultipleChoice = new Choice;
             $MultipleChoiceQuestion->questions_types_id =$request->input('Multiple'.$j);
             $MultipleChoiceQuestion->number =$request->input('number'.$j);
-            $MultipleChoiceQuestion->solution =$request->input('name'.$j);
+            $MultipleChoiceQuestion->solution =$request->input('name');
             $MultipleChoiceQuestion->question =$request->input('question'.$j);
             $MultipleChoiceQuestion->score =$request->input('score'.$j);
             $MultipleChoiceQuestion->quizs_id =$request->input('quiz_id');

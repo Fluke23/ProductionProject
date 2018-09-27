@@ -14,6 +14,10 @@
         <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
 
+            <div class="form-group">
+                {{Form::label('name', 'solution')}}
+                {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+            </div>
 
              {{-- <input type="file" name ="fileName[]" multiple>  --}}
     @for ( $i=1 ;  $i<=$amount ; $i++) 
@@ -30,10 +34,7 @@
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
-            <div class="form-group">
-                {{Form::label('name', 'solution')}}
-                {{Form::text('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
-            </div>
+            
 
             <div class="form-group">
                 {{Form::label('question', 'question')}}

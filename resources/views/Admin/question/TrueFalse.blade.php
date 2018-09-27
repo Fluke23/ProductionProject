@@ -18,6 +18,12 @@
 
              {{-- <input type="file" name ="fileName[]" multiple>  --}}
 
+            @for ( $i=1 ;  $i<=$amount ; $i++) 
+
+            <div class="form-group h5">
+            {{Form::label('', 'No.'.$i)}}
+            </div>
+
             <div class="form-group">
                 {{Form::hidden ('TrueFalse', 'TrueFalse')}}
 
@@ -56,7 +62,8 @@
             {{Form::text('choice_'.$question, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor
-
+            <br><hr><br>
+    @endfor
 
 
             {{-- <div class="form-group">

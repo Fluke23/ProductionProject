@@ -28,6 +28,7 @@ class TrueFalseController extends Controller
         // dd($request);
         
         //return $request-> all();
+        for ($j=1; $j <=5 ; $j++) { 
         $currentQuestionId = DB::table('Questions')->max('questions_id');
         
         $lastestQuestinID = $currentQuestionId+1;
@@ -39,11 +40,11 @@ class TrueFalseController extends Controller
             //create new message
             $TrueFalseQuestion = new Question;
             $TrueFalse = new Choice;
-            $TrueFalseQuestion->questions_types_id =$request->input('TrueFalse');
-            $TrueFalseQuestion->number =$request->input('number');
+            $TrueFalseQuestion->questions_types_id =$request->input('TrueFalse'.$j);
+            $TrueFalseQuestion->number =$request->input('number'.$j);
             $TrueFalseQuestion->solution =$request->input('name');
-            $TrueFalseQuestion->question =$request->input('question');
-            $TrueFalseQuestion->score =$request->input('score');
+            $TrueFalseQuestion->question =$request->input('question'.$j);
+            $TrueFalseQuestion->score =$request->input('score'.$j);
             $TrueFalseQuestion->quizs_id =$request->input('quiz_id');
             $TrueFalseQuestion->save();
             $TrueFalse->questions_id =$lastestQuestinID;
@@ -59,7 +60,7 @@ class TrueFalseController extends Controller
             // $question_id = $request->get('questions_id');
             $quiz_id = $request->input('quiz_id');
             //save message
-            
+        }
             
             
              /*add file into database */
