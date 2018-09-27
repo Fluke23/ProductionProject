@@ -30,19 +30,19 @@
         </div>
 
             <div class="form-group">
-                {{Form::label('number', 'number')}}
+                {{Form::label('number'.$i, 'number')}}
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
             
 
             <div class="form-group">
-                {{Form::label('question', 'question')}}
+                {{Form::label('question'.$i, 'question')}}
                 {{Form::textarea('question'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
             </div>
 
             <div class="form-group">
-                {{Form::label('score', 'score')}}
+                {{Form::label('score'.$i, 'score')}}
                 {{Form::text('score'.$i, '',['placeholder'=> 'Enter Score'])}}
             </div>
 
@@ -52,7 +52,7 @@
                 
             @for ( $question=1 ;  $question<=4 ; $question++)
             <div class="form-group">
-            {{Form::label('choice_'.$question, 'Choice_'.$question)}}
+            {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
             <!-- {{Form::checkbox('choice_type_id_'.$question,'1')}} -->
             ถูก
             {{Form::radio('choice_type_id_'.$question.$i, '1')}}

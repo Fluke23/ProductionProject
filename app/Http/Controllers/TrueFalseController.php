@@ -51,9 +51,9 @@ class TrueFalseController extends Controller
 
             for ($i=1; $i <=2 ; $i++){
             $TrueFalse = new Choice; 
-            $TrueFalse->choice =$request->input('choice_'.$i);
+            $TrueFalse->choice =$request->input('choice_'.$i.$j);
             $TrueFalse->questions_id =$lastestQuestinID;
-            $TrueFalse->choice_type_id = $request->input('choice_type_id_'.$i);
+            $TrueFalse->choice_type_id = $request->input('choice_type_id_'.$i.$j);
             $TrueFalse->save();
             }
             // dd($request);

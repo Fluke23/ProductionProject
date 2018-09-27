@@ -25,41 +25,41 @@
             </div>
 
             <div class="form-group">
-                {{Form::hidden ('TrueFalse', 'TrueFalse')}}
+                {{Form::hidden ('TrueFalse'.$i, 'TrueFalse')}}
 
             </div>
             <div class="form-group">
-                {{Form::label('number', 'number')}}
-                {{Form::text('number', '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
+                {{Form::label('number'.$i, 'number')}}
+                {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
             <div class="form-group">
-                {{Form::label('name', 'solution')}}
-                {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+                {{Form::label('name'.$i, 'solution')}}
+                {{Form::text('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
             </div>
 
             <div class="form-group">
-                {{Form::label('question', 'question')}}
-                {{Form::textarea('question', '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
+                {{Form::label('question'.$i, 'question')}}
+                {{Form::textarea('question'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
             </div>
 
             <div class="form-group">
-                {{Form::label('score', 'score')}}
-                {{Form::text('score', '',['placeholder'=> 'Enter Score'])}}
+                {{Form::label('score'.$i, 'score')}}
+                {{Form::text('score'.$i, '',['placeholder'=> 'Enter Score'])}}
             </div>
 
             <div class="form-group">
-                {{Form::hidden('quiz_id',$quiz_id)}}
+                {{Form::hidden('quiz_id'.$i,$quiz_id)}}
             </div>
                 
             @for ( $question=1 ;  $question<=2 ; $question++)
             <div class="form-group">
-            {{Form::label('choice_'.$question, 'Choice_'.$question)}}
+            {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
             ถูก
-            {{Form::radio('choice_type_id_'.$question, '1')}}
+            {{Form::radio('choice_type_id_'.$question.$i, '1')}}
             ผิด
-            {{Form::radio('choice_type_id_'.$question, '2')}}
-            {{Form::text('choice_'.$question, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
+            {{Form::radio('choice_type_id_'.$question.$i, '2')}}
+            {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor
             <br><hr><br>
