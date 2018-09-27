@@ -51,7 +51,7 @@ class QuizController extends Controller
                 ->join('Groups','Groups.groups_id','=','Groups_quizs.groups_id')
                 ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้ 
                 ->where('Subjects.subject_id','=',$subject_id)
-                //->orderby('quizs.quizs_id','desc') //Addition
+                ->orderby('quizs.quizs_id','desc') //Addition
                 ->get();
         
         
