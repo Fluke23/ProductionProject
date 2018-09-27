@@ -42,7 +42,7 @@ class TrueFalseController extends Controller
             $TrueFalse = new Choice;
             $TrueFalseQuestion->questions_types_id =$request->input('TrueFalse'.$j);
             $TrueFalseQuestion->number =$request->input('number'.$j);
-            $TrueFalseQuestion->solution =$request->input('name');
+            $TrueFalseQuestion->solution =$request->input('name'.$j);
             $TrueFalseQuestion->question =$request->input('question'.$j);
             $TrueFalseQuestion->score =$request->input('score'.$j);
             $TrueFalseQuestion->quizs_id =$request->input('quiz_id');
