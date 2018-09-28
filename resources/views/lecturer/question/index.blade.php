@@ -13,15 +13,15 @@
                  </button>
             <div class="dropdown-menu">
             <a class="dropdown-item"  
-                        href="/Admin/question/blankQuestion/{{$quizs_id}}">BlankQuestion</a>
+                        href="/Lecturer/question/blankQuestion/{{$quizs_id}}">BlankQuestion</a>
                         <!-- href="{{ URL::to('/question/blankQuestion/')}}">BlankQuestion</a> -->
                 <a class="dropdown-item"  
-                        href="/Admin/question/shortAnswer/{{$quizs_id}}">shortAnswer</a> 
+                        href="/Lecturer/question/shortAnswer/{{$quizs_id}}">shortAnswer</a> 
                 <a class="dropdown-item" 
-                 href="/Admin/question/UploadQuestion/{{$quizs_id}}">UploadQuestion</a> 
+                 href="/Lecturer/question/UploadQuestion/{{$quizs_id}}">UploadQuestion</a> 
                 <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/Admin/question/MultipleChoice/{{$quizs_id}}">MultipleQuestion</a>
-                    <a class="dropdown-item" href="/Admin/question/TrueFalse/{{$quizs_id}}">TrueFalseQuestion</a>
+                    <a class="dropdown-item" href="/Lecturer/question/MultipleChoice/{{$quizs_id}}">MultipleQuestion</a>
+                    <a class="dropdown-item" href="/Lecturer/question/TrueFalse/{{$quizs_id}}">TrueFalseQuestion</a>
             </div>
       </div>       
             </div>   
