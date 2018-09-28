@@ -50,9 +50,9 @@
                     
 
                         <td >
-                            <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                            <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
-                            <a href="{{ URL::to('/Admin/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
+                            <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{ URL::to('/Lecturer/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
+                            <a href="{{ URL::to('/Lecturer/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
                         </td>
                 </tr>
                      @endforeach
