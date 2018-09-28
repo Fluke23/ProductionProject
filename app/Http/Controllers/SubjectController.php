@@ -49,7 +49,7 @@ class SubjectController extends Controller
         if($permission == 'ADMIN'){
            return view('/Admin/subject/index',compact('subjects','permission'));
        }elseif($permission == 'STUDENT'){
-            return view('student/subject/Studentindex',compact('subjects','permission'));
+            return view('Student/subject/Studentindex',compact('subjects','permission'));
         }elseif($permission == 'LECTURER'){
            return view('lecturer/subject/index',compact('subjects','permission'));
         }
