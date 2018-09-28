@@ -192,7 +192,7 @@ class QuizController extends Controller
         return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
         }
     }
-
+//jm
     /**
      * Remove the specified resource from storage.
      *
