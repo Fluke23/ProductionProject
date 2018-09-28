@@ -6,7 +6,7 @@
 <body>
 <div class="container">
          <h1> UploadQuestion</h1>
-</div>  
+
 <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
@@ -15,6 +15,7 @@
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/UploadQuestion')}}">AddQuestion</a></li>
             </ol>
 </nav>
+</div>  
     <div class="container">
         <div class="row">
         <br>

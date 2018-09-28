@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row mb-2">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h2 >Question Manager</h2>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
             <div class="btn-group float-right">
                  <button type="button" class="btn btn-success dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Add Question

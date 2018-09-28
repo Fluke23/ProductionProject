@@ -3,14 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row mb-2">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <h2>TrueFalse Question</h2>
+            
         </div>
         <div class="col-md-9">
 
         </div>
     </div>
-
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz')}}">Quizmanager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question')}}">Questionmanager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question/TrueFalse')}}">AddQuestion</a></li>
+            </ol>
+    </nav>
     <div class="row">
         <form action="{{route('TrueFalse.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}

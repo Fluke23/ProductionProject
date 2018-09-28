@@ -7,7 +7,7 @@
 <body>
     <div class="container">
          <h1> blankQuestion</h1>
-    </div> 
+    
 
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -17,7 +17,7 @@
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/blankQuestion')}}">AddQuestion</a></li>
             </ol>
     </nav>    
-    
+    </div> 
     <div class="container">
         <div class="row">
         <br>

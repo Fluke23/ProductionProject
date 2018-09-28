@@ -10,6 +10,15 @@
 
         </div>
     </div>
+
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz')}}">Quizmanager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question')}}">Questionmanager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question/MultipleChoice')}}">AddQuestion</a></li>
+            </ol>
+    </nav>
     <div class="row">
         <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
