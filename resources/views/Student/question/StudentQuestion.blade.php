@@ -10,7 +10,13 @@
             
                  
   </div>
-
+  <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/quiz/StudentquizDetail')}}">Quiz Manager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/question/StudentQuestion')}}">Question Manager</a></li>
+            </ol>
+          </nav>
 
 <div class="row">
         <table class="table table-bordered">
@@ -33,13 +39,16 @@
                 <tr>
                         <td style="font-size: 0.8em;">{{$que->question}}</td>
                         <td style="font-size: 0.8em;">{{$que->score}}</td>
-                       
+                        <td style="font-size: 0.8em;">Tester</td>
+                        <td style="font-size: 0.8em;">min</td>
+                        <td style="font-size: 0.8em;">max</td>
+                        <td style="font-size: 0.8em;">Avg</td>
                 
                         
                     
 
                         <td >
-                            <a href="{{URL::to('/question/'.$que->questions_types_id)}}" class="btn btn-info ">View</a>
+                        <a href="{{URL::to('Student/question/AnswerBlankQuestion/'.$que->questions_id)}}" class="btn btn-info ">View</a>
                              
                         
                         </td>

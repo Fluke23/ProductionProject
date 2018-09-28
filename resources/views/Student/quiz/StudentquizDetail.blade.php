@@ -14,6 +14,12 @@
                     <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit">Search</button>
             </form> 
     </div>
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/quiz/StudentquizDetail')}}">Quiz Manager</a></li>
+            </ol>
+          </nav>
     <div class="row">
         <table class="table table-bordered">
             <tr>
@@ -44,7 +50,7 @@
                     
 
                         <td >
-                            <a href="{{URL::to('/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
                             
                         </td>
                 </tr>

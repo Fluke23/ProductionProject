@@ -73,7 +73,8 @@ class AnswerBlankController extends Controller
                         $Answer->save();
         
 
-            
+            $data = $quiz_id::where('quizs_id',$quiz_id)->get();
+           // $questionType = $data[0]->questions_types_id;
            
            return redirect()->route('/Student/question/', [$quiz_id]);
             //return'yes';

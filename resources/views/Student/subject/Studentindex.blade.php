@@ -15,7 +15,7 @@
 
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{{ URL::to('quiz')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
             
             </ol>
           </nav>
@@ -38,7 +38,7 @@
                     <td style="font-size: 0.8em;">{{$subject->subject_name}}</td>
 
                     <td >
-                    <a href="{{URL::to('/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
+                    <a href="{{URL::to('Student/quiz/StudentquizDetail/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
                     </td>
                  
             </tr>

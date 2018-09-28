@@ -29,6 +29,13 @@
             </div>   
     </div>
 
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz/')}}">Quizmanager</a></li>
+              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question/')}}">Question Manager</a></li>
+            </ol>
+          </nav>
 
     <div class="row">
         <table class="table table-bordered">

@@ -39,6 +39,10 @@ class QuizController extends Controller
         $permission = $request->get('permission');
 
         $username = Auth::user()->username;
+        $group = Group::all();
+        // $quiz_type = Quiz_type::all();
+        $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
+        $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
         
         // $data = Quiz::all();
         $quizzes = DB::table('quizs')
@@ -56,12 +60,14 @@ class QuizController extends Controller
         
         
         if($permission == 'ADMIN'){
-            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission'));
+            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }elseif($permission == 'STUDENT'){
-            return view('student/quiz/index',compact('quizzes','subject_id','$permission'));
+            return view('student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }elseif($permission == 'LECTURER'){
-            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission'));
+            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }
+
+        
     }
 
     /**
@@ -69,10 +75,20 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($subject_id) 
+    public function create(Request $request,$subject_id) 
     {
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
+
         $group = Group::all();
-        return view('/Admin/quiz/addQuiz',compact('subject_id','group'));
+        $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
+        $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
+        if($permission == 'ADMIN'){
+        return view('/Admin/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status'));
+        }elseif($permission == 'LECTURER'){
+        return view('/Lecturer/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status'));  
+        } 
     }
 
     /**
@@ -83,6 +99,10 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
+
           $quiz = new Quiz([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
@@ -102,9 +122,11 @@ class QuizController extends Controller
 
           $group_quiz->save();
 
-          
-
-          return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
+        if($permission == 'ADMIN'){
+         return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
+        }elseif($permission == 'LECTURER'){
+        return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
+        }
     }
 
     /**
@@ -124,11 +146,20 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        $quiz = Quiz::findorfail($id);
+        $permission = $request->get('permission');
 
-        return view('admin/quiz/editQuiz', compact('quiz'));
+        $username = Auth::user()->username;
+        $group = Group::all();
+        $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
+        $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
+        $quiz = Quiz::findorfail($id);
+        if($permission == 'ADMIN'){
+        return view('admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));
+        }elseif($permission == 'LECTURER'){
+        return view('lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
+        }
     }
 
     /**
@@ -140,6 +171,9 @@ class QuizController extends Controller
      */
     public function update(Request $request)
     {
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
 
         $id = $request->get('quiz_id'); //id sent by editQuiz.blade.php
         $quiz = Quiz::find($id);
@@ -152,7 +186,11 @@ class QuizController extends Controller
         $quiz->quizs_status_id = $request->get('quizs_status_id');
            
         $quiz->save();
-        return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')])->with('success', 'Data Updated');
+        if($permission == 'ADMIN'){
+        return redirect()->route('quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        }elseif($permission == 'LECTURER'){
+        return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        }
     }
 
     /**
@@ -161,11 +199,19 @@ class QuizController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$subject_id)
+    public function destroy(Request $request,$id,$subject_id)
     {
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
+
         $quiz = Quiz::find($id);
         $quiz->delete();
+        if($permission == 'ADMIN'){
         return redirect()->route('quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        }elseif($permission == 'LECTURER'){
+        return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        }
     }
 
 }

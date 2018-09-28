@@ -42,14 +42,30 @@ class SubjectController extends Controller
         ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
         ->join('users','users.username','=','subjects_user.username')
         ->where('users.username', '=', $username)
+        ->orderby('Subjects.subject_id','asc')
         ->get();
 
 
         if($permission == 'ADMIN'){
-            return view('/Admin/subject/index',compact('subjects','permission'));
-        }else{
-            return view('student/subject/indexStudent',compact('subjects','permission'));
+           return view('/Admin/subject/index',compact('subjects','permission'));
+       }elseif($permission == 'STUDENT'){
+            return view('student/subject/Studentindex',compact('subjects','permission'));
+        }elseif($permission == 'LECTURER'){
+           return view('lecturer/subject/index',compact('subjects','permission'));
         }
+
+       /* switch ($permission) {
+            case 'ADMIN':
+            return view('/Admin/subject/index',compact('subjects','permission'));
+                break;
+            case 'STUDENT':
+            return view('student/subject/Studentindex',compact('subjects','permission'));
+                break;
+            default:
+            return view('lecturer/subject/index',compact('subjects','permission'));
+                break; 
+        }   */
+
         
     }
 

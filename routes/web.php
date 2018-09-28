@@ -93,12 +93,86 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Admin/question/TrueFalsesubmit','TrueFalseController@submit');
    
 
+
+
+    //Lecturer/subject
+    Route::get('/Lecturer/subject','SubjectController@index')->name('lec.subject.index'); //name for reditect in update 
+    Route::get('/Lecturer/subject/addSubject','SubjectController@create')->name('lec.addSubject');;
+    Route::post('/Lecturer/subject/saveSubject','SubjectController@store');
+    Route::get('/Lecturer/subject/editSubject/{id?}','SubjectController@edit');
+    Route::post('/Lecturer/subject/updateSubject','SubjectController@update');
+    Route::get('/Lecturer/subject/deleteSubject/{id?}','SubjectController@destroy');
+
+    //lecturer/quiz
+    Route::get('/Lecturer/quiz/index/{subject_id?}','QuizController@index')->name('lec.quiz.quizDetail'); //name use for redirect in update
+    Route::get('/Lecturer/quiz/addQuiz/{subject_id?}','QuizController@create')->name('lec.addQuiz');
+    Route::post('/Lecturer/quiz/saveQuiz/{subject_id?}','QuizController@store');
+    Route::get('/Lecturer/quiz/editQuiz/{subject_id?}','QuizController@edit');
+    Route::post('/Lecturer/quiz/updateQuiz','QuizController@update');
+    Route::get('/Lecturer/quiz/deleteQuiz/{id?}/{subject_id?}','QuizController@destroy');
+
+     //question 
+     Route::get('/Lecturer/question/{id?}','QuestionController@index')->name('lec.question.index'); //name for reditect in update
+     //Route::get('/question/addQuestion/{id?}','QuestionController@create')->name('question.addQuestion');
+     Route::post('/Lecturer/question/saveQuestion/{id?}','QuestionController@store');
+     Route::get('/Lecturer/question/editQuestion/{subject_id?}','QuestionController@edit');
+     Route::post('/Lecturer/question/updateQuestion','QuestionController@update');
+     Route::get('/Lecturer/question/blankQuestion/{id?}','QuestionController@callBlankQuestion');
+     Route::get('/Lecturer/question/shortAnswer/{id?}','QuestionController@callShortAnswerQuesstion');
+     Route::get('/Lecturer/question/UploadQuestion/{id?}','QuestionController@callUploadFileQuesstion');
+     Route::get('/Lecturer/question/MultipleChoice/{id?}','QuestionController@callMultipleChoice')->name('lec.Question.callMultipleChoice');
+     Route::get('/Lecturer/question/TrueFalse/{id?}','QuestionController@callTrueFalse');
+ 
+     //testChoice
+     Route::get('/Lecturer/choiceType/addMultiple/{id?}','QuestionController@callMultiple');
+     Route::get('/choiceType/addTF/{id?}','QuestionController@callTF');
+     Route::get('/choiceType/addBlank/{id?}','QuestionController@callBlank');
+ 
+     //user manager for admin
+     Route::get('/Lecturer/userManager','UserController@index')->name('lec.userManager.index'); //name for reditect in update
+     Route::get('/Lecturer/userManager/viewUserInfo/{username?}','UserController@viewStudent');
+     Route::get('/Lecturer/userManager/addGroupUser','UserController@create');
+     Route::post('/Lecturer/userManager/saveUser','UserController@store')->name('lec.saveUser');
+     Route::get('/Lecturer/userManager/delete/{id?}','UserController@destroy');
+ 
+     //Admin/blankQuestion
+     Route::get('/Lecturer/question/blankQuestion','blankQuestionController@showUploadForms')->name('lec.blankQuestion.file');
+     Route::post ('/Lecturer/question/blankQuestion','blankQuestionController@storeFiles') ;
+     Route::post('/Lecturer/question/blankQuestion/submit','blankQuestionController@submit');
+ 
+     //Admin/shortanswer
+     Route::get('/Lecturer/shortAnswer','shortAnswerQuestionController@showUploadForms')->name('lec.shortAnswer.file');
+     Route::post ('/Lecturer/shortAnswer','shortAnswerQuestionController@storeFiles') ;
+     Route::post('/Lecturer/shortAnswer/submit','shortAnswerQuestionController@submit');
+ 
+     //Admin/uploadQuestion
+     Route::get('/Lecturer/UploadQuestion','UploadQuestionController@showUploadForms')->name('lec.UploadQuestion.file');
+     Route::post ('/Lecturer/UploadQuestion','UploadQuestionController@storeFiles') ;
+     Route::post('/Lecturer/UploadQuestion/submit','UploadQuestionController@submit');
+ 
+     //admin/MultipleQuestion
+     Route::get('/Lecturer/question/MultipleChoice','MultipleChoiceController@showUploadForms')->name('lec.MultipleChoice.file');
+     Route::post ('/Lecturer/question/MultipleChoice','MultipleChoiceController@storeFiles') ;
+     Route::post('/Lecturer/question/MultipleChoicesubmit','MultipleChoiceController@submit');
+ 
+     //TrueFalseQuestion
+     Route::get('/Lecturer/question/TrueFalse','TrueFalseController@showUploadForms')->name('lec.TrueFalse.file');
+     Route::post ('/Lecturer/question/TrueFalse','TrueFalseController@storeFiles') ;
+     Route::post('/Lecturer/question/TrueFalsesubmit','TrueFalseController@submit');
+
+    
+
+
+
     //Student/subject
-    Route::get('/Student/subject','SubjectController@index')->name('subject.indexStudent'); //name for reditect in update 
+    Route::get('/Student/subject','SubjectController@index')->name('subject.Studentindex'); //name for reditect in update 
+   
+
     //Student/quiz
-    Route::get('/Student/quiz/{subject_id?}','QuizController@index')->name('quiz.StudentquizDetail'); //name use for redirect in update
+    Route::get('/Student/quiz/StudentquizDetail/{subject_id?}','QuizController@index')->name('quiz.StudentquizDetail'); //name use for redirect in update
+    
     //Student/question 
-    Route::get('/Student/question/{id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
+    Route::get('/Student/question/StudentQuestion/{id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
     //Student/answerBlankquestion 
     Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
