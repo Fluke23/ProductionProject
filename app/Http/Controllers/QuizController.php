@@ -62,7 +62,7 @@ class QuizController extends Controller
         if($permission == 'ADMIN'){
             return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }elseif($permission == 'STUDENT'){
-            return view('student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
+            return view('Student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }elseif($permission == 'LECTURER'){
             return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
         }
