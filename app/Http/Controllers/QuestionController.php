@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 use App\Question;
@@ -11,21 +11,27 @@ use App\Quiz;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($quizs_id)
+    public function index(Request $request,$quizs_id)
     {
-       
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
+
        $question = DB::table('Questions')
-            // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
+           
             
             ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-           // ->join('Answer','Answer.questions_id','=','Questions.questions_id')
-           // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
-           // ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
+           
             ->where('quizs.quizs_id','=',$quizs_id)
             ->orderby('Questions.questions_id','desc')
             ->get();
@@ -34,8 +40,13 @@ class QuestionController extends Controller
         
         
            
-            
-            return view('/Admin/question/index',compact('question','quizs_id'));       
+            if($permission == 'ADMIN'){
+            return view('/Admin/question/index',compact('question','quizs_id'));
+            }elseif($permission == 'STUDENT'){
+            return view('/Student/question/StudentQuestion',compact('question','quizs_id'));       
+            }elseif($permission == 'LECTURER'){       
+            return view('/Lecturer/question/index',compact('question','quizs_id'));           
+            }
     }
 
     /**
@@ -101,6 +112,9 @@ class QuestionController extends Controller
      */
     public function destroy($id,$quizs_id)
     {
+
+        $question_pic =DB::table('Question_pictures')->where('questions_id', '=', $id)->delete();
+          
         $question = Question::find($id);
         $question->delete(); 
         return redirect()->route('question.index',['quizs_id'=>$quizs_id])->with('success', 'Data Deleted');
