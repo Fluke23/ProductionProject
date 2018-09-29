@@ -1,5 +1,4 @@
-@extends('layouts.main')
-
+@extends('layouts.student')
 @section('content')
 <div class="container">
     <div class="row mb-2">
@@ -48,7 +47,7 @@
         {{Form::hidden('questions_id',$questions_id)}}
           
         </div>
-    
+        
     
     <div class="form-group">
         <button type="button" class="btn btn-danger">Cencel</button>
