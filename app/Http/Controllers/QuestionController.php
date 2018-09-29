@@ -114,7 +114,6 @@ class QuestionController extends Controller
     {
 
         $question_pic =DB::table('Question_pictures')->where('questions_id', '=', $id)->delete();
-          
         $question = Question::find($id);
         $question->delete(); 
         return redirect()->route('question.index',['quizs_id'=>$quizs_id])->with('success', 'Data Deleted');
