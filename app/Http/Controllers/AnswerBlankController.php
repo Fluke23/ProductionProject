@@ -12,6 +12,8 @@ use App\Question_type;
 
 class AnswerBlankController extends Controller
 {
+
+   
     
     public function index($questions_id)
     {
@@ -20,13 +22,15 @@ class AnswerBlankController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
+        
         ->get();
       
 
         $data = Question::where('questions_id',$questions_id)->get();
+       
         $questionType = $data[0]->questions_types_id;
 
-        //dd($questionType);
+       
        
         switch ($questionType) {
             case 'Blank':
@@ -48,7 +52,7 @@ class AnswerBlankController extends Controller
             default:
             return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id'));
                 break;
-        }
+             }
 
        
     }
@@ -71,17 +75,25 @@ class AnswerBlankController extends Controller
                         $Answer->questions_id =$request->input('questions_id');
                         //save message
                         $Answer->save();
-        
 
-            $data = $quiz_id::where('quizs_id',$quiz_id)->get();
-           // $questionType = $data[0]->questions_types_id;
-           
-           return redirect()->route('/Student/question/', [$quiz_id]);
+                        //$Answer
+                        $quiz_id = $request->input('questions_id');
+                       // $quiz_id = $request->input('quizs_id');
+
+                      
+                       // dd($quiz_id);
+           //return redirect()->action('AnswerController@routh',[$quiz_id]);           
+           return redirect()->route('question.index', [$quiz_id]);
             //return'yes';
+             
+           
+
+
             }
 
- 
-        }
+           
+            
+}
         
         
 
