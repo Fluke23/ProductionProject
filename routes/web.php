@@ -49,6 +49,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Admin/question/saveQuestion/{id?}','QuestionController@store');
     Route::get('/Admin/question/editQuestion/{subject_id?}','QuestionController@edit');
     Route::post('/Admin/question/updateQuestion','QuestionController@update');
+    Route::get('/Admin/question/deleteQuestion/{id?}/{quiz_id?}','QuestionController@destroy');
     Route::get('/Admin/question/blankQuestion/{id?}','QuestionController@callBlankQuestion');
     Route::get('/Admin/question/shortAnswer/{id?}','QuestionController@callShortAnswerQuesstion');
     Route::get('/Admin/question/UploadQuestion/{id?}','QuestionController@callUploadFileQuesstion');
@@ -117,6 +118,7 @@ Route::group(['middleware' => ['Admin']], function () {
      Route::post('/Lecturer/question/saveQuestion/{id?}','QuestionController@store');
      Route::get('/Lecturer/question/editQuestion/{subject_id?}','QuestionController@edit');
      Route::post('/Lecturer/question/updateQuestion','QuestionController@update');
+     Route::get('/Lecturer/question/deleteQuestion/{id?}/{quiz_id?}','QuestionController@destroy');
      Route::get('/Lecturer/question/blankQuestion/{id?}','QuestionController@callBlankQuestion');
      Route::get('/Lecturer/question/shortAnswer/{id?}','QuestionController@callShortAnswerQuesstion');
      Route::get('/Lecturer/question/UploadQuestion/{id?}','QuestionController@callUploadFileQuesstion');
@@ -135,7 +137,7 @@ Route::group(['middleware' => ['Admin']], function () {
      Route::post('/Lecturer/userManager/saveUser','UserController@store')->name('lec.saveUser');
      Route::get('/Lecturer/userManager/delete/{id?}','UserController@destroy');
  
-     //Admin/blankQuestion
+     //Lecturer/blankQuestion
      Route::get('/Lecturer/question/blankQuestion','blankQuestionController@showUploadForms')->name('lec.blankQuestion.file');
      Route::post ('/Lecturer/question/blankQuestion','blankQuestionController@storeFiles') ;
      Route::post('/Lecturer/question/blankQuestion/submit','blankQuestionController@submit');
@@ -172,11 +174,15 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/quiz/StudentquizDetail/{subject_id?}','QuizController@index')->name('quiz.StudentquizDetail'); //name use for redirect in update
     
     //Student/question 
-    Route::get('/Student/question/StudentQuestion/{id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
+    Route::get('/Student/question/StudentQuestion/{id?}','QuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
     //Student/answerBlankquestion 
     Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
     Route::post('/Student/AnswerBlankQuestion/submit/{id?}','AnswerBlankController@submit');
+    Route::get('/Student/question/StudentQuestion/{id?}','AnswerController@routh');
+
+   
+
     //Student/answerShortquestion 
     Route::get('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@store'); //name 
