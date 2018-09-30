@@ -9,7 +9,7 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
-
+   
 class AnswerShortQuestionController extends Controller
 {
     public function index($questions_id)
