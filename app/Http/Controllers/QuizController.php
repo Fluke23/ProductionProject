@@ -187,9 +187,9 @@ class QuizController extends Controller
            
         $quiz->save();
         if($permission == 'ADMIN'){
-        return redirect()->route('quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+        return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')])->with('success', 'Data updated');
         }elseif($permission == 'LECTURER'){
-        return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$subject_id])->with('success', 'Data Deleted');
+            return redirect()->route('lec.quiz.quizDetail',['subject_id'=>$request->get('subject_id')])->with('success', 'Data updated');
         }
     }
 //jm
