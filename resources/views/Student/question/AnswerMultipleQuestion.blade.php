@@ -59,7 +59,7 @@
 
 
                 <div class="form-group">
-                    <button type="button" class="btn btn-danger">Cencel</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
                     <input class="btn btn-primary" type="submit">
                 </div>
             </form>

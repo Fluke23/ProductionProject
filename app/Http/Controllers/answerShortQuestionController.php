@@ -10,7 +10,7 @@ use App\Quiz;
 use App\Answer;
 use App\Question_type;
 
-class answerShortQuestionController extends Controller
+class AnswerShortQuestionController extends Controller
 {
     public function index($questions_id)
     {

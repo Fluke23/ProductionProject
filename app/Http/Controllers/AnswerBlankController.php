@@ -39,7 +39,6 @@ class AnswerBlankController extends Controller
         ->get();
 
 
-       
         switch ($questionType) {
             case 'Blank':
             return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id'));
@@ -53,7 +52,7 @@ class AnswerBlankController extends Controller
             return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id'));
                 break;
                 
-            case 'True/False':
+            case 'TrueFalse':
             return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question2','quiz_id'));
                 break;        
             

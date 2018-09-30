@@ -37,10 +37,11 @@ class answerTrueFalseQuestionController extends Controller
                         //save message
                         $Answer->save();
                         $quiz_id = $request->input('quiz_id');
+            
 
             
            
-                        return redirect()->route('question.StudentQuestion',[$quiz_id]);
+            return redirect()->route('question.StudentQuestion',[$quiz_id]);
             //return'yes';
             }
 

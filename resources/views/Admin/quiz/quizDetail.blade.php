@@ -7,7 +7,7 @@
             <h2>Quiz Manager</h2>
         </div>
         <div class="col-md-9">
-            <a href="{{ URL::route('lec.addQuiz', ['subject_id'=>$subject_id]) }}" class="btn btn-success float-right"
+            <a href="{{ URL::route('addQuiz', ['subject_id'=>$subject_id]) }}" class="btn btn-success float-right"
                 data-toggle="modal" data-target="#exampleModal">Add Quiz</a>
 
         </div>
@@ -42,9 +42,9 @@
 
 
                     <td>
-                        <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                        <a href="{{ URL::to('/Lecturer/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
-                        <a href="{{ URL::to('/Lecturer/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
+                        <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
+                        <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
+                        <a href="{{ URL::to('/Admin/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 @endforeach
@@ -74,7 +74,7 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <form action="{{URL::to('/Lecturer/quiz/saveQuiz/{subject_id?}')}}" method="post" id="addForm">
+                    <form action="{{URL::to('/Admin/quiz/saveQuiz/{subject_id?}')}}" method="post" id="addForm">
                         @csrf
                         {{-- title --}}
                         <div class="form-group row">
