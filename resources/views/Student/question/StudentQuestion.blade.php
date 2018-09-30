@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
@@ -48,9 +48,7 @@
                     
 
                         <td >
-                        <a href="{{URL::to('Student/question/AnswerBlankQuestion/'.$que->questions_id)}}" class="btn btn-info ">View</a>
-                             
-                        
+                        <a href="{{URL::route('AnswerBlankQuestion.file').'/'.$que->questions_id.'/'.$que->quizs_id}}" class="btn btn-info ">View</a>
                         </td>
                 </tr>
                      @endforeach

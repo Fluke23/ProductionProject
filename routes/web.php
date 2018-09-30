@@ -174,24 +174,27 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/quiz/StudentquizDetail/{subject_id?}','QuizController@index')->name('quiz.StudentquizDetail'); //name use for redirect in update
     
     //Student/question 
-    Route::get('/Student/question/StudentQuestion/{id?}','QuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
+    Route::get('/Student/question/StudentQuestion/{quiz_id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
     //Student/answerBlankquestion 
-    Route::get('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
-    Route::post('/Student/question/AnswerBlankQuestion/{id?}','AnswerBlankController@store'); //name 
-    Route::post('/Student/AnswerBlankQuestion/submit/{id?}','AnswerBlankController@submit');
-    Route::get('/Student/question/StudentQuestion/{id?}','AnswerController@routh');
-
-   
-
+    Route::get('/Student/question/AnswerQuestion/{id?}/{quiz_id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@store'); //name 
+    Route::post('/Student/AnswerBlankQuestion/submit/{id?}/{quiz_id?}','AnswerBlankController@submit');
     //Student/answerShortquestion 
-    Route::get('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
-    Route::post('/Student/question/AnswerShortQuestion/{id?}','AnswerShortQuestionController@store'); //name 
-    Route::post('/Student/AnswerShortQuestion/submit/{id?}','AnswerShortQuestionController@submit');
+    Route::get('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@store'); //name 
+    Route::post('/Student/AnswerShortQuestion/submit/{id?}/{quiz_id?}','AnswerShortQuestionController@submit');
 
-    //Student/answerShortquestion 
-    Route::get('/Student/question/AnswerUploadQuestion/{id?}','answerUploadQuestionController@index')->name('AnswerUploadQuestion.file'); //name for reditect in update
-    Route::post('/Student/question/AnswerUploadQuestion/{id?}','answerUploadQuestionController@store'); //name 
-    Route::post('/Student/AnswerUploadQuestion/submit/{id?}','answerUploadController@submit');
+    //Student/answerUploadquestion 
+    Route::get('/Student/question/AnswerUploadQuestion/{id?}/{quiz_id?}','answerUploadQuestionController@index')->name('AnswerUploadQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerUploadQuestion/{id?}/{quiz_id?}','answerUploadQuestionController@store'); //name 
+    Route::post('/Student/AnswerUploadQuestion/submit/{id?}/{quiz_id?}','answerUploadController@submit');
 
-
+    //Student/answerMultiplequestion 
+    Route::get('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@index')->name('AnswerMultipleQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@store'); //name 
+    Route::post('/Student/AnswerMultipleQuestion/submit/{id?}/{quiz_id?}','answerMultipleController@submit');
     
+    //Student/answerTrueFalsequestion 
+    Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','answerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','answerTrueFalseQuestionController@store'); //name 
+    Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','answerTrueFalseController@submit');

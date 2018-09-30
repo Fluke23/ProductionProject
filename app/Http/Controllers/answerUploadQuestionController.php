@@ -41,11 +41,11 @@ class answerUploadQuestionController extends Controller
                         $Answer->questions_id =$request->input('questions_id');
                         //save message
                         $Answer->save();
-        
-                       
+                        $quiz_id = $request->input('quiz_id');
+
             
            
-           return redirect()->route('/Student/question/', [$quiz_id]);
+                        return redirect()->route('question.StudentQuestion',[$quiz_id]);
             //return'yes';
             }
 }

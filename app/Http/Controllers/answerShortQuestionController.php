@@ -22,6 +22,7 @@ class answerShortQuestionController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
             
+        $data = Question::where('questions_id',$questions_id)->get();
                
     }
 
@@ -35,11 +36,12 @@ class answerShortQuestionController extends Controller
                         $Answer->questions_id =$request->input('questions_id');
                         //save message
                         $Answer->save();
+                        
+                        $quiz_id = $request->input('quiz_id');
+                        
         
 
-            
-           
-           return redirect()->route('/Student/question/', [$quiz_id]);
+           return redirect()->route('question.StudentQuestion',[$quiz_id]);
             //return'yes';
             }
 

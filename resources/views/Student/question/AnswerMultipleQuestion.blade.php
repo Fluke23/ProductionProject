@@ -52,6 +52,10 @@
                 <div class="form-group">
                     {{Form::hidden('questions_id',$questions_id)}}
                 </div>
+                
+                <div class="form-group">
+                    {{Form::hidden('quiz_id',$quiz_id)}}
+                </div>
 
 
                 <div class="form-group">
