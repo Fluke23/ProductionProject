@@ -156,9 +156,9 @@ class QuizController extends Controller
         $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
         $quiz = Quiz::findorfail($id);
         if($permission == 'ADMIN'){
-        return view('admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));
+        return view('Admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));
         }elseif($permission == 'LECTURER'){
-        return view('lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
+        return view('Lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
         }
     }
 
