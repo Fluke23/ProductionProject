@@ -57,7 +57,7 @@
             </div>
 
             <div class="form-group">
-                {{Form::hidden('quiz_id'.$i,$quiz_id)}}
+                {{Form::hidden('quiz_id',$quiz_id)}}
             </div>
                 
             @for ( $question=1 ;  $question<=2 ; $question++)

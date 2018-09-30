@@ -176,9 +176,9 @@ Route::group(['middleware' => ['Admin']], function () {
     //Student/question 
     Route::get('/Student/question/StudentQuestion/{quiz_id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
     //Student/answerBlankquestion 
-    Route::get('/Student/question/AnswerQuestion/{id?}/{quiz_id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
+    Route::get('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@store'); //name 
-    Route::post('/Student/AnswerBlankQuestion/submit/{id?}/{quiz_id?}','AnswerBlankController@submit');
+    Route::post('/Student/AnswerBlankQuestionsubmit/{id?}/{quiz_id?}','AnswerBlankController@submit');
     //Student/answerShortquestion 
     Route::get('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@store'); //name 

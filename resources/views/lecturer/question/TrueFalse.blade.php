@@ -12,7 +12,7 @@
     </div>
 
     <div class="row">
-        <form action="{{route('TrueFalse.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+        <form action="{{route('lec.TrueFalse.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
 
 

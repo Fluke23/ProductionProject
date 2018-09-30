@@ -154,12 +154,13 @@ class SubjectController extends Controller
                 ->update([  
                     'subject_id' => $request->get('subject_id')
                 ]);
-
+        
+        
         $subject_user = Subject_user::where('subject_id','=',$id) // ทำเช่นเดียวกับ quiz 
                 ->update([
                     'subject_id' => $request->get('subject_id')
                 ]);
-           
+        
         return redirect()->route('subject.index')->with('success', 'Data Updated');
     }
 

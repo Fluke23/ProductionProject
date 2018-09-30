@@ -24,7 +24,6 @@ class TrueFalseController extends Controller
     }
     
     public function storeFiles(request $request){
-
         // dd($request);
         
         //return $request-> all();
@@ -48,7 +47,6 @@ class TrueFalseController extends Controller
             $TrueFalseQuestion->quizs_id =$request->input('quiz_id');
             $TrueFalseQuestion->save();
             $TrueFalse->questions_id =$lastestQuestinID;
-
             for ($i=1; $i <=2 ; $i++){
             $TrueFalse = new Choice; 
             $TrueFalse->choice =$request->input('choice_'.$i.$j);

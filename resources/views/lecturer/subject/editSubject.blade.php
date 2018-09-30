@@ -20,7 +20,7 @@
           
 
     <div class="row">
-    <form action="{{URL::to('/Admin/subject/updateSubject')}}" method="post">
+    <form action="{{URL::to('/Lecturer/subject/updateSubject')}}" method="post">
        
         
         {{-- subject id --}}
