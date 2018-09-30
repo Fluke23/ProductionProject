@@ -45,7 +45,7 @@ class QuestionController extends Controller
             }elseif($permission == 'STUDENT'){
             return view('/Student/question/StudentQuestion',compact('question','quizs_id'));       
             }elseif($permission == 'LECTURER'){       
-            return view('/Lecturer/question/index',compact('question','quizs_id'));           
+            return view('/lecturer/question/index',compact('question','quizs_id'));           
             }
     }
 

@@ -113,9 +113,9 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Lecturer/quiz/deleteQuiz/{id?}/{subject_id?}','QuizController@destroy');
 
      //question 
-     Route::get('/lecturer/question/{id?}','QuestionController@index')->name('lec.question.index'); //name for reditect in update
+     Route::get('/Lecturer/question/{id?}','QuestionController@index')->name('lec.question.index'); //name for reditect in update
      //Route::get('/question/addQuestion/{id?}','QuestionController@create')->name('question.addQuestion');
-     Route::post('/lecturer/question/saveQuestion/{id?}','QuestionController@store');
+     Route::post('/Lecturer/question/saveQuestion/{id?}','QuestionController@store');
      Route::get('/Lecturer/question/editQuestion/{subject_id?}','QuestionController@edit');
      Route::post('/Lecturer/question/updateQuestion','QuestionController@update');
      Route::get('/Lecturer/question/deleteQuestion/{id?}/{quiz_id?}','QuestionController@destroy');
