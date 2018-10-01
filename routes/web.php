@@ -196,6 +196,6 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Student/AnswerMultipleQuestion/submit/{id?}/{quiz_id?}','answerMultipleController@submit');
     
     //Student/answerTrueFalsequestion 
-    Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','answerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
-    Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','answerTrueFalseQuestionController@store'); //name 
-    Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','answerTrueFalseController@submit');
+    Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','AnswerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
+    Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','AnswerTrueFalseQuestionController@store')->name('AnswerStore'); //name edit ล่าสุด
+    Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','AnswerTrueFalseController@submit');
