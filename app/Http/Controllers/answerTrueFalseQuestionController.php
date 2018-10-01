@@ -10,7 +10,7 @@ use App\Quiz;
 use App\Answer;
 use App\Question_type;
 
-class answerTrueFalseQuestionController extends Controller
+class AnswerTrueFalseQuestionController extends Controller
 {
     public function index($questions_id)
     {
@@ -25,25 +25,26 @@ class answerTrueFalseQuestionController extends Controller
         
     }
 
-        public function store(request $request){
+    public function store(request $request){
         
-                        //create new Answer
-                        $Answer = new Answer;
-                        $Answer->answer_number =$request->input('1');
-                        $Answer->answer =$request->input('answer');
-                        $Answer->answer_date=$request->input('answerDate');
-                        $Answer->questions_id =$request->input('questions_id');
-                        $Answer->choice_id =$request->input('choice_id');
-                        //save message
-                        $Answer->save();
-                        $quiz_id = $request->input('quiz_id');
-            
+        
+        //create new Answer
+        $Answer = new Answer;
+        $Answer->answer_number =$request->input('1');
+        $Answer->answer =$request->input('answer');
+        $Answer->answer_date=$request->input('answerDate');
+        $Answer->questions_id =$request->input('questions_id');
+        $Answer->choice_id =$request->input('choice_id');
+        //save message
+        $Answer->save();
+        $quiz_id = $request->input('quiz_id');
 
-            
-           
-            return redirect()->route('question.StudentQuestion',[$quiz_id]);
-            //return'yes';
-            }
+
+
+
+return redirect()->route('question.StudentQuestion',[$quiz_id]);
+//return'yes';
+}
 
  
 }
