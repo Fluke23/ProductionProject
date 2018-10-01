@@ -55,8 +55,10 @@
 
                 <div class="form-group">
                     <button type="button" class="btn btn-danger">Cencel</button>
-                    <input class="btn btn-primary" type="submit">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <!-- <input class="btn btn-primary" type="submit">Submit -->
                 </div>
+                
             </form>
         </div>
     </div>

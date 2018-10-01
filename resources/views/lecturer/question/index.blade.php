@@ -51,8 +51,8 @@
 
                         <td >
                             <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                            <a href="{{ URL::to('/Lecturer/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
-                            <a href="{{ URL::to('/Lecturer/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
+                            <a href="{{ URL::to('/Lecturer/question/editQuestion/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
+                            <a href="{{ URL::to('/Lecturer/question/deleteQuestion/'.$q->questions_id.'/'.$q->quizs_id)}}" class="btn btn-danger">Delete</a>
                         </td>
                 </tr>
                      @endforeach

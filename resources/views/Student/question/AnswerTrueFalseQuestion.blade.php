@@ -29,17 +29,19 @@
         </ul>
         @endforeach
         <hr>
-    </div>
-    <div class="container">
+</div>
+
+<div class="container">
         <div class="row">
             <br>
-            <form action="{{route('AnswerTrueFalseQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <form action="{{route('AnswerStore')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
+                @csrf
 
-                @foreach ($question2 as $q2)
+                @foreach($question2 as $q2)
                 <div class="form-group">
                     {{$q2->choice}}
-                    {{Form::checkbox('answer',$q2->choice,'' )}}
+                    {{Form::radio('answer',$q2->choice,'' )}}
                     {{Form::hidden ('choice_id', $q2->choice_id)}}
                 </div>
                 @endforeach
@@ -60,10 +62,12 @@
 
                 <div class="form-group">
                     <button type="button" class="btn btn-danger">Cancel</button>
-                    <input class="btn btn-primary" type="submit">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <!-- <input class="btn btn-primary" type="submit"> -->
                 </div>
+                
             </form>
         </div>
-    </div>
+</div>
 
     @endsection
