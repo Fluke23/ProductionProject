@@ -7,13 +7,14 @@
             <h2 >Home(Subject Manager)</h2>
             </div>
             <div class="col-md-8">
-              <!--   <a href="{{ URL::to('/Admin/subject/addSubject')}}" class="btn btn-success float-right">Add Subject</a> -->
+              <!--   <a href="{{ URL::to('/Admin/subject/addSubject')}}" class="btn btn-success float-right">Add Subject</a> 
               <a href="{{ URL::route('addSubject') }}"  
                 class="btn btn-success float-right" 
                 data-toggle="modal" 
-                data-target="#exampleModal">Add Subject</a>
+                data-target="#exampleModal">Add Subject</a> -->
                 </div>   
-    </div>
+    </div> 
+   
 
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
