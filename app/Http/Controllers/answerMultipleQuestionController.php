@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Question;
-use App\Question_pictures;
+//use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
