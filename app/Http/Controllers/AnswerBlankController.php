@@ -9,6 +9,9 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use App\Users;
+use Auth;
+
 
 class AnswerBlankController extends Controller
 {
@@ -22,43 +25,55 @@ class AnswerBlankController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->where('Questions.quizs_id','=',$quiz_id)
         ->get();
+        
 
 
         $data = Question::where('questions_id',$questions_id)->get();
         $data2 = Question::where('quizs_id','=',$quiz_id)->get();
         $questionType = $data[0]->questions_types_id;
+        //dd($questionType);
+
+        $quizStatus = DB::table('Questions')
+        ->select('quizs_status_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->where('Questions.quizs_id','=',$quiz_id)
+        ->get();
+       //dd($quizStatus);
         
-
-
         $question2 = DB::table('Questions')
-        
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
 
-
-        switch ($questionType) {
-            case 'Blank':
-            return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id'));
-                break;
-            
-            case 'Shortanswe':
-            return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id'));
-                break;  
-                
-            case 'Upload':
-            return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id'));
-                break;
-                
-            case 'TrueFalse':
-            return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question2','quiz_id'));
-                break;        
-            
-            case 'Multiple':
-            return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question2','quiz_id'));
-                break;
+        for($i=0 ;$i<count($quizStatus); $i++){
+            if($quizStatus[$i]->quizs_status_id == "Open"){
+                switch ($questionType) {
+                    case 'Blank':
+                    return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id'));
+                        break;
+                    
+                    case 'Shortanswe':
+                    return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id'));
+                        break;  
+                        
+                    case 'Upload':
+                    return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id'));
+                        break;
+                        
+                    case 'TrueFalse':
+                    return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question2','quiz_id'));
+                        break;        
+                    
+                    case 'Multiple':
+                    return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question2','quiz_id'));
+                        break;
+                }
+            }else{
+                return "no";
+            }
+            $i++;
         }
 
        
@@ -74,6 +89,7 @@ class AnswerBlankController extends Controller
 
     public function store(request $request){
         
+       
                         //create new Answer
                         $Answer = new Answer;
                         $Answer->answer_number =$request->input('1');
