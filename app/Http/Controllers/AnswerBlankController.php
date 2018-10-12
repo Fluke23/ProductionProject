@@ -89,9 +89,13 @@ class AnswerBlankController extends Controller
 
     public function store(request $request){
         
-       
+                    $username = Auth::user()->username;
+                    //session ข้องข้อมูลนศ ที่login
+                    //dd($username);
+
                         //create new Answer
                         $Answer = new Answer;
+                        $Answer->username = $username;
                         $Answer->answer_number =$request->input('1');
                         $Answer->answer =$request->input('Answer');
                         $Answer->answer_date=$request->input('AnswerDate');
