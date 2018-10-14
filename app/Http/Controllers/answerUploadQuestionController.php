@@ -27,8 +27,10 @@ class answerUploadQuestionController extends Controller
 
         public function store(request $request){
         
+                        $username = Auth::user()->username;
                         //create new Answer
                         $Answer = new Answer;
+                        $Answer->username = $username;
                         $Answer->answer_number =$request->input('1');
                         $Answer_file = $request->file('fileName');
                             $input['fileName'] = time().'.'.$Answer_file->getClientOriginalExtension();
