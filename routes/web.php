@@ -88,11 +88,20 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post ('/Admin/question/MultipleChoice','MultipleChoiceController@storeFiles') ;
     Route::post('/Admin/question/MultipleChoicesubmit','MultipleChoiceController@submit');
 
-    //TrueFalseQuestion
+    //admin/TrueFalseQuestion
     Route::get('/Admin/question/TrueFalse','TrueFalseController@showUploadForms')->name('TrueFalse.file');
     Route::post ('/Admin/question/TrueFalse','TrueFalseController@storeFiles') ;
     Route::post('/Admin/question/TrueFalsesubmit','TrueFalseController@submit');
-   
+
+    //admin/indexAnswer
+    Route::get('/Admin/checkAnswer/indexAnswer/{id?}','checkAnswerController@index')->name('indexAnswer.file');
+   // Route::post ('/Admin/checkAnswer/indexAnswer/','checkAnswerController@store') ;
+    //Route::post('/Admin/checkAnswer/indexAnswersubmit','checkAnswerController@submit');
+
+    //admin/reviewAnswer
+    Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
+    Route::post ('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
+    Route::post('/Admin/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
 
 
 
