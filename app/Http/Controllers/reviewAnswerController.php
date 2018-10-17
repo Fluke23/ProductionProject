@@ -25,7 +25,13 @@ class reviewAnswerController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
             
-        return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
+        $permission = $request->get('permission');
+        if($permission == 'ADMIN'){
+            return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));        
+            }elseif($permission == 'LECTURER'){
+                return view('/lecturer/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));         
+            }
+       
        // $data = Question::where('questions_id',$questions_id)->get();
         //dd($question);
     }
@@ -61,9 +67,16 @@ class reviewAnswerController extends Controller
 
                         
                         
-        
+                
+                       $permission = $request->get('permission');
+                       if($permission == 'ADMIN'){
+                        return view('/Admin/checkAnswer/indexAnswer',compact($questions_id)); 
+                       }elseif($permission == 'LECTURER'){
+                        return view('/Lecturer/checkAnswer/indexAnswer',compact($questions_id)); 
+                       }
+   
 
-           return view('/Admin/checkAnswer/indexAnswer',compact($questions_id));
+           
             //return'yes';
             }
 }

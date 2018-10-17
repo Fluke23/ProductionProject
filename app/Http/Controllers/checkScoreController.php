@@ -30,7 +30,8 @@ class checkScoreController extends Controller
             return view('/Admin/checkAnswer/commentAnswer/',compact('question','questions_id','question2','quiz_id')); 
             }elseif($permission == 'STUDENT'){
             return view('/Student/checkScore/checkScore/',compact('question','questions_id','question2','quiz_id'));       
-                       
+            }elseif($permission == 'LECTURER'){
+                return view('/lecturer/checkAnswer/commentAnswer/',compact('question','questions_id','question2','quiz_id'));          
             }
         
        // $data = Question::where('questions_id',$questions_id)->get();
@@ -61,9 +62,16 @@ class checkScoreController extends Controller
 
                         
                         
-        
+                    $permission = $request->get('permission');
+                    if($permission == 'ADMIN'){
+                        return view('/Admin/question/StudentQuestion',compact($questions_id)); 
+                    }elseif($permission == 'STUDENT'){
+                        return view('/Student/question/StudentQuestion',compact($questions_id));       
+                    }elseif($permission == 'LECTURER'){
+                        return view('/lecturer/question/index',compact($questions_id));           
+                    }
 
-           return view('/Student/question/StudentQuestion',compact($questions_id));
+           
             //return'yes';
             }
 

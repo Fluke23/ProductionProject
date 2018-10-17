@@ -177,6 +177,21 @@ Route::group(['middleware' => ['Admin']], function () {
      Route::post ('/Lecturer/question/TrueFalse','TrueFalseController@storeFiles') ;
      Route::post('/Lecturer/question/TrueFalsesubmit','TrueFalseController@submit');
 
+     //lecturer/indexAnswer
+    Route::get('/lecturer/checkAnswer/indexAnswer/{id?}','checkAnswerController@index')->name('indexAnswer.file');
+    // Route::post ('/Admin/checkAnswer/indexAnswer/','checkAnswerController@store') ;
+     //Route::post('/Admin/checkAnswer/indexAnswersubmit','checkAnswerController@submit');
+ 
+     //lecturer/reviewAnswer
+     Route::get('/lecturer/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
+     Route::post ('/lecturer/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
+     Route::post('/lecturer/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
+ 
+     //Admin/commentAnswer
+     Route::get('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentAnswer.file'); 
+     Route::post('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentAnswer.file'); 
+     Route::post('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
+
     
 
 

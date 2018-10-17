@@ -10,6 +10,7 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use Auth;
 
 class checkAnswerController extends Controller
 {
@@ -23,17 +24,30 @@ class checkAnswerController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
        
-     
+        $permission = $request->get('permission');
         $quizStatus = $question[0]->quizs_status_id;
-        switch ( $quizStatus) {
-            case 'Reviewing':
-            return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
-                break;
-            
-            case 'Close':
-            return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
-                break;
+        if($permission == 'ADMIN'){
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+                    break;
+                
+                case 'Close':
+                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
+                    break;
+            }
+        }elseif($permission == 'LECTURER'){
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/lecturer/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+                    break;
+                
+                case 'Close':
+                return view('/lecturer/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
+                    break;
+            }     
         }
+       
         
                 
                 
