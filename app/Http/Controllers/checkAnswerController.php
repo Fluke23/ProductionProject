@@ -21,8 +21,23 @@ class checkAnswerController extends Controller
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+       
+     
+        $quizStatus = $question[0]->quizs_status_id;
+        switch ( $quizStatus) {
+            case 'Reviewing':
+            return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+                break;
             
-        return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+            case 'Close':
+            return 'no';
+                break;
+        }
+        
+                
+                
+               
+        
        $data = Question::where('questions_id',$questions_id)->get();
         //dd($question);
     }

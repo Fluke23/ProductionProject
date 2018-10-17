@@ -13,55 +13,75 @@
 
 
     <div class="row">
-        
+   
                     @foreach($question as $q)
-               
-               
+                    @endforeach
+                    
                     <div class="col-md-12">
+                   
+                     
                         <h4>{{$q->title}}</h4>
+                       
                         <img src="{{$q->img_url}} ">
+                        
+                       
                         <li class="list-group">solution: {{$q->solution}}</li>
+                       
                         <li class="list-group">Question:{{$q->question}}</li>
-                        <li class="list-group">Score:{{$q->score}}</li>
+                       
 
+                        
+                        <li class="list-group">Score:{{$q->score}}</li>
+                        
                      </div></br>
                      
+                    
                      <div class="col-md-4">
                      <li class="list-group">Answer No: {{$q->number}}</li>
                      </div>
+                     
 
                      <div class="col-md-4">
                      <li class="list-group">Student: {{$q->username}}</li>
                      </div>
-
+                    
+                     
                      <div class="col-md-4">
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>
-
                      
+                     
+                    
                      
                      <div class="col-md-12">
                      {{Form::label('Answer:', 'Answer:')}}</br>
                      <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
                      style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly>   {{$q->answer}}</textarea>
                      </div>  
+                     
+
+                      @foreach($question as $q)
 
                      <div class="col-md-12">
-                     {{Form::comment('Remark:', 'Remark:')}}</br>
-                     <textarea name="Remark:" cols="120" rows="10" id="Answer:" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly>   {{$q->comment}}</textarea>
+                     </br>
+                     {{Form::label('remark:', 'remark:')}}</br>
+                     
+                     <li class="list-group">{{$q->usernames}}  {{$q->created_at}}</li>
+                     
+                    <textarea name="Remark:" cols="120" rows="10" id="Answer:" 
+                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly> {{$q->comment}}</textarea>
                      </div>  
 
                      </div></br>
 
-                
+                  
                
                      @endforeach
 
         <div class="container">
         <div class="row">
             <br>
-            <form action="{{route('reviewAnswer.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <form action="{{route('checkScore.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="col-md-12">
                      {{Form::label('Remark:', 'Remark:')}}</br>

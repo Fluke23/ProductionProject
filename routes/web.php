@@ -208,3 +208,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','AnswerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','AnswerTrueFalseQuestionController@store')->name('AnswerStore'); //name edit ล่าสุด
     Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','AnswerTrueFalseController@submit');
+
+    //Student/answerTrueFalsequestion 
+    Route::get('/Student/checkScore/checkScore/{id?}/{quiz_id?}}','checkScoreController@index')->name('checkScore.file'); //name for reditect in update
+    Route::post('/Student/checkScore/checkScore/{id?}/{quiz_id?}','checkScoreController@store')->name('checkScore.file'); //name edit ล่าสุด
+    Route::post('/Student/checkScore/checkScore/submit/{id?}/{quiz_id?}','checkScoreController@submit');

@@ -47,6 +47,18 @@ class AnswerBlankController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
 
+        $question3 = DB::table('Questions')
+        ->select('Question_pictures.img_url','quizs.title','Questions.solution','Questions.question','Questions.score'
+        ,'Questions.number','Answer.username','Answer.answer_date','Answer.answer','Comment.usernames','Comment.created_at','Comment.comment')
+        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
+       //dd($question3);
+    
+
         for($i=0 ;$i<count($quizStatus); $i++){
             if($quizStatus[$i]->quizs_status_id == "Open"){
                 switch ($questionType) {
@@ -71,7 +83,8 @@ class AnswerBlankController extends Controller
                         break;
                 }
             }else{
-                return "no";
+                return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);
+                //return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','question3','quiz_id'));
             }
             $i++;
         }
