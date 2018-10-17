@@ -24,7 +24,6 @@ class TrueFalseController extends Controller
     }
     
     public function storeFiles(request $request){
-        // dd($request);
         
         //return $request-> all();
         for ($j=1; $j <=5 ; $j++) { 
@@ -37,6 +36,20 @@ class TrueFalseController extends Controller
             // $files->storeAs('public/upload',$fileName);    
                         
             //create new message
+ 
+            for ($i=1; $i <=2 ; $i++){
+                // if($request->choice)
+
+            $TrueFalse = new Choice;
+            $TrueFalse->choice =$request->input('choice_'.$i.$j);
+            $TrueFalse->questions_id =$lastestQuestinID;
+            $TrueFalse->choice_type_id = $request->input('choice_type_id_'.$i.$j);
+            $TrueFalse->save();
+            }
+            // dd($request);
+            // $question_id = $request->get('questions_id');
+            $quiz_id = $request->input('quiz_id');
+            //save message
             $TrueFalseQuestion = new Question;
             $TrueFalse = new Choice;
             $TrueFalseQuestion->questions_types_id =$request->input('TrueFalse'.$j);
@@ -47,17 +60,6 @@ class TrueFalseController extends Controller
             $TrueFalseQuestion->quizs_id =$request->input('quiz_id');
             $TrueFalseQuestion->save();
             $TrueFalse->questions_id =$lastestQuestinID;
-            for ($i=1; $i <=2 ; $i++){
-            $TrueFalse = new Choice; 
-            $TrueFalse->choice =$request->input('choice_'.$i.$j);
-            $TrueFalse->questions_id =$lastestQuestinID;
-            $TrueFalse->choice_type_id = $request->input('choice_type_id_'.$i.$j);
-            $TrueFalse->save();
-            }
-            // dd($request);
-            // $question_id = $request->get('questions_id');
-            $quiz_id = $request->input('quiz_id');
-            //save message
         }
             
             

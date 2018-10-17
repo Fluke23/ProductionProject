@@ -101,6 +101,11 @@ class AnswerBlankController extends Controller
                         $Answer->answer_date=$request->input('AnswerDate');
                         $Answer->questions_id =$request->input('questions_id');
                         //save message
+
+                        $currentQuestionId = DB::table('Questions')->max('questions_id');
+                        $lastestQuestinID = $currentQuestionId+1;
+
+                        
                         $Answer->save();
         
 

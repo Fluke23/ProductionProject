@@ -8,7 +8,9 @@ use App\Question;
 use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
+use App\Comment;
 use App\Question_type;
+use Auth;
 
 class reviewAnswerController extends Controller
 {
@@ -34,29 +36,29 @@ class reviewAnswerController extends Controller
                       // dd($questions_id);
                         $Answer= new Answer;
                         $Answer=$request->input('Score');
-                        
-                        //$Remark=new Remark;
-                        //$Remark=$request->input('Remark');
-
-                       
+                      
                         $Score = DB::table('Answer')
-                        
                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
                         ->where('Answer.questions_id','=',$questions_id)
                         ->update(['Answer.Score'=> $Answer] );
-                        //dd($Score);
-                        //->get();
-                        //dd($Answer);
-                         
-                     //  $Answer->Score =$request->input('Score');
-                    //   $Answer1 = DB::table('Answer')
-                     //  ->insert('Score')
-                     //  ->join('Questions','Questions.questions_id','=','Answer.questions_id')
-                     //  ->where('Answer.questions_id','=',$questions_id);
-                     //  $Answer1->remark=$request->input('Remark');
-                    
+
+                        $currentAnswerId = DB::table('Answer')->max('answer_id');
+                        $lastestAnswerID = $currentAnswerId;
+
+                        $Comment = new Comment;
+                        $Comment->answer_id = $lastestAnswerID;
+                        $Comment->comment =$request->input('Remark');
                         
-                        //save message
+                        $username = Auth::user()->username;
+                        $Comment->username = $username;
+                        $Comment->save();
+                        
+                       // $questions_id = $request->input('questions_id');
+
+                       
+                        
+                        
+
                         
                         
         
