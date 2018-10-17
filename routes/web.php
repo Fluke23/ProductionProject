@@ -103,6 +103,12 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post ('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
     Route::post('/Admin/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
 
+    //Admin/commentAnswer
+    Route::get('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentAnswer.file'); 
+    Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentAnswer.file'); 
+    Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
+
+
 
 
     //Lecturer/subject
@@ -209,7 +215,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','AnswerTrueFalseQuestionController@store')->name('AnswerStore'); //name edit ล่าสุด
     Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','AnswerTrueFalseController@submit');
 
-    //Student/answerTrueFalsequestion 
+    //Student/checkScore
     Route::get('/Student/checkScore/checkScore/{id?}/{quiz_id?}}','checkScoreController@index')->name('checkScore.file'); //name for reditect in update
     Route::post('/Student/checkScore/checkScore/{id?}/{quiz_id?}','checkScoreController@store')->name('checkScore.file'); //name edit ล่าสุด
     Route::post('/Student/checkScore/checkScore/submit/{id?}/{quiz_id?}','checkScoreController@submit');

@@ -19,6 +19,7 @@ class checkAnswerController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
        
@@ -30,7 +31,7 @@ class checkAnswerController extends Controller
                 break;
             
             case 'Close':
-            return 'no';
+            return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
                 break;
         }
         

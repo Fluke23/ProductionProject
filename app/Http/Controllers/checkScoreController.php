@@ -11,6 +11,7 @@ use App\Comment;
 use App\Question_type;
 use Auth;
 
+
 class checkScoreController extends Controller
 {
    
@@ -24,7 +25,14 @@ class checkScoreController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
 
-        return view('/Student/checkScore/checkScore/',compact('question','questions_id','question2','quiz_id'));
+        $permission = $request->get('permission');
+        if($permission == 'ADMIN'){
+            return view('/Admin/checkAnswer/commentAnswer/',compact('question','questions_id','question2','quiz_id')); 
+            }elseif($permission == 'STUDENT'){
+            return view('/Student/checkScore/checkScore/',compact('question','questions_id','question2','quiz_id'));       
+                       
+            }
+        
        // $data = Question::where('questions_id',$questions_id)->get();
         //dd($question);
         dd($question);
