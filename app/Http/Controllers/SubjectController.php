@@ -88,12 +88,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'subject_id' => 'required|varchar|max:11',
-            
-            'subject_name' => 'required|varchar|max:45',
-           
-            ]);
+       
         $username = Auth::user()->username;
         // $temp = DB::table('Subjects') ->where('subject_id','=',$request->get('subject_id'))->where('subject_name','=',$request->get('subject_name'))->get();
         $temp = DB::table('Subjects') ->where([
