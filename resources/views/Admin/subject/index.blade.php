@@ -17,7 +17,7 @@
     </div>
 
          @if(Session::has('unsuccess'))
-             <div class="alert alert-success">
+             <div class="alert alert-danger">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>Cannot add this Subject becuse this Subject already</strong> {{ Session::get('message', '') }}
              </div>
@@ -86,7 +86,7 @@
 
         {{-- subject id --}}
         <div class="form-group row">
-            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject id') }}</label>
+            <label for="subject_id" class="col-md-6 col-form-label text-md-right">{{ __('subject id') }}</label>
 
             <div class="col-md-6">
                 <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}" name="subject_id" value="{{ old('subject_id') }}" required autofocus>
@@ -101,7 +101,7 @@
 
         {{-- subject name --}}
         <div class="form-group row">
-            <label for="subject_name" class="col-md-4 col-form-label text-md-right">{{ __('subject name') }}</label>
+            <label for="subject_name" class="col-md-6 col-form-label text-md-right">{{ __('subject name') }}</label>
 
             <div class="col-md-6">
                 <input id="subject_name" type="text" class="form-control{{ $errors->has('subject_name') ? ' is-invalid' : '' }}" name="subject_name" value="{{ old('subject_name') }}" required autofocus>
@@ -115,13 +115,14 @@
         </div>
 
 
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success"  data-dismiss="modal" class="form action" onclick='addForm()'>Add Subject </button>
-        
+       
         </form>
+        
     </div>
-    
+    <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-success"  data-dismiss="modal" class="form action" onclick='addForm()'>Add Subject </button>
+             </div>
 
 </div>
 <script>
