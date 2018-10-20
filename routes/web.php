@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Input as input;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -234,3 +235,25 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/checkScore/checkScore/{id?}/{quiz_id?}}','checkScoreController@index')->name('checkScore.file'); //name for reditect in update
     Route::post('/Student/checkScore/checkScore/{id?}/{quiz_id?}','checkScoreController@store')->name('checkScore.file'); //name edit ล่าสุด
     Route::post('/Student/checkScore/checkScore/submit/{id?}/{quiz_id?}','checkScoreController@submit');
+
+    // Change Password 
+    Route::get('/changepassword',function(){
+        return view('auth.changePassword');
+    })->name('viewChangePW');
+    
+    Route::post('/SubmitChangePassword',function(){
+            $User = User::find(Auth::user()->id);
+        
+            if(Hash::check(Input::get('passwordold'),$User['password'])  && Input::get('password') == Input::get('password_confirmation')){
+                $User->password = bcrypt(Input::get('password'));
+                $User->save();
+                return back()->with('success','Password changed');
+            }else{
+                return back()->with('error','Password not changed !!');
+            }
+        })->name('submitchangepw');
+// Change Password
+// Register User
+    Route::get('/CreateUser','UserController@createUser')->name('CreateUser');
+    Route::post('/SaveUser','UserController@storeUser')->name('saveUser');
+// Register User
