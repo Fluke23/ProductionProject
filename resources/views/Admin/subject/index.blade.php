@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+
+      
     <div class="row mb-2">
         <div class="col-md-4">
             <h2>Home(Subject Manager)</h2>
@@ -14,12 +16,19 @@
             </div>  
     </div>
 
+         @if(Session::has('unsuccess'))
+             <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Cannot add this Subject becuse this Subject already</strong> {{ Session::get('message', '') }}
+             </div>
+        @endif
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
         </ol>
     </nav>
-
+   
     {{-- body --}}
     <div class="row">
         <div class="row">
@@ -77,7 +86,7 @@
 
         {{-- subject id --}}
         <div class="form-group row">
-            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject_id') }}</label>
+            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject id') }}</label>
 
             <div class="col-md-6">
                 <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}" name="subject_id" value="{{ old('subject_id') }}" required autofocus>
@@ -92,7 +101,7 @@
 
         {{-- subject name --}}
         <div class="form-group row">
-            <label for="subject_name" class="col-md-4 col-form-label text-md-right">{{ __('subject_name') }}</label>
+            <label for="subject_name" class="col-md-4 col-form-label text-md-right">{{ __('subject name') }}</label>
 
             <div class="col-md-6">
                 <input id="subject_name" type="text" class="form-control{{ $errors->has('subject_name') ? ' is-invalid' : '' }}" name="subject_name" value="{{ old('subject_name') }}" required autofocus>

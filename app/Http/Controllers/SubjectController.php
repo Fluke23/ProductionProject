@@ -88,22 +88,40 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-
         $username = Auth::user()->username;
-    
-        $subject = Subject::insert([
-                    'subject_id' => $request->get('subject_id'),
-                    'subject_name' => $request->get('subject_name')
-                ]);
-        $subject_user = Subject_user::insert([
+        // $temp = DB::table('Subjects') ->where('subject_id','=',$request->get('subject_id'))->where('subject_name','=',$request->get('subject_name'))->get();
+        $temp = DB::table('Subjects') ->where([
+            'subject_id'=>$request->get('subject_id'),
+            'subject_name'=>$request->get('subject_name')
+            ])->get();       
+        //dd($temp);
+      
+         if(count($temp)===0){
+            $subject = Subject::insert([
                 'subject_id' => $request->get('subject_id'),
-                'username' => $username
-        ]);
+                'subject_name' => $request->get('subject_name')
+            ]);
+             $subject_user = Subject_user::insert([
+            'subject_id' => $request->get('subject_id'),
+            'username' => $username
+             ]);
+            return redirect()->route('subject.index');
+            }else{
+                
+                //echo "<script>window.alert('Cannot add this Subject becuse this Subject already')</script>";
+               // return view('/Admin/subject');
+                
+                //echo "<script> function myFunction() {alert('I am an alert box!');
+               // }</script>";
+                return redirect()->back()->with('unsuccess','Cannot add this Subject becuse this Subject already' );
+                
+           // dd('sum');
+        }
+        
 
-        // $subject->save();
-        return redirect()->route('subject.index');
+       
     }
-
+ 
     /**
      * Display the specified resource.
      *
