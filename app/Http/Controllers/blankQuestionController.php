@@ -18,6 +18,14 @@ class blankQuestionController  extends Controller
 
     public function storeFiles(request $request){
         
+        $this->validate($request, [
+            'number' => 'required|int|max:11',
+            'name' => 'required|varchar|max:50',
+            'name' => 'required|varchar|max:255',
+            'question' => 'required|mediumtext',
+            'score' => 'required|mediumtext',
+           
+            ]);
         //return $request-> all();
 
         // $blankQuestion1 = new blankQuestion1;
