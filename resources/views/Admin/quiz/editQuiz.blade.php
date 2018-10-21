@@ -124,7 +124,8 @@
         </select>
 
     </div>
-</div> {{-- quizs_status_id --}}
+</div> 
+{{-- quizs_status_id --}}
 
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">Quiz Status </label>
