@@ -9,8 +9,12 @@ use App\Subject_user;
 use DB;
 use Auth;
 use App\Student_group;
+use App\Group_user;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input as input;
+
 
 class UserController extends Controller
 {
@@ -42,7 +46,7 @@ class UserController extends Controller
         $student_group = DB::table('Student_group')->select('student_group_id','student_group_name')->get();
         $user = DB::table('users')->select('username')->orderBy('username','ASC')->get();
      
-        return view('/Admin/user/addGroupUser',compact('subject','student_group','user'));
+        return view('/Admin/user/addGroupUser',compact('subject','student_group','user'));  //mean add subject group user 
     }
 
     /**
@@ -149,4 +153,82 @@ class UserController extends Controller
 
         return view('/Admin/user/viewUserInfo',compact('subject_user','username'));
     }
+
+
+
+
+
+    //Add User to Group Admin/Lecturer/Student
+    public function createTypeGroupUser()
+    {
+
+    
+    // $subject = DB::table('Subjects')->select('subject_id','subject_name')->get();
+    // $student_group = DB::table('Student_group')->select('student_group_id','student_group_name')->get();
+    $group = DB::table('Groups')->select('groups_id','group_name')->get();
+    $group_user = DB::table('Group_user')->select('groups_id','username')->get();
+    $user = DB::table('users')->select('username')->orderBy('username','ASC')->get();
+
+    return view('/Admin/user/addTypeGroupUser',compact('group','group_user','user')); 
+    }
+
+
+    public function storeTypeUser(Request $request)
+    {
+
+      
+    
+        $first_student = $request->user;
+        $last_student = $request->user2;
+        $groups_id= $request->group;
+  
+        $query = DB::table('users')->select('username')->whereBetween('username',[$first_student,$last_student])->get();
+
+        foreach($query as $group_user){
+            Group_user::insert([
+            'groups_id'=> $groups_id,
+            'username'=> $group_user->username,
+            ]);
+        }
+        return redirect()->route('userManager.index');
+
+    }
+    
+
+    public function createUser(){
+                return view('/Admin/user/createUser');
+    }
+
+
+    public function storeUser(Request $request){
+           // dd($request);
+            $this->validate($request, [
+            'username' => 'required|string|max:255',
+            'password' => 'required|string|min:4|confirmed',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'remark' => 'required|string|max:255',
+            ]);
+
+            $user = Users::insert([
+            'username' => $request->get('username'),
+            'password' => Hash::make($request->get('password')),
+            'firstname' => $request->get('firstname'),
+            'lastname' => $request->get('lastname'),
+            'remark' => $request->get('remark'),
+            'passkey' => $request->get('password'),
+            ]);
+
+            $group_user = Group_user::insert([
+                'username' => $request->get('username'),
+                'groups_id'=> $request->get('groups_id')
+                ]);
+
+
+            $username = $request->get('username');
+            return back()->with('success','Create '.$username.' Successful ');
+
+    }
+
+
 }

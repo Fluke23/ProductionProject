@@ -2,80 +2,25 @@
 
 @section('content')
 <div class="container">
-    <div class="row mb-2">
-        <div class="col-md-3">
-            <h2 >User Manager</h2>
-        </div>
-            <div class="col-md-9">
-                <a href="{{ URL::to('/Admin/userManager/addGroupUser')}}" class="btn btn-success float-right">Add Group User</a>
-            </div> 
-           <!--  <div class="col-md-9">
-                <a href="{{ URL::to('/Admin/user/createUser')}}" class="btn btn-success float-right"> User</a>
-            </div>  -->
-            <div class="col-md-12">
-            <a href="{{ URL::route('createUser') }}"  
-            class="btn btn-success float-right" 
-            data-toggle="modal" 
-            data-target="#exampleModal">Create User</a>
-            </div>  
-    </div>
 
+    {{--  breadcrumb --}}
+     <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+                 <li class="breadcrumb-item">Create User</a></li>
+                </ol>
+    </nav>
+    {{--  breadcrumb --}}
 
-    <div class="row">
-            <table class="table table-bordered">
-                <tr>
-                    <th style="font-size: 1em;width:30px;">Username</th>
-                    <th style="width:50px;">Remark</th>
-                    <th style="width:50px;">Firstname</th>
-                    <th style="width:50px;">Lastname</th>
-                    <th style="width:100px;"></th>
-                </tr>
-                <tbody>
-                    @foreach($user as $user)
-                    <tr>
-                        <td style="font-size: 0.8em;">{{$user->username}}</td>
-                        <td style="font-size: 0.8em;">{{$user->remark}}</td>
-                        <td style="font-size: 0.8em;">{{$user->firstname}}</td>
-                        <td style="font-size: 0.8em;">{{$user->lastname}}</td>
-                        <td >
-                        <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$user->username)}}" class="btn btn-info btn-sm">View</a>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="{{ URL::to('/Admin/userManager/delete/'.$user->username)}}" class="btn btn-danger btn-sm">Delete</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            
-             <hr>
-        </div>
-
-        <!-- modal create user -->
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Create User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-      <div class="row">
-    <form action="{{URL::to('/Admin/user/saveUser')}}" method="post" id="addForm">
-        @csrf
-
-        <div class="row justify-content-center">
-        <div class="col-md-12">
-           
-                
-                    <form action="{{URL::to('/Admin/user/saveUser')}}"method="POST"  >
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Create User') }}</div>
+                <div class="card-body">
+                <form action="{{URL::to('/Admin/user/saveUser')}}" method="post">
                         @csrf
 
-                        <div class="form-group row">
+                         <div class="form-group row">
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('username') }}</label>
 
                             <div class="col-md-6">
@@ -199,29 +144,39 @@
                         </div>  
 
                      </div>
-                    <div class="modal-footer">
+                     <div class="modal-footer">
                         <button type="reset" class="btn btn-danger">ยกเลิก</button>
                         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> บันทึก</button>
                          
                     </div>
-
-                    </div>
-
-   
-                </div>    
-
-                </form>
+                    </form>
 
 
+                </div>
             </div>
-     </form>
-    
-<script>
-    function addForm(){
-        document.getElementById('addForm').submit();
-    }
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/bootstrap.min.css"/>
+
+@if(session('success'))
+<script type="text/javascript">
+        $(document).ready(function(){
+            alertify.success('{{session('success')}}');
+        });
 </script>
-
-
-    @endsection
-
+@endif
+@endsection

@@ -253,7 +253,9 @@ Route::group(['middleware' => ['Admin']], function () {
             }
         })->name('submitchangepw');
 // Change Password
+
+
 // Register User
-    Route::get('/CreateUser','UserController@createUser')->name('CreateUser');
-    Route::post('/SaveUser','UserController@storeUser')->name('saveUser');
+Route::get('/Admin/user/createUser','UserController@createUser')->name('createUser');
+Route::post('/Admin/user/saveUser','UserController@storeUser')->name('saveUser');
 // Register User

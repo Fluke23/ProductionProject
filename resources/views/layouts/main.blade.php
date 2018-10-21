@@ -72,9 +72,9 @@
                                 </div>
                             </li>
 
-                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('CreateUser') }}">{{ __('Create User') }}</a>
-                            </li>
+                           <!-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('createUser') }}">{{ __('Create User') }}</a>
+                            </li> -->
                         @endguest
                     </ul>
                 </div>
