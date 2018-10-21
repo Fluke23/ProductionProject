@@ -24,9 +24,9 @@ class checkAnswerController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
        
-        $permission = $request->get('permission');
+        //$permission = $request->get('permission');
         $quizStatus = $question[0]->quizs_status_id;
-        if($permission == 'ADMIN'){
+       // if($permission == 'ADMIN'){
             switch ( $quizStatus) {
                 case 'Reviewing':
                 return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
@@ -36,7 +36,7 @@ class checkAnswerController extends Controller
                 return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
             }
-        }elseif($permission == 'LECTURER'){
+       // }elseif($permission == 'LECTURER'){
             switch ( $quizStatus) {
                 case 'Reviewing':
                 return view('/lecturer/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
@@ -46,7 +46,7 @@ class checkAnswerController extends Controller
                 return view('/lecturer/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
             }     
-        }
+       // }
        
         
                 
