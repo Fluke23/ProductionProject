@@ -17,8 +17,14 @@ class shortAnswerQuestionController extends Controller
 
     public function storeFiles(request $request){
         
-        //return $request-> all();
-
+        $this->validate($request, [
+            'number' => 'required|int|max:11',
+            'name' => 'required|varchar|max:50',
+            'name' => 'required|varchar|max:255',
+            'question' => 'required|mediumtext',
+            'score' => 'required|mediumtext',
+           
+            ]);
          $currentQuestionId = DB::table('Questions')->max('questions_id');
         
          $lastestQuestinID = $currentQuestionId+1;
