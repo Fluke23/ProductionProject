@@ -37,9 +37,9 @@ Route::group(['middleware' => ['Admin']], function () {
 
     //Admin/subject
     Route::get('/Admin/subject','SubjectController@index')->name('subject.index'); //name for reditect in update 
-    Route::get('/Admin/subject/addSubject','SubjectController@create')->name('addSubject');;
+    Route::get('/Admin/subject/addSubject','SubjectController@create')->name('addSubject');
     Route::post('/Admin/subject/saveSubject','SubjectController@store');
-    Route::get('/Admin/subject/editSubject/{id?}','SubjectController@edit');
+    Route::get('/Admin/subject/editSubject/{id?}','SubjectController@edit')->name('editSubject');
     Route::post('/Admin/subject/updateSubject','SubjectController@update');
     Route::get('/Admin/subject/deleteSubject/{id?}','SubjectController@destroy');
 
