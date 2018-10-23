@@ -49,6 +49,11 @@ class reviewAnswerController extends Controller
         //dd($question);
     }
 
+
+
+
+   
+
         public function store(request $request){
             
                         $questions_id= $request->input ('questions_id');
@@ -61,8 +66,16 @@ class reviewAnswerController extends Controller
                         ->where('Answer.questions_id','=',$questions_id)
                         ->update(['Answer.Score'=> $Answer] );
 
-                        $currentAnswerId = DB::table('Answer')->max('answer_id');
-                        $lastestAnswerID = $currentAnswerId;
+                        //$currentAnswerId = DB::table('Answer')->max('answer_id');
+                        //$lastestAnswerID = $currentAnswerId;
+                        $currentAnswerId = DB::table('Answer')
+                        ->select('answer_id')
+                        ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                        ->where('Answer.questions_id','=',$questions_id)
+                        ->get();
+                        $lastestAnswerID = $currentAnswerId[0]->answer_id;
+                        //dd($lastestAnswerID);
+
 
                         $Comment = new Comment;
                         $Comment->answer_id = $lastestAnswerID;
@@ -84,7 +97,7 @@ class reviewAnswerController extends Controller
                        $permission = $request->get('permission');
                        if($permission == 'ADMIN'){
                         return view('/Admin/checkAnswer/indexAnswer',compact($questions_id)); 
-                       }elseif($permission == 'LECTURER'){
+                       }else{
                         return view('/Lecturer/checkAnswer/indexAnswer',compact($questions_id)); 
                        }
    

@@ -40,12 +40,13 @@
                      </div>
 
                      
-                     
+                    
                      <div class="col-md-12">
                      {{Form::label('Answer:', 'Answer:')}}</br>
                      <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly>   {{$q->answer}}</textarea>
+                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly >   {{$q->answer}}</textarea>
                      </div>  
+                     
 
                      </div></br>
 
