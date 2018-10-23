@@ -9,6 +9,7 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use Auth;
    
 class AnswerShortQuestionController extends Controller
 {

@@ -9,6 +9,7 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use Auth;
 
 class answerUploadQuestionController extends Controller
 {
@@ -21,7 +22,7 @@ class answerUploadQuestionController extends Controller
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-        
+        $data = Question::where('questions_id',$questions_id)->get();
                
     }
 
