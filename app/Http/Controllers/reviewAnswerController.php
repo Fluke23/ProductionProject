@@ -22,7 +22,7 @@ class reviewAnswerController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        //->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
         //dd($question);
