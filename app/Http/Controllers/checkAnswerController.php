@@ -33,7 +33,7 @@ class checkAnswerController extends Controller
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
             }
        // }elseif($permission == 'LECTURER'){
@@ -43,7 +43,7 @@ class checkAnswerController extends Controller
                     break;
                 
                 case 'Close':
-                return view('/lecturer/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/lecturer/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
             }     
        // }

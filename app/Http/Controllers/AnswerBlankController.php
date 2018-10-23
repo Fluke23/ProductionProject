@@ -46,6 +46,7 @@ class AnswerBlankController extends Controller
         ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+        dd($question2);
 
         $question3 = DB::table('Questions')
         ->select('Question_pictures.img_url','quizs.title','Questions.solution','Questions.question','Questions.score'
@@ -56,7 +57,7 @@ class AnswerBlankController extends Controller
         ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-       //dd($question3);
+      
     
 
         for($i=0 ;$i<count($quizStatus); $i++){

@@ -15,7 +15,7 @@
     <div class="row">
         
                     @foreach($question as $q)
-               
+                    @endforeach
                
                     <div class="col-md-12">
                         <h4>{{$q->title}}</h4>
@@ -26,14 +26,15 @@
 
                      </div></br>
                      
+                   
                      <div class="col-md-4">
                      <li class="list-group">Answer No: {{$q->number}}</li>
                      </div>
-
+                     @foreach($question as $q)
                      <div class="col-md-4">
                      <li class="list-group">Student: {{$q->username}}</li>
                      </div>
-
+                     @endforeach
                      <div class="col-md-4">
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>
@@ -50,7 +51,7 @@
 
                 
                
-                     @endforeach
+                    
 
         <div class="container">
         <div class="row">

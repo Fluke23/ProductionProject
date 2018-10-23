@@ -31,7 +31,7 @@
                        
 
                         
-                        <li class="list-group">Score:{{$q->score}}</li>
+                        
                         
                      </div></br>
                      
@@ -58,6 +58,12 @@
                      <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
                      style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly>   {{$q->answer}}</textarea>
                      </div>  
+
+                     <div class="col-md-12">
+                     {{Form::label('Score:', 'Score:')}}</br>
+                     <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
+                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly>   {{$q->Score}}</textarea>
+                     </div> 
                      
 
                       @foreach($question as $q)

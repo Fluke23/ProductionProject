@@ -26,7 +26,7 @@
 
             <tbody>
                     @foreach($question as $q)
-               
+                    @endforeach
                
                     <div class="col-md-6">
                         <h4>{{$q->title}}</h4>
@@ -45,7 +45,7 @@
                         
                         </td>
                 </tr>
-                     @endforeach
+                    
     
 
     @endsection

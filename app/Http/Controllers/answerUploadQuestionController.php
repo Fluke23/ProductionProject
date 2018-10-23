@@ -21,7 +21,7 @@ class answerUploadQuestionController extends Controller
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-            
+        
                
     }
 
