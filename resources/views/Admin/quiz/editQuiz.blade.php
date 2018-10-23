@@ -112,19 +112,7 @@
                             </div>
                         </div>
 
-       {{-- quizs_status_id --}}
-
-<div class="form-group row">
-    <label for="" class="col-md-4 col-form-label text-md-right">Quiz Status </label>
-    <div class="col-md-6">
-        <select class="form-control" name="quizs_status_id" id="select3">
-            @foreach($quiz_status as $qs)
-            <option value="{{$qs->quizs_status_id}}">{{$qs->quizs_status_id}}</option>
-            @endforeach
-        </select>
-
-    </div>
-</div> 
+      
 {{-- quizs_status_id --}}
 
                         <div class="form-group row">
