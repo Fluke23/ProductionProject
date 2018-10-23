@@ -101,6 +101,7 @@ Route::group(['middleware' => ['Admin']], function () {
 
     //admin/reviewAnswer
     Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
+    Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewAnswer.file');
     Route::post ('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
     Route::post('/Admin/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
 
