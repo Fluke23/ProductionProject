@@ -25,6 +25,7 @@ class reviewAnswerController extends Controller
         ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+        //dd($question);
             
         $quizStatus = $question[0]->quizs_status_id;
        // if($permission == 'ADMIN'){

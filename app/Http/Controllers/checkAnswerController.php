@@ -20,10 +20,10 @@ class checkAnswerController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        //->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-       
+       // dd($question);
         //$permission = $request->get('permission');
         $quizStatus = $question[0]->quizs_status_id;
        // if($permission == 'ADMIN'){
@@ -37,15 +37,7 @@ class checkAnswerController extends Controller
                     break;
             }
        // }elseif($permission == 'LECTURER'){
-            switch ( $quizStatus) {
-                case 'Reviewing':
-                return view('/lecturer/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
-                    break;
-                
-                case 'Close':
-                return view('/lecturer/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
-                    break;
-            }     
+              
        // }
        
         
