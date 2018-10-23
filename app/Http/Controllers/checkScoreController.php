@@ -42,12 +42,15 @@ class checkScoreController extends Controller
         public function store(request $request){
             
                        
-
-                        $currentAnswerId = DB::table('Answer')->max('answer_id');
-                        $lastestAnswerID = $currentAnswerId;
-
+                        $questions_id= $request->input ('questions_id');
+                        $currentAnswerId = DB::table('Answer')
+                         ->select('answer_id')
+                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                         ->where('Answer.questions_id','=',$questions_id)
+                         ->get();
+                         $lastestAnswerID = $currentAnswerId[0]->answer_id;
                         $Comment = new Comment;
-                        $Comment->answer_id = $lastestAnswerID;
+                        $Comment->answer_id =  $lastestAnswerID;
                         $Comment->comment =$request->input('Remark');
                         
                         $username = Auth::user()->username;

@@ -93,13 +93,13 @@ class reviewAnswerController extends Controller
 
                         
                         
-                
-                       $permission = $request->get('permission');
+
+                     /* $permission = $request->get('permission');
                        if($permission == 'ADMIN'){
-                        return view('/Admin/checkAnswer/indexAnswer',compact($questions_id)); 
+                        return view('/Admin/checkAnswer/indexAnswer',compact('questions_id','question')); 
                        }else{
                         return view('/Lecturer/checkAnswer/indexAnswer',compact($questions_id)); 
-                       }
+                       } */ 
    
 
            
