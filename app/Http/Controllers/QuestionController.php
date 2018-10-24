@@ -133,7 +133,7 @@ class QuestionController extends Controller
        //dd($quiz_id);
         // $amount = $request->input('amount');
        // dd($amount);
-         $amount = 10;
+         $amount = 2;
       return view('/Admin/question/MultipleChoice',compact('quiz_id','amount')); 
     }
 

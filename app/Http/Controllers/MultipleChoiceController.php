@@ -28,7 +28,7 @@ class MultipleChoiceController extends Controller
         // dd($request);
         
         //return $request-> all();
-        for ($j=1; $j <=10 ; $j++) { 
+        for ($j=1; $j <=2 ; $j++) { 
         $currentQuestionId = DB::table('Questions')->max('questions_id');
         
         $lastestQuestinID = $currentQuestionId+1;

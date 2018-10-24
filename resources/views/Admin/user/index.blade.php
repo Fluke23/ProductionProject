@@ -7,8 +7,13 @@
             <h2>User Manager</h2>
         </div>
         <div class="col-md-9">
-            <a href="{{ URL::to('/Admin/userManager/addGroupUser')}}" class="btn btn-success float-right">Add Group
-                User</a>
+            <a href="{{URL::route('importFile')}}" class="btn btn-info float-right"><i class="fas fa-file-import"></i>
+                ImportFile</a>
+            <a href="{{ URL::to('/Admin/user/addGroupUser')}}" class="btn btn-success float-right mr-3"><i class="fas fa-plus"></i>
+                Subject Group</a>
+            <a href="{{ URL::to('/Admin/user/addTypeGroupUser')}}" class="btn btn-success float-right mr-3"><i class="fas fa-plus"></i>
+                User Group</a>
+
         </div>
         <!--  <div class="col-md-9">
                 <a href="{{ URL::to('/Admin/user/createUser')}}" class="btn btn-success float-right"> User</a>
@@ -18,7 +23,12 @@
                 data-target="#exampleModal">Create User</a>
         </div>
     </div>
-
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/userManager')}}">UserManager</a></li>
+            </ol>
+        </nav>
 
     <div class="row">
         <table class="table table-bordered">
@@ -237,6 +247,28 @@
             </div>
 
 
+            <!-- JavaScript -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/alertify.min.js"></script>
+
+            <!-- CSS -->
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css" />
+            <!-- Default theme -->
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/default.min.css" />
+            <!-- Semantic UI theme -->
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/semantic.min.css" />
+            <!-- Bootstrap theme -->
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/themes/bootstrap.min.css" />
+
+            @if(session('success'))
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    alertify.success('{{session('
+                        success ')}}');
+                });
+
+            </script>
+            @endif
             <script>
                 function addForm() {
                     document.getElementById('addForm').submit();

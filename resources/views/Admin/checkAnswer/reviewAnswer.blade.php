@@ -10,7 +10,11 @@
 
 
     </div>
-
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+            </ol>
+        </nav>
 
     <div class="row">
         

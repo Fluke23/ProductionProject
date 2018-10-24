@@ -10,7 +10,12 @@
                 
                 </div>   
     </div>
-
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/userManager')}}">UserManager</a></li>
+            </ol>
+        </nav>
     <div class="row mt-5">
     <form action="{{URL::route('saveTypeUser')}}" method="post" class="col-md-12">
                 {{ csrf_field() }}

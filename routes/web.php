@@ -65,8 +65,8 @@ Route::group(['middleware' => ['Admin']], function () {
     //user manager for admin
     Route::get('/Admin/userManager','UserController@index')->name('userManager.index'); //name for reditect in update
     Route::get('/Admin/userManager/viewUserInfo/{username?}','UserController@viewStudent');
-    Route::get('/Admin/userManager/addGroupUser','UserController@create');
-    Route::post('/Admin/userManager/saveUser','UserController@store')->name('saveUser');
+    Route::get('/Admin/user/addGroupUser','UserController@create');
+    Route::post('/Admin/user/saveUser','UserController@store')->name('saveUser');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
 
     //Admin/blankQuestion
@@ -258,5 +258,12 @@ Route::group(['middleware' => ['Admin']], function () {
 
 // Register User
 Route::get('/Admin/user/createUser','UserController@createUser')->name('createUser');
-Route::post('/Admin/user/saveUser','UserController@storeUser')->name('saveUser');
+// Route::post('/Admin/user/saveUser','UserController@storeUser')->name('saveUser');
 // Register User
+// user 
+Route::get('/Admin/user/addTypeGroupUser','UserController@createTypeGroupUser')->name('');
+Route::post('/Admin/user/saveTyprUser','UserController@storeTypeUser')->name('saveTypeUser');
+
+// Import file  User 
+    Route::get('/Admin/importfile','UserController@importFileUser')->name('importFile');
+    Route::post('/Admin/importfileStore','UserController@parseImport')->name('parseImport');

@@ -164,6 +164,9 @@ return [
          //collective
          Collective\Html\HtmlServiceProvider::class,
 
+         // Import File
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -216,6 +219,10 @@ return [
         //collective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
+
+        //import file
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
