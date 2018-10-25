@@ -165,7 +165,7 @@ return [
          Collective\Html\HtmlServiceProvider::class,
 
          // Import File
-       // Maatwebsite\Excel\ExcelServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
