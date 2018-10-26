@@ -74,7 +74,7 @@
 
         <div class="col-md-12">
             </br>
-            {{Form::label('remark:', 'remark:')}}</br>
+            {{Form::label('Comment:', 'Comment:')}}</br>
 
             <li class="list-group">{{$q->usernames}} {{$q->created_at}}</li>
 
@@ -94,7 +94,7 @@
             <form action="{{route('commentAnswer.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="col-md-12">
-                    {{Form::label('Remark:', 'Remark:')}}</br>
+                    {{Form::label('Comment:', 'Comment:')}}</br>
                     <textarea name="Remark" cols="120" rows="5" id="Remark" style="margin-top: 0px; margin-bottom: 0px; height: 100px;">   </textarea>
                 </div>
 
