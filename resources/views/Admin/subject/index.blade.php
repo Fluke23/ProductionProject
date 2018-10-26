@@ -46,6 +46,7 @@
 
                         <td>
                             <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View user</a>
                            <!-- <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning " data-toggle="modal"
                                 data-target="#editSubjectModal1">Edit</a> -->
                             <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>

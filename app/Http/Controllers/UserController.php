@@ -20,6 +20,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('Admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -287,5 +291,46 @@ class UserController extends Controller
         return view('/Admin/user/importShowFile',compact('data'))->with('success', 'Import File Successfil');
     }
 
+    public function viewtoSubjectUser(Request $request,$subject_id)
+    {
+       
+       
+        $permission = $request->get('permission');
+    
+        
+        $subject_user = DB::table('subjects_user')
+        ->join('users','users.username','=','subjects_user.username')
+        //
+        ->join('Subjects','Subjects.subject_id','=','subjects_user.subject_id')
+        //
+        ->join('Group_user','Group_user.username','=','users.username')
+        ->join('Student_group','Student_group.student_group_id','=','subjects_user.student_group_id')
+        // ->join('Group_user','Group_user.username','=','users.username')
+        ->where('Subjects.subject_id','=',$subject_id)
+        ->get();
+       
+
+        
+            //  return view('/Admin/subject/index',compact('subjects','permission'));
+    if($permission == 'ADMIN'){
+        return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission'));
+    }elseif($permission == 'LECTURER'){
+        return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission'));
+    }
+        
+
+        
+
+    }
+
+    public function viewtoSubjectUserDestroy($id)
+    {   
+        //where because $request sent username it must be  delete id 
+        $subject_user  = Subject_user::where('username','=', $id)->delete();  
+        return back()->with('success', 'Data Deleted');
+        // return view('Admin/user/viewSubjectUser',compact('subject_user'));
+    }
+    
+   
 
 }

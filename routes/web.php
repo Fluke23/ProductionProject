@@ -42,6 +42,11 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/subject/editSubject/{id?}','SubjectController@edit')->name('editSubject');
     Route::post('/Admin/subject/updateSubject','SubjectController@update');
     Route::get('/Admin/subject/deleteSubject/{id?}','SubjectController@destroy');
+     //function view  each Subject has who are admin lecturer and student
+    // for Admin
+    Route::get('/Admin/subject/viewSubjectUser/{subject_id?}','UserController@viewtoSubjectUser')->name('subjectUser');
+    Route::get('/Admin/subject/viewSubjectUser/delete/{id?}/{subject_id?}','UserController@viewtoSubjectUserDestroy')->name('subjectUserDelete');
+    
 
 
     //question 
@@ -120,6 +125,10 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Lecturer/subject/editSubject/{id?}','SubjectController@edit');
     Route::post('/Lecturer/subject/updateSubject','SubjectController@update');
     Route::get('/Lecturer/subject/deleteSubject/{id?}','SubjectController@destroy');
+     // for Lecturer
+
+     Route::get('/Lecturer/subject/viewSubjectUser/{subject_id?}','UserController@viewtoSubjectUser');
+     Route::get('/Lecturer/subject/viewSubjectUser/delete/{id?}/{subject_id?}','UserController@viewtoSubjectUserDestroy');
 
     //lecturer/quiz
     Route::get('/Lecturer/quiz/index/{subject_id?}','QuizController@index')->name('lec.quiz.quizDetail'); //name use for redirect in update
@@ -267,3 +276,6 @@ Route::post('/Admin/user/saveTyprUser','UserController@storeTypeUser')->name('sa
 // Import file  User 
     Route::get('/Admin/importfile','UserController@importFileUser')->name('importFile');
     Route::post('/Admin/importfileStore','UserController@parseImport')->name('parseImport');
+
+   
+   
