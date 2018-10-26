@@ -20,7 +20,7 @@
             <img src="{{$q->img_url}} ">
             <a target="_blank" href="{{$q->img_url}}"> {{$q->img_url}} </a>
             <li class="list-group">Number: {{$q->number}}</li>
-            <li class="list-group">solution: {{$q->solution}}</li>
+            <!--<li class="list-group">solution: {{$q->solution}}</li>-->
             <li class="list-group">Question:{{$q->question}}</li>
             <li class="list-group">Score:{{$q->score}}</li>
 
