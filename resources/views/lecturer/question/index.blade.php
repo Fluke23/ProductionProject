@@ -50,7 +50,7 @@
                     
 
                         <td >
-                            <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Admin/checkAnswer/indexAnswer/'.$q->questions_id)}}" class="btn btn-info ">View</a>
                             <a href="{{ URL::to('/Lecturer/question/editQuestion/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
                             <a href="{{ URL::to('/Lecturer/question/deleteQuestion/'.$q->questions_id.'/'.$q->quizs_id)}}" class="btn btn-danger">Delete</a>
                         </td>
