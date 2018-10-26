@@ -13,11 +13,11 @@
         </div>
     </div>
     <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz')}}">QuizManager</a></li>
-            </ol>
-        </nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz')}}">QuizManager</a></li>
+        </ol>
+    </nav>
     <div class="row">
         <table class="table table-bordered">
             <tr>
@@ -134,7 +134,7 @@
 
                         {{-- subject_id --}}
                         <div class="form-group row">
-                            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject_id')
+                            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject')
                                 }}</label>
 
                             <div class="col-md-6">
@@ -149,24 +149,40 @@
                             </div>
                         </div>
 
-                        {{-- group_id --}}
+                        <!-- {{-- group_id --}}
                         <div class="form-group row">
-                            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
+                            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="groups_id" id="select1">
+                                <div class="col-md-6">
                                     @foreach($group as $g)
-                                    <option value="{{$g->groups_id}}">{{$g->groups_id}}</option>
-                                    @endforeach
+                                    <option value="{{$g->groups_id}}">{{$g->student_group_name}}</option>
+                                    @endforeach 
                                 </select>
 
+                            </div>
+                        </div>-->
+
+                        <div class="form-group row">
+                            <label for="remark" class="col-md-4 col-form-label text-md-right">{{
+                                __('Group') }}</label>
+
+                            <div class="col-md-6">
+                                {{Form::select('groups_id', array('G1'=>'G1' ,
+                                'G2'=>'G2'))}}
+                                @if ($errors->has('Group'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('Group') }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
 
 
                         {{-- quiz type id --}}
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">Quiz Type </label>
+                            <label for="" class="col-md-4 col-form-label text-md-right"> Type </label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="quizs_types_id" id="select2">
@@ -182,7 +198,7 @@
                         {{-- quizs_status_id --}}
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">Quiz Status </label>
+                            <label for="" class="col-md-4 col-form-label text-md-right">Status </label>
                             <div class="col-md-6">
                                 <select class="form-control" name="quizs_status_id" id="select3">
                                     @foreach($quiz_status as $qs)
@@ -210,6 +226,7 @@
     function addForm() {
         document.getElementById('addForm').submit();
     }
+
 </script>
 
 @endsection

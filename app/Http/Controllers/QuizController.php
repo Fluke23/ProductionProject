@@ -43,6 +43,8 @@ class QuizController extends Controller
         // $quiz_type = Quiz_type::all();
         $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
         $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
+        $quiz_group= DB::table('Student_group')->select('student_group_name')->get();
+        
         
         // $data = Quiz::all();
         $quizzes = DB::table('quizs')
@@ -60,11 +62,11 @@ class QuizController extends Controller
         
         
         if($permission == 'ADMIN'){
-            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
+            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
         }elseif($permission == 'STUDENT'){
-            return view('Student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
+            return view('Student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
         }elseif($permission == 'LECTURER'){
-            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status'));
+            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
         }
 
         
@@ -84,10 +86,11 @@ class QuizController extends Controller
         $group = Group::all();
         $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
         $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
+        $quiz_group= DB::table('Student_group')->select('student_group_name')->get();
         if($permission == 'ADMIN'){
-        return view('/Admin/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status'));
+        return view('/Admin/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status','quiz_group'));
         }elseif($permission == 'LECTURER'){
-        return view('/Lecturer/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status'));  
+        return view('/Lecturer/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status','quiz_group'));  
         } 
     }
 
