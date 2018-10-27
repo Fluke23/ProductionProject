@@ -48,7 +48,7 @@
                     <td style="font-size: 0.8em;">{{$user->lastname}}</td>
                     <td>
                         <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$user->username)}}" class="btn btn-info btn-sm">View</a>
-                        <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{URL::to('/Admin/userManager/editUser/'.$user->username)}}" class="btn btn-warning btn-sm">Edit</a>
                         @if($user->username != 'Admin')
                         <a href="{{ URL::to('/Admin/userManager/delete/'.$user->username)}}" class="btn btn-danger btn-sm">Delete</a>
                         @endif
