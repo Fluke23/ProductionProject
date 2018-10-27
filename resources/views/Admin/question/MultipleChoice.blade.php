@@ -52,7 +52,7 @@
 
             <div class="form-group">
                 {{Form::label('score'.$i, 'score')}}
-                {{Form::text('score'.$i, '',['placeholder'=> 'Enter Score'])}}
+                {{Form::text('score'.$i, '1')}}
             </div>
 
             <div class="form-group">
