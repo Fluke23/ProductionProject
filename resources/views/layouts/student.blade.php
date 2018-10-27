@@ -85,7 +85,7 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav ml-5">
                                       <li class="nav-item ">
-                                        <a class="nav-link" href="#">Home</a>
+                                        <a class="nav-link" href="{{ URL::to('/Admin/subject')}}">Home</a>
                                       </li>
                                     </ul>
                             </div>
