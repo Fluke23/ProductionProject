@@ -35,10 +35,11 @@
                      <li class="list-group">Answer No: {{$q->number}}</li>
                      </div>
                      @foreach($question as $q)
+                     @endforeach
                      <div class="col-md-4">
                      <li class="list-group">Student: {{$q->username}}</li>
                      </div>
-                     @endforeach
+                     
                      <div class="col-md-4">
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>
