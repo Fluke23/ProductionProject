@@ -71,8 +71,11 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/userManager','UserController@index')->name('userManager.index'); //name for reditect in update
     Route::get('/Admin/userManager/viewUserInfo/{username?}','UserController@viewStudent');
     Route::get('/Admin/user/addGroupUser','UserController@create');
-    Route::post('/Admin/user/saveUser','UserController@store')->name('saveUser');
+    
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
+    
+    Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
+
 
     //Admin/blankQuestion
     Route::get('/Admin/question/blankQuestion','blankQuestionController@showUploadForms')->name('blankQuestion.file');
@@ -105,7 +108,7 @@ Route::group(['middleware' => ['Admin']], function () {
     //Route::post('/Admin/checkAnswer/indexAnswersubmit','checkAnswerController@submit');
 
     //admin/reviewAnswer
-    Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
+   // Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
     Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewAnswer.file');
     Route::post ('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
     Route::post('/Admin/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
