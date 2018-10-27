@@ -137,7 +137,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Lecturer/quiz/index/{subject_id?}','QuizController@index')->name('lec.quiz.quizDetail'); //name use for redirect in update
     Route::get('/Lecturer/quiz/addQuiz/{subject_id?}','QuizController@create')->name('lec.addQuiz');
     Route::post('/Lecturer/quiz/saveQuiz/{subject_id?}','QuizController@store');
-    Route::get('/Lecturer/quiz/editQuiz/{subject_id?}','QuizController@edit');
+    Route::get('/lecturer/quiz/editQuiz/{subject_id?}','QuizController@edit');
     Route::post('/Lecturer/quiz/updateQuiz','QuizController@update');
     Route::get('/Lecturer/quiz/deleteQuiz/{id?}/{subject_id?}','QuizController@destroy');
 
