@@ -1,4 +1,5 @@
-@extends('layouts.lecturer')
+@extends('layouts.main')
+
 @section('content')
 <div class="container">
     <div class="row mb-2">
@@ -19,7 +20,7 @@
           
 
     <div class="row">
-    <form action="{{URL::to('/Lecturer/quiz/updateQuiz')}}" method="post">
+    <form action="{{URL::to('/Admin/quiz/updateQuiz')}}" method="post">
         @csrf
 
         {{-- title --}}
@@ -73,7 +74,7 @@
             <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject_id') }}</label>
 
             <div class="col-md-6">
-            <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}" name="subject_id" value="{{$quiz->subject_id}}" required autofocus>
+            <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}" name="subject_id" value="{{$quiz->subject_id}}" required readonly autofocus>
 
                 @if ($errors->has('subject_id'))
                     <span class="invalid-feedback" role="alert">
@@ -84,49 +85,47 @@
         </div>
 
         {{-- group_id --}}
-        <div class="form-group row">
-            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
+                        <div class="form-group row">
+                            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
 
-            <div class="col-md-6">
-            <input id="groups_id" type="text" class="form-control{{ $errors->has('groups_id') ? ' is-invalid' : '' }}" name="groups_id" value="{{$quiz->groups_id}}" required autofocus>
+                            <div class="col-md-6">
+                                <select class="form-control" name="groups_id" id="select1">
+                                    @foreach($group as $g)
+                                    <option value="{{$g->groups_id}}">{{$g->groups_id}}</option>
+                                    @endforeach
+                                </select>
 
-                @if ($errors->has('groups_id'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('groups_id') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+                            </div>
+                        </div>
 
-        {{-- quizs_types_id --}}
-        <div class="form-group row">
-            <label for="quizs_types_id" class="col-md-4 col-form-label text-md-right">{{ __('quizs_types_id') }}</label>
+        {{-- quiz type id --}}
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">Quiz Type </label>
 
-            <div class="col-md-6">
-            <input id="quizs_types_id" type="text" class="form-control{{ $errors->has('quizs_types_id') ? ' is-invalid' : '' }}" name="quizs_types_id" value="{{$quiz->quizs_types_id}}" required autofocus>
+                            <div class="col-md-6">
+                                <select class="form-control" name="quizs_types_id" id="select2">
+                                    @foreach($quiz_type as $q)
+                                    <option value="{{$q->quizs_types_id}}">{{$q->type_name}}</option>
+                                    @endforeach
+                                </select>
 
-                @if ($errors->has('quizs_types_id'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('quizs_types_id') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+                            </div>
+                        </div>
 
-        {{-- quizs_status_id --}}
-        <div class="form-group row">
-            <label for="quizs_status_id" class="col-md-4 col-form-label text-md-right">{{ __('quizs_status_id') }}</label>
+      
+{{-- quizs_status_id --}}
 
-            <div class="col-md-6">
-            <input id="quizs_status_id" type="text" class="form-control{{ $errors->has('quizs_status_id') ? ' is-invalid' : '' }}" name="quizs_status_id" value="{{$quiz->quizs_status_id}}" required autofocus>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">Quiz Status </label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="quizs_status_id" id="select3">
+                                    @foreach($quiz_status as $qs)
+                                    <option value="{{$qs->quizs_status_id}}">{{$qs->quizs_status_id}}</option>
+                                    @endforeach
+                                </select>
 
-                @if ($errors->has('quizs_status_id'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('quizs_status_id') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
+                            </div>
+                        </div>
 
         <input type="hidden" name="quiz_id" value="{{ $quiz->quizs_id}}">
 
