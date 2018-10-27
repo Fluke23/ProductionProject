@@ -161,7 +161,7 @@ class QuizController extends Controller
         if($permission == 'ADMIN'){
         return view('Admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));
         }elseif($permission == 'LECTURER'){
-        return view('Lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
+        return view('lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
         }
     }
 
