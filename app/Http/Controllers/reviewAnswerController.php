@@ -22,7 +22,7 @@ class reviewAnswerController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-       // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
         //dd($question);
@@ -57,7 +57,7 @@ class reviewAnswerController extends Controller
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+       // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
         //dd($question);
@@ -96,11 +96,20 @@ class reviewAnswerController extends Controller
                       // dd($questions_id);
                         $Answer= new Answer;
                         $Answer=$request->input('Score');
+                        $user=DB::table('Answer')
+                        ->select('username')
+                        ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                        ->where('Answer.questions_id','=',$questions_id)
+                        ->get();
+                        $newuser=$user[0]->username;
+                        //dd($newuser);
                       
                         $Score = DB::table('Answer')
                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
                         ->where('Answer.questions_id','=',$questions_id)
+                        ->where('Answer.username','=',$newuser)
                         ->update(['Answer.Score'=> $Answer] );
+                        //dd($Score);
 
                         //$currentAnswerId = DB::table('Answer')->max('answer_id');
                         //$lastestAnswerID = $currentAnswerId;
