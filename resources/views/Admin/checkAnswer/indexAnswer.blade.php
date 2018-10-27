@@ -29,14 +29,16 @@
             </tr>
 
             <tbody>
-                    @foreach($question as $q)
-                    @endforeach
-               
+                    
+                    
+            @foreach($question as $q)
+            @endforeach
                     <div class="col-md-6">
                         <h4>{{$q->title}}</h4>
                     <li class="list-group">{{$q->question}}</li>
 
                      </div></br>
+                     @foreach($question as $q)
                 <tr>
                         <td style="font-size: 0.8em;">{{$q->username}}</td>
                         <td style="font-size: 0.8em;">{{$q->answer}}</td>
@@ -48,6 +50,7 @@
                         <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
                         
                         </td>
+                        @endforeach
                 </tr>
                     
     

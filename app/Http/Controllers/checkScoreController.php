@@ -48,7 +48,7 @@ class checkScoreController extends Controller
                          ->join('Questions','Questions.questions_id','=','Answer.questions_id')
                          ->where('Answer.questions_id','=',$questions_id)
                          ->get();
-                         $lastestAnswerID = $currentAnswerId[0]->answer_id;
+                        $lastestAnswerID = $currentAnswerId[0]->answer_id;
                         $Comment = new Comment;
                         $Comment->answer_id =  $lastestAnswerID;
                         $Comment->comment =$request->input('Remark');
