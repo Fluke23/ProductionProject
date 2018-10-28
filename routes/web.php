@@ -107,13 +107,13 @@ Route::group(['middleware' => ['Admin']], function () {
    // Route::post ('/Admin/checkAnswer/indexAnswer/','checkAnswerController@store') ;
     //Route::post('/Admin/checkAnswer/indexAnswersubmit','checkAnswerController@submit');
 
-    //admin/reviewAnswer
-   // Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
-    Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewAnswer.file');
+    //admin/reviewAnswer/statusopen
+   // Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewAnswer.file');
+    Route::get('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
     Route::post ('/Admin/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
     Route::post('/Admin/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
 
-    //Admin/commentAnswer
+    //Admin/commentAnswer/statusclose
     Route::get('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentAnswer.file'); 
     Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentAnswer.file'); 
     Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
@@ -196,12 +196,12 @@ Route::group(['middleware' => ['Admin']], function () {
     // Route::post ('/Admin/checkAnswer/indexAnswer/','checkAnswerController@store') ;
      //Route::post('/Admin/checkAnswer/indexAnswersubmit','checkAnswerController@submit');
  
-     //lecturer/reviewAnswer
+     //lecturer/reviewAnswer/statusreview
      Route::get('/lecturer/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@index')->name('reviewAnswer.file');
      Route::post ('/lecturer/checkAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
      Route::post('/lecturer/checkAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
  
-     //Admin/commentAnswer
+     //lecturer/commentAnswer/statusclose
      Route::get('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentAnswer.file'); 
      Route::post('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentAnswer.file'); 
      Route::post('/lecturer/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
