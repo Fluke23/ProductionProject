@@ -48,8 +48,18 @@
                     
                      <div class="col-md-12">
                      {{Form::label('Answer:', 'Answer:')}}</br>
+                     
+                     
+                     @if($q->questions_types_id =='Upload')
+                     <a name="Answer:" cols="120" rows="10" id="Answer:" 
+                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly href="{{$q->answer}}">   {{$q->answer}}</a>
+                     @else
                      <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
                      style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly >   {{$q->answer}}</textarea>
+                     @endif
+                    
+                    
+                     
                      </div>  
                      
 
