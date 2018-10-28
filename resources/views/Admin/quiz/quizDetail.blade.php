@@ -27,27 +27,31 @@
                 <th style="font-size: 1em;">Title</th>
                 <th>Description</th>
                 <th>Date</th>
-                <th style="width:50px;">Subject</th>
+                
                 <th style="width:50px;">Group</th>
                 <th style="width:50px;">Type</th>
                 <th style="width:50px;">Status</th>
+                <th style="width:50px;">Min</th>
+                <th style="width:50px;">Max</th>
+                <th style="width:50px;">AVG</th>
                 <th></th>
 
 
             </tr>
-
+           
             <tbody>
                 @foreach($quizzes as $q)
                 <tr>
                     <td style="font-size: 0.8em;">{{$q->title}}</td>
                     <td style="font-size: 0.8em;">{{$q->description}}</td>
                     <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
-                    <td style="font-size: 0.8em;">{{$q->subject_id}}</td>
                     {{-- name is from group_name --}}
                     <td style="font-size: 0.8em;">{{$q->group_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->type_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->status_name}}</td>
-
+                    <td style="font-size: 0.8em;">{{$quiz_min}}</td>
+                    <td style="font-size: 0.8em;">{{$quiz_max}}</td>
+                    <td style="font-size: 0.8em;">{{$quiz_avg}}</td>
 
 
                     <td>

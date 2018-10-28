@@ -44,8 +44,33 @@ class QuizController extends Controller
         $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
         $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
         $quiz_group= DB::table('Student_group')->select('student_group_name')->get();
-        
-        
+       
+        $quiz_id=DB::table('quizs')
+                        ->select('quizs_id')
+                        ->get();
+        $quizs_id=$quiz_id[2]->quizs_id;
+      //  dd($quizs_id);
+        $quiz_min = DB::table('Questions')
+                ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+                  //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+                 ->where('quizs.quizs_id','=',$quizs_id)
+                 ->min('Answer.Score');
+        //dd($quiz_min);
+        $quiz_max = DB::table('Questions')
+                ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+                  //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+                 ->where('quizs.quizs_id','=',$quizs_id)
+                 ->max('Answer.Score');
+        //dd($quiz_max);
+        $quiz_avg = DB::table('Questions')
+        ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+          //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+         ->where('quizs.quizs_id','=',$quizs_id)
+         ->avg('Answer.Score');
+        //dd($quiz_avg);
         // $data = Quiz::all();
         $quizzes = DB::table('quizs')
                 ->join('Subjects', 'quizs.subject_id', '=', 'Subjects.subject_id')
@@ -62,11 +87,11 @@ class QuizController extends Controller
         
         
         if($permission == 'ADMIN'){
-            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
+            return view('/Admin/quiz/quizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group','quiz_min','quiz_max','quiz_avg'));
         }elseif($permission == 'STUDENT'){
-            return view('Student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
+            return view('Student/quiz/StudentquizDetail',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group','quiz_min','quiz_max','quiz_avg'));
         }elseif($permission == 'LECTURER'){
-            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group'));
+            return view('lecturer/quiz/index',compact('quizzes','subject_id','$permission','group','quiz_type','quiz_status','quiz_group','quiz_min','quiz_max','quiz_avg'));
         }
 
         
