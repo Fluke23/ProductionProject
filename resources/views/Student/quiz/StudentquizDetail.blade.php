@@ -30,6 +30,10 @@
                 <th style="width:50px;">Group</th>
                 <th style="width:50px;">Type</th>
                 <th style="width:50px;">Status</th>
+                <th style="width:50px;">Min</th>
+                <th style="width:50px;">Max</th>
+                <th style="width:50px;">AVG</th>
+                
                 <th></th>
                 
 
@@ -46,6 +50,9 @@
                         <td style="font-size: 0.8em;">{{$q->group_name}}</td>
                         <td style="font-size: 0.8em;">{{$q->type_name}}</td>  
                         <td style="font-size: 0.8em;">{{$q->status_name}}</td>
+                        <td style="font-size: 0.8em;">{{$quiz_min}}</td>
+                        <td style="font-size: 0.8em;">{{$quiz_max}}</td>
+                        <td style="font-size: 0.8em;">{{$quiz_avg}}</td>
                         
                     
 
