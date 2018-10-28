@@ -23,7 +23,7 @@
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/question/StudentQuestion')}}">Question Manager</a></li>
         </ol>
     </nav>
-
+ 
 
 
     <div class="row">
@@ -33,7 +33,7 @@
                 <!-- <th>Description</th> -->
                 <!-- <th>Date</th> -->
                 <th style="width:50px;">Score</th>
-                <th style="width:50px;">Tester</th>
+               
                 <th style="width:50px;">min</th>
                 <th style="width:50px;">max</th>
                 <th style="width:50px;">Avg</th>
@@ -41,16 +41,17 @@
 
 
             </tr>
-
+            
             <tbody>
                 @foreach($question as $que)
                 <tr>
                     <td style="font-size: 0.8em;">{{$que->question}}</td>
                     <td style="font-size: 0.8em;">{{$que->score}}</td>
-                    <td style="font-size: 0.8em;">Tester</td>
-                    <td style="font-size: 0.8em;">min</td>
-                    <td style="font-size: 0.8em;">max</td>
-                    <td style="font-size: 0.8em;">Avg</td>
+                    <td style="font-size: 0.8em;">{{$question_min}}</td>
+                    <td style="font-size: 0.8em;">{{$question_max}}</td>
+                    <td style="font-size: 0.8em;">{{$question_avg}}</td>
+                    
+                    
 
 
 

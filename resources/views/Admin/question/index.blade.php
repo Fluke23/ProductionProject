@@ -44,6 +44,9 @@
                 <th>Question</th>
                 <th style="width:50px;">Score</th>
                 <th style="width:50px;">Type</th>
+                <th style="width:50px;">Min</th>
+                <th style="width:50px;">Max</th>
+                <th style="width:50px;">AVG</th>
                 <th></th>
                 
 
@@ -56,7 +59,9 @@
                         <td style="font-size: 0.8em;">{{$q->question}}</td>
                         <td style="font-size: 0.8em;">{{$q->score}}</td>
                         <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>
-                    
+                        <td style="font-size: 0.8em;">{{$question_min}}</td>
+                        <td style="font-size: 0.8em;">{{$question_max}}</td>
+                        <td style="font-size: 0.8em;">{{$question_avg}}</td>
 
                         <td >
                         <a href="{{URL::to('/Admin/checkAnswer/indexAnswer/'.$q->questions_id)}}" class="btn btn-info ">View</a>
