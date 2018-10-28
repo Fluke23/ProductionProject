@@ -15,7 +15,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz')}}">QuizManager</a></li>
+            @foreach($quizzes as $q)
+            @endforeach
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject/{id?}')}}">{{$q->subject_id}}</a></li>
+            
         </ol>
     </nav>
     <div class="row">
