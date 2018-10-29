@@ -50,9 +50,9 @@
                         <td style="font-size: 0.8em;">{{$q->question}}</td>
                         <td style="font-size: 0.8em;">{{$q->score}}</td>
                         <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>
-                        <td style="font-size: 0.8em;">{{$question_min}}</td>
-                        <td style="font-size: 0.8em;">{{$question_max}}</td>
-                        <td style="font-size: 0.8em;">{{$question_avg}}</td>
+                        <td style="font-size: 0.8em;">{{$q->min}}</td>
+                        <td style="font-size: 0.8em;">{{$q->max}}</td>
+                        <td style="font-size: 0.8em;">{{$q->avg}}</td>
                     
 
                         <td >
