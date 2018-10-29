@@ -33,7 +33,6 @@
                 <!-- <th>Description</th> -->
                 <!-- <th>Date</th> -->
                 <th style="width:50px;">Score</th>
-               
                 <th style="width:50px;">min</th>
                 <th style="width:50px;">max</th>
                 <th style="width:50px;">Avg</th>
@@ -47,9 +46,9 @@
                 <tr>
                     <td style="font-size: 0.8em;">{{$que->question}}</td>
                     <td style="font-size: 0.8em;">{{$que->score}}</td>
-                    <td style="font-size: 0.8em;">{{$question_min}}</td>
-                    <td style="font-size: 0.8em;">{{$question_max}}</td>
-                    <td style="font-size: 0.8em;">{{$question_avg}}</td>
+                    <td style="font-size: 0.8em;">{{$que->min}}</td>
+                    <td style="font-size: 0.8em;">{{$que->max}}</td>
+                    <td style="font-size: 0.8em;">{{$que->avg}}</td> 
                     
                     
 
