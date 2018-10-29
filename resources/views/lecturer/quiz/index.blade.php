@@ -40,9 +40,9 @@
                     <td style="font-size: 0.8em;">{{$q->group_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->type_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->status_name}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_min}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_max}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_avg}}</td>
+                    <td style="font-size: 0.8em;">{{$q->min}}</td>
+                    <td style="font-size: 0.8em;">{{$q->max}}</td>
+                    <td style="font-size: 0.8em;">{{$q->avg}}</td>
 
 
 
