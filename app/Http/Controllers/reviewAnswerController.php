@@ -106,7 +106,7 @@ class reviewAnswerController extends Controller
                       
                         $Score = DB::table('Answer')
                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
-                        ->where('Answer.questions_id','=',$questions_id)
+                        //->where('Answer.questions_id','=',$questions_id)
                         ->where('Answer.username','=',$newuser)
                         ->update(['Answer.Score'=> $Answer] );
                         //dd($Score);
