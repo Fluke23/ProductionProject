@@ -71,7 +71,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/userManager','UserController@index')->name('userManager.index'); //name for reditect in update
     Route::get('/Admin/userManager/viewUserInfo/{username?}','UserController@viewStudent');
     Route::get('/Admin/user/addGroupUser','UserController@create');
-    
+    Route::get('/Admin/userManager/editUser/{user_id}','UserController@edit');
+    Route::post('Admin/userManager/updateUser','UserController@update');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
     
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');

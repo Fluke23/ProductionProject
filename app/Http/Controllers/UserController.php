@@ -107,10 +107,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($username)
+    public function edit(Request $request,$id)
     {
-        $ีuser1 = DB::table('users')->where('username','=',$username)->first();
-        dd($user1);
+        $permission = $request->get('permission');
+        $username = Auth::user()->username;
+        // $remark= DB::table('Name_title')->select('name_title')->get();
+        
+    
+        
+        $user = DB::table('users')->where('username','=',$id)->first();
+        
+
+
+        return view('/Admin/user/editUser',compact('user'));
     }
 
     /**
@@ -122,7 +131,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $permission = $request->get('permission');
+        $username = Auth::user()->username;
+        
+        $id = $request->get('id'); //id sent by editQuiz.blade.php
+        $user = User::find($id);
+       
+        $user->username = $request->get('username');
+        $user->remark = $request->get('remark');
+        $user->firstname = $request->get('firstname');
+        $user->lastname = $request->get('lastname');
+        $user->save();
+        
+
+        return redirect()->route('userManager.index')->with('success', 'Data Edited');
+
     }
 
     /**
