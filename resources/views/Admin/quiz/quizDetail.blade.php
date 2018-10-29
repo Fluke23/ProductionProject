@@ -49,9 +49,9 @@
                     <td style="font-size: 0.8em;">{{$q->group_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->type_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->status_name}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_min}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_max}}</td>
-                    <td style="font-size: 0.8em;">{{$quiz_avg}}</td>
+                    <td style="font-size: 0.8em;">{{$q->min}}</td>
+                    <td style="font-size: 0.8em;">{{$q->max}}</td>
+                    <td style="font-size: 0.8em;">{{$q->avg}}</td>
 
 
                     <td>
@@ -156,7 +156,7 @@
                             </div>
                         </div>
 
-                        <!-- {{-- group_id --}}
+                         {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
@@ -164,14 +164,14 @@
                                 <select class="form-control" name="groups_id" id="select1">
                                 <div class="col-md-6">
                                     @foreach($group as $g)
-                                    <option value="{{$g->groups_id}}">{{$g->student_group_name}}</option>
+                                    <option value="{{$g->groups_id}}">{{$g->groups_id}}</option>
                                     @endforeach 
                                 </select>
 
                             </div>
-                        </div>-->
+                        </div>
 
-                        <div class="form-group row">
+                       <!--  <div class="form-group row">
                             <label for="remark" class="col-md-4 col-form-label text-md-right">{{
                                 __('Group') }}</label>
 
@@ -184,7 +184,7 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
                         {{-- quiz type id --}}
