@@ -17,7 +17,7 @@
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{{ URL::to('/Student/quiz/StudentquizDetail')}}">Quiz Manager</a></li>
+              <li class="breadcrumb-item"><a href="{{URL::to('Student/quiz/StudentquizDetail/'.$subject_id)}}">{{$subject_id}}</a></li>
             </ol>
           </nav>
     <div class="row">
