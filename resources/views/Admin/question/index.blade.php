@@ -33,7 +33,9 @@
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz/')}}">Quizmanager</a></li>
-              <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question/')}}">Question Manager</a></li>
+              
+              <li class="breadcrumb-item"><a href="{{URL::to('/Admin/question/'.$quizs_id)}}" >{{$quizs_id}}</a></li>
+              
             </ol>
           </nav>
 

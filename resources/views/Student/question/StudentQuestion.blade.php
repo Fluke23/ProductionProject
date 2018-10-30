@@ -29,6 +29,7 @@
     <div class="row">
         <table class="table table-bordered">
             <tr>
+           <!-- <th style="font-size: 1em;">Number</th> -->
                 <th style="font-size: 1em;">Question</th>
                 <!-- <th>Description</th> -->
                 <!-- <th>Date</th> -->
@@ -44,6 +45,7 @@
             <tbody>
                 @foreach($question as $que)
                 <tr>
+                  <!--  <td style="font-size: 0.8em;">{{$que->number}}</td> -->
                     <td style="font-size: 0.8em;">{{$que->question}}</td>
                     <td style="font-size: 0.8em;">{{$que->score}}</td>
                     <td style="font-size: 0.8em;">{{$que->min}}</td>

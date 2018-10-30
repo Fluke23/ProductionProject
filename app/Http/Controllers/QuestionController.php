@@ -30,7 +30,7 @@ class QuestionController extends Controller
        $question = DB::table('Questions')
            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
            ->where('quizs.quizs_id','=',$quizs_id)
-            ->orderby('Questions.questions_id','desc')
+            ->orderby('Questions.number','desc')
             ->get();
 
 
