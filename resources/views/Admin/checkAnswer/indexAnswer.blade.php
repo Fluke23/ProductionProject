@@ -30,7 +30,7 @@
 
             <tbody>
                     
-                    
+            
             @foreach($question as $q)
             @endforeach
                     <div class="col-md-6">

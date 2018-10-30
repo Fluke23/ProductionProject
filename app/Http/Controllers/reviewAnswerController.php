@@ -131,13 +131,19 @@ class reviewAnswerController extends Controller
                         $Comment->save();
                         
                        // $questions_id = $request->input('questions_id');
-
+                       $question = DB::table('Questions')
+                       ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+                       ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+                       ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+                       ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+                       ->where('Questions.questions_id','=',$questions_id)
+                       ->get();
+                       
                        
                         
-                        
 
                         
-                        
+                       return view('/Admin/checkAnswer/indexAnswer',compact('questions_id','question')); 
 
                      /* $permission = $request->get('permission');
                        if($permission == 'ADMIN'){
