@@ -143,10 +143,11 @@ class QuizController extends Controller
             'groups_id' => $request->get('groups_id'),
             'quizs_types_id' => $request->get('quizs_types_id'),
             'quizs_status_id' => $request->get('quizs_status_id'),
+            
           ]);
-
+          $quiz->Student_group = $request->get('Student_group');
           $quiz->save();
-
+           // dd($quiz);
           $group_quiz = new Group_quiz([
                 'quizs_id' =>$quiz->quizs_id, //quiz ใหม่เรื่อยๆ ต้องทำแบบนี้เพื่อให้ข้อมูลเก็บ
                 'groups_id' =>$request->get('groups_id')
