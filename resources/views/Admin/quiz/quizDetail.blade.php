@@ -15,9 +15,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-            @foreach($quizzes as $q)
-            @endforeach
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject/{id?}')}}">{{$q->subject_id}}</a></li>
+            
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject/{id?}')}}">{{$subject_id}}</a></li>
             
         </ol>
     </nav>
@@ -46,7 +45,7 @@
                     <td style="font-size: 0.8em;">{{$q->description}}</td>
                     <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
                     {{-- name is from group_name --}}
-                    <td style="font-size: 0.8em;">{{$q->group_name}}</td>
+                    <td style="font-size: 0.8em;">{{$q->student_group}}</td>
                     <td style="font-size: 0.8em;">{{$q->type_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->status_name}}</td>
                     <td style="font-size: 0.8em;">{{$q->min}}</td>
@@ -156,7 +155,7 @@
                             </div>
                         </div>
 
-                         {{-- group_id --}}
+                        <!--  {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
@@ -170,6 +169,24 @@
 
                             </div>
                         </div>
+
+                        {{-- student_group_id --}}
+                         <div class="form-group row">
+                            <label for="Student_group" class="col-md-4 col-form-label text-md-right">{{ __('group') }}</label>
+
+                            <div class="col-md-6">
+
+                                <div class="col-md-6">
+                                    {{Form::select('Student_group', array('G1'=>'G1' ,
+                                    'G2'=>'G2'))}}
+                                    @if ($errors->has('Student_group'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('Student_group') }}</strong>
+                                                </span>
+                                                @endif
+                                </div>
+                            </div>
+                        </div>  
 
                        <!--  <div class="form-group row">
                             <label for="remark" class="col-md-4 col-form-label text-md-right">{{
