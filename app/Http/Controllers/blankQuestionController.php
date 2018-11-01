@@ -60,18 +60,29 @@ class blankQuestionController  extends Controller
             $blankQuestion = new blankQuestion;
            // $blankQuestion ->img_url =$fileName;
             $blankQuestionImg =$request->file('fileName');
-            $input['fileName'] = time().'.'.$blankQuestionImg->getClientOriginalExtension();
-            $picPath = public_path('/images/Photo');
-            $blankQuestionImg->move($picPath,$input['fileName']);
-            $picName = $input['fileName'];
-            $blankQuestion ->img_url = '/images/Photo/'.$picName;
-            $blankQuestion ->questions_id =$lastestQuestinID;
+            //dd($blankQuestionImg);
+            if($blankQuestionImg == NULL){
+                $blankQuestion ->img_url = null;
+                $blankQuestion ->questions_id =$lastestQuestinID;
            
-            //$blankQuestion ->size = $size;
-            $blankQuestion -> save();
-            //dd($blankQuestion);
-            $quiz_id = $request->input('quiz_id');
+                //$blankQuestion ->size = $size;
+                $blankQuestion -> save();
+                $quiz_id = $request->input('quiz_id');
+            }else{
+                $input['fileName'] = time().'.'.$blankQuestionImg->getClientOriginalExtension();
+                $picPath = public_path('/images/Photo');
+                $blankQuestionImg->move($picPath,$input['fileName']);
+                $picName = $input['fileName'];
+                $blankQuestion ->img_url = '/images/Photo/'.$picName;
+                $blankQuestion ->questions_id =$lastestQuestinID;
+           
+                //$blankQuestion ->size = $size;
+                $blankQuestion -> save();
+                //dd($blankQuestion);
+                $quiz_id = $request->input('quiz_id');
 
+            }
+            
            
            return redirect()->route('question.index', [$quiz_id]);
            

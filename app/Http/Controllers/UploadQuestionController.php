@@ -45,15 +45,25 @@ class UploadQuestionController  extends Controller
             /*add file into database */
             $UploadQuestion = new UploadQuestion;
             $UploadQuestionImg =$request->file('fileName');
-            $input['fileName'] = time().'.'.$UploadQuestionImg->getClientOriginalExtension();
-            $picPath = public_path('/images/Photo');
-            $UploadQuestionImg->move($picPath,$input['fileName']);
-            $picName = $input['fileName'];
-            $UploadQuestion ->img_url = '/images/Photo/'.$picName;
-            $UploadQuestion ->questions_id =$lastestQuestinID;
-            $UploadQuestion -> save();
-            
-            $quiz_id = $request->input('quiz_id');
+            if($UploadQuestionImg == NULL){
+                $UploadQuestion ->img_url = null;
+                $UploadQuestion ->questions_id =$lastestQuestinID;
+           
+                
+                $UploadQuestion -> save();
+                $quiz_id = $request->input('quiz_id');
+            }else{
+                $input['fileName'] = time().'.'.$UploadQuestionImg->getClientOriginalExtension();
+                $picPath = public_path('/images/Photo');
+                $UploadQuestionImg->move($picPath,$input['fileName']);
+                $picName = $input['fileName'];
+                $UploadQuestion ->img_url = '/images/Photo/'.$picName;
+                $UploadQuestion ->questions_id =$lastestQuestinID;
+                $UploadQuestion -> save();
+                
+                $quiz_id = $request->input('quiz_id');
+            }
+           
             
 
            

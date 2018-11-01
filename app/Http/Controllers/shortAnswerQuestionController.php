@@ -44,18 +44,28 @@ class shortAnswerQuestionController extends Controller
 
             /*add file into database */
             $shortAnswerQuestion = new shortAnswerQuestion;
-           // $shortAnswerQuestion ->img_url =$fileName;
+          
            $shortAnswerQuestionImg =$request->file('fileName');
-           $input['fileName'] = time().'.'.$shortAnswerQuestionImg->getClientOriginalExtension();
-           $picPath = public_path('/images/Photo');
-           $shortAnswerQuestionImg->move($picPath,$input['fileName']);
-           $picName = $input['fileName'];
-           $shortAnswerQuestion ->img_url = '/images/Photo/'.$picName;
+           if($shortAnswerQuestionImg == NULL){
+            $shortAnswerQuestion ->img_url = null;
             $shortAnswerQuestion ->questions_id =$lastestQuestinID;
+       
             //$blankQuestion ->size = $size;
             $shortAnswerQuestion -> save();
-            //สร้างตัวแปร quizId
             $quiz_id = $request->input('quiz_id');
+           }else{
+            $input['fileName'] = time().'.'.$shortAnswerQuestionImg->getClientOriginalExtension();
+            $picPath = public_path('/images/Photo');
+            $shortAnswerQuestionImg->move($picPath,$input['fileName']);
+            $picName = $input['fileName'];
+            $shortAnswerQuestion ->img_url = '/images/Photo/'.$picName;
+            $shortAnswerQuestion ->questions_id =$lastestQuestinID;
+             
+             $shortAnswerQuestion -> save();
+             
+             $quiz_id = $request->input('quiz_id');
+           }
+           
             
 
            
