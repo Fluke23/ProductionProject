@@ -16,8 +16,9 @@ use Auth;
 class AnswerBlankController extends Controller
 {
     
-    public function index($questions_id,$quiz_id)
+    public function index(Request $request,$questions_id,$quiz_id)
     {
+        $username = Auth::user()->username;
         $question = DB::table('Questions')
         
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
@@ -26,6 +27,19 @@ class AnswerBlankController extends Controller
         ->where('Questions.quizs_id','=',$quiz_id)
         ->get();
         
+        if ($request->query('answer') !== null ) {
+            $Answer = new Answer();
+            $Answer->username = $username;
+            $Answer->answer_number =$request->query('input');
+            $Answer->answer =$request->query('answer');
+            $Answer->questions_id =$request->query('questions_id');
+            //save message
+            
+            $currentQuestionId = DB::table('Questions')->max('questions_id');
+            $lastestQuestinID = $currentQuestionId+1;
+
+            $Answer->save();
+        }
 
 
         $data = Question::where('questions_id',$questions_id)->get();
@@ -41,7 +55,7 @@ class AnswerBlankController extends Controller
        //dd($quizStatus);
         
         $question2 = DB::table('Questions')
-         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->where('Questions.questions_id','=',$questions_id)
@@ -58,30 +72,43 @@ class AnswerBlankController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
        //dd($question3);
-      
+       $question4 = DB::table('Questions')
+       ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+       ->where('Questions.questions_id','=',$questions_id)
+       ->where('Questions.quizs_id','=',$quiz_id)
+       ->get();
+       $question5 = DB::table('Questions')
+       ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
+       ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+         //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
+
+       $previous = Question::where('questions_id','<',$questions_id)->orderBy('questions_id','desc')->first();
+       $next = Question::where('questions_id','>',$questions_id)->orderBy('questions_id')->first();
     
 
         for($i=0 ;$i<count($quizStatus); $i++){
             if($quizStatus[$i]->quizs_status_id == "Open"){
                 switch ($questionType) {
                     case 'Blank':
-                    return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id'));
+                    return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id','next'));
                         break;
                     
                     case 'Shortanswe':
-                    return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id'));
+                    return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id','next'));
                         break;  
                         
                     case 'Upload':
-                    return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id'));
+                    return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id','next'));
                         break;
                         
                     case 'TrueFalse':
-                    return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question2','quiz_id'));
+                    return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
                         break;        
                     
                     case 'Multiple':
-                    return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question2','quiz_id'));
+                    return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
                         break;
                 }
             }else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
@@ -122,12 +149,16 @@ class AnswerBlankController extends Controller
 
                         $currentQuestionId = DB::table('Questions')->max('questions_id');
                         $lastestQuestinID = $currentQuestionId+1;
-
+                        $quiz_id = $request->input('quiz_id');
                         
+                        $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
+
                         $Answer->save();
+
+                        $answerback =$request->input('Answer');
         
 
-                        $quiz_id = $request->input('quiz_id');
+                        
 
             
            

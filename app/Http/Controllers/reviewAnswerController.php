@@ -32,6 +32,9 @@ class reviewAnswerController extends Controller
         $quizStatus = $question[0]->quizs_status_id;
        // if($permission == 'ADMIN'){
             switch ( $quizStatus) {
+                case 'Open':
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
+                    break;
                 case 'Reviewing':
                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;

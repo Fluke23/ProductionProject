@@ -47,7 +47,7 @@
                         <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
                         <td style="font-size: 0.8em;">{{$q->subject_id}}</td>
                         {{-- name is from group_name --}}
-                        <td style="font-size: 0.8em;">{{$q->group_name}}</td>
+                        <td style="font-size: 0.8em;">{{$q->student_group}}</td>
                         <td style="font-size: 0.8em;">{{$q->type_name}}</td>  
                         <td style="font-size: 0.8em;">{{$q->status_name}}</td>
                         <td style="font-size: 0.8em;">{{$q->min}}</td>

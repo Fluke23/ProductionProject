@@ -156,7 +156,7 @@
                             </div>
                         </div>
 
-                        {{-- group_id --}}
+                    <!--    {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
 
@@ -168,7 +168,7 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </div> -->
 
 
                         {{-- quiz type id --}}

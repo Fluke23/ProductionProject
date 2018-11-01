@@ -168,7 +168,7 @@
                                 </select>
 
                             </div>
-                        </div>
+                        </div> -->
 
                         {{-- student_group_id --}}
                          <div class="form-group row">

@@ -45,6 +45,8 @@ class StudentQuestionController extends Controller
                    //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
                   ->where('Questions.questions_id','=',$id->questions_id)
                   ->avg('Answer.Score');
+
+                 
      
              $id->max = $question_max;
              $id->min = $question_min;

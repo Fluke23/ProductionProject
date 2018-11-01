@@ -36,16 +36,16 @@
             <form action="{{route('AnswerShortQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="form-group">
-                    {{Form::hidden ('1', '1')}}
+                    {{Form::hidden ('1', '1',['id' => 'index'])}}
 
                 </div>
                 <div class="form-group">
                     {{Form::label('Answer', 'Answer')}}
-                    {{Form::text('Answer', '',['class'=>'form-control','placeholder'=> 'Enter Answer'])}}
+                    {{Form::text('Answer', '',['class'=>'form-control','placeholder'=> 'Enter Answer','id' => 'answer'])}}
 
                 </div>
                 <div class="form-group">
-                    {{Form::hidden('questions_id',$questions_id)}}
+                    {{Form::hidden('questions_id',$questions_id,['id' => 'questions_id'])}}
 
                 </div>
 
@@ -57,9 +57,24 @@
                 <div class="form-group">
                     <button type="button" class="btn btn-danger">Cencel</button>
                     <input class="btn btn-primary" type="submit">
+                    <a href="#" onClick="return onClickHandler();" class="btn btn-primary" >
+                        Next
+                    </a>
                 </div>
             </form>
         </div>
     </div>
+
+     <script>
+        const onClickHandler = () => {
+            const answer = document.getElementById('answer').value
+            const inputIndex = document.getElementById('index').value
+            const questionId = document.getElementById('questions_id').value
+            window.location = '{{ URL::to('Student/question/AnswerBlankQuestion/' . $next->questions_id . '/' . $next->quizs_id) }}' 
+            + '?answer=' + answer 
+            + '&input=' + inputIndex
+            + '&questions_id=' + questionId
+        }
+    </script>
 
     @endsection

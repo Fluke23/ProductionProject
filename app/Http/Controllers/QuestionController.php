@@ -30,7 +30,7 @@ class QuestionController extends Controller
        $question = DB::table('Questions')
            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
            ->where('quizs.quizs_id','=',$quizs_id)
-            ->orderby('Questions.number','desc')
+            ->orderby('Questions.number','Asc')
             ->get();
 
 
@@ -57,6 +57,11 @@ class QuestionController extends Controller
               //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
              ->where('Questions.questions_id','=',$id->questions_id)
              ->avg('Answer.Score');
+
+        
+    
+
+
 
         $id->max = $question_max;
         $id->min = $question_min;
