@@ -91,6 +91,95 @@ class reviewAnswerController extends Controller
 
 
 
+
+
+    public function indexMultiple($questions_id)
+    {
+        $question = DB::table('Questions')
+        ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+       // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
+
+        $correct = DB::table('Questions')
+        ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+        ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->where('choice_type.choice_type_id','=','1')
+        ->get();
+
+
+        $quizStatus = $question[0]->quizs_status_id;
+        $data = Question::where('questions_id',$questions_id)->get();
+        $questionType = $data[0]->questions_types_id;
+       // if($permission == 'ADMIN'){
+        switch ($questionType) {
+            case 'Blank':
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                    break;
+                
+                case 'Close':
+                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                    break;
+            }
+                break;
+
+            case 'Shortanswe':
+            switch ( $quizStatus) {
+                    case 'Reviewing':
+                    return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                        break;
+                    
+                    case 'Close':
+                    return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                        break;
+                }
+                    break;    
+
+            case 'Upload':
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                    break;
+                
+                case 'Close':
+                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                    break;
+            }
+                break;
+                            
+            case 'TrueFalse':
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/Admin/checkMultipleAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                    break;
+                
+                case 'Close':
+                return view('/Admin/checkMultipleAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                    break;
+            }
+                break;        
+                        
+            case 'Multiple':
+            switch ( $quizStatus) {
+                case 'Reviewing':
+                return view('/Admin/checkMultipleAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                    break;
+                
+                case 'Close':
+                return view('/Admin/checkMultipleAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                    break;
+            }
+                break;
+            }
+        }
    
 
         public function store(request $request){

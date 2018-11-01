@@ -121,6 +121,19 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentAnswer.file'); 
     Route::post('/Admin/checkAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
 
+    Route::get('/Admin/checkMultipleAnswer/indexAnswer/{id?}','checkMultipleAnswerController@index')->name('indexAnswer.file');
+
+    //admin/reviewAnswer
+    Route::get('/Admin/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@indexMultiple')->name('reviewMultipleAnswer.file');
+    // Route::get('/Admin/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewMultipleAnswer.file');
+    
+    Route::post ('/Admin/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
+    Route::post('/Admin/checkMultipleAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
+
+    //Admin/commentAnswer
+    Route::get('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentMultipleAnswer.file'); 
+    Route::post('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentMultipleAnswer.file'); 
+    Route::post('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
 
 
 

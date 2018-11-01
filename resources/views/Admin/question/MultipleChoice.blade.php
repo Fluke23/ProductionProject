@@ -66,7 +66,7 @@
             ถูก
             {{Form::radio('choice_type_id_'.$question.$i, '1')}}
             ผิด
-            {{Form::radio('choice_type_id_'.$question.$i, '2')}}
+            {{Form::radio('choice_type_id_'.$question.$i, '2',true)}}
             {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor
