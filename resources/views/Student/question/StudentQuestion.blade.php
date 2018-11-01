@@ -16,6 +16,12 @@
         <strong>Cannot access because Lecturer still reviewing</strong> {{ Session::get('message', '') }}
     </div>
     @endif
+    @if(Session::has('unanswer'))
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Cannot answer</strong> {{ Session::get('message', '') }}
+    </div>
+    @endif
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
