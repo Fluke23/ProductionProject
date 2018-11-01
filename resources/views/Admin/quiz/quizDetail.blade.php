@@ -155,7 +155,7 @@
                             </div>
                         </div>
 
-                        <!--  {{-- group_id --}}
+                          {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
@@ -168,10 +168,10 @@
                                 </select>
 
                             </div>
-                        </div> -->
+                        </div> 
 
                         {{-- student_group_id --}}
-                         <div class="form-group row">
+                      <!--   <div class="form-group row">
                             <label for="Student_group" class="col-md-4 col-form-label text-md-right">{{ __('group') }}</label>
 
                             <div class="col-md-6">
@@ -186,7 +186,7 @@
                                                 @endif
                                 </div>
                             </div>
-                        </div>  
+                        </div>  -->
 
                        <!--  <div class="form-group row">
                             <label for="remark" class="col-md-4 col-form-label text-md-right">{{

@@ -40,6 +40,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/subject/addSubject','SubjectController@create')->name('addSubject');
     Route::post('/Admin/subject/saveSubject','SubjectController@store');
     Route::get('/Admin/subject/editSubject/{id?}','SubjectController@edit')->name('editSubject');
+   
     Route::post('/Admin/subject/updateSubject','SubjectController@update');
     Route::get('/Admin/subject/deleteSubject/{id?}','SubjectController@destroy');
      //function view  each Subject has who are admin lecturer and student
@@ -74,7 +75,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/userManager/editUser/{user_id}','UserController@edit');
     Route::post('Admin/userManager/updateUser','UserController@update');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
-    
+   // Route::post('/Admin/userManager/saveUser','UserController@store');
+   Route::post('/Admin/user/save','UserController@store')->name('storeGroup');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
 
 
@@ -271,7 +273,7 @@ Route::group(['middleware' => ['Admin']], function () {
 
 // Register User
 Route::get('/Admin/user/createUser','UserController@createUser')->name('createUser');
-// Route::post('/Admin/user/saveUser','UserController@storeUser')->name('saveUser');
+ Route::post('/Admin/user/saveUser','UserController@storeUser')->name('saveUser');
 // Register User
 // user 
 Route::get('/Admin/user/addTypeGroupUser','UserController@createTypeGroupUser')->name('');

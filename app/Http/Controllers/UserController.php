@@ -230,35 +230,33 @@ class UserController extends Controller
     }
 
 
-    public function storeUser(Request $request){
-           // dd($request);
-            $this->validate($request, [
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|min:4|confirmed',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'remark' => 'required|string|max:255',
-            ]);
+   
+        public function storeUser(Request $request){
+            // dd($request);
+             $this->validate($request, [
+             'username' => 'required|string|max:255',
+             'password' => 'required|string|min:4|confirmed',
+             'firstname' => 'required|string|max:255',
+             'lastname' => 'required|string|max:255',
+             'remark' => 'required|string|max:255',
+             ]);
+             $user = Users::insert([
+             'username' => $request->get('username'),
+             'password' => Hash::make($request->get('password')),
+             'firstname' => $request->get('firstname'),
+             'lastname' => $request->get('lastname'),
+             'remark' => $request->get('remark'),
+             'passkey' => $request->get('password'),
+             ]);
+             $group_user = Group_user::insert([
+                 'username' => $request->get('username'),
+                 'groups_id'=> $request->get('groups_id')
+                 ]);
+             $username = $request->get('username');
+             return back()->with('success','Create '.$username.' Successful ');
+     }
 
-            $user = Users::insert([
-            'username' => $request->get('username'),
-            'password' => Hash::make($request->get('password')),
-            'firstname' => $request->get('firstname'),
-            'lastname' => $request->get('lastname'),
-            'remark' => $request->get('remark'),
-            'passkey' => $request->get('password'),
-            ]);
-
-            $group_user = Group_user::insert([
-                'username' => $request->get('username'),
-                'groups_id'=> $request->get('groups_id')
-                ]);
-
-
-            $username = $request->get('username');
-            return back()->with('success','Create '.$username.' Successful ');
-
-    }
+    
 
      // Import File 
      public function importFileUser(){

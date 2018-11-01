@@ -17,7 +17,7 @@
             </ol>
         </nav>
     <div class="row">
-    <form action="{{URL::route('saveUser')}}" method="post" class="col-md-12">
+    <form action="{{URL::route('storeGroup')}}" method="post" class="col-md-12">
                 {{ csrf_field() }}
                         
                 <div class="row">
