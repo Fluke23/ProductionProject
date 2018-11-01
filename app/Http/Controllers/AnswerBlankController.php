@@ -19,119 +19,128 @@ class AnswerBlankController extends Controller
     public function index(Request $request,$questions_id,$quiz_id)
     {
         $username = Auth::user()->username;
-        $question = DB::table('Questions')
         
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->where('Questions.quizs_id','=',$quiz_id)
+        $answerCheck = DB::table('Answer')
+        ->where('username','=',$username)
+        ->where('questions_id','=',$questions_id)
         ->get();
         
-        if ($request->query('answer') !== null ) {
-            $Answer = new Answer();
-            $Answer->username = $username;
-            $Answer->answer_number =$request->query('input');
-            $Answer->answer =$request->query('answer');
-            $Answer->questions_id =$request->query('questions_id');
-            //save message
+        if(count($answerCheck)===0 ){
             
-            $currentQuestionId = DB::table('Questions')->max('questions_id');
-            $lastestQuestinID = $currentQuestionId+1;
-
-            $Answer->save();
-        }
-
-
-        $data = Question::where('questions_id',$questions_id)->get();
-        $data2 = Question::where('quizs_id','=',$quiz_id)->get();
-        $questionType = $data[0]->questions_types_id;
-        //dd($questionType);
-
-        $quizStatus = DB::table('Questions')
-        ->select('quizs_status_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->where('Questions.quizs_id','=',$quiz_id)
-        ->get();
-       //dd($quizStatus);
+            $question = DB::table('Questions')
+             ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->where('Questions.questions_id','=',$questions_id)
+            ->where('Questions.quizs_id','=',$quiz_id)
+            ->get();
         
-        $question2 = DB::table('Questions')
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Choice','Choice.questions_id','=','Questions.questions_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->get();
-        //dd($question2);
+                if ($request->query('answer') !== null ) {
+                     $Answer = new Answer();
+                     $Answer->username = $username;
+                     $Answer->answer_number =$request->query('input');
+                     $Answer->answer =$request->query('answer');
+                     $Answer->questions_id =$request->query('questions_id');
+                    //save message
+            
+                     $currentQuestionId = DB::table('Questions')->max('questions_id');
+                    $lastestQuestinID = $currentQuestionId+1;
 
-        $question3 = DB::table('Questions')
-        ->select('Question_pictures.img_url','quizs.title','Questions.solution','Questions.question','Questions.score'
-       ,'Questions.number','Answer.username','Answer.answer_date','Answer.answer','Comment.usernames','Comment.created_at','Comment.comment')
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
-        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->get();
-       //dd($question3);
-       $question4 = DB::table('Questions')
-       ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-       ->where('Questions.questions_id','=',$questions_id)
-       ->where('Questions.quizs_id','=',$quiz_id)
-       ->get();
-       $question5 = DB::table('Questions')
-       ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
-       ->join('Choice','Choice.questions_id','=','Questions.questions_id')
-         //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->get();
-
-       $previous = Question::where('questions_id','<',$questions_id)->orderBy('questions_id','desc')->first();
-       $next = Question::where('questions_id','>',$questions_id)->orderBy('questions_id')->first();
-    
-
-        for($i=0 ;$i<count($quizStatus); $i++){
-            if($quizStatus[$i]->quizs_status_id == "Open"){
-                switch ($questionType) {
-                    case 'Blank':
-                    return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id','next'));
-                        break;
-                    
-                    case 'Shortanswe':
-                    return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id','next'));
-                        break;  
-                        
-                    case 'Upload':
-                    return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id','next'));
-                        break;
-                        
-                    case 'TrueFalse':
-                    return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
-                        break;        
-                    
-                    case 'Multiple':
-                    return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
-                        break;
+                    $Answer->save();
                 }
-            }else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
-                return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
 
-            } else{
-                return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);
-                //return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','question3','quiz_id'));
-            }
-            $i++;
-        }
 
+            $data = Question::where('questions_id',$questions_id)->get();
+            $data2 = Question::where('quizs_id','=',$quiz_id)->get();
+            $questionType = $data[0]->questions_types_id;
+            //dd($questionType);
+
+            $quizStatus = DB::table('Questions')
+            ->select('quizs_status_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->where('Questions.quizs_id','=',$quiz_id)
+            ->get();
+            //dd($quizStatus);
+        
+            $question2 = DB::table('Questions')
+            ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+            ->where('Questions.questions_id','=',$questions_id)
+            ->get();
+            //dd($question2);
+
+            $question3 = DB::table('Questions')
+            ->select('Question_pictures.img_url','quizs.title','Questions.solution','Questions.question','Questions.score'
+            ,'Questions.number','Answer.username','Answer.answer_date','Answer.answer','Comment.usernames','Comment.created_at','Comment.comment')
+            ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+            ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+            ->where('Questions.questions_id','=',$questions_id)
+            ->get();
        
+             //dd($question3);
+             $question4 = DB::table('Questions')
+             ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->where('Questions.questions_id','=',$questions_id)
+            ->where('Questions.quizs_id','=',$quiz_id)
+            ->get();
+
+            $question5 = DB::table('Questions')
+            ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+             //->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+            ->where('Questions.questions_id','=',$questions_id)
+            ->get();
+
+            $previous = Question::where('questions_id','<',$questions_id)->orderBy('questions_id','desc')->first();
+            $next = Question::where('questions_id','>',$questions_id)->orderBy('questions_id')->first();
+
+            for($i=0 ;$i<count($quizStatus); $i++){
+                if($quizStatus[$i]->quizs_status_id == "Open"){
+                    switch ($questionType) {
+                        case 'Blank':
+                        return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id','next'));
+                            break;
+                        
+                        case 'Shortanswe':
+                        return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id','next'));
+                            break;  
+                            
+                        case 'Upload':
+                        return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id','next'));
+                            break;
+                            
+                        case 'TrueFalse':
+                        return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
+                            break;        
+                        
+                        case 'Multiple':
+                        return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5'));
+                            break;
+                    }
+                }else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
+                    return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
+    
+                } else{
+                    return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);
+                    //return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','question3','quiz_id'));
+                }
+                $i++;
+            }
+    
+        }else{
+            
+                    return redirect()->back()->with('unanswer','Cannot answer' );
+                    
+               
+        }
+        //dd(count ($answerCheck[0]));
     }
 
 
     
     
-
-    
-
-
-
     public function store(request $request){
         
                     $username = Auth::user()->username;
