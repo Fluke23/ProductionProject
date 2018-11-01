@@ -201,7 +201,22 @@ Route::group(['middleware' => ['Admin']], function () {
      Route::get('/Lecturer/question/MultipleChoice','MultipleChoiceController@showUploadForms')->name('lec.MultipleChoice.file');
      Route::post ('/Lecturer/question/MultipleChoice','MultipleChoiceController@storeFiles') ;
      Route::post('/Lecturer/question/MultipleChoicesubmit','MultipleChoiceController@submit');
+
+    /* Route::get('/lecturer/checkMultipleAnswer/indexAnswer/{id?}','checkMultipleAnswerController@index')->name('indexAnswer.file');
+
+     //admin/reviewAnswer
+     Route::get('/lecturer/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@indexMultiple')->name('reviewMultipleAnswer.file');
+     // Route::get('/Admin/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@indexComment')->name('reviewMultipleAnswer.file');
+     
+     Route::post ('/lecturer/checkMultipleAnswer/reviewAnswer/{id?}','reviewAnswerController@store') ;
+     Route::post('/lecturer/checkMultipleAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
  
+     //Admin/commentAnswer
+     Route::get('/lecturer/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentMultipleAnswer.file'); 
+     Route::post('/lecturer/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@store')->name('commentMultipleAnswer.file'); 
+     Route::post('/lecturer/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
+ 
+ */
      //TrueFalseQuestion
      Route::get('/Lecturer/question/TrueFalse','TrueFalseController@showUploadForms')->name('lec.TrueFalse.file');
      Route::post ('/Lecturer/question/TrueFalse','TrueFalseController@storeFiles') ;
