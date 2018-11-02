@@ -19,7 +19,7 @@
     @if(Session::has('unanswer'))
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Cannot answer</strong> {{ Session::get('message', '') }}
+        <strong>You have already answered.</strong> {{ Session::get('message', '') }}
     </div>
     @endif
     <nav aria-label="breadcrumb">

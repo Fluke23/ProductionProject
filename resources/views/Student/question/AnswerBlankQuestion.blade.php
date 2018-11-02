@@ -39,10 +39,10 @@
                     {{Form::hidden ('1', '1', ['id' => 'index'])}}
 
                 </div>
+                
                 <div class="form-group">
                     {{Form::label('Answer', 'Answer')}}
                     {{Form::textarea('Answer', '',['class'=>'form-control','placeholder'=> 'Enter Answer', 'id' => 'answer'])}}
-
                 </div>
                 <div class="form-group">
                     {{Form::hidden('questions_id',$questions_id, ['id' => 'questions_id'])}}
