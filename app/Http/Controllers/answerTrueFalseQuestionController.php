@@ -9,6 +9,7 @@ use App\Question_pictures;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use Auth;
 
 class AnswerTrueFalseQuestionController extends Controller
 {
@@ -55,10 +56,9 @@ class AnswerTrueFalseQuestionController extends Controller
 
 
 
-
-return redirect()->route('question.StudentQuestion',[$quiz_id]);
-//return'yes';
-}
+        return redirect()->route('question.StudentQuestion',[$quiz_id]);
+    //return'yes';
+    }
 
  
 }

@@ -24,8 +24,8 @@
             {{csrf_field()}}
 
             <div class="form-group">
-                {{Form::label('name', 'solution')}}
-                {{Form::text('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+                <!-- {{Form::label('name', 'solution')}} -->
+                {{Form::hidden('name', '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
             </div>
 
              {{-- <input type="file" name ="fileName[]" multiple>  --}}

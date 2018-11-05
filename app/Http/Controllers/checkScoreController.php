@@ -24,7 +24,8 @@ class checkScoreController extends Controller
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-
+       
+        //dd('test');
         $permission = $request->get('permission');
         if($permission == 'ADMIN'){
             return view('/Admin/checkAnswer/commentAnswer/',compact('question','questions_id','question2','quiz_id')); 
@@ -33,16 +34,14 @@ class checkScoreController extends Controller
             }elseif($permission == 'LECTURER'){
                 return view('/lecturer/checkAnswer/commentAnswer/',compact('question','questions_id','question2','quiz_id'));          
             }
-        
        // $data = Question::where('questions_id',$questions_id)->get();
         //dd($question);
-        dd($question);
+        // dd($question);
     }
 
         public function store(request $request){
-            
-                       
                         $questions_id= $request->input ('questions_id');
+                       
                         $currentAnswerId = DB::table('Answer')
                          ->select('answer_id')
                          ->join('Questions','Questions.questions_id','=','Answer.questions_id')
@@ -57,22 +56,16 @@ class checkScoreController extends Controller
                         $Comment->usernames = $username;
                         $Comment->save();
                         
-                       // $questions_id = $request->input('questions_id');
-
-                       
+                      
                         
                         
 
                         
                         
-                    $permission = $request->get('permission');
-                    if($permission == 'ADMIN'){
-                        return view('/Admin/question/StudentQuestion',compact($questions_id)); 
-                    }elseif($permission == 'STUDENT'){
-                        return view('/Student/question/StudentQuestion',compact($questions_id));       
-                    }elseif($permission == 'LECTURER'){
-                        return view('/lecturer/question/index',compact($questions_id));           
-                    }
+                    // $permission = $request->get('permission');
+                       // return view('/Student/question/StudentQuestion',compact($questions_id,'question'));  
+                        return redirect()->back()  ;        
+                     
 
            
             //return'yes';

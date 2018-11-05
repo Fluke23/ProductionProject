@@ -52,9 +52,11 @@ class AnswerShortQuestionController extends Controller
                         $Answer->answer_date=$request->input('AnswerDate');
                         $Answer->questions_id =$request->input('questions_id');
                         //save message
+
                         $Answer->save();
-                        $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
                         $quiz_id = $request->input('quiz_id');
+                        $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
+                        
                         
         
 

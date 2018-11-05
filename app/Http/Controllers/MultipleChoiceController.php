@@ -24,9 +24,8 @@ class MultipleChoiceController extends Controller
     }
     
     public function storeFiles(request $request){
-
         // dd($request);
-        
+        $Tcount = 0 ;
         //return $request-> all();
         for ($j=1; $j <=2 ; $j++) { 
         $currentQuestionId = DB::table('Questions')->max('questions_id');
@@ -49,22 +48,26 @@ class MultipleChoiceController extends Controller
             $MultipleChoiceQuestion->question =$request->input('question'.$j);
             $MultipleChoiceQuestion->score =$request->input('score'.$j);
             $MultipleChoiceQuestion->quizs_id =$request->input('quiz_id');
+            
             $MultipleChoiceQuestion->save();
             $MultipleChoice->questions_id =$lastestQuestinID;
-
             for ($i=1; $i <=4 ; $i++){
             $MultipleChoice = new Choice; 
             $MultipleChoice->choice =$request->input('choice_'.$i.$j);
             $MultipleChoice->questions_id =$lastestQuestinID;
             $MultipleChoice->choice_type_id = $request->input('choice_type_id_'.$i.$j);
             $MultipleChoice->save();
+                if($MultipleChoice->choice_type_id == '1'){
+                    $Tcount++;
+                }
             }
-            // dd($request);
+           $MultipleChoiceQuestion->answer_row = $Tcount;
+           $MultipleChoiceQuestion->save();
+           $Tcount = 0 ;
             // $question_id = $request->get('questions_id');
             $quiz_id = $request->input('quiz_id');
             //save message
         }
-
             
              /*add file into database */
             // $QuestionPic = new Question_pictures;

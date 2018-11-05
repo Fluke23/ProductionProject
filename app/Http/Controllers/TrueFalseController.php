@@ -20,7 +20,6 @@ class TrueFalseController extends Controller
     }
     
     public function showUploadForms($quiz_id){
-        $amount = 2;
         return view('admin/question/TrueFalse',compact('quiz_id','amount'));
     }
     
@@ -58,7 +57,7 @@ class TrueFalseController extends Controller
             $TrueFalse->choice =$request->input('choice_'.$i.$j);
             $TrueFalse->questions_id =$lastestQuestinID;
             $TrueFalse->choice_type_id = $request->input('choice_type_id_'.$i.$j);
-            
+            dd($request);
             
                 if($request->input('choice_type_id_'.$i.$j) == '1'){
                     $countT++;

@@ -10,80 +10,92 @@
 
 
     </div>
-
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+        </ol>
+    </nav>
 
     <div class="row">
-        
-                    @foreach($question as $q)
-               
-               
-                    <div class="col-md-12">
-                        <h4>{{$q->title}}</h4>
-                        <img src="{{$q->img_url}} ">
-                        <li class="list-group">solution: {{$q->solution}}</li>
-                        <li class="list-group">Question:{{$q->question}}</li>
-                        <li class="list-group">Score:{{$q->score}}</li>
 
-                     </div></br>
-                     
-                     <div class="col-md-4">
-                     <li class="list-group">Answer No: {{$q->number}}</li>
-                     </div>
+        @foreach($question as $q)
+        @endforeach
 
-                     <div class="col-md-4">
-                     <li class="list-group">Student: {{$q->username}}</li>
-                     </div>
+        <div class="col-md-12">
+            <h4>{{$q->title}}</h4>
+            <img src="{{$q->img_url}} ">
+            <li class="list-group">solution: {{$q->solution}}</li>
+            <li class="list-group">Question:{{$q->question}}</li>
 
-                     <div class="col-md-4">
-                     <li class="list-group">Answer Date: {{$q->answer_date}}</li>
-                     </div>
 
-                     
-                     
-                     <div class="col-md-12">
-                     {{Form::label('Answer:', 'Answer:')}}</br>
-                     @if($q->questions_types_id =='Upload')
-                     <a name="Answer:" cols="120" rows="10" id="Answer:" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly href="{{$q->answer}}">   {{$q->answer}}</a>
-                     @else
-                     <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly >   {{$q->answer}}</textarea>
-                     @endif
-                     </div>  
+        </div></br>
 
-                     </div></br>
 
-                
-               
-                     @endforeach
+        <div class="col-md-4">
+            <li class="list-group">Answer No: {{$q->number}}</li>
+        </div>
+        @foreach( $question as $q)
+        @endforeach
+        <div class="col-md-4">
+            <li class="list-group">Student: {{$q->username}}</li>
+        </div>
 
-        <div class="container">
+        <div class="col-md-4">
+            <li class="list-group">Answer Date: {{$q->answer_date}}</li>
+        </div>
+
+
+
+        <div class="col-md-12">
+            {{Form::label('Answer:', 'Answer:')}}</br>
+
+
+            @if($q->questions_types_id =='Upload')
+            <a name="Answer:" cols="120" rows="10" id="Answer:" style="margin-top: 0px; margin-bottom: 0px; height: 219px;"
+                readonly href="{{$q->answer}}"> {{$q->answer}}</a>
+            @else
+            <textarea name="Answer:" cols="120" rows="10" id="Answer:" style="margin-top: 0px; margin-bottom: 0px; height: 219px;"
+                readonly>   {{$q->answer}}</textarea>
+            @endif
+
+
+
+        </div>
+
+
+    </div></br>
+
+
+
+
+
+    <div class="container">
         <div class="row">
             <br>
             <form action="{{route('reviewAnswer.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="col-md-12">
-                     {{Form::label('Remark:', 'Remark:')}}</br>
-                     <textarea name="Remark" cols="120" rows="5" id="Remark" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 100px;">   </textarea>
+                    {{Form::label('Comment:', 'Comment:')}}</br>
+                    <textarea name="Remark" cols="120" rows="5" id="Remark" style="margin-top: 0px; margin-bottom: 0px; height: 100px;">   </textarea>
                 </div>
 
                 <div class="col-md-4">
-                     {{Form::label('Score:', 'Score:')}}</br>
-                     {{Form::text('Score', '',['class'=>'form-control','placeholder'=> 'Score'])}}
+                    {{Form::label('Score:', 'Score:')}}&nbsp;&nbsp;From:{{$q->score}}</br>
+                    {{Form::text('Score', '',['class'=>'form-control','placeholder'=> 'Score'])}}
+
                 </div>
 
                 <div class="col-md-4">
-                     {{Form::hidden('questions_id',$questions_id)}}</br>
-                     
-                </div>
-            </br>
+                    {{Form::hidden('questions_id',$questions_id)}}</br>
 
-                 <div class="form-group">
-                   
+                </div>
+                </br>
+
+                <div class="form-group">
+
                     <button type="submit" class="btn btn-primary">Save</button>
                     <!-- <input class="btn btn-primary" type="submit">Submit -->
                 </div>
-    
 
-    @endsection
+
+                @endsection

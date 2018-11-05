@@ -173,7 +173,7 @@ class QuestionController extends Controller
     }
 
     public function callTrueFalse($quiz_id){
-        $amount = 5;
+        $amount = 2;
         return view('/Admin/question/TrueFalse',compact('quiz_id','amount')); 
     }
 }

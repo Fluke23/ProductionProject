@@ -18,7 +18,7 @@
 
     <div class="row">
 
-        @foreach($question as $q)
+        @foreach($questionReview as $q)
         @endforeach
 
         <div class="col-md-12">
@@ -70,7 +70,7 @@
         </div>
 
 
-        @foreach($question as $q)
+        @foreach($questionReview as $q)
 
         <div class="col-md-12">
             </br>
@@ -112,5 +112,7 @@
                     <!-- <input class="btn btn-primary" type="submit">Submit -->
                 </div>
 
-
+            </form>
+        </div>
+    </div>    
                 @endsection

@@ -41,9 +41,8 @@
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
-            <div class="form-group">
-                {{Form::label('name'.$i, 'solution')}}
-                {{Form::text('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
+            <div class="form-group">                
+                {{Form::hidden('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
             </div>
 
             <div class="form-group">
@@ -65,8 +64,8 @@
             {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
             ถูก
             {{Form::radio('choice_type_id_'.$question.$i, '1')}}
-            <!-- ผิด
-            {{Form::radio('choice_type_id_'.$question.$i, '2')}} -->
+            ผิด
+            {{Form::radio('choice_type_id_'.$question.$i, '2')}}
             {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor

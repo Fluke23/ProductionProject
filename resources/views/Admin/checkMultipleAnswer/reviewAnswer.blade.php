@@ -80,10 +80,20 @@
                     <textarea name="Remark" cols="120" rows="5" id="Remark" style="margin-top: 0px; margin-bottom: 0px; height: 100px;">   </textarea>
                 </div>
 
-                <div class="col-md-4">
-                    {{Form::label('Score:', 'Score:')}}</br>
-                    {{Form::text('Score', '',['class'=>'form-control','placeholder'=> 'Score'])}}
-                </div>
+            @foreach($correct as $c)
+            @endforeach
+                @if($q->answer == $c->choice)
+                    <div class="col-md-4">
+                        {{Form::label('Score:', 'Score:')}}</br>
+                        {{Form::text('Score', '1',['class'=>'form-control','placeholder'=> 'Score'])}}
+                    </div>
+                @else
+                    <div class="col-md-4">
+                            {{Form::label('Score:', 'Score:')}}</br>
+                            {{Form::text('Score', '0',['class'=>'form-control','placeholder'=> 'Score'])}}
+                    </div>
+                @endif    
+
 
                 <div class="col-md-4">
                     {{Form::hidden('questions_id',$questions_id)}}</br>

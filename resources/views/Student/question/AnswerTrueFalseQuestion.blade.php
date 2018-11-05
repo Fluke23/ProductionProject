@@ -61,10 +61,15 @@
 
                 <div class="form-group">
                     <button type="button" class="btn btn-danger">Cancel</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <a href="#" onClick="return onClickHandler();" class="btn btn-primary">
-                        Next
-                    </a>
+                    @if($q2->questions_id != $questionMax)
+                        <input class="btn btn-success" type="submit">
+                        <a href="#" onClick="return onClickHandler();" class="btn btn-primary">                      
+                            Next
+                        </a>
+                    @else
+                        <input class="btn btn-success" type="submit">
+                    @endif 
+                </div>
 
                 </div>
 
@@ -74,17 +79,19 @@
 
 
 
-    <script>
-        const onClickHandler = () => {
-            const answer = document.getElementById('answer').value
-            const inputIndex = document.getElementById('index').value
-            const questionId = document.getElementById('questions_id').value
-            window.location = '{{ URL::to('Student/question/AnswerBlankQuestion/' . $next->questions_id . '/' . $next->quizs_id) }}' 
-            + '?answer=' + answer 
-            + '&input=' + inputIndex
-            + '&questions_id=' + questionId
-        }
-    </script>
+    @if($next)
+        <script>
+            const onClickHandler = () => {
+                const answer = document.getElementById('answer').value
+                const inputIndex = document.getElementById('index').value
+                const questionId = document.getElementById('questions_id').value
+                window.location = '{{ URL::to('Student/question/AnswerBlankQuestion/' . $next->questions_id . '/' . $next->quizs_id) }}' 
+                + '?answer=' + answer 
+                + '&input=' + inputIndex
+                + '&questions_id=' + questionId
+            }
+        </script>
+    @endif
 
 
     @endsection

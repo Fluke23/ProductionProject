@@ -26,37 +26,8 @@ class reviewAnswerController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
        // dd($question);
-
         
-            
-        $quizStatus = $question[0]->quizs_status_id;
-       // if($permission == 'ADMIN'){
-            switch ( $quizStatus) {
-                case 'Open':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
-                    break;
-                case 'Reviewing':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
-                    break;
-                
-                case 'Close':
-                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
-                    break;
-            }
-    //    $permission = $request->get('permission');
-     //   if($permission == 'ADMIN'){
-          // return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));        
-      //      }elseif($permission == 'LECTURER'){
-       //         return view('/lecturer/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));         
-       //     }
-       
-       // $data = Question::where('questions_id',$questions_id)->get();
-        //dd($question);
-    }
-
-    public function indexComment($questions_id)
-    {
-        $question = DB::table('Questions')
+       $questionReview = DB::table('Questions')
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
@@ -64,18 +35,20 @@ class reviewAnswerController extends Controller
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
         //dd($question);
-
         
             
         $quizStatus = $question[0]->quizs_status_id;
        // if($permission == 'ADMIN'){
             switch ( $quizStatus) {
+                case 'Open':
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                    break;
                 case 'Reviewing':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
                     break;
             }
     //    $permission = $request->get('permission');
@@ -89,10 +62,49 @@ class reviewAnswerController extends Controller
         //dd($question);
     }
 
+   
 
 
 
+    public function indexreview($questions_id){
 
+        $question = DB::table('Questions')
+        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
+       //dd($question);
+        
+        $questionReview = DB::table('Questions')
+        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
+
+        
+
+        //dd($question);
+        $quizStatus = $question[0]->quizs_status_id;
+        // if($permission == 'ADMIN'){
+             switch ( $quizStatus) {
+                 case 'Open':
+                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                     break;
+                 case 'Reviewing':
+                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                     break;
+                 
+                 case 'Close':
+                 return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                     break;
+             }
+
+    }
+    
     public function indexMultiple($questions_id)
     {
         $question = DB::table('Questions')
@@ -248,6 +260,73 @@ class reviewAnswerController extends Controller
            
             //return'yes';
             }
+
+            public function storeMultiple(request $request){
+            
+                $questions_id= $request->input ('questions_id');
+              // dd($questions_id);
+                $Answer= new Answer;
+                $Answer=$request->input('Score');
+                $user=DB::table('Answer')
+                ->select('username')
+                ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                ->where('Answer.questions_id','=',$questions_id)
+                ->get();
+                $newuser=$user[0]->username;
+                //dd($newuser);
+              
+                $Score = DB::table('Answer')
+                ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                ->where('Answer.questions_id','=',$questions_id)
+                ->where('Answer.username','=',$newuser)
+                ->update(['Answer.Score'=> $Answer] );
+                //dd($Score);
+
+                //$currentAnswerId = DB::table('Answer')->max('answer_id');
+                //$lastestAnswerID = $currentAnswerId;
+                $currentAnswerId = DB::table('Answer')
+                ->select('answer_id')
+                ->join('Questions','Questions.questions_id','=','Answer.questions_id')
+                ->where('Answer.questions_id','=',$questions_id)
+                ->get();
+                $lastestAnswerID = $currentAnswerId[0]->answer_id;
+                //dd($lastestAnswerID);
+
+
+                $Comment = new Comment;
+                $Comment->answer_id = $lastestAnswerID;
+                $Comment->comment =$request->input('Remark');
+                
+                $username = Auth::user()->username;
+                $Comment->usernames = $username;
+                $Comment->save();
+                
+               // $questions_id = $request->input('questions_id');
+               $question = DB::table('Questions')
+               ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+               ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+               ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+               ->where('Questions.questions_id','=',$questions_id)
+               ->get();
+               
+               
+                
+
+                
+               return view('/Admin/checkMultipleAnswer/indexAnswer',compact('questions_id','question')); 
+
+             /* $permission = $request->get('permission');
+               if($permission == 'ADMIN'){
+                return view('/Admin/checkAnswer/indexAnswer',compact('questions_id','question')); 
+               }else{
+                return view('/Lecturer/checkAnswer/indexAnswer',compact($questions_id)); 
+               } */ 
+
+
+   
+    //return'yes';
+    }
+
 }
 
 

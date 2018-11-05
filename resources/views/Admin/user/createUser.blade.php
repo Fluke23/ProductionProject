@@ -133,7 +133,7 @@
                      
                          <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('group ') }}</label>
-                            {{Form::select('groups_id', array('ADMIN'=>'Admin' , 'LECTURE'=>'Lecturer','STUDENT'=>'Student'))}}
+                            {{Form::select('groups_id', array('ADMIN'=>'Admin' , 'LECTURER'=>'Lecturer','STUDENT'=>'Student'))}}
                             
                                 @if ($errors->has('groups_id'))
                                     <span class="invalid-feedback" role="alert">
