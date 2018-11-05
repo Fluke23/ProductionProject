@@ -55,12 +55,13 @@
                         <td style="font-size: 0.8em;">{{$q->min}}</td>
                         <td style="font-size: 0.8em;">{{$q->max}}</td>
                         <td style="font-size: 0.8em;">{{$q->avg}}</td>
-                        
+                    
                     
 
                         <td >
+                        @if($q->quizs_status_id !='Reviewing')
                             <a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                            
+                        @endif
                         </td>
                 </tr>
                     @endif
