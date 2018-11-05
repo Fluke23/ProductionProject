@@ -131,8 +131,8 @@ class AnswerBlankController extends Controller
                         return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5','questionMax','answerRow'));
                             break;
                     }
-                }else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
-                    return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
+                //}else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
+                 //   return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
     
                 } else{
                     return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);

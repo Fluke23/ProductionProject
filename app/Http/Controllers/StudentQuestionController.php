@@ -21,6 +21,7 @@ class StudentQuestionController extends Controller
            // ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
             ->where('quizs.quizs_id','=',$quizs_id)
             ->get();
+            
 
             foreach ($question as $id) {
                 //dd( $questions_id);
@@ -53,12 +54,26 @@ class StudentQuestionController extends Controller
              $id->avg = $question_avg;
             }
 
+            $quizStatus = DB::table('Questions')
+            ->select('quizs_status_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->where('Questions.quizs_id','=',$quizs_id)
+            ->get();
+            //dd($quizStatus);
+            for($i=0 ;$i<count($quizStatus); $i++){
+                if($quizStatus[$i]->quizs_status_id == "Reviewing"){
+                    return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
+                } else{
+                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus'));
+                }
+                $i++;
+            }
         
-        
-           
+         
             
-            return view('/Student/question/StudentQuestion',compact('question','quizs_id'));       
+                   
     }
+   
     
 
     public function view($questions_types_id)

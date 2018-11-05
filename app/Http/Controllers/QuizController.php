@@ -57,7 +57,7 @@ class QuizController extends Controller
             ->where('Subjects.subject_id','=',$subject_id)
             ->orderby('quizs.quizs_id','desc') //Addition
             ->get();
-
+            
         foreach($quizzes as $id) {
             $quiz_min = DB::table('Questions')
                 ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
@@ -85,7 +85,7 @@ class QuizController extends Controller
         // $quizs_id=$quiz_id[2]->quizs_id;
 
         
-        //dd($quiz_avg);
+        //dd($quizzes);
         // $data = Quiz::all();
 
         

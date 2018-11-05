@@ -47,7 +47,7 @@
 
 
             </tr>
-            
+           
             <tbody>
                 @foreach($question as $que)
                 <tr>
@@ -70,7 +70,7 @@
                 </tr>
                 @endforeach
             </tbody>
-
+           
         </table>
 
 

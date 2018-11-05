@@ -40,7 +40,9 @@
             </tr>
 
             <tbody>
+
                     @foreach($quizzes as $q)
+                    @if($q->quizs_status_id !='Hide')
                 <tr>
                         <td style="font-size: 0.8em;">{{$q->title}}</td>
                         <td style="font-size: 0.8em;">{{$q->description}}</td>
@@ -61,6 +63,7 @@
                             
                         </td>
                 </tr>
+                    @endif
                      @endforeach
             </tbody>
  
