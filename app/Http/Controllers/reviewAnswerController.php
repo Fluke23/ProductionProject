@@ -161,23 +161,23 @@ class reviewAnswerController extends Controller
 
 
         public function store(request $request){
-           // dd($request);
+          //  dd($request);
                         $questions_id= $request->input ('questions_id');
                      //   dd($questions_id);
-                       
+                       $answer_id=$request->input ('answer_id');
                         $Answer= new Answer;
                         $Answer=$request->input('Score');
                         $user=DB::table('Answer')
                         ->select('username')
                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
-                        ->where('Answer.questions_id','=',$questions_id)
+                        ->where('Answer.answer_id','=', $answer_id)
                         ->get();
                         $newuser=$user[0]->username;
                         //dd($newuser);
                       
                         $Score = DB::table('Answer')
                         ->join('Questions','Questions.questions_id','=','Answer.questions_id')
-                        ->where('Answer.questions_id','=',$questions_id)
+                        ->where('Answer.answer_id','=', $answer_id)
                         ->where('Answer.username','=',$newuser)
                         ->update(['Answer.Score'=> $Answer] );
                         //dd($Score);

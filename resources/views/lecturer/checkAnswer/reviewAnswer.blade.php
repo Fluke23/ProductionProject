@@ -90,6 +90,10 @@
                      
                 </div>
                
+                <div class="col-md-4"> 
+                     {{Form::hidden('answer_id',$answer_id)}}</br>
+                     
+                </div>
                 </br>
 
                 <div class="form-group">
