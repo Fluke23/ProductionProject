@@ -36,7 +36,7 @@
                 <tr>
                         <td style="font-size: 0.8em;">{{$q->username}}</td>
                         <td style="font-size: 0.8em;">{{$q->answer}}</td>
-                        <td style="font-size: 0.8em;">{{$q->score}}</td>
+                        <td style="font-size: 0.8em;">{{$q->Score}}</td>
                         <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>
                     
 

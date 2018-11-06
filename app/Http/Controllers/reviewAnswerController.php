@@ -16,64 +16,28 @@ class reviewAnswerController extends Controller
 {
    
 
-    public function index($questions_id)
-    {
-        $question = DB::table('Questions')
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
-        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->get();
-       // dd($question);
-        
-       $questionReview = DB::table('Questions')
-        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
-        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
-        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-       // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
-        ->where('Questions.questions_id','=',$questions_id)
-        ->get();
-        //dd($question);
-        
-            
-        $quizStatus = $question[0]->quizs_status_id;
-       // if($permission == 'ADMIN'){
-            switch ( $quizStatus) {
-                case 'Open':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
-                    break;
-                case 'Reviewing':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
-                    break;
-                
-                case 'Close':
-                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
-                    break;
-            }
-    //    $permission = $request->get('permission');
-     //   if($permission == 'ADMIN'){
-          // return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));        
-      //      }elseif($permission == 'LECTURER'){
-       //         return view('/lecturer/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id'));         
-       //     }
-       
-       // $data = Question::where('questions_id',$questions_id)->get();
-        //dd($question);
-    }
-
+    
    
 
 
 
-    public function indexreview($questions_id){
+    public function indexreview($answer_id){
 
+        $questions_id= DB::table('Questions')
+        ->select('Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->where('Answer.answer_id','=',$answer_id)
+        ->get();
+        //dd($questions_id);
+
+        
         $question = DB::table('Questions')
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         //->join('Comment','Comment.answer_id','=','Answer.answer_id')
-        ->where('Questions.questions_id','=',$questions_id)
+        //->where('Questions.questions_id','=',$questions_id)
+        ->where('Answer.answer_id','=',$answer_id)
         ->get();
        //dd($question);
         
@@ -82,20 +46,22 @@ class reviewAnswerController extends Controller
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->join('Comment','Comment.answer_id','=','Answer.answer_id')
-        ->where('Questions.questions_id','=',$questions_id)
+        //->where('Questions.questions_id','=',$questions_id)
+        ->where('Answer.answer_id','=',$answer_id)
         ->get();
 
         
 
         //dd($question);
         $quizStatus = $question[0]->quizs_status_id;
+        $questions_id = $questions_id[0]->questions_id;
         // if($permission == 'ADMIN'){
              switch ( $quizStatus) {
                  case 'Open':
-                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview','answer_id'));
                      break;
                  case 'Reviewing':
-                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
+                 return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionReview','answer_id'));
                      break;
                  
                  case 'Close':
@@ -192,12 +158,13 @@ class reviewAnswerController extends Controller
                 break;
             }
         }
-   
+
 
         public function store(request $request){
-            
+           // dd($request);
                         $questions_id= $request->input ('questions_id');
-                      // dd($questions_id);
+                     //   dd($questions_id);
+                       
                         $Answer= new Answer;
                         $Answer=$request->input('Score');
                         $user=DB::table('Answer')
@@ -235,6 +202,7 @@ class reviewAnswerController extends Controller
                         $Comment->save();
                         
                        // $questions_id = $request->input('questions_id');
+                      
                        $question = DB::table('Questions')
                        ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
                        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
@@ -242,6 +210,7 @@ class reviewAnswerController extends Controller
                        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
                        ->where('Questions.questions_id','=',$questions_id)
                        ->get();
+                       
                        
                        
                         

@@ -85,10 +85,11 @@
 
                 </div>
 
-                <div class="col-md-4">
-                    {{Form::hidden('questions_id',$questions_id)}}</br>
-
+              <div class="col-md-4">
+                     {{Form::hidden('questions_id',$q->questions_id)}}</br>
+                     
                 </div>
+               
                 </br>
 
                 <div class="form-group">

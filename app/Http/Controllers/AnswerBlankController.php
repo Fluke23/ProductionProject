@@ -24,7 +24,7 @@ class AnswerBlankController extends Controller
         ->where('username','=',$username)
         ->where('questions_id','=',$questions_id)
         ->get();
-        
+       // dd($answerCheck);
         if(count($answerCheck)===0 ){
             
             $question = DB::table('Questions')

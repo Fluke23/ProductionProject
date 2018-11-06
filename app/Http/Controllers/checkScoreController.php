@@ -24,7 +24,7 @@ class checkScoreController extends Controller
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
-       
+       //dd($question);
         //dd('test');
         $permission = $request->get('permission');
         if($permission == 'ADMIN'){

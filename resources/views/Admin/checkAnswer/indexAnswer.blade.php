@@ -42,12 +42,12 @@
                 <tr>
                         <td style="font-size: 0.8em;">{{$q->username}}</td>
                         <td style="font-size: 0.8em;">{{$q->answer}}</td>
-                        <td style="font-size: 0.8em;">{{$q->score}}</td>
+                        <td style="font-size: 0.8em;">{{$q->Score}}</td>
                         <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>
                     
 
                         <td >
-                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
+                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->answer_id)}}" class="btn btn-info ">Review</a>
                         
                         </td>
                         @endforeach

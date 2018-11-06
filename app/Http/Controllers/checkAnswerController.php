@@ -23,6 +23,7 @@ class checkAnswerController extends Controller
        // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+       
        // dd($question);
         //$permission = $request->get('permission');
         $quizStatus = $question[0]->quizs_status_id;

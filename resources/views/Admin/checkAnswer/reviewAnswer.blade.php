@@ -85,12 +85,14 @@
                      {{Form::text('Score', '',['class'=>'form-control','placeholder'=> 'Score'])}}
                      
                 </div>
-
+                
+               
                 <div class="col-md-4">
                      {{Form::hidden('questions_id',$questions_id)}}</br>
                      
                 </div>
-            </br>
+
+                 
 
                  <div class="form-group">
                    
