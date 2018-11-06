@@ -19,6 +19,7 @@
     <div class="row">
         <table class="table table-bordered">
             <tr>
+                <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;"> Username</th>
                 <th>Answer</th>
                 <th style="width:50px;">Score</th>
@@ -38,8 +39,9 @@
                     <li class="list-group">{{$q->question}}</li>
 
                      </div></br>
-                     @foreach($question as $q)
+                     @foreach($question as $key => $q)
                 <tr>
+                        <td>{{ $key + 1 }}</td>
                         <td style="font-size: 0.8em;">{{$q->username}}</td>
                         <td style="font-size: 0.8em;">{{$q->answer}}</td>
                         <td style="font-size: 0.8em;">{{$q->Score}}</td>

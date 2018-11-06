@@ -64,6 +64,53 @@ class AnswerShortQuestionController extends Controller
             //return'yes';
             }
 
+            public function edit($answer_id)
+            {
+               $answer = DB::table('Questions')
+               ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+               ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+               ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+               //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+               //->where('Questions.questions_id','=',$questions_id)
+               ->where('Answer.answer_id','=',$answer_id)
+               ->get();
+              //dd($question);
+                
+                return view('/Student/question/editAnswer', compact('answer_id','answer'));
+            }
+        
+            /**
+             * Update the specified resource in storage.
+             *
+             * @param  \Illuminate\Http\Request  $request
+             * @param  int  $id
+             * @return \Illuminate\Http\Response
+             */
+            public function update(Request $request)
+            {
+        
+                $id = $request->get('subject_id_old'); //id sent by editQuiz.blade.php
+                
+                $subject = Subject::find($id); //หา id เก่า แล้วไปเปลี่ยน 
+                $subject->subject_id = $request->get('subject_id');
+                $subject->subject_name = $request->get('subject_name');
+                $subject->save(); //เซฟ id อันใหม่ที่แก้แล้ว 
+        
+        
+                $quiz = Quiz::where('subject_id','=',$id)  //ต้องไปบันทึกที่ quiz ด้วยเพราะมี subject_id 
+                        ->update([  
+                            'subject_id' => $request->get('subject_id')
+                        ]);
+                
+                
+                $subject_user = Subject_user::where('subject_id','=',$id) // ทำเช่นเดียวกับ quiz 
+                        ->update([
+                            'subject_id' => $request->get('subject_id')
+                        ]);
+                
+                return redirect()->route('subject.index')->with('success', 'Data Updated');
+            }
+
  
 }
 

@@ -136,11 +136,11 @@ class reviewAnswerController extends Controller
             case 'TrueFalse':
             switch ( $quizStatus) {
                 case 'Reviewing':
-                return view('/Admin/checkMultipleAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkMultipleAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
                     break;
             }
                 break;        

@@ -15,11 +15,11 @@
     <div class="row">
 
 
-        @foreach($question4 as $q)
+        @foreach($question4 as $key => $q)
         <ul class="list-group">
 
 
-            <li class="list-group">Number: {{$q->number}}</li>
+            <li class="list-group">Number: {{$key + 1}}</li>
             <li class="list-group">Question:{{$q->question}}</li>
             <li class="list-group">Score:{{$q->score}}</li>
 
@@ -37,13 +37,13 @@
                 {{csrf_field()}}
                 @csrf
 
-                @foreach($question5 as $q2)
                 <div class="form-group">
-                    {{$q2->choice}}
-                    {{Form::radio('answer',$q2->choice,'',['id' => 'answer'])}}
-                    {{Form::hidden ('choice_id', $q2->choice_id)}}
+                True                    
+                {{Form::radio('answer','True',['id' => 'answer'])}}                    
+                False
+                {{Form::radio('answer','False',['id' => 'answer'])}}
                 </div>
-                @endforeach
+
 
 
                 <div class="form-group">
@@ -61,7 +61,7 @@
 
                 <div class="form-group">
                     <button type="button" class="btn btn-danger">Cancel</button>
-                    @if($q2->questions_id != $questionMax)
+                    @if($q->questions_id != $questionMax)
                         <input class="btn btn-success" type="submit">
                         <a href="#" onClick="return onClickHandler();" class="btn btn-primary">                      
                             Next

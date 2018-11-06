@@ -66,6 +66,8 @@
                     <td>
                         <a href="{{URL::route('AnswerBlankQuestion.file').'/'.$que->questions_id.'/'.$que->quizs_id}}"
                             class="btn btn-info ">View</a>
+                        <a href="#"
+                            class="btn btn-warning ">Edit</a>
                     </td>
                 </tr>
                 @endforeach

@@ -23,6 +23,7 @@
     <div class="row">
         <table class="table table-bordered">
             <tr>
+                <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;">Title</th>
                 <th>Description</th>
                 <th>Date</th>
@@ -39,8 +40,9 @@
             </tr>
            
             <tbody>
-                @foreach($quizzes as $q)
+                @foreach($quizzes as $key => $q)
                 <tr>
+                    <td>{{ $key + 1 }}</td>
                     <td style="font-size: 0.8em;">{{$q->title}}</td>
                     <td style="font-size: 0.8em;">{{$q->description}}</td>
                     <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>

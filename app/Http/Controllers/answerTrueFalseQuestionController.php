@@ -44,16 +44,17 @@ class AnswerTrueFalseQuestionController extends Controller
         $username = Auth::user()->username;
         //create new Answer
         $Answer = new Answer;
+        $Answer->username = $username;
         $Answer->answer_number =$request->input('1');
         $Answer->answer =$request->input('answer');
         $Answer->answer_date=$request->input('answerDate');
         $Answer->questions_id =$request->input('questions_id');
-        $Answer->choice_id =$request->input('choice_id');
         //save message
-        $Answer->save();
-        $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
+        $Answer->save(); 
         $quiz_id = $request->input('quiz_id');
-
+        $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
+       
+        // dd($request->all());
 
 
         return redirect()->route('question.StudentQuestion',[$quiz_id]);

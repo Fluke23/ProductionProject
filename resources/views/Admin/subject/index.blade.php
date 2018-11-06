@@ -32,14 +32,16 @@
         <div class="row">
             <table class="table table-bordered subject-table">
                 <tr>
+                    <th>No.</th>
                     <th style="font-size: 1em;">subject ID</th>
                     <th>Subject Name</th>
                     <th></th>
                 </tr>
 
                 <tbody>
-                    @foreach($subjects as $subject)
+                    @foreach($subjects as $key => $subject)
                     <tr>
+                        <td>{{ $key + 1 }}</td>
                         <td style="font-size: 0.8em;">{{$subject->subject_id}}</td>
 
                         <td style="font-size: 0.8em;">{{$subject->subject_name}}</td>

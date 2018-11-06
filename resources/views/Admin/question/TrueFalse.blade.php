@@ -41,9 +41,6 @@
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
-            <div class="form-group">                
-                {{Form::hidden('name'.$i, '',['class'=>'form-control','placeholder'=> 'Enter solution'])}}
-            </div>
 
             <div class="form-group">
                 {{Form::label('question'.$i, 'question')}}
@@ -59,65 +56,18 @@
                 {{Form::hidden('quiz_id',$quiz_id)}}
             </div>
                 
-            @for ( $question=1 ;  $question<=2 ; $question++)
             <div class="form-group">
-            {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
-            ถูก
-            {{Form::radio('choice_type_id_'.$question.$i, '1')}}
-            ผิด
-            {{Form::radio('choice_type_id_'.$question.$i, '2')}}
-            {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
+            {{Form::label('Answer')}}
+            True
+            {{Form::radio('solution'.$i, 'True')}}
+            False
+            {{Form::radio('solution'.$i, 'False')}}       
             </div>
-            @endfor
+            
             <br><hr><br>
     @endfor
-
-
-            {{-- <div class="form-group">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-6 ">
-                            <label for="question">Plase Select Number of Choice:</label>
-                            <input class="form-control" type="text" v-model="choice">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="btn btn-primary btn-sm" v-on:click="addQuiz(this.choice)">Add
-                                Question</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-danger btn-sm">Delete choice</button>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="mt-2" v-for="quizs in quiz">
-                            <div class="row" v-for="ch in quizs.choice">
-                                <div class="mt-2">
-                                    <div class="checkbox mt-3">
-                                        {{Form::label('choice', 'choice')}}
-                                        {{Form::text('choice', '',['class'=>'form-control','placeholder'=> 'Enter
-                                        Choice'])}}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <label for="question">Score:</label><br>
-                                    <input type="text" value="" name="score" style="width:100px;">
-                                </div>
-                            </div>
-                            <br><br><br>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <br> --}}
-                <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
-
-                {{--
-            </div> --}}
+            <button type="reset" class="btn btn-danger">ยกเลิก</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
     </div>
 
     </form>

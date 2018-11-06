@@ -93,14 +93,14 @@ class checkMultipleAnswerController extends Controller
             case 'TrueFalse':
             switch ( $quizStatus) {
                 case 'Open':
-                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
                 case 'Reviewing':
-                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
                     break;
             }
                 break;        
