@@ -352,6 +352,52 @@ class UserController extends Controller
         return back()->with('success', 'Data Deleted');
         // return view('Admin/user/viewSubjectUser',compact('subject_user'));
     }
+
+    public function ExportContactSubjectUser(Request $request,$subject_id){
+        
+        $subject_user_data = DB::table('subjects_user')
+        ->select('Group_user.groups_id','users.username','users.firstname','users.lastname')
+        ->join('users','users.username','=','subjects_user.username')
+        ->join('Subjects','Subjects.subject_id','=','subjects_user.subject_id')
+        ->join('Group_user','Group_user.username','=','users.username')
+        ->join('Student_group','Student_group.student_group_id','=','subjects_user.student_group_id')
+        // ->join('Group_user','Group_user.username','=','users.username')
+        ->where('Subjects.subject_id','=',$subject_id)
+        ->orderBy('Group_user.groups_id', 'asc')
+        ->get();
+
+        $subject_user_array[] = array('Username', 'Firstname', 'Lastname','User Group');
+        foreach($subject_user_data as $su_data){
+        $subject_user_array[] = array(
+        'Username' => $su_data->username,
+        'Firstname' => $su_data->firstname,
+        'Lastname' => $su_data->lastname,
+        'User Group' => $su_data->groups_id,
+        );
+        }
+
+        $subject = DB::table('Subjects')
+        ->where('Subjects.subject_id','=',$subject_id)
+        ->get();
+
+        $subject_id = $subject[0]->subject_id;
+        $subject_name = $subject[0]->subject_name;
+
+
+            Excel::create('List User', function ($excel) use ($subject_user_array,$subject_id, $subject_name) {
+            $excel->setTitle('List User');
+            $excel->sheet('List User', function ($sheet) use ($subject_user_array,$subject_id, $subject_name) {
+            $sheet->fromArray($subject_user_array, null, 'A1', false, false);
+            $sheet->setCellValue('F1', 'Subject ID');
+            $sheet->setCellValue('G1', 'Subject Name');
+
+            $sheet->setCellValue('F2', $subject_id);
+            $sheet->setCellValue('G2', $subject_name);
+
+        });
+        })->download('xlsx');
+
+    }
     
    
 
