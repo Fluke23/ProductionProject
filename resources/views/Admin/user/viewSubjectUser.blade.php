@@ -6,6 +6,11 @@
         <div class="col-md-3">
             <h2>{{ $subject_id }}  </h2>
         </div>
+        <div class="col-md-9">
+            {{--   Export Contact  --}}
+             <a href="{{ route('exportSubjectUser',['subject_id'=>$subject_id]) }}" class="btn btn-success float-right">Export List User</a>    
+             {{--   Export Contact  --}}            
+        </div>
     </div>
 
     <nav aria-label="breadcrumb">
