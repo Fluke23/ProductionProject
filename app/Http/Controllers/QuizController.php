@@ -51,8 +51,8 @@ class QuizController extends Controller
             ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
             ->join('users','users.username','=','subjects_user.username')
             ->join('Quiz_status','Quiz_status.quizs_status_id','=','quizs.quizs_status_id')
-            ->join('Groups_quizs','Groups_quizs.quizs_id','=','quizs.quizs_id')
-            ->join('Groups','Groups.groups_id','=','Groups_quizs.groups_id')
+            // ->join('Groups_quizs','Groups_quizs.quizs_id','=','quizs.quizs_id')
+            // ->join('Groups','Groups.groups_id','=','Groups_quizs.groups_id')
             ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้ 
             ->where('Subjects.subject_id','=',$subject_id)
             ->orderby('quizs.quizs_id','desc') //Addition
@@ -140,20 +140,21 @@ class QuizController extends Controller
             'description' => $request->get('description'),
             'quiz_date' => $request->get('quiz_date'),
             'subject_id' => $request->get('subject_id'),
-            'groups_id' => $request->get('groups_id'),
+            // 'groups_id' => $request->get('groups_id'),
+            'student_group' => $request->get('student_group'),
             'quizs_types_id' => $request->get('quizs_types_id'),
             'quizs_status_id' => $request->get('quizs_status_id'),
             
           ]);
-          $quiz->Student_group = $request->get('Student_group');
+        //   $quiz->Student_group = $request->get('Student_group');
           $quiz->save();
            // dd($quiz);
-          $group_quiz = new Group_quiz([
-                'quizs_id' =>$quiz->quizs_id, //quiz ใหม่เรื่อยๆ ต้องทำแบบนี้เพื่อให้ข้อมูลเก็บ
-                'groups_id' =>$request->get('groups_id')
-          ]);
+        //   $group_quiz = new Group_quiz([
+        //         'quizs_id' =>$quiz->quizs_id, //quiz ใหม่เรื่อยๆ ต้องทำแบบนี้เพื่อให้ข้อมูลเก็บ
+        //         'groups_id' =>$request->get('groups_id')
+        //   ]);
 
-          $group_quiz->save();
+        //   $group_quiz->save();
 
         if($permission == 'ADMIN'){
          return redirect()->route('quiz.quizDetail',['subject_id'=>$request->get('subject_id')]);
@@ -187,11 +188,12 @@ class QuizController extends Controller
         $group = Group::all();
         $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
         $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
+        $quiz_group= DB::table('Student_group')->select('student_group_name')->get();
         $quiz = Quiz::findorfail($id);
         if($permission == 'ADMIN'){
-        return view('Admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));
+        return view('Admin/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status','quiz_group'));
         }elseif($permission == 'LECTURER'){
-        return view('lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status'));    
+        return view('lecturer/quiz/editQuiz', compact('quiz','subject_id','group','quiz_type','quiz_status','quiz_group'));    
         }
     }
 
@@ -214,7 +216,8 @@ class QuizController extends Controller
         $quiz->description = $request->get('description');
         $quiz->quiz_date = $request->get('quiz_date');
         $quiz->subject_id = $request->get('subject_id');
-        $quiz->groups_id = $request->get('groups_id');
+        // $quiz->groups_id = $request->get('groups_id');
+        $quiz->student_group= $request->get('student_group');
         $quiz->quizs_types_id = $request->get('quizs_types_id');
         $quiz->quizs_status_id = $request->get('quizs_status_id');
            
