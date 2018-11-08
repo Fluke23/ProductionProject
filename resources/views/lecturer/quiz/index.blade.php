@@ -156,19 +156,21 @@
                             </div>
                         </div>
 
-                        {{-- group_id --}}
+                         {{-- student_group_id --}}                        
                         <div class="form-group row">
-                            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
+                            <label for="student_group" class="col-md-4 col-form-label text-md-right">{{ __('student_group') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="groups_id" id="select1">
-                                    @foreach($group as $g)
-                                    <option value="{{$g->groups_id}}">{{$g->groups_id}}</option>
-                                    @endforeach
+                                <select class="form-control" name="student_group" id="select1">
+                                <div class="col-md-6">
+                                    @foreach($quiz_group as $g)
+                                    <option value="{{$g->student_group_name}}">{{$g->student_group_name}}</option>
+                                    @endforeach 
                                 </select>
 
                             </div>
                         </div> 
+
 
 
                         {{-- quiz type id --}}
