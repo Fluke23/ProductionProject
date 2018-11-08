@@ -157,7 +157,7 @@
                             </div>
                         </div>
 
-                          {{-- group_id --}}
+                          <!-- {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
@@ -170,40 +170,22 @@
                                 </select>
 
                             </div>
-                        </div> 
-
-                        {{-- student_group_id --}}
-                      <!--   <div class="form-group row">
-                            <label for="Student_group" class="col-md-4 col-form-label text-md-right">{{ __('group') }}</label>
-
-                            <div class="col-md-6">
-
-                                <div class="col-md-6">
-                                    {{Form::select('Student_group', array('G1'=>'G1' ,
-                                    'G2'=>'G2'))}}
-                                    @if ($errors->has('Student_group'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('Student_group') }}</strong>
-                                                </span>
-                                                @endif
-                                </div>
-                            </div>
                         </div>  -->
 
-                       <!--  <div class="form-group row">
-                            <label for="remark" class="col-md-4 col-form-label text-md-right">{{
-                                __('Group') }}</label>
+                        {{-- student_group_id --}}                        
+                        <div class="form-group row">
+                            <label for="student_group" class="col-md-4 col-form-label text-md-right">{{ __('student_group') }}</label>
 
                             <div class="col-md-6">
-                                {{Form::select('groups_id', array('G1'=>'G1' ,
-                                'G2'=>'G2'))}}
-                                @if ($errors->has('Group'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('Group') }}</strong>
-                                </span>
-                                @endif
+                                <select class="form-control" name="student_group" id="select1">
+                                <div class="col-md-6">
+                                    @foreach($quiz_group as $g)
+                                    <option value="{{$g->student_group_name}}">{{$g->student_group_name}}</option>
+                                    @endforeach 
+                                </select>
+
                             </div>
-                        </div> -->
+                        </div> 
 
 
                         {{-- quiz type id --}}
