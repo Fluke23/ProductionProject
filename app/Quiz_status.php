@@ -9,5 +9,6 @@ class Quiz_status extends Model
     protected $table = 'Quiz_status';
     public $primaryKey = 'quizs_status_id';
     protected $fillable = ['quizs_status_id'];
+    public $timestamps = false;
     
 }

@@ -97,7 +97,7 @@
                                         <a class="nav-link" href="{{ URL::to('/Admin/userManager')}}">User Manager</a>
                                       </li>
                                       <li class="nav-item ml-4">
-                                        <a class="nav-link disabled" href="#">Setting</a>
+                                        <a class="nav-link " href="{{ route('setting')}}">Setting</a>
                                       </li>
                                     </ul>
                             </div>

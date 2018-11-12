@@ -325,5 +325,30 @@ Route::post('/Admin/user/saveTyprUser','UserController@storeTypeUser')->name('sa
 Route::get('/ExportSubjectUser/{subject_id?}','UserController@ExportContactSubjectUser')->name('exportSubjectUser');
 //Export Contact SubjectUser
 
+// Setting
+    Route::get('/Admin/setting','SettingController@index')->name('setting');
+
+    Route::post('/Setting/saveSubject','SettingController@storeSubject');
+    Route::get('/Setting/deleteSubject/{subject_id?}','SettingController@destroySubject');
+    Route::get('/Setting/editSubject/{subject_id?}','SettingController@editSubject');
+    Route::post('/Setting/updateSubject/','SettingController@updateSubject');
+
+    Route::post('/Setting/saveGroup','SettingController@storeGroup');
+    Route::get('/Setting/editGroup/{groups_id?}','SettingController@editGroup');
+    Route::post('/Setting/updateGroup/','SettingController@updateGroup');
+    Route::get('/Setting/deleteGroup/{groups_id?}','SettingController@destroyGroup');
+
+    Route::post('/Setting/saveQuizType','SettingController@storeQuizType');
+    Route::get('/Setting/editQuizType/{quizs_types_id?}','SettingController@editQuizType');
+    Route::post('/Setting/updateQuizType/','SettingController@updateQuizType');
+    Route::get('/Setting/deleteQuizType/{quizs_types_id?}','SettingController@destroyQuizType');
+
+    Route::post('/Setting/saveQuizStatus','SettingController@storeQuizStatus');
+    Route::get('/Setting/editQuizStatus/{quizs_status_id?}','SettingController@editQuizStatus');
+    Route::post('/Setting/updateQuizStatus/','SettingController@updateQuizStatus');
+    Route::get('/Setting/deleteQuizStatus/{quizs_status_id?}','SettingController@destroyQuizStatus');
+// Setting
+
+
    
    

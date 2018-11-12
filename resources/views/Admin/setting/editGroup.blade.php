@@ -1,0 +1,89 @@
+@extends('layouts.main')
+
+@section('content')
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-md-3">
+            <h2>Edit Subject</h2>
+        </div>
+        <div class="col-md-9">
+
+        </div>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('quiz')}}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Subject</li>
+        </ol>
+    </nav>
+
+
+    <div class="row">
+        <form action="{{URL::to('/Setting/updateGroup/')}}" method="post">
+            @csrf
+
+            {{-- groups id --}}
+            <div class="form-group row">
+                <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups_id') }}</label>
+
+                <div class="col-md-6">
+                    <input id="groups_id" type="text" class="form-control{{ $errors->has('groups_id') ? ' is-invalid' : '' }}"
+                        name="groups_id" value="{{$group->groups_id}}" required autofocus readonly>
+
+                    @if ($errors->has('groups_id'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('groups_id') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+             {{-- groups id --}}
+
+
+            {{-- group name --}}
+            <div class="form-group row">
+                <label for="group_name" class="col-md-4 col-form-label text-md-right">{{ __('group_name') }}</label>
+
+                <div class="col-md-6">
+                    <input id="group_name" type="text" class="form-control{{ $errors->has('group_name') ? ' is-invalid' : '' }}"
+                        name="group_name" value="{{$group->group_name}}" required autofocus>
+
+                    @if ($errors->has('group_name'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('group_name') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+             {{-- group name --}}
+
+              {{-- mark --}}
+            <div class="form-group row">
+                <label for="marked" class="col-md-4 col-form-label text-md-right">{{ __('marked') }}</label>
+
+                <div class="col-md-6">
+                    <input id="marked" type="text" class="form-control{{ $errors->has('marked') ? ' is-invalid' : '' }}"
+                        name="marked" value="{{$group->marked}}" required autofocus>
+
+                    @if ($errors->has('marked'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('marked') }}</strong>
+                    </span>
+                    @endif
+                </div>
+            </div>
+              {{-- mark --}}
+
+
+            <input type="hidden" name="groups_id_old" value="{{ $group->groups_id}}">
+
+            <button type="reset" class="btn btn-danger">ยกเลิก</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+
+        </form>
+    </div>
+
+
+</div>
+@endsection
