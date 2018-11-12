@@ -18,7 +18,7 @@
 
     <div class="row">
         
-                    @foreach($question as $q)
+                    @foreach($question  as $q)
                     @endforeach
                
                     <div class="col-md-12">

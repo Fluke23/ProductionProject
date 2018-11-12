@@ -277,6 +277,43 @@ class AnswerBlankController extends Controller
             //return'yes';
             }
 
+            public function edit($answer_id)
+            {
+                //dd($answer_id);
+               $answer = DB::table('Questions')
+               ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+               ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+               ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+               //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+               //->where('Questions.questions_id','=',$questions_id)
+               ->where('Answer.answer_id','=',$answer_id)
+               ->get();
+              //dd($question);
+                
+                return view('/Student/question/editAnswer', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));
+            }
+
+            
+
+            public function update(Request $request)
+            {
+
+                 //dd($request);
+
+                $answer_id = $request->get('answer_id');
+                $answer = Answer::find($answer_id); 
+                $answer->answer = $request->get('answer');
+                
+                // dd($answer);
+                $answer->save(); //เซฟ id อันใหม่ที่แก้แล้ว 
+
+            
+               
+        
+                // return view('/Student/question/StudentQuestion', compact('answer_id','answer'));
+                return redirect()->back();
+    }   
+
  
         }
         

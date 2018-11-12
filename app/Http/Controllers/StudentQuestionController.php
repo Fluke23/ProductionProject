@@ -12,16 +12,13 @@ class StudentQuestionController extends Controller
     public function index($quizs_id)
     {
        
-       $question = DB::table('Questions')
-            // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
-            
-            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
-           // ->join('Answer','Answer.questions_id','=','Questions.questions_id')
-           // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
-           // ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
-            ->where('quizs.quizs_id','=',$quizs_id)
+        $question = DB::table('Answer')
+            ->rightJoin('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+
             ->get();
-            
+            // dd($question);
 
             foreach ($question as $id) {
                 //dd( $questions_id);
@@ -59,12 +56,22 @@ class StudentQuestionController extends Controller
             ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
             ->where('Questions.quizs_id','=',$quizs_id)
             ->get();
-            //dd($quizStatus);
+            
+            $questionAnswer = DB::table('Questions')
+            // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
+            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+            ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+           // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+           // ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')
+            ->where('quizs.quizs_id','=',$quizs_id)
+            
+            ->get();
+            //dd($questionAnswer);
             for($i=0 ;$i<count($quizStatus); $i++){
                 if($quizStatus[$i]->quizs_status_id == "Reviewing"){
                     return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
                 } else{
-                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus'));
+                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer'));
                 }
                 $i++;
             }

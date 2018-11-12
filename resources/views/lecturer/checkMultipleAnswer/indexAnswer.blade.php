@@ -1,4 +1,4 @@
-@extends('layouts.lecturer')
+@extends('layouts.main')
 
 @section('content')
 <div class="container">
@@ -15,6 +15,7 @@
     <div class="row">
         <table class="table table-bordered">
             <tr>
+                <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;"> Username</th>
                 <th>Answer</th>
                 <th style="width:50px;">Score</th>
@@ -34,8 +35,9 @@
 
                 </div></br>
 
-                @foreach($question as $q)
+                @foreach($question as $key => $q)
                 <tr>
+                    <td>{{ $key + 1 }}</td>
                     <td style="font-size: 0.8em;">{{$q->username}}</td>
                     <td style="font-size: 0.8em;">{{$q->answer}}</td>
                     <td style="font-size: 0.8em;">{{$q->score}}</td>
@@ -43,7 +45,7 @@
 
 
                     <td>
-                        @if($q->questions_types_id == 'Multiple' || $q->questions_types_id == 'TrueFalse')
+                        @if($q->questions_types_id == 'Multiple' || $q->questions_types_id  == 'TrueFalse')
                         <a href="{{URL::to('/Admin/checkMultipleAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
                         @else
                         <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>

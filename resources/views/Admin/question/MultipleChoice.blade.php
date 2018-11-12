@@ -63,13 +63,18 @@
             <div class="form-group">
             {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
             <!-- {{Form::checkbox('choice_type_id_'.$question,'1')}} -->
+            ถูก
+            {{Form::radio('choice_type_id_'.$question.$i, '1')}}
+            ผิด
+            {{Form::radio('choice_type_id_'.$question.$i, '2',true)}}
             {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
             </div>
             @endfor
 
             <br><hr><br>
     @endfor
-
+                <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
 
     </div>
 

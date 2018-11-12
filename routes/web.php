@@ -138,6 +138,9 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Admin/checkMultipleAnswer/commentAnswer/{quiz_id?}','checkScoreController@store')->name('commentMultipleAnswer.file'); 
     Route::post('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
 
+    //export
+    Route::get('/ExportScore/{id?}','QuestionController@exportScoreQuiz')->name('exportScore');
+
 
 
     //Lecturer/subject
@@ -257,11 +260,14 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@store'); //name 
     Route::post('/Student/AnswerBlankQuestionsubmit/{id?}/{quiz_id?}','AnswerBlankController@submit');
+    Route::get('/Student/question/editAnswer/{answer_id}','AnswerBlankController@edit')->name('editAnswer.file'); //name 
+    Route::post('/Student/question/editAnswer/{answer_id}','AnswerBlankController@update');
+    
     //Student/answerShortquestion 
     Route::get('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@store'); //name 
     Route::post('/Student/AnswerShortQuestion/submit/{id?}/{quiz_id?}','AnswerShortQuestionController@submit');
-    Route::get('/Student/question/editAnswer/{id?}/{quiz_id?}','AnswerShortQuestionController@edit'); //name 
+   
                                                                        
 
     //Student/answerUploadquestion 
@@ -314,6 +320,10 @@ Route::post('/Admin/user/saveTyprUser','UserController@storeTypeUser')->name('sa
 // Import file  User 
     Route::get('/Admin/importfile','UserController@importFileUser')->name('importFile');
     Route::post('/Admin/importfileStore','UserController@parseImport')->name('parseImport');
+
+//Export Contact SubjectUser
+Route::get('/ExportSubjectUser/{subject_id?}','UserController@ExportContactSubjectUser')->name('exportSubjectUser');
+//Export Contact SubjectUser
 
    
    

@@ -20,7 +20,7 @@
             <img src="{{$q->img_url}} ">
 
             <li class="list-group">Number: {{$key + 1}}</li>
-            <li class="list-group">solution: {{$q->solution}}</li>
+            <!-- <li class="list-group">solution: {{$q->solution}}</li> -->
             <li class="list-group">Question:{{$q->question}}</li>
             <li class="list-group">Score:{{$q->score}}</li>
 
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             {{Form::hidden('quiz_id',$quiz_id)}}
                         </div>
-
+                        
 
                         <div class="form-group">
                             <button type="button" class="btn btn-danger">Cancel</button>

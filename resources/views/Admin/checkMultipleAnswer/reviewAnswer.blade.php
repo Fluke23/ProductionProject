@@ -40,21 +40,46 @@
             <li class="list-group">Answer Date: {{$q->answer_date}}</li>
         </div>
 
-        
-        @foreach($correct as $c)
-        @endforeach
-        @if($q->answer == $c->choice)
+    @if($q->solution != NULL)
         <div class="col-md-4">
-            <button type="button" class="btn btn-success">
-                Correct Answer
-            </button>
+            <li class="list-group">Solution: {{$q->solution}}</li>
         </div>
-        @else
-        <div class="col-md-4">
-            <button type="button" class="btn btn-danger">
-                Incorrect Answer
-            </button>
-        </div>
+    @endif
+    
+        @if($questionType == 'Multiple')
+            @foreach($correct as $c)
+            @endforeach
+                @if($q->answer == $c->choice)
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif
+        @elseif($questionType == 'TrueFalse')
+                @if($q->answer == $q->solution)
+                <div class="col-md-4">
+                    <li class="list-group">Solution: {{$q->solution}}</li>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif        
         @endif
 
 
@@ -80,6 +105,8 @@
                     <textarea name="Remark" cols="120" rows="5" id="Remark" style="margin-top: 0px; margin-bottom: 0px; height: 100px;">   </textarea>
                 </div>
 
+
+    @if($questionType == 'Multiple')
             @foreach($correct as $c)
             @endforeach
                 @if($q->answer == $c->choice)
@@ -92,8 +119,21 @@
                             {{Form::label('Score:', 'Score:')}}</br>
                             {{Form::text('Score', '0',['class'=>'form-control','placeholder'=> 'Score'])}}
                     </div>
-                @endif    
+                @endif
+    @elseif($questionType == 'TrueFalse')
+                @if($q->answer == $q->solution)
+                    <div class="col-md-4">
+                        {{Form::label('Score:', 'Score:')}}</br>
+                        {{Form::text('Score', '1',['class'=>'form-control','placeholder'=> 'Score'])}}
+                    </div>
+                @else
+                    <div class="col-md-4">
+                            {{Form::label('Score:', 'Score:')}}</br>
+                            {{Form::text('Score', '0',['class'=>'form-control','placeholder'=> 'Score'])}}
+                    </div>
+                @endif
 
+    @endif
 
                 <div class="col-md-4">
                     {{Form::hidden('questions_id',$questions_id)}}</br>

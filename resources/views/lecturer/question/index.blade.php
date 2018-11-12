@@ -42,9 +42,9 @@
             </tr>
 
             <tbody>
-                @foreach($question as $q)
+            @foreach($question as $key => $q)
                 <tr>
-                    <td style="font-size: 0.8em;">{{$q->number}}</td>
+                    <td>{{ $key + 1 }}</td>
                     <td style="font-size: 0.8em;">{{$q->question}}</td>
                     <td style="font-size: 0.8em;">{{$q->score}}</td>
                     <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>

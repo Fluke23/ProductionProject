@@ -17,7 +17,7 @@ class checkMultipleAnswerController extends Controller
     public function index($questions_id)
     {
         $question = DB::table('Questions')
-        ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+        // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
         //->join('Comment','Comment.answer_id','=','Answer.answer_id')
@@ -93,14 +93,14 @@ class checkMultipleAnswerController extends Controller
             case 'TrueFalse':
             switch ( $quizStatus) {
                 case 'Open':
-                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
+                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id'));
                     break;
                 case 'Reviewing':
-                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
+                return view('/Admin/checkMultipleAnswer/indexAnswer',compact('question','questions_id','question2','quiz_id','questionType'));
                     break;
             }
                 break;        

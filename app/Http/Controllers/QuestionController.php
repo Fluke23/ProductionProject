@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Question;
 use App\Quiz;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class QuestionController extends Controller
@@ -176,4 +177,144 @@ class QuestionController extends Controller
         $amount = 2;
         return view('/Admin/question/TrueFalse',compact('quiz_id','amount')); 
     }
+    public function exportScoreQuiz(Request $request, $quizs_id)
+    {
+
+        $username = Auth::user()->username;
+
+        $permission = $request->get('permission');
+        $quiz_data = DB::table('quizs')
+            ->join('Subjects', 'quizs.subject_id', '=', 'Subjects.subject_id')
+            ->join('Quiz_types', 'Quiz_types.quizs_types_id', '=', 'quizs.quizs_types_id')
+            ->join('subjects_user', 'subjects_user.subject_id', '=', 'Subjects.subject_id')
+            ->join('users', 'users.username', '=', 'subjects_user.username')
+            ->join('Quiz_status', 'Quiz_status.quizs_status_id', '=', 'quizs.quizs_status_id')
+            ->join('Groups_quizs', 'Groups_quizs.quizs_id', '=', 'quizs.quizs_id')
+            ->join('Groups', 'Groups.groups_id', '=', 'Groups_quizs.groups_id')
+            ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้
+        // ->where('Subjects.subject_id', '=', $subject_id)
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->orderby('quizs.quizs_id', 'desc')
+            ->get()->toArray();
+
+        $quiz_array[] = array('Quiz Name', 'Quiz Description', 'Subject', 'Quiz type', 'Min Score', 'Max Score', 'Avg Score');
+
+        foreach ($quiz_data as $quiz) {
+            $quiz_array[] = array(
+                'Quiz Name' => $quiz->title,
+                'Description' => $quiz->description,
+                'Subject' => $quiz->subject_id,
+                'Quiz type' => $quiz->type_name,
+            );
+        }
+
+        //Total Score 
+        $total_score = DB::table('Questions')
+            ->select(DB::raw('SUM(Questions.score) AS totalScore'))
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->get();
+        //Total Score
+
+        $quiz_name = $quiz->title;
+        $quiz_subject = $quiz->subject_id;
+        $quiz_total = $total_score[0]->totalScore;
+        
+
+        // For generate each user  and each score
+        $user = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS Score, users.username'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username')
+            ->get();
+         // For generate each user and each score
+           
+        $user_array[] = array('Username', 'Score');
+        foreach ($user as $u) {
+            $user_array[] = array(
+                'Username' => $u->username,
+                'Score' => $u->Score,
+            );
+        }
+
+
+        // Max Score in each Quiz
+        $max = DB::table('Answer')
+        ->select(DB::raw('SUM(Answer.Score) AS maxScore,users.username'))
+        ->join('users', 'users.username', '=', 'Answer.username')
+        ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+        ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->groupBy('users.username')
+        ->get()->max();
+        // Max Score in each Quiz
+
+
+        // Min Score in each Quiz
+        $min = DB::table('Answer')
+        ->select(DB::raw('SUM(Answer.Score) AS minScore,users.username'))
+        ->join('users', 'users.username', '=', 'Answer.username')
+        ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+        ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->groupBy('users.username')
+        ->get()->min();
+        // Min Score in each Quiz
+
+        
+        //Avg Score in each Quiz
+        $sum = DB::table('Answer')
+        ->select(DB::raw('SUM(Answer.Score) AS avgScore'))
+        ->join('users', 'users.username', '=', 'Answer.username')
+        ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+        ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->get();
+
+        $count = DB::table('users')
+        ->select(DB::raw('users.username'))
+        ->join('Answer', 'users.username', '=', 'Answer.username')
+        ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+        ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->groupBy('users.username')
+        ->get()->count();
+        //Avg Score in each Quiz
+        
+        $sum_score = $sum[0]->avgScore;
+        $avg_score = $sum_score/$count;
+
+        $max_score = $max->maxScore;
+        $min_score = $min->minScore;
+        // $avg_score = $avg->avgScore;
+              
+
+        Excel::create('User Score', function ($excel) use ($user_array,
+        $quiz_name, $quiz_subject, $quiz_total,$max_score,$min_score, $avg_score) {
+            $excel->setTitle('User Score');
+            $excel->sheet('User Score', function ($sheet) use ($user_array,
+        $quiz_name, $quiz_subject, $quiz_total,$max_score, $min_score, $avg_score) {
+                $sheet->fromArray($user_array, null, 'A1', false, false);
+                $sheet->setCellValue('E2', 'Quiz ');
+                $sheet->setCellValue('E3', 'Subject');
+                $sheet->setCellValue('E4', 'Total Score');
+                $sheet->setCellValue('E5', 'Max');
+                $sheet->setCellValue('E6', 'Min');
+                $sheet->setCellValue('E7', 'Avg');
+
+                $sheet->setCellValue('F2', $quiz_name);
+                $sheet->setCellValue('F3', $quiz_subject);
+                $sheet->setCellValue('F4', $quiz_total);
+                $sheet->setCellValue('F5', $max_score);
+                $sheet->setCellValue('F6', $min_score);
+                $sheet->setCellValue('F7', $avg_score);
+
+            });
+        })->download('xlsx');
+
+    }
+
 }

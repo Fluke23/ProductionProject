@@ -8,5 +8,6 @@ class Answer extends Model
 {
     protected $table = 'Answer';
     public $timestamps = false;
+    protected $primaryKey = 'answer_id';
 
 }

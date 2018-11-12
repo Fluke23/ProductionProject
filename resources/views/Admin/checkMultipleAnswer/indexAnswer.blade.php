@@ -45,7 +45,7 @@
 
 
                     <td>
-                        @if($q->questions_types_id == 'Multiple')
+                        @if($q->questions_types_id == 'Multiple' || $q->questions_types_id  == 'TrueFalse')
                         <a href="{{URL::to('/Admin/checkMultipleAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
                         @else
                         <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>

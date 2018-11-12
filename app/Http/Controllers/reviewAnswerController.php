@@ -17,19 +17,13 @@ class reviewAnswerController extends Controller
    
 
     
-   
-
-
-
     public function indexreview($answer_id){
-
         $questions_id= DB::table('Questions')
         ->select('Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->where('Answer.answer_id','=',$answer_id)
         ->get();
         //dd($questions_id);
-
         
         $question = DB::table('Questions')
         ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
@@ -49,9 +43,7 @@ class reviewAnswerController extends Controller
         //->where('Questions.questions_id','=',$questions_id)
         ->where('Answer.answer_id','=',$answer_id)
         ->get();
-
         
-
         //dd($question);
         $quizStatus = $question[0]->quizs_status_id;
         $questions_id = $questions_id[0]->questions_id;
@@ -68,13 +60,12 @@ class reviewAnswerController extends Controller
                  return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionReview'));
                      break;
              }
-
     }
     
     public function indexMultiple($questions_id)
     {
         $question = DB::table('Questions')
-        ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+        // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
        // ->join('Comment','Comment.answer_id','=','Answer.answer_id')
@@ -136,11 +127,11 @@ class reviewAnswerController extends Controller
             case 'TrueFalse':
             switch ( $quizStatus) {
                 case 'Reviewing':
-                return view('/Admin/checkAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                return view('/Admin/checkMultipleAnswer/reviewAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
                     break;
                 
                 case 'Close':
-                return view('/Admin/checkAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
+                return view('/Admin/checkMultipleAnswer/commentAnswer',compact('question','questions_id','question2','quiz_id','questionType','correct'));
                     break;
             }
                 break;        

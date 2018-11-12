@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-        <input type="hidden" name="quiz_id" value="{{ $quiz->quizs_id}}">
+        <input type="hidden" name="quiz_id" value="{{$quiz->quizs_id}}">
 
 
         <button type="reset" class="btn btn-danger">ยกเลิก</button>

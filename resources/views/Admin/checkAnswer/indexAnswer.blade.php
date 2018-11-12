@@ -48,10 +48,14 @@
                         <td style="font-size: 0.8em;">{{$q->questions_types_id}}</td>
                     
 
-                        <td >
-                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->answer_id)}}" class="btn btn-info ">Review</a>
-                        
-                        </td>
+                        <td>
+                        @if($q->questions_types_id == 'Multiple' || $q->questions_types_id  == 'TrueFalse')
+                        <a href="{{URL::to('/Admin/checkMultipleAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
+                        @else
+                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
+                        @endif
+
+                    </td>
                         @endforeach
                 </tr>
                     
