@@ -62,7 +62,7 @@ class reviewAnswerController extends Controller
              }
     }
     
-    public function indexMultiple($questions_id)
+   public function indexMultiple($questions_id)
     {
         $question = DB::table('Questions')
         // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
