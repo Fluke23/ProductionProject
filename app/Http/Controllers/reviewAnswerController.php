@@ -18,6 +18,7 @@ class reviewAnswerController extends Controller
 
     
     public function indexreview($answer_id){
+        //dd($answer_id);
         $questions_id= DB::table('Questions')
         ->select('Questions.questions_id')
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
