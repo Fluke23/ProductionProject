@@ -288,9 +288,17 @@ class AnswerBlankController extends Controller
                //->where('Questions.questions_id','=',$questions_id)
                ->where('Answer.answer_id','=',$answer_id)
                ->get();
-              //dd($question);
+              //dd($answer);
+              for($i=0 ;$i<count($answer); $i++){
+                if($answer[$i]->questions_types_id == "Blank"){
                 
-                return view('/Student/question/editAnswer', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));
+                    return view('/Student/question/editAnswer', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));
+                }else if($answer[$i]->questions_types_id == "Shortanswe"){
+                    return view('/Student/question/editAnswerShort', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));  
+                }else{
+                    return view('/Student/question/editAnswerUpload', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow')); 
+                }
+             }
             }
 
             
