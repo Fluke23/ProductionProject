@@ -89,13 +89,14 @@ class AnswerBlankController extends Controller
 
             
 
+            // dd($request->all());
             if ($request->query('answer') !== null ) {
-                    for ($i=1; $i <=$answerRow ; $i++) { 
-                        // dd('test');
+                    for ($i=0; $i < sizeof($request->query('answer')) ; $i++) { 
+                        
                         $Answer = new Answer();
                         $Answer->username = $username;
                         $Answer->answer_number =$request->query('input');
-                        $Answer->answer =$request->query('answer');
+                        $Answer->answer =$request->query('answer')[$i];
                         $Answer->questions_id =$request->query('questions_id');
                     //save message
             

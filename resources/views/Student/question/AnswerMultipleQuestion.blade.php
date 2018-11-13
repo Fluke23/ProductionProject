@@ -33,11 +33,11 @@
             <br>
             <form action="{{route('AnswerMultipleQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
-                            @foreach ($question5 as $q2)
+                            @foreach ($question5 as $key => $q2)
                                 @if($q2->answer_row > 1)
                                     <div class="form-group">
                                         {{$q2->choice}}
-                                        {{Form::checkbox('answer',$q2->choice,'',['id' => 'answer'])}}
+                                        {{Form::checkbox('answer[' . $key . ']',$q2->choice)}}
                                         {{Form::hidden ('choice_id', $q2->choice_id)}}
                                     </div>
                                 @else
@@ -82,13 +82,21 @@
 @if($next)
     <script>
         const onClickHandler = () => {
-            const answer = document.getElementById('answer').value
+            const answerInput = Array.from(document.querySelectorAll("input[name^='answer[']"))
+            const answerString = answerInput
+                .filter(answer => answer.checked)
+                .map(answer => answer.value)
+                .reduce((result, answer, index) => {
+                    result += `&answer[${index}]=${answer}`
+                    return result
+                }, '')
             const inputIndex = document.getElementById('index').value
             const questionId = document.getElementById('questions_id').value
-            window.location = '{{ URL::to('Student/question/AnswerBlankQuestion/' . $next->questions_id . '/' . $next->quizs_id) }}' 
-            + '?answer=' + answer 
-            + '&input=' + inputIndex
+            const location = '{{ URL::to('Student/question/AnswerBlankQuestion/' . $next->questions_id . '/' . $next->quizs_id) }}' 
+            + '?input=' + inputIndex
+            + answerString
             + '&questions_id=' + questionId
+            window.location = location
         }
     </script>
 @endif    
