@@ -177,6 +177,7 @@ class QuestionController extends Controller
         $amount = 2;
         return view('/Admin/question/TrueFalse',compact('quiz_id','amount')); 
     }
+    // Export Score 
     public function exportScoreQuiz(Request $request, $quizs_id)
     {
 
@@ -216,6 +217,27 @@ class QuestionController extends Controller
             ->get();
         //Total Score
 
+        //Date
+        $date = DB::table('quizs')
+            ->select(DB::raw('quizs.quiz_date'))
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->get();
+        $quiz_date = $date[0]->quiz_date;
+        //Date 
+
+        // count of student
+        $count_student = DB::table('Answer')
+            ->select(DB::raw('users.username'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username')
+            ->get()->count();
+        // count of student
+
+
+    
         $quiz_name = $quiz->title;
         $quiz_subject = $quiz->subject_id;
         $quiz_total = $total_score[0]->totalScore;
@@ -223,19 +245,23 @@ class QuestionController extends Controller
 
         // For generate each user  and each score
         $user = DB::table('Answer')
-            ->select(DB::raw('SUM(Answer.Score) AS Score, users.username'))
+            ->select(DB::raw('SUM(Answer.Score) AS Score, users.username, users.firstname,users.lastname'))
             ->join('users', 'users.username', '=', 'Answer.username')
             ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
             ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
             ->where('quizs.quizs_id', '=', $quizs_id)
-            ->groupBy('users.username')
+            ->groupBy('users.username','users.firstname','users.lastname')
             ->get();
          // For generate each user and each score
+
+        
            
-        $user_array[] = array('Username', 'Score');
+        $user_array[] = array('Username','Firstname','Lastname','Score');
         foreach ($user as $u) {
             $user_array[] = array(
                 'Username' => $u->username,
+                'Firstname' => $u->firstname,
+                'Lastname' => $u->lastname,
                 'Score' => $u->Score,
             );
         }
@@ -293,28 +319,33 @@ class QuestionController extends Controller
               
 
         Excel::create('User Score', function ($excel) use ($user_array,
-        $quiz_name, $quiz_subject, $quiz_total,$max_score,$min_score, $avg_score) {
+        $quiz_name, $quiz_subject, $quiz_total,$max_score,$min_score, $avg_score,$quiz_date,$count_student) {
             $excel->setTitle('User Score');
             $excel->sheet('User Score', function ($sheet) use ($user_array,
-        $quiz_name, $quiz_subject, $quiz_total,$max_score, $min_score, $avg_score) {
+            $quiz_name, $quiz_subject, $quiz_total,$max_score, $min_score, $avg_score,$quiz_date,$count_student) {
                 $sheet->fromArray($user_array, null, 'A1', false, false);
-                $sheet->setCellValue('E2', 'Quiz ');
-                $sheet->setCellValue('E3', 'Subject');
-                $sheet->setCellValue('E4', 'Total Score');
-                $sheet->setCellValue('E5', 'Max');
-                $sheet->setCellValue('E6', 'Min');
-                $sheet->setCellValue('E7', 'Avg');
+                $sheet->setCellValue('F1', 'Quiz ');
+                $sheet->setCellValue('F2', 'Subject');
+                $sheet->setCellValue('F3', 'Date');
+                $sheet->setCellValue('F4', 'Amount Student');
+                $sheet->setCellValue('F5', 'Total Score');
+                $sheet->setCellValue('F6', 'Max');
+                $sheet->setCellValue('F7', 'Min');
+                $sheet->setCellValue('F8', 'Avg');
 
-                $sheet->setCellValue('F2', $quiz_name);
-                $sheet->setCellValue('F3', $quiz_subject);
-                $sheet->setCellValue('F4', $quiz_total);
-                $sheet->setCellValue('F5', $max_score);
-                $sheet->setCellValue('F6', $min_score);
-                $sheet->setCellValue('F7', $avg_score);
+                $sheet->setCellValue('G1', $quiz_name);
+                $sheet->setCellValue('G2', $quiz_subject);
+                $sheet->setCellValue('G3', $quiz_date);
+                $sheet->setCellValue('G4', $count_student);
+                $sheet->setCellValue('G5', $quiz_total);
+                $sheet->setCellValue('G6', $max_score);
+                $sheet->setCellValue('G7', $min_score);
+                $sheet->setCellValue('G8', $avg_score);
 
             });
         })->download('xlsx');
 
     }
+    // Export Score
 
 }
