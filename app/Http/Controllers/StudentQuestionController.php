@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DB;
 use App\Question;
@@ -11,15 +11,16 @@ class StudentQuestionController extends Controller
 {
     public function index($quizs_id)
     {
+        //$username = Auth::user()->username;
        
         $question = DB::table('Answer')
             ->rightJoin('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
             ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
             ->where('quizs.quizs_id', '=', $quizs_id)
-
+            //->where('Answer.username','=',$username)            
             ->get();
             // dd($question);
-
+       
             foreach ($question as $id) {
                 //dd( $questions_id);
                 $question_min = DB::table('Questions')
