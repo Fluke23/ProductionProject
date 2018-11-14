@@ -277,7 +277,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Student/question/AnswerUploadQuestion/{id?}/{quiz_id?}','answerUploadQuestionController@store'); //name 
     Route::post('/Student/AnswerUploadQuestion/submit/{id?}/{quiz_id?}','answerUploadController@submit');
     Route::get('/Student/question/editAnswerUpload/{answer_id}','AnswerBlankController@edit')->name('editAnswerUpload.file'); //name 
-    Route::post('/Student/question/editAnswerUpload/{answer_id}','AnswerBlankController@update');
+    Route::post('/Student/question/editAnswerUpload/{answer_id}','AnswerUploadQuestionController@update');
 
     //Student/answerMultiplequestion 
     Route::get('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@index')->name('AnswerMultipleQuestion.file'); //name for reditect in update

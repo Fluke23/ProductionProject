@@ -90,7 +90,9 @@ class AnswerBlankController extends Controller
             
 
             // dd($request->all());
+            
             if ($request->query('answer') !== null ) {
+                if($questionType == 'Multiple'){
                     for ($i=0; $i < sizeof($request->query('answer')) ; $i++) { 
                         
                         $Answer = new Answer();
@@ -104,6 +106,19 @@ class AnswerBlankController extends Controller
                         $lastestQuestinID = $currentQuestionId+1;
 
                         $Answer->save();
+                    }
+                        }else{
+                            $Answer = new Answer();
+                            $Answer->username = $username;
+                            $Answer->answer_number =$request->query('input');
+                            $Answer->answer =$request->query('answer');
+                            $Answer->questions_id =$request->query('questions_id');
+                        //save message
+                
+                            $currentQuestionId = DB::table('Questions')->max('questions_id');
+                            $lastestQuestinID = $currentQuestionId+1;
+    
+                            $Answer->save();
                         }
                     }        
                 
@@ -321,7 +336,7 @@ class AnswerBlankController extends Controller
         
                 // return view('/Student/question/StudentQuestion', compact('answer_id','answer'));
                 return redirect()->back();
-    }   
+            }   
 
  
         }

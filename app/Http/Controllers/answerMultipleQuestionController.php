@@ -9,11 +9,13 @@ use App\Question;
 use App\Quiz;
 use App\Answer;
 use App\Question_type;
+use Auth;
 
 class answerMultipleQuestionController extends Controller
 {
     public function index($questions_id)
     {
+        $username = Auth::user()->username;
         $question = DB::table('Questions')
         // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
         
@@ -39,16 +41,28 @@ class answerMultipleQuestionController extends Controller
     }
 
         public function store(request $request){
-        
-                        //create new Answer
-                        $Answer = new Answer;
-                        $Answer->answer_number =$request->input('1');
-                        $Answer->answer =$request->input('answer');
-                        $Answer->answer_date=$request->input('answerDate');
-                        $Answer->questions_id =$request->input('questions_id');
-                        $Answer->choice_id =$request->input('choice_id');
-                        //save message
-                        $Answer->save();
+
+                        $username = Auth::user()->username;
+                        $data = Question::where('questions_id',$request->input('questions_id'))->get();                        
+                        $answerRow = $data[0]->answer_row;
+                        $question = DB::table('Answer')
+                        // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
+                        ->join('Choice','Choice.choice_id','=','Answer.choice_id')
+                        ->where('Answer.questions_id','=',$request->input('questions_id'))
+                        ->get();
+                        
+                    for ($i=0; $i < sizeof($request->input('answer')) ; $i++) { 
+                            //create new Answer
+                            $Answer = new Answer;
+                            $Answer->username = $username;
+                            $Answer->answer_number =$request->input('1');
+                            $Answer->answer =$request->input('answer')[$i];
+                            $Answer->answer_date=$request->input('answerDate');
+                            $Answer->questions_id =$request->input('questions_id');
+                            $Answer->choice_id =$request->input('choice_id');
+                            //save message
+                            $Answer->save();
+                    }
                         $quiz_id = $request->input('quiz_id');
                         $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
             

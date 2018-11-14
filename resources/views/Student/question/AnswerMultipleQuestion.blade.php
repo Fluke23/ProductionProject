@@ -43,7 +43,7 @@
                                 @else
                                 <div class="form-group">
                                     {{$q2->choice}}
-                                    {{Form::radio('answer',$q2->choice,'',['id' => 'answer'])}}
+                                    {{Form::radio('answer[' . $key . ']',$q2->choice)}}
                                     {{Form::hidden ('choice_id', $q2->choice_id)}}
                                 </div>
                                 @endif

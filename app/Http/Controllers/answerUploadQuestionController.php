@@ -70,6 +70,30 @@ class answerUploadQuestionController extends Controller
            
                         return redirect()->route('question.StudentQuestion',[$quiz_id]);
             //return'yes';
-            }
+        }
+
+        public function update(Request $request)
+            {
+
+                 dd($request);
+
+                $answer_id = $request->get('answer_id');
+                $answer = Answer::find($answer_id); 
+                $answer = $request->file('fileName');
+                $input['fileName'] = time().'.'.$Answer_file->getClientOriginalExtension();
+                $filePath = public_path('/images/Photo');
+                $answer->move($filePath,$input['fileName']);
+                $fileName = $input['fileName'];
+                $Answer->answer = '/images/Photo/'.$fileName;
+                
+                // dd($answer);
+                $answer->save(); //เซฟ id อันใหม่ที่แก้แล้ว 
+
+            
+               
+        
+                // return view('/Student/question/StudentQuestion', compact('answer_id','answer'));
+                return redirect()->back();
+            }   
 }
 
