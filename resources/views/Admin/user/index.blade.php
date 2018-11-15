@@ -65,7 +65,7 @@
 
         </table>
         {{-- Pagination --}}
-        {{$user}}
+        <center>{{$user}}</center>
         {{-- Pagination --}}
 
         <hr>
