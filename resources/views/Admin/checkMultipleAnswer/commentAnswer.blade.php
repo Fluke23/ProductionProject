@@ -49,7 +49,44 @@
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>
                      
-                     
+        @foreach($question as $q)
+        @endforeach
+
+        @if($questionType == 'Multiple')
+            @foreach($correct as $c)
+            @endforeach
+                @if($q->answer == $c->choice)
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif
+        @elseif($questionType == 'TrueFalse')
+                @if($q->answer == $q->solution)
+                <div class="col-md-4">
+                    <li class="list-group">Solution: {{$q->solution}}</li>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif        
+        @endif
                     
                      
                      <div class="col-md-12">
@@ -59,7 +96,7 @@
                      </div>  
                      
 
-                      @foreach($question as $q)
+                      @foreach($question2 as $q)
 
                      <div class="col-md-12">
                      </br>

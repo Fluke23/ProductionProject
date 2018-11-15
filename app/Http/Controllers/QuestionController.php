@@ -32,7 +32,7 @@ class QuestionController extends Controller
            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
            ->where('quizs.quizs_id','=',$quizs_id)
             ->orderby('Questions.number','Asc')
-            ->get();
+            ->paginate(10);
 
 
        foreach ($question as $id) {

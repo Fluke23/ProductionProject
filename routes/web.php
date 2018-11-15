@@ -134,7 +134,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::post('/Admin/checkMultipleAnswer/reviewAnswersubmit/{id?}','reviewAnswerController@submit');
 
     //Admin/commentAnswer
-    Route::get('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@index')->name('commentMultipleAnswer.file'); 
+    Route::get('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}}','checkScoreController@indexMultiple')->name('commentMultipleAnswer.file'); 
     Route::post('/Admin/checkMultipleAnswer/commentAnswer/{quiz_id?}','checkScoreController@store')->name('commentMultipleAnswer.file'); 
     Route::post('/Admin/checkMultipleAnswer/commentAnswer/{id?}/{quiz_id?}','checkScoreController@submit');
 
@@ -352,6 +352,9 @@ Route::get('/ExportSubjectUser/{subject_id?}','UserController@ExportContactSubje
     Route::post('/Setting/updateQuizStatus/','SettingController@updateQuizStatus');
     Route::get('/Setting/deleteQuizStatus/{quizs_status_id?}','SettingController@destroyQuizStatus');
 // Setting
+
+// show quiz type
+Route::get('/Admin/quiz/{subject_id?}/{quizs_types_ud}','QuizController@showQuizTypeIndex')->name('showQuizTypeIndex');
 
 
    

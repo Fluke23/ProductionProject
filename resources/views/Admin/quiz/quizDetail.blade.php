@@ -9,25 +9,58 @@
         <div class="col-md-9">
             <a href="{{ URL::route('addQuiz', ['subject_id'=>$subject_id]) }}" class="btn btn-success float-right"
                 data-toggle="modal" data-target="#exampleModal">Add Quiz</a>
-
         </div>
     </div>
+    {{-- Breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-            
+
             <li class="breadcrumb-item"><a href="{{URL::to('/Admin/quiz/'.$subject_id)}}">{{$subject_id}}</a></li>
-            
         </ol>
     </nav>
+    {{-- Breadcrumb --}}
+
+    {{-- Nav-tab --}}
+    <ul class="nav nav-tabs mb-3">
+
+
+        @if(Request::is('Admin/quiz/'.$subject_id) == 'Admin/quiz/'.$subject_id)
+        <li class="nav-item">
+            <a class="nav-link active" href="{{URL::to('/Admin/quiz/'.$subject_id)}}">All</a>
+        </li>
+        @foreach ($quiz_type as $qt)
+        <li class="nav-item">
+            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+        </li>
+        @endforeach
+        @else
+        <li class="nav-item">
+            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id)}}">All</a>
+        </li>
+        @foreach ($quiz_type as $qt)
+        @if(Request::is('Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id) ==
+        'Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)
+        <li class="nav-item">
+            <a class="nav-link active" href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+        </li>
+        @else
+        <li class="nav-item">
+            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+        </li>
+        @endif
+        @endforeach
+        @endif
+    </ul>
+    {{-- Nav-tab --}}
+
     <div class="row">
         <table class="table table-bordered">
             <tr>
-                <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;">Title</th>
                 <th>Description</th>
                 <th>Date</th>
-                
+
                 <th style="width:50px;">Group</th>
                 <th style="width:50px;">Type</th>
                 <th style="width:50px;">Status</th>
@@ -38,12 +71,12 @@
 
 
             </tr>
-           
+
             <tbody>
-                @foreach($quizzes as $key => $q)
+                @foreach($quizzes as $q)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td style="font-size: 0.8em;">{{$q->title}}</td>
+                    <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
+                        </a></td>
                     <td style="font-size: 0.8em;">{{$q->description}}</td>
                     <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
                     {{-- name is from group_name --}}
@@ -68,6 +101,7 @@
 
 
         <hr>
+        {{ $quizzes}}
     </div>
 
 
@@ -157,7 +191,7 @@
                             </div>
                         </div>
 
-                          <!-- {{-- group_id --}}
+                        <!--  {{-- group_id --}}
                         <div class="form-group row">
                             <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
@@ -170,22 +204,40 @@
                                 </select>
 
                             </div>
-                        </div>  -->
+                        </div> -->
 
-                        {{-- student_group_id --}}                        
+                        {{-- student_group_id --}}
                         <div class="form-group row">
-                            <label for="student_group" class="col-md-4 col-form-label text-md-right">{{ __('student_group') }}</label>
+                            <label for="Student_group" class="col-md-4 col-form-label text-md-right">{{ __('group') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="student_group" id="select1">
-                                <div class="col-md-6">
-                                    @foreach($quiz_group as $g)
-                                    <option value="{{$g->student_group_name}}">{{$g->student_group_name}}</option>
-                                    @endforeach 
-                                </select>
 
+                                <div class="col-md-6">
+                                    {{Form::select('Student_group', array('G1'=>'G1' ,
+                                    'G2'=>'G2'))}}
+                                    @if ($errors->has('Student_group'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('Student_group') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div> 
+                        </div>
+
+                        <!--  <div class="form-group row">
+                            <label for="remark" class="col-md-4 col-form-label text-md-right">{{
+                                __('Group') }}</label>
+
+                            <div class="col-md-6">
+                                {{Form::select('groups_id', array('G1'=>'G1' ,
+                                'G2'=>'G2'))}}
+                                @if ($errors->has('Group'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('Group') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div> -->
 
 
                         {{-- quiz type id --}}

@@ -83,6 +83,13 @@ class reviewAnswerController extends Controller
         ->where('choice_type.choice_type_id','=','1')
         ->get();
 
+        $question2 = DB::table('Questions')
+        // ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+        ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+        ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->join('Comment','Comment.answer_id','=','Answer.answer_id')
+        ->where('Questions.questions_id','=',$questions_id)
+        ->get();
 
         $quizStatus = $question[0]->quizs_status_id;
         $data = Question::where('questions_id',$questions_id)->get();

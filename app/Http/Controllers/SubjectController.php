@@ -43,7 +43,7 @@ class SubjectController extends Controller
         ->join('users','users.username','=','subjects_user.username')
         ->where('users.username', '=', $username)
         ->orderby('Subjects.subject_id','asc')
-        ->get();
+        ->paginate(10);
 
 
         if($permission == 'ADMIN'){

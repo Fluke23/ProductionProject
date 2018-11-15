@@ -24,45 +24,52 @@
         </div>
     </div>
     <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/userManager')}}">UserManager</a></li>
-            </ol>
-        </nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/userManager')}}">UserManager</a></li>
+        </ol>
+    </nav>
 
     <div class="row">
         <table class="table table-bordered">
             <tr>
-                <th style="font-size: 1em;width:30px;">Number</th>
                 <th style="font-size: 1em;width:30px;">Username</th>
                 <th style="width:50px;">Remark</th>
                 <th style="width:50px;">Firstname</th>
                 <th style="width:50px;">Lastname</th>
                 <th style="width:100px;"></th>
             </tr>
+
+
+
             <tbody>
-                @foreach($user as $key => $user)
+
+                @foreach($user as $u)
                 <tr>
-                    <td style="font-size: 0.8em;">{{ $key + 1 }}</td>
-                    <td style="font-size: 0.8em;">{{$user->username}}</td>
-                    <td style="font-size: 0.8em;">{{$user->remark}}</td>
-                    <td style="font-size: 0.8em;">{{$user->firstname}}</td>
-                    <td style="font-size: 0.8em;">{{$user->lastname}}</td>
+                    <td style="font-size: 0.8em;">{{$u->username}}</td>
+                    <td style="font-size: 0.8em;">{{$u->remark}}</td>
+                    <td style="font-size: 0.8em;">{{$u->firstname}}</td>
+                    <td style="font-size: 0.8em;">{{$u->lastname}}</td>
                     <td>
-                        <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$user->username)}}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{URL::to('/Admin/userManager/editUser/'.$user->username)}}" class="btn btn-warning btn-sm">Edit</a>
-                        @if($user->username != 'Admin')
-                        <a href="{{ URL::to('/Admin/userManager/delete/'.$user->username)}}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$u->username)}}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username)}}" class="btn btn-warning btn-sm">Edit</a>
+                        @if($u->username != 'Admin')
+                        <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm">Delete</a>
                         @endif
                     </td>
                 </tr>
+
                 @endforeach
             </tbody>
+
+
         </table>
+        {{-- Pagination --}}
+        {{$user}}
+        {{-- Pagination --}}
 
         <hr>
     </div>
-
 
 
     <!-- modal create user -->
@@ -88,7 +95,7 @@
                                 <div class="col-md-12">
 
 
-                                   
+                                    <form action="{{URL::to('/Admin/user/saveUser')}}" method="POST">
                                         @csrf
 
                                         <div class="form-group row">
@@ -242,7 +249,6 @@
 
 
                 </div>
-
                 </form>
 
 
@@ -277,6 +283,7 @@
                 }
 
             </script>
+
 
 
             @endsection

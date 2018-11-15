@@ -33,8 +33,9 @@ class UserController extends Controller
     {
         $username = Auth::user()->username;
 
-        $user = DB::table('users') //โชว์แค่ข้อมูล user ไม่จำเป็นต้อง join ข้อมูลกับตารางอื่น 
-        ->get();
+       // $user = DB::table('users') //โชว์แค่ข้อมูล user ไม่จำเป็นต้อง join ข้อมูลกับตารางอื่น 
+        //->get();
+        $user = DB::table('users')->paginate(10);
 
         return view('/Admin/user/index',compact('user'));
     }
