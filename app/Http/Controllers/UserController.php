@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Group; 
 use App\Users;
 use App\User;
 use App\Subject;
@@ -399,6 +399,178 @@ class UserController extends Controller
         })->download('xlsx');
 
     }
+    public function showScoreQuiz(Request $request, $subject_id){
+        $permission = $request->get('permission');
+
+        $username = Auth::user()->username;
+        $group = Group::all();
+        // $quiz_type = Quiz_type::all();
+        $quiz_type = DB::table('Quiz_types')->select('quizs_types_id', 'type_name')->get();
+        $quiz_status = DB::table('Quiz_status')->select('quizs_status_id')->get();
+        $quiz_group = DB::table('Student_group')->select('student_group_name')->get();
+
+        $quizzes = DB::table('quizs')
+            ->join('Subjects', 'quizs.subject_id', '=', 'Subjects.subject_id')
+            ->join('Quiz_types', 'Quiz_types.quizs_types_id', '=', 'quizs.quizs_types_id')
+            ->join('subjects_user', 'subjects_user.subject_id', '=', 'Subjects.subject_id')
+            ->join('users', 'users.username', '=', 'subjects_user.username')
+            ->join('Quiz_status', 'Quiz_status.quizs_status_id', '=', 'quizs.quizs_status_id')
+            ->join('Groups_quizs', 'Groups_quizs.quizs_id', '=', 'quizs.quizs_id')
+            ->join('Groups', 'Groups.groups_id', '=', 'Groups_quizs.groups_id')
+            ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้
+            ->where('Subjects.subject_id', '=', $subject_id)
+            ->orderby('quizs.quizs_id', 'desc') //Addition
+            // ->get();
+            ->paginate(10);
+
+
+
+        foreach ($quizzes as $id) {
+        $quiz_min = DB::table('Questions')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->join('Answer', 'Answer.questions_id', '=', 'Questions.questions_id')
+            ->where('quizs.quizs_id', '=', $id->quizs_id)
+            ->min('Answer.Score');
+
+        $quiz_max = DB::table('Questions')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->join('Answer', 'Answer.questions_id', '=', 'Questions.questions_id')
+            ->where('quizs.quizs_id', '=', $id->quizs_id)
+            ->max('Answer.Score');
+
+        $quiz_avg = DB::table('Questions')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->join('Answer', 'Answer.questions_id', '=', 'Questions.questions_id')
+            ->where('quizs.quizs_id', '=', $id->quizs_id)
+            ->avg('Answer.Score');
+
+        $id->max = $quiz_max;
+        $id->min = $quiz_min;
+        $id->avg = $quiz_avg;
+        }
+
+        $quiz_type = DB::table('Quiz_types')->get();
+
+        $subject = DB::table('Subjects')
+        ->where('Subjects.subject_id','=',$subject_id)->get();
+        // $quizs_id=$quiz_id[2]->quizs_id;
+
+        //dd($quiz_avg);
+        // $data = Quiz::all();
+
+        if ($permission == 'ADMIN') {
+            return view('/Admin/user/showScoreQuiz', compact('quizzes', 'subject_id', '$permission', 'group', 'quiz_type',
+        'quiz_status', 'quiz_group'));
+        } elseif ($permission == 'STUDENT') {
+            return view('Student/quiz/StudentquizDetail', compact('quizzes', 'subject_id', '$permission', 'group', 'quiz_type',
+        'quiz_status', 'quiz_group'));
+        } elseif ($permission == 'LECTURER') {
+            return view('lecturer/quiz/index', compact('quizzes', 'subject_id', '$permission', 'group', 'quiz_type', 'quiz_status',
+        'quiz_group'));
+        }
+    }
+
+
+
+    public function showScoreUser(Request $request, $quizs_id){
+
+            $permission = $request->get('permission');
+            // $username = Auth::user()->username;
+
+            $question = DB::table('Questions')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->orderby('Questions.number', 'Asc')
+            ->get();
+
+            $quiz = DB::table('quizs')
+            ->join('Subjects', 'quizs.subject_id', '=', 'Subjects.subject_id')
+            ->join('Quiz_types', 'Quiz_types.quizs_types_id', '=', 'quizs.quizs_types_id')
+            ->join('Quiz_status', 'Quiz_status.quizs_status_id', '=', 'quizs.quizs_status_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->get();
+        
+            // Max Score in each Quiz
+            $max = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS maxScore,users.username'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username')
+            ->get()->max();
+            // Max Score in each Quiz
+
+
+            // Min Score in each Quiz
+            $min = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS minScore,users.username'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username')
+            ->get()->min();
+            // Min Score in each Quiz
+
+
+            //Avg Score in each Quiz
+            $sum = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS avgScore'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->get();
+
+            $count = DB::table('users')
+            ->select(DB::raw('users.username'))
+            ->join('Answer', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username')
+            ->get()->count();
+            //Avg Score in each Quiz
+
+            $sum_score = $sum[0]->avgScore;
+            $avg_score = $sum_score/$count;
+
+            $max_score = $max->maxScore;
+            $min_score = $min->minScore;
+            // $avg_score = $avg->avgScore;s
+
+            $total_score = DB::table('Questions')
+            ->select(DB::raw('SUM(Questions.score) AS totalScore'))
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->get();
+
+            $quiz_total = $total_score[0]->totalScore;
+
+         // For generate each user and each score
+        $user = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS Score, users.username, users.firstname,users.lastname'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $quizs_id)
+            ->groupBy('users.username','users.firstname','users.lastname')
+            ->paginate(10);
+        // For generate each user and each score
+       
+        if ($permission == 'ADMIN') {
+return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_score','min_score','quiz_total','quizs_id'));
+        } elseif ($permission == 'STUDENT') {
+            return back();
+        } elseif ($permission == 'LECTURER') {
+        return back();
+        }
+        
+
+
+    }
+    
     
    
 

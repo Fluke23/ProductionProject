@@ -10,17 +10,18 @@ use App\Quiz;
 class StudentQuestionController extends Controller
 {
     public function index($quizs_id)
-    {
-        //$username = Auth::user()->username;
-       
+    {       
+        $username = Auth::user()->username;
+
+
+        // dd($username);
         $question = DB::table('Answer')
             ->rightJoin('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
             ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
             ->where('quizs.quizs_id', '=', $quizs_id)
-            //->where('Answer.username','=',$username)            
+            ->groupBy('Questions.questions_id')
             ->get();
-            // dd($question);
-       
+
             foreach ($question as $id) {
                 //dd( $questions_id);
                 $question_min = DB::table('Questions')
@@ -72,7 +73,7 @@ class StudentQuestionController extends Controller
                 if($quizStatus[$i]->quizs_status_id == "Reviewing"){
                     return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
                 } else{
-                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer'));
+                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer','username'));
                 }
                 $i++;
             }

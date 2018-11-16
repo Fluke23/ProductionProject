@@ -355,6 +355,9 @@ Route::get('/ExportSubjectUser/{subject_id?}','UserController@ExportContactSubje
 
 // show quiz type
 Route::get('/Admin/quiz/{subject_id?}/{quizs_types_ud}','QuizController@showQuizTypeIndex')->name('showQuizTypeIndex');
+// showScoreQuiz
+Route::get('/Admin/ShowQuizScore/{subject_id?}','UserController@showScoreQuiz')->name('showQuizScore');
+Route::get('/Admin/showQuizScore/ShowUserScore/{id?}','UserController@showScoreUser')->name('showUserScore');
 
 
    
