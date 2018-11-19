@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Quiz;
 use App\Subject_user;
 use App\Subject;
+use App\Users;
+use App\User;
 
 use DB;
 use Input;
@@ -45,7 +47,10 @@ class SubjectController extends Controller
         ->orderby('Subjects.subject_id','asc')
         ->paginate(10);
 
+        $user = User::where('users.username', '=', $username)->get();
+        $userBanned = $user[0]->status_banned;
 
+    if($userBanned == '0'){    
         if($permission == 'ADMIN'){
            return view('/Admin/subject/index',compact('subjects','permission'));
        }elseif($permission == 'STUDENT'){
@@ -53,7 +58,9 @@ class SubjectController extends Controller
         }elseif($permission == 'LECTURER'){
            return view('lecturer/subject/index',compact('subjects','permission'));
         }
-
+    }else{
+        return view('/suspension')->with('Suspension','You were Suspension , Please contract to admin of this website.');
+        } 
        /* switch ($permission) {
             case 'ADMIN':
             return view('/Admin/subject/index',compact('subjects','permission'));

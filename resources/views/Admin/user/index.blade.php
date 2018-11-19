@@ -31,17 +31,18 @@
     </nav>
 
     <div class="row">
-        <table class="table table-bordered">
+    <div class="table col-md-12">
+    <table id="table">
+        <thead>
             <tr>
                 <th style="font-size: 1em;width:30px;">Username</th>
                 <th style="width:50px;">Remark</th>
                 <th style="width:50px;">Firstname</th>
                 <th style="width:50px;">Lastname</th>
-                <th style="width:100px;"></th>
+                <th style="width:100px;">Option</th>
             </tr>
-
-
-
+        </thead>
+            
             <tbody>
 
                 @foreach($user as $u)
@@ -52,9 +53,12 @@
                     <td style="font-size: 0.8em;">{{$u->lastname}}</td>
                     <td>
                         <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$u->username)}}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username)}}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username.'/'.$u->id)}}" class="btn btn-warning btn-sm">Edit</a>
                         @if($u->username != 'Admin')
-                        <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
+                        @endif
+                        @if($u->status_banned == '1')
+                            <button class="btn btn-dark btn-sm">Banned</button>
                         @endif
                     </td>
                 </tr>
@@ -64,9 +68,9 @@
 
 
         </table>
-        {{-- Pagination --}}
-        <center>{{$user}}</center>
-        {{-- Pagination --}}
+    </div>
+        
+      
 
         <hr>
     </div>
@@ -283,6 +287,19 @@
                 }
 
             </script>
+             {{--  JavaScript  --}}
+    <script>
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+        }
+    </script>  
+{{--  JavaScript  --}}
+
 
 
 

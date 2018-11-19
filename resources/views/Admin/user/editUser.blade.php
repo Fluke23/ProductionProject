@@ -87,6 +87,18 @@
                         </div>
                         {{--  Lastname  --}}
 
+                        {{-- Ban User--}}
+
+                        <div class="form-group-row">
+                        
+                        <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Ban User') }}</label>
+
+                            Yes
+                                {{Form::radio('status_banned', '1')}}
+                            No
+                                {{Form::radio('status_banned', '0','TRUE')}}
+                        </div>
+
 
                     <input type="hidden" name="id" value="{{ $user->id}}">
                        

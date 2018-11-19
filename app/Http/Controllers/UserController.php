@@ -130,7 +130,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $permission = $request->get('permission');
         $username = Auth::user()->username;
@@ -142,6 +142,7 @@ class UserController extends Controller
         $user->remark = $request->get('remark');
         $user->firstname = $request->get('firstname');
         $user->lastname = $request->get('lastname');
+        $user->status_banned = $request->get('status_banned');
         $user->save();
         
 
@@ -564,7 +565,8 @@ return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_s
         } elseif ($permission == 'STUDENT') {
             return back();
         } elseif ($permission == 'LECTURER') {
-        return back();
+            return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_score','min_score','quiz_total','quizs_id'));
+
         }
         
 

@@ -21,19 +21,24 @@
           </nav>
 
      {{-- body      --}}
- <div class="row">
-    <div class="row">
-        <table class="table table-bordered subject-table">
-            <tr>
+ <div class="row d-flex justify-content-center mt-4">
+    <div class="col-md-8 ">
+        <table id="table" class="table">
+        <thead>
+        <tr>
                 <th style="font-size: 1em;">subject ID</th>
                 <th>Subject Name</th>
-                <th></th>
+                <th>Option</th>
             </tr>
 
+        </thead>
+           
             <tbody>
                 @foreach($subjects as $subject)
             <tr>
-                    <td style="font-size: 0.8em;">{{$subject->subject_id}}</td>
+                    <td >
+                    <a href="{{URL::to('/Student/quiz/StudentquizDetail/'.$subject->subject_id)}}" >{{$subject->subject_id}}</a>
+                    </td>
                    
                     <td style="font-size: 0.8em;">{{$subject->subject_name}}</td>
 

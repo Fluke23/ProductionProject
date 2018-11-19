@@ -55,53 +55,55 @@
     {{-- Nav-tab --}}
 
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
-                <th style="font-size: 1em;">Title</th>
-                <th>Description</th>
-                <th>Date</th>
-
-                <th style="width:50px;">Group</th>
-                <th style="width:50px;">Type</th>
-                <th style="width:50px;">Status</th>
-                <th style="width:50px;">Min</th>
-                <th style="width:50px;">Max</th>
-                <th style="width:50px;">AVG</th>
-                <th></th>
-
-
-            </tr>
-
-            <tbody>
-                @foreach($quizzes as $q)
-                <tr>
-                    <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
-                        </a></td>
-                    <td style="font-size: 0.8em;">{{$q->description}}</td>
-                    <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
-                    {{-- name is from group_name --}}
-                    <td style="font-size: 0.8em;">{{$q->student_group}}</td>
-                    <td style="font-size: 0.8em;">{{$q->type_name}}</td>
-                    <td style="font-size: 0.8em;">{{$q->status_name}}</td>
-                    <td style="font-size: 0.8em;">{{$q->min}}</td>
-                    <td style="font-size: 0.8em;">{{$q->max}}</td>
-                    <td style="font-size: 0.8em;">{{$q->avg}}</td>
+        <div class="table col-md-12">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th width="10px;">Title</th>
+                        <th width="10px;">Description</th>
+                        <th width="2px;">Date</th>
+                        <th width="1px;">Group</th>
+                        <th width="1px;">Type</th>
+                        <th width="1px;">Status</th>
+                        <th width="1px;">Min</th>
+                        <th width="1px;">Max</th>
+                        <th width="1px;">AVG</th>
+                        <th width="20px">Option</th>
+                    </tr>
+                </thead>
 
 
-                    <td>
-                        <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                        <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
-                        <a href="{{ URL::to('/Admin/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
+                <tbody>
+                    @foreach($quizzes as $q)
+                    <tr>
+                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
+                            </a></td>
+                        <td style="font-size: 0.8em;">{{$q->description}}</td>
+                        <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
+                        {{-- name is from group_name --}}
+                        <td style="font-size: 0.8em;">{{$q->student_group}}</td>
+                        <td style="font-size: 0.8em;">{{$q->type_name}}</td>
+                        <td style="font-size: 0.8em;">{{$q->status_name}}</td>
+                        <td style="font-size: 0.8em;">{{$q->min}}</td>
+                        <td style="font-size: 0.8em;">{{$q->max}}</td>
+                        <td style="font-size: 0.8em;">{{$q->avg}}</td>
 
-        </table>
 
+                        <td>
+                            <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info btn-sm mb-1">View</a>
+                            <a href="{{URL::to('/Admin/showQuizScore/ShowUserScore/'.$q->quizs_id)}}" class="btn btn-primary btn-sm mb-1">Score</a>
 
+                            <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
+                            <a href="{{ URL::to('/Admin/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger btn-sm mb-1"
+                                onclick="return ConfirmDelete();">Delete</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+
+            </table>
+        </div>
         <hr>
-        {{ $quizzes}}
     </div>
 
 
@@ -288,5 +290,17 @@
     }
 
 </script>
+{{--  JavaScript  --}}
+    <script>
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+        }
+    </script>  
+{{--  JavaScript  --}}
 
 @endsection

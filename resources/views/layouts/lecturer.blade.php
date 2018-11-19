@@ -18,6 +18,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+
+
 </head>
 <body>
     <div>
@@ -95,7 +99,7 @@
                                       </li>
                                       
                                       <li class="nav-item ml-4">
-                                        <a class="nav-link disabled" href="#">Setting</a>
+                                        <a class="nav-link " href="{{ route('setting')}}">Setting</a>
                                       </li>
                                     </ul>
                             </div>
@@ -116,6 +120,18 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+        
+
+        <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+        <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+       
+         <script>
+            $(document).ready(function(){
+                $('#table').DataTable();
+            });
+        </script>
     
 
     @stack('script')

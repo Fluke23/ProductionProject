@@ -22,30 +22,28 @@
 
     {{-- Nav-tab --}}
     <ul class="nav nav-tabs mb-3">
-
-
-        @if(Request::is('Admin/quiz/'.$subject_id) == 'Admin/quiz/'.$subject_id)
+        @if(Request::is('Lecturer/quiz/index/'.$subject_id) == 'Lecturer/quiz/index/'.$subject_id)
         <li class="nav-item">
-            <a class="nav-link active" href="{{URL::to('/Admin/quiz/'.$subject_id)}}">All</a>
+            <a class="nav-link active" href="{{URL::to('Lecturer/quiz/index'.$subject_id)}}">All</a>
         </li>
         @foreach ($quiz_type as $qt)
         <li class="nav-item">
-            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+            <a class="nav-link " href="{{URL::to('/Lecturer/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
         </li>
         @endforeach
         @else
         <li class="nav-item">
-            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id)}}">All</a>
+            <a class="nav-link " href="{{URL::to('/Lecturer/quiz/index/'.$subject_id)}}">All</a>
         </li>
         @foreach ($quiz_type as $qt)
-        @if(Request::is('Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id) ==
-        'Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)
+        @if(Request::is('Lecturer/quiz/'.$subject_id.'/'.$qt->quizs_types_id) ==
+        'Lecturer/quiz/'.$subject_id.'/'.$qt->quizs_types_id)
         <li class="nav-item">
-            <a class="nav-link active" href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+            <a class="nav-link active" href="{{URL::to('/Lecturer/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
         </li>
         @else
         <li class="nav-item">
-            <a class="nav-link " href="{{URL::to('/Admin/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
+            <a class="nav-link " href="{{URL::to('/Lecturer/quiz/'.$subject_id.'/'.$qt->quizs_types_id)}}">{{$qt->type_name}}</a>
         </li>
         @endif
         @endforeach
@@ -54,53 +52,52 @@
     {{-- Nav-tab --}}
 
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
-                <th style="font-size: 1em;">Title</th>
-                <th>Description</th>
-                <th>Date</th>
+        <div class="table col-md-12">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th width="10px;">Title</th>
+                        <th width="10px;">Description</th>
+                        <th width="2px;">Date</th>
+                        <th width="1px;">Group</th>
+                        <th width="1px;">Type</th>
+                        <th width="1px;">Status</th>
+                        <th width="1px;">Min</th>
+                        <th width="1px;">Max</th>
+                        <th width="1px;">AVG</th>
+                        <th width="20px">Option</th>
+                    </tr>
+                </thead>
 
-                <th style="width:50px;">Group</th>
-                <th style="width:50px;">Type</th>
-                <th style="width:50px;">Status</th>
-                <th style="width:50px;">Min</th>
-                <th style="width:50px;">Max</th>
-                <th style="width:50px;">AVG</th>
-                <th></th>
-
-
-            </tr>
-
-            <tbody>
-                @foreach($quizzes as $q)
-                <tr>
-                    <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
-                        </a></td>
-                    <td style="font-size: 0.8em;">{{$q->description}}</td>
-                    <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
-                    {{-- name is from group_name --}}
-                    <td style="font-size: 0.8em;">{{$q->student_group}}</td>
-                    <td style="font-size: 0.8em;">{{$q->type_name}}</td>
-                    <td style="font-size: 0.8em;">{{$q->status_name}}</td>
-                    <td style="font-size: 0.8em;">{{$q->min}}</td>
-                    <td style="font-size: 0.8em;">{{$q->max}}</td>
-                    <td style="font-size: 0.8em;">{{$q->avg}}</td>
-
-
-                    <td>
-                        <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
-                        <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
-                        <a href="{{ URL::to('/Admin/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-
-        </table>
+                <tbody>
+                    @foreach($quizzes as $q)
+                    <tr>
+                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
+                            </a></td>
+                        <td style="font-size: 0.8em;">{{$q->description}}</td>
+                        <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
+                        {{-- name is from group_name --}}
+                        <td style="font-size: 0.8em;">{{$q->student_group}}</td>
+                        <td style="font-size: 0.8em;">{{$q->type_name}}</td>
+                        <td style="font-size: 0.8em;">{{$q->status_name}}</td>
+                        <td style="font-size: 0.8em;">{{$q->min}}</td>
+                        <td style="font-size: 0.8em;">{{$q->max}}</td>
+                        <td style="font-size: 0.8em;">{{$q->avg}}</td>
 
 
+                        <td>
+                            <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info btn-sm mb-1">View</a>
+                            <a href="{{URL::to('/Lecturer/ShowStudentScore/'.$q->quizs_id)}}" class="btn btn-primary btn-sm mb-1">Score</a>
+                            <a href="{{ URL::to('/lecturer/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
+                            <a href="{{ URL::to('/Lecturer/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger btn-sm mb-1"
+                                onclick="return ConfirmDelete();">Delete</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         <hr>
-        {{ $quizzes}}
     </div>
 
 
@@ -289,5 +286,16 @@
 </script>
 
 
-
+{{--  JavaScript  --}}
+    <script>
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+        }
+    </script>  
+{{--  JavaScript  --}}
 @endsection

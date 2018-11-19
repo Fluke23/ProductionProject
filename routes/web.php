@@ -73,8 +73,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Admin/userManager','UserController@index')->name('userManager.index'); //name for reditect in update
     Route::get('/Admin/userManager/viewUserInfo/{username?}','UserController@viewStudent');
     Route::get('/Admin/user/addGroupUser','UserController@create');
-    Route::get('/Admin/userManager/editUser/{user_id}','UserController@edit');
-    Route::post('Admin/userManager/updateUser','UserController@update');
+    Route::get('/Admin/userManager/editUser/{user_id}/{id?}','UserController@edit');
+    Route::post('/Admin/user/updateUser','UserController@update')->name('updateUser');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
    // Route::post('/Admin/userManager/saveUser','UserController@store');
    Route::post('/Admin/user/save','UserController@store')->name('storeGroup');
@@ -355,9 +355,11 @@ Route::get('/ExportSubjectUser/{subject_id?}','UserController@ExportContactSubje
 
 // show quiz type
 Route::get('/Admin/quiz/{subject_id?}/{quizs_types_ud}','QuizController@showQuizTypeIndex')->name('showQuizTypeIndex');
+Route::get('/Lecturer/quiz/{subject_id?}/{quizs_types_ud}','QuizController@showQuizTypeIndex');
 // showScoreQuiz
 Route::get('/Admin/ShowQuizScore/{subject_id?}','UserController@showScoreQuiz')->name('showQuizScore');
 Route::get('/Admin/showQuizScore/ShowUserScore/{id?}','UserController@showScoreUser')->name('showUserScore');
+Route::get('/Lecturer/ShowStudentScore/{id?}','UserController@showScoreUser')->name('showStudentScore');
 
 
    

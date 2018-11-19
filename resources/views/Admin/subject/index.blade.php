@@ -28,60 +28,52 @@
     </nav>
 
     {{-- body --}}
+   
+        <div class="row">
+            <div class="table col-md-12">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">Subject ID</th>
+                        <th style="width: 400px;">Subject Name</th>
+                        <th >Option</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach($subjects as $subject)
+                    <tr>
+                        <td>
+                            <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" >{{$subject->subject_id}}</a>
+                        </td>
 
-    <div class="row">
-        <table class="table table-bordered" id="dtOrderExample">
-            <thead>
-                <tr>
-                    <th width="13%">Subject ID
+                        <td >{{$subject->subject_name}}</td>
 
-                    </th>
-                    <th width="44%">Subject Name
-                        {{-- <i class="fa fa-sort float-right" aria-hidden="true"></i> --}}
-                    </th>
-                    <th width="26%">
-                        Option
-                    </th>
-                </tr>
+                        <td>
+                            <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
 
-            </thead>
-
-            <tbody>
-                @foreach($subjects as $subject)
-                <tr>
-                    <td>
-                        <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}">{{$subject->subject_id}}</a>
-                    </td>
-
-                    <td>{{$subject->subject_name}}</td>
-
-                    <td>
-                        <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
-                        <!-- <a href="{{URL::to('/Admin/ShowQuizScore/'.$subject->subject_id)}}" class="btn btn-primary ">View user</a>-->
-                         <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View
-                            user</a>  
-                        <!-- <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning " data-toggle="modal"
+                            <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View user</a>
+                            
+                           <!-- <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning " data-toggle="modal"
                                 data-target="#editSubjectModal1">Edit</a> -->
-                        <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>
-                        <a href="{{ URL::to('/Admin/subject/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger">Delete</a>
-                    </td>
+                            <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>
+                            <a href="{{ URL::to('/Admin/subject/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a>
+                        </td>
 
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-        {{-- Pagination --}}
-        {{$subjects}}
-        {{-- Pagination --}}
-        <hr>
+               
+            <hr>  
+        </div>   
     </div>
+    
 
 
 
-
-
-    <!-- modal add Subject -->
+   {{--  modal add Subject   --}}
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -133,34 +125,39 @@
                                 </div>
                             </div>
 
-                    </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add
+                                    Subject </button>
+                            </div>
 
-
-
+                        </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add
-                        Subject </button>
-                </div>
-
-
             </div>
-        </div>
-        </form>
-    </div>
 
-    <!-- modal edit Subject -->
+
+
+        </div>
+         {{--  Modal content  --}}
+    </div>
+    {{--  Modal dialog  --}}
+      
+</div>
+  {{--  modal add Subject   --}}
+
+   {{--  modal edit Subject   --}}
     <div class="modal fade" id="editSubjectModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> Edit Subject</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="row">
                     <form action="{{URL::to('/Admin/subject/updateSubject')}}" method="post">
                         @csrf
@@ -172,7 +169,7 @@
 
                             <div class="col-md-6">
                                 <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}"
-                                    name="subject_id" value='{{$subject->subject_id}}' required autofocus readonly>
+                                    name="subject_id" value='{{$subject->subject_id}}'required autofocus readonly>
 
                                 @if ($errors->has('subject_id'))
                                 <span class="invalid-feedback" role="alert">
@@ -202,12 +199,13 @@
 
 
                 </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="subject_id_old" value="{{ $subject->subject_id}}">
 
-                    <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
-                </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="subject_id_old" value="{{ $subject->subject_id}}">
+
+                        <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+                    </div>
             </div>
             </form>
         </div>
@@ -218,16 +216,18 @@
 
         </script>
 
-        <script>
-            $(document).ready(function () {
-                $('#dtOrderExample').DataTable({
-                    "order": [
-                        [3, "desc"]
-                    ]
-                });
-                $('.dataTables_length').addClass('bs-select');
-            });
+        {{--  JavaScript  --}}
+    <script>
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+        }
+    </script>  
+{{--  JavaScript  --}}
 
-        </script>
-    </div>
+       
     @endsection

@@ -24,13 +24,16 @@
 
      {{-- body      --}}
  <div class="row">
-    <div class="row">
-        <table class="table table-bordered subject-table">
-            <tr>
+    <div class="table col-md-12">
+        <table id="table">
+            <thead>
+                <tr>
                 <th style="font-size: 1em;">subject ID</th>
                 <th>Subject Name</th>
-                <th></th>
+                <th>Option</th>
             </tr>
+            </thead>
+            
 
             <tbody>
                 @foreach($subjects as $subject)
@@ -49,7 +52,6 @@
         </tbody>
         </table>
         
-         
          <hr>
     </div>
 
@@ -117,6 +119,19 @@
         document.getElementById('addForm').submit();
     }
 </script>
+  {{--  JavaScript  --}}
+    <script>
+        function ConfirmDelete()
+        {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+        }
+    </script>  
+{{--  JavaScript  --}}
+
 
  @endsection
           

@@ -10,8 +10,8 @@
             </div>
             
             <form class="form-inline">
-                    <input class="form-control mr-sm-2 float-right" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit">Search</button>
+                    <!-- <input class="form-control mr-sm-2 float-right" type="search" placeholder="Search" aria-label="Search"> -->
+                    <!-- <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit">Search</button> -->
             </form> 
     </div>
     <nav aria-label="breadcrumb">
@@ -21,8 +21,10 @@
             </ol>
           </nav>
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
+    <div class="col-md-12">
+    <table id="table" class="table">
+    <thead>
+    <tr>
                 <th style="font-size: 1em;">Title</th>
                 <th>Description</th>
                 <th>Date</th>
@@ -34,17 +36,20 @@
                 <th style="width:50px;">Max</th>
                 <th style="width:50px;">AVG</th>
                 
-                <th></th>
+                <th>Option</th>
                 
 
             </tr>
+    </thead>
+            
 
             <tbody>
 
                     @foreach($quizzes as $q)
                     @if($q->quizs_status_id !='Hide')
                 <tr>
-                        <td style="font-size: 0.8em;">{{$q->title}}</td>
+                        <!-- <td style="font-size: 0.8em;">{{$q->title}}</td> -->
+                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id)}}">{{$q->title}}</a></td>
                         <td style="font-size: 0.8em;">{{$q->description}}</td>
                         <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
                         <td style="font-size: 0.8em;">{{$q->subject_id}}</td>
@@ -69,6 +74,8 @@
             </tbody>
  
         </table>
+    </div>
+        
         
          
          <hr>

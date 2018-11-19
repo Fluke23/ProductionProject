@@ -25,7 +25,6 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Student/quiz/StudentquizDetail')}}">Quiz Manager</a></li>
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/question/StudentQuestion')}}">Question Manager</a></li>
         </ol>
     </nav>
@@ -33,8 +32,10 @@
 
 
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
+    <div class="col-md-12">
+    <table id="table" class="table">
+    <thead>
+    <tr>
            <!-- <th style="font-size: 1em;">Number</th> -->
                 <th style="font-size: 1em;">Question</th>
                 <!-- <th>Description</th> -->
@@ -47,6 +48,8 @@
 
 
             </tr>
+    </thead>
+            
            
             <tbody>
                 @foreach($question as $que)
@@ -78,6 +81,8 @@
            
         </table>
 
+    </div>
+       
 
         <hr>
     </div>
