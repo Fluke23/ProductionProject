@@ -35,7 +35,7 @@ class UserController extends Controller
 
        // $user = DB::table('users') //โชว์แค่ข้อมูล user ไม่จำเป็นต้อง join ข้อมูลกับตารางอื่น 
         //->get();
-        $user = DB::table('users')->paginate(10);
+        $user = DB::table('users')->get();
 
         return view('/Admin/user/index',compact('user'));
     }
@@ -422,7 +422,7 @@ class UserController extends Controller
             ->where('Subjects.subject_id', '=', $subject_id)
             ->orderby('quizs.quizs_id', 'desc') //Addition
             // ->get();
-            ->paginate(10);
+            ->get();
 
 
 
@@ -557,7 +557,7 @@ class UserController extends Controller
             ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
             ->where('quizs.quizs_id', '=', $quizs_id)
             ->groupBy('users.username','users.firstname','users.lastname')
-            ->paginate(10);
+            ->get();
         // For generate each user and each score
        
         if ($permission == 'ADMIN') {

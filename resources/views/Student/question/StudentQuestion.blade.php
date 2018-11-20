@@ -36,7 +36,7 @@
     <table id="table" class="table">
     <thead>
     <tr>
-           <!-- <th style="font-size: 1em;">Number</th> -->
+                <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;">Question</th>
                 <!-- <th>Description</th> -->
                 <!-- <th>Date</th> -->
@@ -52,9 +52,10 @@
             
            
             <tbody>
-                @foreach($question as $que)
+                @foreach($question as $key => $que)
                 <tr>
                   <!--  <td style="font-size: 0.8em;">{{$que->number}}</td> -->
+                    <td>{{ $key + 1 }}</td>
                     <td style="font-size: 0.8em;">{{$que->question}}</td>
                     <td style="font-size: 0.8em;">{{$que->score}}</td>
                     <td style="font-size: 0.8em;">{{$que->min}}</td>
@@ -66,14 +67,19 @@
 
 
                     <td>
-                        @if($que->username !== $username)
-                        <a href="{{URL::route('AnswerBlankQuestion.file').'/'.$que->questions_id.'/'.$que->quizs_id}}"
-                            class="btn btn-info ">View</a>
-                       
-                    @else
-                        <a href="{{URL::route('editAnswer.file', $que->answer_id)}}"
-                            class="btn btn-warning ">Edit</a>
+                    @if($quizStatus[0]->quizs_status_id == 'Open')    
+                        
+                            <a href="{{URL::route('AnswerBlankQuestion.file').'/'.$que->questions_id.'/'.$que->quizs_id}}"
+                                class="btn btn-info ">View</a>
+                        @if($que->answer_id !== null)
+                            <a href="{{URL::route('editAnswer.file', $que->answer_id)}}"
+                                class="btn btn-warning ">Edit</a>
                         @endif
+
+                    @else
+                        <a href="{{URL::route('checkScoreIndex.file',$que->questions_id)}}"
+                            class="btn btn-info ">View</a>
+                    @endif
                     </td>
                 </tr>
                 @endforeach

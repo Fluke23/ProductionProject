@@ -51,18 +51,30 @@ class answerMultipleQuestionController extends Controller
                         ->where('Answer.questions_id','=',$request->input('questions_id'))
                         ->get();
                         
-                    for ($i=0; $i < sizeof($request->input('answer')) ; $i++) { 
-                            //create new Answer
-                            $Answer = new Answer;
-                            $Answer->username = $username;
-                            $Answer->answer_number =$request->input('1');
-                            $Answer->answer =$request->input('answer')[$i];
-                            $Answer->answer_date=$request->input('answerDate');
-                            $Answer->questions_id =$request->input('questions_id');
-                            $Answer->choice_id =$request->input('choice_id');
-                            //save message
-                            $Answer->save();
-                    }
+                    // for ($i=0; $i < sizeof($request->input('answer')) ; $i++) { 
+                    //         //create new Answer
+                    //         $Answer = new Answer;
+                    //         $Answer->username = $username;
+                    //         $Answer->answer_number =$request->input('1');
+                    //         $Answer->answer =$request->input('answer')[$i];
+                    //         $Answer->answer_date=$request->input('answerDate');
+                    //         $Answer->questions_id =$request->input('questions_id');
+                    //         $Answer->choice_id =$request->input('choice_id');
+                    //         //save message
+                    //         $Answer->save();
+                    // }
+                    
+                        //create new Answer
+                        $Answer = new Answer;
+                        $Answer->username = $username;
+                        $Answer->answer_number =$request->input('1');
+                        $Answer->answer =$request->input('answer');
+                        $Answer->answer_date=$request->input('answerDate');
+                        $Answer->questions_id =$request->input('questions_id');
+                        $Answer->choice_id =$request->input('choice_id');
+                        //save message
+                        $Answer->save();
+                
                         $quiz_id = $request->input('quiz_id');
                         $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
             
@@ -73,6 +85,27 @@ class answerMultipleQuestionController extends Controller
             //return'yes';
             }
 
+	public function update(Request $request)
+            {
+                
+
+                            //create new Answer
+                            $answer_id =$request->get('answer_id');
+                            $Answer = Answer::find($answer_id);
+                            $Answer->answer = $request->get('answer');
+                            $Answer->answer_date=$request->get('answerDate');
+                            $Answer->choice_id =$request->get('choice_id');
+                            //save message
+                            $Answer->save();
+                            
+                    
+                        // $next = Question::where('questions_id','>',$Answer->questions_id)->where('quizs_id',$quiz_id)->orderBy('questions_id')->first();
+            
+
+            
+           
+                        return redirect()->back();
+            }      		
  
 }
 

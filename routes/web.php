@@ -283,16 +283,23 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@index')->name('AnswerMultipleQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@store'); //name 
     Route::post('/Student/AnswerMultipleQuestion/submit/{id?}/{quiz_id?}','answerMultipleController@submit');
+    Route::get('/Student/question/editAnswerMultiple/{answer_id}','AnswerBlankController@edit')->name('editAnswerMultiple.file'); //name 
+    Route::post('/Student/question/editAnswerMultiple/{answer_id}','AnswerMultipleQuestionController@update');
     
     //Student/answerTrueFalsequestion 
     Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','AnswerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','AnswerTrueFalseQuestionController@store')->name('AnswerStore'); //name edit ล่าสุด
     Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','AnswerTrueFalseController@submit');
+    Route::get('/Student/question/editAnswerTrueFalse/{answer_id}','AnswerBlankController@edit')->name('editAnswerTrueFalse.file'); //name 
+    Route::post('/Student/question/editAnswerTrueFalse/{answer_id}','AnswerTrueFalseQuestionController@update');
+
 
     //Student/checkScore
-    Route::get('/Student/checkScore/checkScore/{id?}/{quiz_id?}}','checkScoreController@index')->name('checkScore.file'); //name for reditect in update
-    Route::post('/Student/checkScore/checkScore/{id?}/{quiz_id?}','checkScoreController@store')->name('checkScore.file'); //name edit ล่าสุด
+    Route::get('/Student/checkScore/checkScore/{id?}','checkScoreController@index')->name('checkScoreIndex.file'); //name for reditect in update
+    Route::post('/Student/checkScore/checkScore/{id?}','checkScoreController@store')->name('checkScore.file'); //name edit ล่าสุด
     Route::post('/Student/checkScore/checkScore/submit/{id?}/{quiz_id?}','checkScoreController@submit');
+
+
 
     // Change Password 
     Route::get('/changepassword',function(){

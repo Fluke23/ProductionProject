@@ -19,6 +19,7 @@ class StudentQuestionController extends Controller
             ->rightJoin('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
             ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
             ->where('quizs.quizs_id', '=', $quizs_id)
+            ->orderBy('Questions.questions_id')
             ->groupBy('Questions.questions_id')
             ->get();
 
@@ -59,6 +60,9 @@ class StudentQuestionController extends Controller
             ->where('Questions.quizs_id','=',$quizs_id)
             ->get();
             
+
+
+
             $questionAnswer = DB::table('Questions')
             // ->join('Question_types','Question_types.questions_types_id','=','Questions.questions_types_id')
             ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')

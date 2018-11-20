@@ -28,7 +28,7 @@ class AnswerBlankController extends Controller
         if(count($answerCheck)===0 ){
             
             $question = DB::table('Questions')
-             ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+            ->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
             ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
             ->where('Questions.questions_id','=',$questions_id)
             ->where('Questions.quizs_id','=',$quiz_id)
@@ -93,12 +93,12 @@ class AnswerBlankController extends Controller
             
             if ($request->query('answer') !== null ) {
                 if($questionType == 'Multiple'){
-                    for ($i=0; $i < sizeof($request->query('answer')) ; $i++) { 
+                    { 
                         
                         $Answer = new Answer();
                         $Answer->username = $username;
                         $Answer->answer_number =$request->query('input');
-                        $Answer->answer =$request->query('answer')[$i];
+                        $Answer->answer =$request->query('answer');
                         $Answer->questions_id =$request->query('questions_id');
                     //save message
             
@@ -128,30 +128,31 @@ class AnswerBlankController extends Controller
                 if($quizStatus[$i]->quizs_status_id == "Open"){
                     switch ($questionType) {
                         case 'Blank':
-                        return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow'));
+                        return view('/Student/question/AnswerBlankQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow','questionType'));
                             break;
                         
                         case 'Shortanswe':
-                        return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow'));
+                        return view('/Student/question/AnswerShortQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow','questionType'));
                             break;  
                             
                         case 'Upload':
-                        return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow'));
+                        return view('/Student/question/AnswerUploadQuestion',compact('question','questions_id','question2','quiz_id','next','questionMax','answerRow','questionType'));
                             break;
                             
                         case 'TrueFalse':
-                        return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question4','quiz_id','next','question5','questionMax','answerRow'));
+                        return view('/Student/question/AnswerTrueFalseQuestion',compact('question','questions_id','question4','quiz_id','next','question5','questionMax','answerRow','questionType'));
                             break;        
                         
                         case 'Multiple':
-                        return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5','questionMax','answerRow'));
+                        return view('/Student/question/AnswerMultipleQuestion',compact('question','questions_id','question4','quiz_id','next','question5','questionMax','answerRow','questionType'));
                             break;
                     }
                 //}else if($quizStatus[$i]->quizs_status_id == "Reviewing"){
                  //   return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
     
                 } else{
-                    return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);
+                   
+                    return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id','questionType','$question3'))->with('question',$question3);
                     //return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','question3','quiz_id'));
                 }
                 $i++;
@@ -171,19 +172,36 @@ class AnswerBlankController extends Controller
                    ->where('Questions.quizs_id','=',$quiz_id)
                    ->get();
                
-                       if ($request->query('answer') !== null ) {
+                   if ($request->query('answer') !== null ) {
+                    if($questionType == 'Multiple'){
+                        for ($i=0; $i < sizeof($request->query('answer')) ; $i++) { 
+                            
                             $Answer = new Answer();
                             $Answer->username = $username;
                             $Answer->answer_number =$request->query('input');
-                            $Answer->answer =$request->query('answer');
+                            $Answer->answer =$request->query('answer')[$i];
                             $Answer->questions_id =$request->query('questions_id');
-                           //save message
-                   
+                        //save message
+                
                             $currentQuestionId = DB::table('Questions')->max('questions_id');
-                           $lastestQuestinID = $currentQuestionId+1;
-       
-                           $Answer->save();
-                       }
+                            $lastestQuestinID = $currentQuestionId+1;
+    
+                            $Answer->save();
+                        }
+                            }else{
+                                $Answer = new Answer();
+                                $Answer->username = $username;
+                                $Answer->answer_number =$request->query('input');
+                                $Answer->answer =$request->query('answer');
+                                $Answer->questions_id =$request->query('questions_id');
+                            //save message
+                    
+                                $currentQuestionId = DB::table('Questions')->max('questions_id');
+                                $lastestQuestinID = $currentQuestionId+1;
+        
+                                $Answer->save();
+                            }
+                        }  
        
        
                    $data = Question::where('questions_id',$questions_id)->get();
@@ -244,13 +262,13 @@ class AnswerBlankController extends Controller
                            return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
            
                        } else{
-                           return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id'))->with('question',$question3);
+                           return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','quiz_id','questionType','$question3'))->with('question',$question3);
                            //return view('/Student/checkScore/checkScore',compact('question','questions_id','question2','question3','quiz_id'));
                        }
                        $i++;
                    }
            
-                    
+                   
                
         }
         //dd(count ($answerCheck[0]));

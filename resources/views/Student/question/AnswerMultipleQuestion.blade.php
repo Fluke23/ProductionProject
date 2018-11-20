@@ -37,13 +37,13 @@
                                 @if($q2->answer_row > 1)
                                     <div class="form-group">
                                         {{$q2->choice}}
-                                        {{Form::checkbox('answer[' . $key . ']',$q2->choice)}}
+                                        {{Form::checkbox('answer',$q2->choice,['id' => 'answer'])}}
                                         {{Form::hidden ('choice_id', $q2->choice_id)}}
                                     </div>
                                 @else
                                 <div class="form-group">
                                     {{$q2->choice}}
-                                    {{Form::radio('answer[' . $key . ']',$q2->choice)}}
+                                    {{Form::radio('answer',$q2->choice,['id' => 'answer'])}}
                                     {{Form::hidden ('choice_id', $q2->choice_id)}}
                                 </div>
                                 @endif
@@ -80,7 +80,7 @@
     </div>
 
 @if($next)
-    <script>
+    <!-- <script>
         const onClickHandler = () => {
             const answerInput = Array.from(document.querySelectorAll("input[name^='answer[']"))
             const answerString = answerInput
@@ -98,8 +98,19 @@
             + '&questions_id=' + questionId
             window.location = location
         }
+    </script> -->
+    <script>
+        const onClickHandler = () => {
+            const answer = document.getElementById('answer').value
+            const inputIndex = document.getElementById('index').value
+            const questionId = document.getElementById('questions_id').value
+            window.location = '{{ URL::to('Student/question/AnswerBlankQuestion/' .$next->questions_id . '/' .$next->quizs_id) }}' 
+            + '?answer=' + answer 
+            + '&input=' + inputIndex
+            + '&questions_id=' + questionId
+        }
     </script>
 @endif    
 
 
-    @endsection
+@endsection

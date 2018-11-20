@@ -25,14 +25,13 @@ class QuestionController extends Controller
     public function index(Request $request,$quizs_id)
     {
         $permission = $request->get('permission');
-
         $username = Auth::user()->username;
 
        $question = DB::table('Questions')
            ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
            ->where('quizs.quizs_id','=',$quizs_id)
             ->orderby('Questions.number','Asc')
-            ->paginate(10);
+            ->get();
 
 
        foreach ($question as $id) {

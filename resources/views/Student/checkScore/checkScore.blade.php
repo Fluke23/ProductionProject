@@ -13,7 +13,7 @@
 
 
     <div class="row">
-   
+
                     @foreach($question as $q)
                     @endforeach
                     
@@ -21,8 +21,6 @@
                    
                      
                         <h4>{{$q->title}}</h4>
-                       
-                        <img src="{{$q->img_url}} ">
                         
                        
                         <li class="list-group">solution: {{$q->solution}}</li>
@@ -50,7 +48,41 @@
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>
                      
-                     
+        @if($questionType == 'Multiple')
+            @foreach($correct as $c)
+            @endforeach
+                @if($q->answer == $c->choice)
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif
+        @elseif($questionType == 'TrueFalse')
+                @if($q->answer == $q->solution)
+                <div class="col-md-4">
+                    <li class="list-group">Solution: {{$q->solution}}</li>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success">
+                        Correct Answer
+                    </button>
+                </div>
+                @else
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-danger">
+                        Incorrect Answer
+                    </button>
+                </div>
+                @endif        
+        @endif
                     
                      
                      <div class="col-md-12">

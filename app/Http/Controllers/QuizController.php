@@ -56,7 +56,7 @@ class QuizController extends Controller
             ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้ 
             ->where('Subjects.subject_id','=',$subject_id)
             ->orderby('quizs.quizs_id','desc') //Addition
-            ->paginate(10);
+            ->get();
             
         foreach($quizzes as $id) {
             $quiz_min = DB::table('Questions')
@@ -272,7 +272,7 @@ class QuizController extends Controller
             ->where('Quiz_types.quizs_types_id', '=', $quizs_types_id)
             ->orderby('quizs.quizs_id', 'desc') //Addition
             // ->get();
-            ->paginate(10);
+            ->get();
 
 
 
