@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Question;
 use App\Quiz;
+use App\Subject;
 
 class StudentQuestionController extends Controller
 {
@@ -60,7 +61,10 @@ class StudentQuestionController extends Controller
             ->where('Questions.quizs_id','=',$quizs_id)
             ->get();
             
-
+            $subject = DB::table('Subjects')
+            ->join('quizs','quizs.subject_id','=','Subjects.subject_id')
+            ->where('quizs.quizs_id','=',$quizs_id)
+            ->get();
 
 
             $questionAnswer = DB::table('Questions')
@@ -77,7 +81,7 @@ class StudentQuestionController extends Controller
                 if($quizStatus[$i]->quizs_status_id == "Reviewing"){
                     return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
                 } else{
-                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer','username'));
+                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer','username','subject'));
                 }
                 $i++;
             }

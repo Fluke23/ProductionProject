@@ -43,7 +43,10 @@
                      <li class="list-group">Student: {{$q->username}}</li>
                      </div>
                     
-                     
+                     <div class="col-md-4">
+                     <li class="list-group">Score Student:{{$q->Score}}</li>
+                    </div>
+
                      <div class="col-md-4">
                      <li class="list-group">Answer Date: {{$q->answer_date}}</li>
                      </div>

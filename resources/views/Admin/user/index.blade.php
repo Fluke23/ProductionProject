@@ -55,10 +55,10 @@
                         <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$u->username)}}" class="btn btn-info btn-sm">View</a>
                         <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username.'/'.$u->id)}}" class="btn btn-warning btn-sm">Edit</a>
                         @if($u->username != 'Admin')
-                        <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
+                            <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
                         @endif
                         @if($u->status_banned == '1')
-                            <button class="btn btn-dark btn-sm">Banned</button>
+                            <button class="btn btn-dark btn-sm">Disable</button>
                         @endif
                     </td>
                 </tr>

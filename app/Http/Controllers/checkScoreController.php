@@ -28,6 +28,7 @@ class checkScoreController extends Controller
         $data = Question::where('questions_id',$questions_id)->get();
         $questionType = $data[0]->questions_types_id;
 
+
         $correct = DB::table('Questions')
         ->join('Choice','Choice.questions_id','=','Questions.questions_id')
         ->join('choice_type','choice_type.choice_type_id','=','Choice.choice_type_id')

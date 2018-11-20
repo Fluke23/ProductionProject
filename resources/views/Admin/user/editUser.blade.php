@@ -91,7 +91,7 @@
 
                         <div class="form-group-row">
                         
-                        <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Ban User') }}</label>
+                        <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Disable User') }}</label>
 
                             Yes
                                 {{Form::radio('status_banned', '1')}}

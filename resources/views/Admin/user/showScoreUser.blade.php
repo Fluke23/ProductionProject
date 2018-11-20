@@ -57,15 +57,17 @@
      </div>
 
 
-    <div class="row">
-        <table class="table table-bordered">
-            <tr>
+    <div class="col-md-12">
+        <table id="table">
+        <thead>
+        <tr>
                 <th width="10%">Username</th>
                 <th width="10%">Firstname</th>
                 <th width="10%">Lastname</th>
                 <th width="7%">Score</th>
-            </tr>
-           
+        </tr>
+        </thead>
+            
             <tbody>
                 @foreach($user as $u)
                 <tr>
@@ -81,7 +83,7 @@
 
 
         <hr>
-        {{ $user}}
+    
     </div>
 
 </div>

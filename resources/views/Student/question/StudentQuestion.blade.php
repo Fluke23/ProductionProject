@@ -22,10 +22,12 @@
         <strong>You have already answered.</strong> {{ Session::get('message', '') }}
     </div>
     @endif
+
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Student/question/StudentQuestion')}}">Question Manager</a></li>
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Student/question/StudentQuestion')}}">{{$subject[0]->subject_name}}</a></li>
         </ol>
     </nav>
  
