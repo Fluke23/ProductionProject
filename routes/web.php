@@ -374,6 +374,8 @@ Route::get('/Admin/setting/indexUserGroup','SettingController@indexUserGroup');
 Route::get('/Admin/setting/indexQuizType','SettingController@indexQuizType');
 Route::get('/Admin/setting/indexQuizStatus','SettingController@indexQuizStatus');
 
+// user group nav-tab 
+Route::get('/Admin/userManager/{groups_id?}','UserController@showUserGroup');
 
 
    

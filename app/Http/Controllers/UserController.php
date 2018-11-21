@@ -29,17 +29,31 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $permission = $request->get('permission');
+
         $username = Auth::user()->username;
 
        // $user = DB::table('users') //โชว์แค่ข้อมูล user ไม่จำเป็นต้อง join ข้อมูลกับตารางอื่น 
         //->get();
-        $user = DB::table('users')->get();
+        $user = DB::table('users')
+        ->join('Group_user','Group_user.username','=','users.username')
+        ->join('Groups','Groups.groups_id','=','Group_user.groups_id')
+        ->get();
 
-        return view('/Admin/user/index',compact('user'));
+        $group = DB::table('Groups')->get();
+    
+
+        // return view('/Admin/user/index',compact('user','group'));
+        if ($permission == 'ADMIN') {
+            return view('/Admin/user/index',compact('user','username','group'));
+        } elseif ($permission == 'LECTUTER') {
+            return back();
+        } elseif ($permission == 'STUDENT') {
+            return back();
+        }
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -573,6 +587,31 @@ return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_s
 
 
     }
+    public function showUserGroup(Request $request,$groups_id){
+        $username = Auth::user()->username;
+        $permission = $request->get('permission');
+
+        // $user = DB::table('users') //โชว์แค่ข้อมูล user ไม่จำเป็นต้อง join ข้อมูลกับตารางอื่น
+        //->get();
+        $user = DB::table('users')
+        ->join('Group_user','Group_user.username','=','users.username')
+        ->join('Groups','Groups.groups_id','=','Group_user.groups_id')
+        ->where('Groups.groups_id','=',$groups_id)
+        ->get();
+
+        $group = DB::table('Groups')->get();
+
+        if ($permission == 'ADMIN') {
+            return view('/Admin/user/index',compact('user','username','group'));
+        } elseif ($permission == 'LECTUTER') {
+            return back();
+        } elseif ($permission == 'STUDENT') {
+            return back();
+        }
+    
+    
+    }
+
     
     
    
