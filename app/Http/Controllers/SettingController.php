@@ -275,6 +275,100 @@ class SettingController extends Controller
         return back()->with('successDelete', '');
     }
     //For Quiz Status
+    public function indexSubject(Request $request){
+        $permission = $request->get('permission');
+        //ประกาศไว้เพราะ Auth จาก username มาก่อน
+        $username = Auth::user()->username;
+
+        $subjects = DB::table('Subjects')
+        ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+        ->join('users','users.username','=','subjects_user.username')
+        ->where('users.username', '=', $username)
+        ->orderby('Subjects.subject_id','asc')
+        ->get();
+
+      
+
+        if($permission == 'ADMIN'){
+        return view('Admin/setting/indexSubject',compact('permission','username','subjects','request'));
+        }elseif($permission == 'STUDENT'){
+        return Back();
+        }elseif($permission == 'LECTURER'){
+        return Back();
+        }
+
+    }
+
+    public function indexUserGroup(Request $request){
+        $permission = $request->get('permission');
+        //ประกาศไว้เพราะ Auth จาก username มาก่อน
+        $username = Auth::user()->username;
+
+        // $subjects = DB::table('Subjects')
+        // ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+        // ->join('users','users.username','=','subjects_user.username')
+        // ->where('users.username', '=', $username)
+        // ->orderby('Subjects.subject_id','asc')
+        // ->get();
+
+        $groups = DB::table('Groups')->get();
+
+
+        if($permission == 'ADMIN'){
+        return view('Admin/setting/indexUserGroup',compact('permission','username','groups'));
+        }elseif($permission == 'STUDENT'){
+        return Back();
+        }elseif($permission == 'LECTURER'){
+        return Back();
+        }
+    }  
+
+    public function indexQuizType(Request $request){
+            $permission = $request->get('permission');
+            //ประกาศไว้เพราะ Auth จาก username มาก่อน
+            $username = Auth::user()->username;
+
+            $quiz_types = DB::table('Quiz_types')->get();
+
+
+            if($permission == 'ADMIN'){
+                return view('Admin/setting/indexQuizType',compact('permission','username','quiz_types'));
+            }elseif($permission == 'STUDENT'){
+                return Back();
+            }elseif($permission == 'LECTURER'){
+                return Back();
+            }
+    }
+
+    public function indexQuizStatus(Request $request){
+        $permission = $request->get('permission');
+        //ประกาศไว้เพราะ Auth จาก username มาก่อน
+        $username = Auth::user()->username;
+
+        
+        $quiz_status = DB::table('Quiz_status')->get();
+
+
+        if($permission == 'ADMIN'){
+            return view('Admin/setting/indexQuizStatus',compact('permission','username','quiz_status'));
+        }elseif($permission == 'STUDENT'){
+            return Back();
+        }elseif($permission == 'LECTURER'){
+            return Back();
+        }
+    }
+
+
+        
+
+           
+
+
+
+
+
+
+
 
     
         

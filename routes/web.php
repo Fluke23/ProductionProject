@@ -368,6 +368,13 @@ Route::get('/Admin/ShowQuizScore/{subject_id?}','UserController@showScoreQuiz')-
 Route::get('/Admin/showQuizScore/ShowUserScore/{id?}','UserController@showScoreUser')->name('showUserScore');
 Route::get('/Lecturer/ShowStudentScore/{id?}','UserController@showScoreUser')->name('showStudentScore');
 
+// setting nav-tab
+Route::get('/Admin/setting/indexSubject','SettingController@indexSubject')->name('settingSubject');
+Route::get('/Admin/setting/indexUserGroup','SettingController@indexUserGroup');
+Route::get('/Admin/setting/indexQuizType','SettingController@indexQuizType');
+Route::get('/Admin/setting/indexQuizStatus','SettingController@indexQuizStatus');
+
+
 
    
    

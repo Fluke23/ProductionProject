@@ -41,21 +41,46 @@
     {{-- breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+             <li class="breadcrumb-item active">Setting</li>
         </ol>
     </nav>
     {{-- breadcrumb --}}
+
+    {{-- Nav-tab --}}
+    <ul class="nav nav-tabs mb-3">
+        @if(Request::is('Admin/setting') == 'Admin/setting')
+            <li class="nav-item">
+                <a class="nav-link active" href="#">All</a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexSubject">Subject</a>
+            </li> 
+             <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexUserGroup">User Group</a>
+            </li> 
+             <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexSubject">Quiz Type</a>
+            </li>  
+             <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexSubject">Quiz Status</a>
+            </li>  
+         
+         @endif
+      
+       
+    </ul>
+   
 
 
     {{-- Row --}}
     <div class="row">
 
+      
         {{-- Subject --}}
         <div class="m-1">
-
             <h5 class="">SUBJECT</h5>
             <table class="table">
-
                 <thead>
                     <tr>
                         <th style="font-size: 0.8em">Subject ID</th>
@@ -77,7 +102,6 @@
                             <a href="{{ URL::to('/Setting/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger"
                                 style="font-size: 0.8em" Onclick="return ConfirmDelete();">Delete</a>
                         </td>
-
                     </tr>
                     @endforeach
 
@@ -101,6 +125,7 @@
             </table>
         </div>
         {{-- Subject --}}
+       
 
         {{-- User Group --}}
         <div class="m-1 ">
@@ -280,7 +305,7 @@
             </table>
         </div>
         {{-- Quiz status --}}
-
+     
     </div>
     {{-- Row --}}
 
