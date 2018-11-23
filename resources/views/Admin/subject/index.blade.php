@@ -87,14 +87,14 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="row">
+                    <div >
                         <form action="{{URL::to('/Admin/subject/saveSubject')}}" method="post" id="addForm">
                             @csrf
 
                             {{-- subject id --}}
-                            <div class="form-group row">
-                                <label for="subject_id" class="col-md-6 col-form-label text-md-right">{{ __('subject
-                                    ID') }}</label>
+                            <div class="form-group ">
+                                <label for="subject_id" class="col-md-6 col-form-label text-md-left">{{ __('Subject
+                                    ID : ') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="subject_id" type="text" class="form-control{{ $errors->has('subject_id') ? ' is-invalid' : '' }}"
@@ -109,11 +109,11 @@
                             </div>
 
                             {{-- subject name --}}
-                            <div class="form-group row">
-                                <label for="subject_name" class="col-md-6 col-form-label text-md-right">{{ __('Subject
-                                    Name') }}</label>
+                            <div class="form-group">
+                                <label for="subject_name" class="col-md-6 col-form-label text-md-left">{{ __('Subject
+                                    Name : ') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <input id="subject_name" type="text" class="form-control{{ $errors->has('subject_name') ? ' is-invalid' : '' }}"
                                         name="subject_name" value="{{ old('subject_name') }}" required autofocus>
 
@@ -124,11 +124,10 @@
                                     @endif
                                 </div>
                             </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add
-                                    Subject </button>
+                            
+                            <div class="modal-footer mt-4 text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add Subject </button>
                             </div>
 
                         </form>

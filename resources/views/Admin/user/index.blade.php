@@ -23,85 +23,59 @@
                 data-target="#exampleModal">Create User</a>
         </div>
     </div>
-    {{-- breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/userManager')}}">UserManager</a></li>
         </ol>
     </nav>
-    {{-- breadcrumb --}}
-
-     {{-- Nav-tab --}}
-    <ul class="nav nav-tabs mb-3">
-        @if(Request::is('Admin/userManager') == 'Admin/userManager')
-            <li class="nav-item">
-                <a class="nav-link active" href="{{URL::to('Admin/userManager/')}}">All</a>
-            </li>
-            @foreach ($group as $g)
-            <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
-            </li>
-            @endforeach
-        
-        @else
-            <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('Admin/userManager/')}}">All</a>
-            </li>
-
-            @foreach ($group as $g)
-                @if(Request::is('Admin/userManager/'.$g->groups_id) == 'Admin/userManager/'.$g->groups_id)
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
-                    </li>
-                @else
-                     <li class="nav-item">
-                        <a class="nav-link " href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
-                    </li>
-                @endif
-            @endforeach    
-        @endif
-    </ul>
-    {{-- Nav-tab --}}
 
     <div class="row">
     <div class="table col-md-12">
-    <table id="table">
-        <thead>
-            <tr>
-                <th style="font-size: 1em;width:30px;">Username</th>
-                <th style="width:50px;">Remark</th>
-                <th style="width:50px;">Firstname</th>
-                <th style="width:50px;">Lastname</th>
-                <th style="width:50px;">Status</th>
-                <th style="width:100px;">Option</th>
-            </tr>
-        </thead>
-            
-            <tbody>
 
-                @foreach($user as $u)
+    <form action="{{URL::route('deleteMultiple')}}" method="post">
+        {{csrf_field()}}
+        <table id="table">
+            <thead>
                 <tr>
-                    <td style="font-size: 0.8em;">{{$u->username}}</td>
-                    <td style="font-size: 0.8em;">{{$u->remark}}</td>
-                    <td style="font-size: 0.8em;">{{$u->firstname}}</td>
-                    <td style="font-size: 0.8em;">{{$u->lastname}}</td>
-                    <td style="font-size: 0.8em;">{{$u->group_name}}</td>
-                    <td>
-                        <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$u->username)}}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username.'/'.$u->id)}}" class="btn btn-warning btn-sm">Edit</a>
-                        @if($u->username != 'Admin')
-                        <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
-                        @endif
-                        @if($u->status_banned == '1')
-                            <button class="btn btn-dark btn-sm">Banned</button>
-                        @endif
-                    </td>
+                    <th style="width:10px;"> # </th>
+                    <th style="font-size: 1em;width:30px;">Username</th>
+                    <th style="width:50px;">Remark</th>
+                    <th style="width:50px;">Firstname</th>
+                    <th style="width:50px;">Lastname</th>
+                    <th style="width:100px;">Option</th>
                 </tr>
+            </thead>
+            
+            
+                <tbody>
 
-                @endforeach
-            </tbody>
+                    @foreach($user as $u)
+                    <tr>
+                        <td><input type="checkbox" name="deleteMultiple[]" value="{{$u->username}}"></td>
+                        <td style="font-size: 0.8em;">{{$u->username}}</td>
+                        <td style="font-size: 0.8em;">{{$u->remark}}</td>
+                        <td style="font-size: 0.8em;">{{$u->firstname}}</td>
+                        <td style="font-size: 0.8em;">{{$u->lastname}}</td>
+                        <td>
+                            @if($u->username != 'Admin')
+                                <a href="{{URL::to('/Admin/userManager/viewUserInfo/'.$u->username)}}" class="btn btn-info btn-sm">View</a>
+                            @endif
+                            <a href="{{URL::to('/Admin/userManager/editUser/'.$u->username.'/'.$u->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                            @if($u->username != 'Admin')
+                                <a href="{{ URL::to('/Admin/userManager/delete/'.$u->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
+                            @endif
+                            @if($u->status_banned == '1')
+                                <button class="btn btn-dark btn-sm">Disable</button>
+                            @endif
+                        </td>
+                    </tr>
 
+                    @endforeach
+                </tbody>
+
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete Selected</button>  
+    </form>
 
         </table>
     </div>

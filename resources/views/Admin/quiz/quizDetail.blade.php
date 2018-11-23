@@ -123,14 +123,14 @@
             </div>
 
             <div class="modal-body">
-                <div class="row">
+                <div>
                     <form action="{{URL::to('/Admin/quiz/saveQuiz/{subject_id?}')}}" method="post" id="addForm">
                         @csrf
                         {{-- title --}}
-                        <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('title') }}</label>
+                        <div class="form-group ">
+                            <label for="title" class="col-md-4 col-form-label text-md-left">{{ __('Quiz Title :') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"
                                     name="title" value="{{ old('title') }}" required autofocus>
 
@@ -143,11 +143,12 @@
                         </div>
 
                         {{-- description --}}
-                        <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('description')
+                        <div class="form-group">
+                            <label for="description" class="col-md-6 col-form-label text-md-left">{{ __('Quiz
+                                Description : ')
                                 }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                                     name="description" value="{{ old('description') }}" required autofocus>
 
@@ -161,8 +162,9 @@
 
 
                         {{-- Date --}}
-                        <div class="form-group row">
-                            <label for="quiz_date" class="col-md-4 col-form-label text-md-right">{{ __('quiz_date') }}</label>
+                        <div class="form-group ">
+                            <label for="quiz_date" class="col-md-4 col-form-label text-md-left">{{ __('Quiz Date : ')
+                                }}</label>
 
                             <div class="col-md-6">
                                 <input id="quiz_date" type="date" class="form-control{{ $errors->has('quiz_date') ? ' is-invalid' : '' }}"
@@ -177,8 +179,8 @@
                         </div>
 
                         {{-- subject_id --}}
-                        <div class="form-group row">
-                            <label for="subject_id" class="col-md-4 col-form-label text-md-right">{{ __('subject')
+                        <div class="form-group ">
+                            <label for="subject_id" class="col-md-4 col-form-label text-md-left">{{ __('Subject ID : ')
                                 }}</label>
 
                             <div class="col-md-6">
@@ -193,41 +195,28 @@
                             </div>
                         </div>
 
-                        <!--  {{-- group_id --}}
-                        <div class="form-group row">
-                            <label for="groups_id" class="col-md-4 col-form-label text-md-right">{{ __('groups') }}</label>
 
+                </div>
+
+                {{-- --}}
+                <div class="form-group ">
+                    <label for="student_group" class="col-md-4 col-form-label text-md-left">{{ __('Student Group : ')
+                        }}</label>
+
+                    <div class="col-md-6">
+                        <select class="form-control" name="student_group" id="select1">
                             <div class="col-md-6">
-                                <select class="form-control" name="groups_id" id="select1">
-                                <div class="col-md-6">
-                                    @foreach($group as $g)
-                                    <option value="{{$g->groups_id}}">{{$g->groups_id}}</option>
-                                    @endforeach 
-                                </select>
+                                @foreach($quiz_group as $g)
+                                <option value="{{$g->student_group_name}}">{{$g->student_group_name}}</option>
+                                @endforeach
+                        </select>
 
-                            </div>
-                        </div> -->
+                    </div>
+                </div>
+                {{-- --}}
 
-                        {{-- student_group_id --}}
-                        <div class="form-group row">
-                            <label for="Student_group" class="col-md-4 col-form-label text-md-right">{{ __('group') }}</label>
-
-                            <div class="col-md-6">
-
-                                <div class="col-md-6">
-                                    {{Form::select('Student_group', array('G1'=>'G1' ,
-                                    'G2'=>'G2'))}}
-                                    @if ($errors->has('Student_group'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('Student_group') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  <div class="form-group row">
-                            <label for="remark" class="col-md-4 col-form-label text-md-right">{{
+                <!--  <div class="form-group row">
+                            <label for="remark" class="col-md-4 col-form-label text-md-left">{{
                                 __('Group') }}</label>
 
                             <div class="col-md-6">
@@ -242,45 +231,44 @@
                         </div> -->
 
 
-                        {{-- quiz type id --}}
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right"> Type </label>
+                {{-- quiz type id --}}
+                <div class="form-group ">
+                    <label for="" class="col-md-4 col-form-label text-md-left">Quiz Type : </label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="quizs_types_id" id="select2">
-                                    @foreach($quiz_type as $q)
-                                    <option value="{{$q->quizs_types_id}}">{{$q->type_name}}</option>
-                                    @endforeach
-                                </select>
+                    <div class="col-md-12">
+                        <select class="form-control" name="quizs_types_id" id="select2">
+                            @foreach($quiz_type as $q)
+                            <option value="{{$q->quizs_types_id}}">{{$q->type_name}}</option>
+                            @endforeach
+                        </select>
 
-                            </div>
-                        </div>
-
-
-                        {{-- quizs_status_id --}}
-
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">Status </label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="quizs_status_id" id="select3">
-                                    @foreach($quiz_status as $qs)
-                                    <option value="{{$qs->quizs_status_id}}">{{$qs->quizs_status_id}}</option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add
-                        quiz </button>
+                    </div>
                 </div>
 
+
+                {{-- quizs_status_id --}}
+
+                <div class="form-group ">
+                    <label for="" class="col-md-4 col-form-label text-md-left">Quiz Status : </label>
+                    <div class="col-md-12">
+                        <select class="form-control" name="quizs_status_id" id="select3">
+                            @foreach($quiz_status as $qs)
+                            <option value="{{$qs->quizs_status_id}}">{{$qs->quizs_status_id}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" class="form action" onclick='addForm()'>Add
+                    Quiz </button>
+            </div>
 
+        </div>
     </div>
+
+</div>
 </div>
 </form>
 
@@ -290,17 +278,17 @@
     }
 
 </script>
-{{--  JavaScript  --}}
-    <script>
-        function ConfirmDelete()
-        {
+{{-- JavaScript --}}
+<script>
+    function ConfirmDelete() {
         var x = confirm("Are you sure you want to delete?");
         if (x)
             return true;
         else
             return false;
-        }
-    </script>  
-{{--  JavaScript  --}}
+    }
+
+</script>
+{{-- JavaScript --}}
 
 @endsection

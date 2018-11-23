@@ -39,9 +39,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz/')}}">Quizmanager</a></li>
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/quiz/'.$subject[0]->subject_id)}}">Quizmanager</a></li>
 
-            <li class="breadcrumb-item"><a href="{{URL::to('/Admin/question/'.$quizs_id)}}">{{$quizs_id}}</a></li>
+            <li class="breadcrumb-item"><a href="{{URL::to('/Admin/question/'.$quizs_id)}}">{{$quiz[0]->title}}</a></li>
 
         </ol>
     </nav>

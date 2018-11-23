@@ -51,7 +51,8 @@
                     <td style="font-size: 0.8em;">{{$subject_user->subject_name}}</td>
                     <td style="font-size: 0.8em;">{{$subject_user->student_group_name}}</td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{{URL::to('/Admin/userInfo/showQuizScore/'.$subject_user->username.'/'.$subject_user->subject_id)}}" class="btn btn-info btn-sm">view</a>
+                        <a href="{{URL::to('/Admin/userManager/userInfo/delete/'.$subject_user->subject_user_id)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
                     </td>
                 </tr>
                 @endforeach

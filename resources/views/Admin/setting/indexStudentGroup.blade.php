@@ -38,7 +38,7 @@
     @endif
     {{-- Alert --}}
 
-      {{-- breadcrumb --}}
+    {{-- breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
              <li class="breadcrumb-item active">Setting</li>
@@ -48,12 +48,12 @@
 
     {{-- Nav-tab --}}
     <ul class="nav nav-tabs mb-3">
-         <li class="nav-item">
+        @if(Request::is('Admin/setting/indexStudentGroup') == 'Admin/setting/indexStudentGroup')
+        <li class="nav-item">
                 <a class="nav-link " href="/Admin/setting">All</a>
             </li>
-        @if(Request::is('Admin/setting/indexSubject') == 'Admin/setting/indexSubject')
             <li class="nav-item">
-                <a class="nav-link active" href="#">Subject</a>
+                <a class="nav-link " href="/Admin/setting/indexSubject">Subject</a>
             </li>
             <li class="nav-item">
             <a class="nav-link " href="/Admin/setting/indexUserGroup">User Group</a>
@@ -65,57 +65,55 @@
             <a class="nav-link " href="/Admin/setting/indexQuizStatus">Quiz Status</a>
         </li>  
         <li class="nav-item">
-            <a class="nav-link " href="/Admin/setting/indexStudentGroup">Student Group</a>
-        </li>
+            <a class="nav-link active" href="#">Student Group</a>
+        </li>  
         @endif
     </ul>
 {{-- Nav-tab --}}
-   
    
 
 
     {{-- Row --}}
     <div class="row">
 
-       
-        {{-- Subject --}}
-        <div class="m-1">
-            <h5 class="">SUBJECT</h5>
+         {{-- Student Group --}}
+
+           <div class="m-1 ml-3">
+
+            <h5 class="">STUDENT GROUP</h5>
             <table class="table">
+
                 <thead>
                     <tr>
-                        <th style="font-size: 0.8em">Subject ID</th>
-                        <th style="font-size: 0.8em">Subject Name</th>
+                        <th style="font-size: 0.8em">Student Group</th>
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach($subjects as $subject)
+                    @foreach($student_group as $sg)
                     <tr>
-                        <td style="font-size: 0.8em">{{$subject->subject_id}}</td>
-
-                        <td style="font-size: 0.8em">{{$subject->subject_name}}</td>
+                       
+                        <td style="font-size: 0.8em">{{$sg->student_group_name}}</td>
                         <td style="font-size: 0.8em">
 
-                            <a href="{{ URL::to('/Setting/editSubject/'.$subject->subject_id)}}" class="btn btn-warning"
+                            <a href="{{ URL::to('/Setting/editStudentGroup/'.$sg->student_group_id)}}" class="btn btn-warning"
                                 style="font-size: 0.8em">Edit</a>
-                            <a href="{{ URL::to('/Setting/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger"
-                                style="font-size: 0.8em" Onclick="return ConfirmDelete();">Delete</a>
+                            <a href="{{ URL::to('/Setting/deleteStudentGroup/'.$sg->student_group_id)}}" class="btn btn-danger"
+                                style="font-size: 0.8em" onclick="return ConfirmDelete();">Delete</a>
                         </td>
+
                     </tr>
                     @endforeach
 
-                    <form action="{{URL::to('/Setting/saveSubject')}}" method="post">
+                    <form action="{{URL::to('/Setting/saveStudentGroup')}}" method="post">
                         @csrf
                         <tr>
-                            <td><input id="subject_id" type="text" name="subject_id" value="{{ old('subject_id') }}"
-                                    required autofocus> </td>
-                            <td><input id="subject_name" type="text" name="subject_name" value="{{ old('subject_name') }}"
-                                    required autofocus></td>
                             <td>
-                                {{-- <a href="{{ URL::route('addSubject') }}" class="btn btn-success float-right">Add
-                                </a> --}}
+                                <input id="student_group_name" type="text" name="student_group_name" value="{{ old('student_group_name') }}" required autofocus></td>
+                            </td>
+
+                            <td>
                                 <button type="submit" class="btn btn-success px-4" style="font-size: 0.8em">ADD</button>
                             </td>
                         </tr>
@@ -125,8 +123,7 @@
 
             </table>
         </div>
-        {{-- Subject --}}
-      
+        {{-- Student Group --}}
 
        
     </div>

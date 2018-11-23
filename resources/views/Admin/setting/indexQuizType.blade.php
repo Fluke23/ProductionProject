@@ -37,7 +37,6 @@
     </div>
     @endif
     {{-- Alert --}}
-
     {{-- breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -64,9 +63,14 @@
         <li class="nav-item">
             <a class="nav-link " href="/Admin/setting/indexQuizStatus">Quiz Status</a>
         </li>  
+         <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexStudentGroup">Student Group</a>
+            </li> 
         @endif
     </ul>
 {{-- Nav-tab --}}
+   
+
    
 
 
@@ -83,7 +87,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">Type Name</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                      
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -94,7 +98,7 @@
                         <td style="font-size: 0.8em">{{$qt->quizs_types_id}}</td>
 
                         <td style="font-size: 0.8em">{{$qt->type_name}}</td>
-                        <td style="font-size: 0.8em">{{$qt->marked}}</td>
+                        
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editQuizType/'.$qt->quizs_types_id)}}" class="btn btn-warning"

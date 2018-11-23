@@ -13,19 +13,19 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ URL::to('quiz')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Subject</li>
+            <li class="breadcrumb-item active">Setting</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Quiz Type</li>
         </ol>
     </nav>
 
-
-    <div class="row">
+<div class="card">
+<div class="card-body">
         <form action="{{URL::to('/Setting/updateQuizType/')}}" method="post">
             @csrf
 
             {{-- quizs_type id --}}
             <div class="form-group row">
-                <label for="quizs_types_id" class="col-md-4 col-form-label text-md-right">{{ __('quizs_types_id') }}</label>
+                <label for="quizs_types_id" class="col-md-4 col-form-label text-md-right">{{ __('Quizs Types ID : ') }}</label>
 
                 <div class="col-md-6">
                     <input id="quizs_types_id" type="text" class="form-control{{ $errors->has('quizs_types_id') ? ' is-invalid' : '' }}"
@@ -43,7 +43,7 @@
 
             {{-- type name --}}
             <div class="form-group row">
-                <label for="type_name" class="col-md-4 col-form-label text-md-right">{{ __('type_name') }}</label>
+                <label for="type_name" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Type Name : ') }}</label>
 
                 <div class="col-md-6">
                     <input id="type_name" type="text" class="form-control{{ $errors->has('type_name') ? ' is-invalid' : '' }}"
@@ -58,31 +58,22 @@
             </div>
              {{-- type name --}}
 
-              {{-- mark --}}
-            <div class="form-group row">
-                <label for="marked" class="col-md-4 col-form-label text-md-right">{{ __('marked') }}</label>
-
-                <div class="col-md-6">
-                    <input id="marked" type="text" class="form-control{{ $errors->has('marked') ? ' is-invalid' : '' }}"
-                        name="marked" value="{{$quiz_type->marked}}" required autofocus>
-
-                    @if ($errors->has('marked'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('marked') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-              {{-- mark --}}
+             
 
 
             <input type="hidden" name="quizs_types_id_old" value="{{ $quiz_type->quizs_types_id}}">
 
-            <button type="reset" class="btn btn-danger">ยกเลิก</button>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+           {{--  button  --}}
+            <div class="col-md-12 text-center">
+                <a class="btn btn-danger mr-2" href="{{url()->previous()}}">Cancel</a>
+                <button type="submit" class="btn btn-success px-4">Save</button>
+            </div>
+            {{--  button  --}}
 
         </form>
     </div>
+</div>
+    
 
 
 </div>

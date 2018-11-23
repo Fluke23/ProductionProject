@@ -183,6 +183,27 @@ class UserController extends Controller
 
     }
 
+    public function destroyMultiple(Request $request)
+    {
+        //where because $request sent username it must be  delete id 
+
+        if(isset($_POST['deleteMultiple'])){
+            $delete = $_POST['deleteMultiple'];
+            foreach($delete as $deleteMultiple){
+                $user = Users::where('username', '=', $deleteMultiple)->delete();
+                $subject_user  = Subject_user::where('username','=', $deleteMultiple)->delete();
+            }
+        }
+        
+
+    
+        
+ 
+
+        return redirect()->route('userManager.index')->with('success', 'Data Deleted');
+
+    }
+
 
     public function viewStudent($username)
     {
@@ -293,17 +314,20 @@ class UserController extends Controller
             foreach($data as $key=>$val){
             
                 $user = Users::insert([
-                'username' => $val['username'],
-                'password' => Hash::make($val['password']),
-                'firstname' => $val['firstname'],
-                'lastname' => $val['lastname'],
-                'remark' => $val['remark'],
-                'passkey' => $val['password'],
+                    'username' => $val['username'],
+                    'password' => Hash::make($val['password']),
+                    'firstname' => $val['firstname'],
+                    'lastname' => $val['lastname'],
+                    'remark' => $val['remark'],
+                    'passkey' => $val['password'],
                 ]);
 
-                
+                $group_user = Group_user::insert([
+                    'username' => $val['username'],
+                    'groups_id' => $val['group_id'],
+                ]);
+
             }
-            
             
 
 
@@ -611,6 +635,132 @@ return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_s
     
     
     }
+
+     public function destroyUserInfo($subject_user_id)
+    {
+
+    //where because $request sent username it must be delete id
+    $subject_user = Subject_user::where('subject_user_id','=', $subject_user_id)->delete();
+
+    return redirect()->route('userManager.index')->with('success', 'Data Deleted');
+
+    }
+
+    public function viewUserQuizScore($username,$subject_id){
+
+    // $quizzes = DB::table('quizs')
+    // ->join('Subjects', 'quizs.subject_id', '=', 'Subjects.subject_id')
+    // ->join('Quiz_types', 'Quiz_types.quizs_types_id', '=', 'quizs.quizs_types_id')
+    // ->join('subjects_user', 'subjects_user.subject_id', '=', 'Subjects.subject_id')
+    // ->join('users', 'users.username', '=', 'subjects_user.username')
+    // ->join('Quiz_status', 'Quiz_status.quizs_status_id', '=', 'quizs.quizs_status_id')
+    // ->join('Groups_quizs', 'Groups_quizs.quizs_id', '=', 'quizs.quizs_id')
+    // ->join('Groups', 'Groups.groups_id', '=', 'Groups_quizs.groups_id')
+    // ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้
+    // ->where('Subjects.subject_id', '=', $subject_id)
+    // ->orderby('quizs.quizs_id', 'desc') //Addition
+    // ->get();
+
+        $name = DB::table('users')
+        ->where('users.username', '=', $username)
+        ->get(); 
+
+
+
+
+        $quizzes = DB::table('users')
+            ->join('subjects_user','subjects_user.username','=','users.username')
+            ->join('Subjects','Subjects.subject_id','=','subjects_user.subject_id')
+            ->join('quizs','quizs.subject_id','=','Subjects.subject_id')
+            ->join('Quiz_status', 'Quiz_status.quizs_status_id', '=', 'quizs.quizs_status_id')
+            ->join('Quiz_types', 'Quiz_types.quizs_types_id', '=', 'quizs.quizs_types_id')
+            ->where('users.username', '=', $username) //ใส่หรือไม่ใส่ก็ได้
+            ->where('Subjects.subject_id', '=', $subject_id)
+            ->get();
+            
+        // dd( $user_quiz );
+
+            foreach ($quizzes as $id) {
+                $total_score = DB::table('Questions')
+                ->select(DB::raw('SUM(Questions.score) AS totalScore'))
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->get();
+            
+                // For generate each user and each score
+                $user = DB::table('Answer')
+                ->select(DB::raw('SUM(Answer.Score) AS Score, users.username'))
+                ->join('users', 'users.username', '=', 'Answer.username')
+                ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->where('users.username', '=', $username)
+                ->get();
+               
+                // For generate each user and each score
+                
+                // Max Score in each Quiz
+                $max = DB::table('Answer')
+                ->select(DB::raw('SUM(Answer.Score) AS maxScore,users.username'))
+                ->join('users', 'users.username', '=', 'Answer.username')
+                ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->groupBy('users.username')
+                ->get()->max();
+                // Max Score in each Quiz
+
+                // Min Score in each Quiz
+                $min = DB::table('Answer')
+                ->select(DB::raw('SUM(Answer.Score) AS minScore,users.username'))
+                ->join('users', 'users.username', '=', 'Answer.username')
+                ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->groupBy('users.username')
+                ->get()->min();
+                // Min Score in each Quiz
+            
+                //Avg Score in each Quiz
+                $sum = DB::table('Answer')
+                ->select(DB::raw('SUM(Answer.Score) AS avgScore'))
+                ->join('users', 'users.username', '=', 'Answer.username')
+                ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->get();
+
+                $count = DB::table('users')
+                ->select(DB::raw('users.username'))
+                ->join('Answer', 'users.username', '=', 'Answer.username')
+                ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+                ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+                ->where('quizs.quizs_id', '=', $id->quizs_id)
+                ->groupBy('users.username')
+                ->get()->count();
+                
+            
+                $user_score = $user[0]->Score;
+                $sum_score = $sum[0]->avgScore;
+                $avg_score = $sum_score/$count;
+                $max_score = $max->maxScore;
+                $min_score = $min->minScore;
+                $id->max = $max_score;
+                $id->min = $min_score;
+                $id->avg = $avg_score;
+                $id->user_score = $user_score;
+
+
+            }
+
+       
+
+            return view('/Admin/user/viewUserQuizScore',compact('quizzes','subject_id','$sum_score','$avg_score','$max_score','$min_score','$avg_score','user_score','user','subject_user','name'));
+
+
+    }
+
+    
 
     
     

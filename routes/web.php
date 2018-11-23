@@ -79,6 +79,7 @@ Route::group(['middleware' => ['Admin']], function () {
    // Route::post('/Admin/userManager/saveUser','UserController@store');
    Route::post('/Admin/user/save','UserController@store')->name('storeGroup');
     Route::get('/Admin/userManager/delete/{id?}','UserController@destroy');
+    Route::post('/Admin/userManager/deleteMultiple','UserController@destroyMultiple')->name('deleteMultiple');
 
 
     //Admin/blankQuestion
@@ -373,10 +374,20 @@ Route::get('/Admin/setting/indexSubject','SettingController@indexSubject')->name
 Route::get('/Admin/setting/indexUserGroup','SettingController@indexUserGroup');
 Route::get('/Admin/setting/indexQuizType','SettingController@indexQuizType');
 Route::get('/Admin/setting/indexQuizStatus','SettingController@indexQuizStatus');
-
+Route::get('/Admin/setting/indexStudentGroup','SettingController@indexStudentGroup');
 // user group nav-tab 
 Route::get('/Admin/userManager/{groups_id?}','UserController@showUserGroup');
 
+// setting student group
+Route::post('/Setting/saveStudentGroup','SettingController@storeStudentGroup');
+Route::get('/Setting/editStudentGroup/{student_group_id?}','SettingController@editStudentGroup');
+Route::post('/Setting/updateStudentGroup/','SettingController@updateStudentGroup');
+Route::get('/Setting/deleteStudentGroup/{student_group_id?}','SettingController@destroyStudentGroup');
 
-   
+
+//  delete subject in userinfo
+Route::get('/Admin/userManager/userInfo/delete/{id?}','UserController@destroyUserInfo')->name('deleteUserInfo');
+
+// show each quiz score in userinfo 
+Route::get('Admin/userInfo/showQuizScore/{username?}/{subject_id?}','UserController@viewUserQuizScore')->name('showQuizScore');
    

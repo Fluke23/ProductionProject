@@ -39,9 +39,11 @@ class SettingController extends Controller
 
         $quiz_status = DB::table('Quiz_status')->get();
 
+        $student_group = DB::table('Student_group')->get();
+
 
         if($permission == 'ADMIN'){
-            return view('Admin/setting/index',compact('permission','username','subjects','groups','quiz_types','quiz_status'));
+            return view('Admin/setting/index',compact('permission','username','subjects','groups','quiz_types','quiz_status','student_group'));
 
 
         }elseif($permission == 'STUDENT'){
@@ -132,7 +134,6 @@ class SettingController extends Controller
         $group = Group::insert([
             'groups_id' => $request->get('groups_id'),
             'group_name' => $request->get('group_name'),
-            'marked' => $request->get('marked')
         ]);
             return redirect()->back()->with('successAdd','');
         }else{
@@ -158,7 +159,7 @@ class SettingController extends Controller
     $group = Group::find($id);
     $group->groups_id = $request->get('groups_id');
     $group->group_name = $request->get('group_name');
-    $group->marked = $request->get('marked');
+   
     $group->save();
 
     return redirect()->route('setting')->with('successEdit', '');
@@ -186,7 +187,7 @@ class SettingController extends Controller
         $quiz_type = Quiz_type::insert([
             'quizs_types_id' => $request->get('quizs_types_id'),
             'type_name' => $request->get('type_name'),
-            'marked' => $request->get('marked'),
+
         ]);
             return redirect()->back()->with('successAdd','');
         }else{
@@ -210,7 +211,7 @@ class SettingController extends Controller
         $quiz_type = Quiz_type::find($id);
         $quiz_type->quizs_types_id = $request->get('quizs_types_id');
         $quiz_type->type_name = $request->get('type_name');
-        $quiz_type->marked = $request->get('marked');
+       
         $quiz_type->save();
 
         return redirect()->route('setting')->with('successEdit', '');
@@ -236,7 +237,7 @@ class SettingController extends Controller
             $quiz_status = Quiz_status::insert([
                 'quizs_status_id' => $request->get('quizs_status_id'),
                 'status_name' => $request->get('status_name'),
-                'marked' => $request->get('marked'),
+               
             ]);
             return redirect()->back()->with('successAdd','');
         }else{
@@ -262,7 +263,7 @@ class SettingController extends Controller
        
         $quiz_status->quizs_status_id = $request->get('quizs_status_id');
         $quiz_status->status_name = $request->get('status_name');
-        $quiz_status->marked = $request->get('marked');
+      
         $quiz_status->save();
 
         return redirect()->route('setting')->with('successEdit', '');
@@ -359,7 +360,68 @@ class SettingController extends Controller
     }
 
 
+        // For STUDENT GROUP
+    public function storeStudentGroup(Request $request)
+    {
+        $temp = DB::table('Student_group') ->where([
+            'student_group_name'=>$request->get('student_group_name'),
+        ])->get();
+
+        if(count($temp)===0){
+            $student_group = Student_group::insert([
+            'student_group_name' => $request->get('student_group_name'),
+        ]);
+            return redirect()->back()->with('successAdd','');
+        }else{
+            return redirect()->back()->with('unsuccess','Cannot add this subject because this subject already.');
+        }
+
+    }
+
+    public function editStudentGroup($student_group_id)
+    {
+    $student_group = DB::table('Student_group')
+    ->where('student_group_id','=',$student_group_id)->first();
+
+    return view('/Admin/setting/editStudentGroup', compact('student_group'));
+    }
+
+    public function updateStudentGroup(Request $request)
+    {
+        $id = $request->get('student_group_id_old');
+        $student_group = Student_group::find($id);
+        $student_group->student_group_name = $request->get('student_group_name');
+        $student_group->save();
+        return redirect()->route('setting')->with('successEdit', '');
+    }
+
+    public function destroyStudentGroup($student_group_id)
+    {
+        $student_group = Student_group::find($student_group_id);
+        $student_group->delete();
+        return back()->with('successDelete', '');
+    }
+
+    public function indexStudentGroup(Request $request){
+        $permission = $request->get('permission');
+        //ประกาศไว้เพราะ Auth จาก username มาก่อน
+        $username = Auth::user()->username;
+
+        $student_group = DB::table('Student_group')->get();
+
+        if($permission == 'ADMIN'){
+            return view('Admin/setting/indexStudentGroup',compact('permission','username','student_group'));
+        }elseif($permission == 'STUDENT'){
+            return Back();
+        }elseif($permission == 'LECTURER'){
+            return Back();
+        }
+
+    }
+
         
+// For STUDENT GROUP
+           
 
            
 

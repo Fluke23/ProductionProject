@@ -345,7 +345,7 @@ class AnswerBlankController extends Controller
                 $answer_id = $request->get('answer_id');
                 $answer = Answer::find($answer_id); 
                 $answer->answer = $request->get('answer');
-                
+                $quiz_id = $request->input('quiz_id');
                 // dd($answer);
                 $answer->save(); //เซฟ id อันใหม่ที่แก้แล้ว 
 

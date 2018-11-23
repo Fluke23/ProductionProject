@@ -63,7 +63,10 @@
         </li>  
         <li class="nav-item">
             <a class="nav-link active" href="#">Quiz Status</a>
-        </li>  
+        </li>
+         <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexStudentGroup">Student Group</a>
+        </li> 
         @endif
     </ul>
 {{-- Nav-tab --}}
@@ -83,7 +86,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">Status Name</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                       
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -94,7 +97,7 @@
                         <td style="font-size: 0.8em">{{$qs->quizs_status_id}}</td>
 
                         <td style="font-size: 0.8em">{{$qs->status_name}}</td>
-                        <td style="font-size: 0.8em">{{$qs->marked}}</td>
+                       
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editQuizStatus/'.$qs->quizs_status_id)}}" class="btn btn-warning"
@@ -113,11 +116,7 @@
                                     required autofocus> </td>
                             <td><input id="status_name" type="text" name="status_name" value="{{ old('status_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td> --}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y' ))}}
-                            </td>
+                            
 
                             <td>
                                 {{-- <a href="{{ URL::route('addSubject') }}" class="btn btn-success float-right">Add

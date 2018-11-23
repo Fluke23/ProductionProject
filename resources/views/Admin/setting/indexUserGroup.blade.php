@@ -38,7 +38,7 @@
     @endif
     {{-- Alert --}}
 
-    {{-- breadcrumb --}}
+   {{-- breadcrumb --}}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
              <li class="breadcrumb-item active">Setting</li>
@@ -68,10 +68,13 @@
             <li class="nav-item">
                 <a class="nav-link " href="/Admin/setting/indexQuizStatus">Quiz Status</a>
             </li>  
+
+            <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexStudentGroup">Student Group</a>
+            </li> 
         @endif
     </ul>
 {{-- Nav-tab --}}
-   
 
 
     {{-- Row --}}
@@ -88,7 +91,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">User Group</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                       
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -99,7 +102,7 @@
                         <td style="font-size: 0.8em">{{$g->groups_id}}</td>
 
                         <td style="font-size: 0.8em">{{$g->group_name}}</td>
-                        <td style="font-size: 0.8em">{{$g->marked}}</td>
+                        
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editGroup/'.$g->groups_id)}}" class="btn btn-warning" style="font-size: 0.8em">Edit</a>
@@ -117,11 +120,7 @@
                                     required autofocus> </td>
                             <td><input id="group_name" type="text" name="group_name" value="{{ old('group_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td>--}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y'))}}
-                            </td>
+                          
 
                             <td>
                                 {{-- <a href="{{ URL::route('addSubject') }}" class="btn btn-success float-right">Add

@@ -91,9 +91,9 @@
                    
                             <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav ml-5">
-                                      <li class="nav-item ">
+                                      <!-- <li class="nav-item ">
                                         <a class="nav-link" href="{{ URL::to('/Admin/subject')}}">Home</a>
-                                      </li>
+                                      </li> -->
                                       <li class="nav-item ml-4">
                                         <a class="nav-link" href="{{ URL::to('/Admin/subject')}}">Subject Manager</a>
                                       </li>

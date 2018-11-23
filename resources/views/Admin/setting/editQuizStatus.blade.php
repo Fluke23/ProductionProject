@@ -13,19 +13,19 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ URL::to('quiz')}}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Subject</li>
+            <li class="breadcrumb-item active">Setting</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Quiz Status</li>
         </ol>
     </nav>
 
-
-    <div class="row">
+    <div class="card">
+             <div class="card-body">
         <form action="{{URL::to('/Setting/updateQuizStatus/')}}" method="post">
             @csrf
 
             {{-- groups id --}}
             <div class="form-group row">
-                <label for="quizs_status_id" class="col-md-4 col-form-label text-md-right">{{ __('quizs_status_id') }}</label>
+                <label for="quizs_status_id" class="col-md-4 col-form-label text-md-right">{{ __('Quizs Status ID : ') }}</label>
 
                 <div class="col-md-6">
                     <input id="quizs_status_id" type="text" class="form-control{{ $errors->has('quizs_status_id') ? ' is-invalid' : '' }}"
@@ -43,7 +43,7 @@
 
             {{-- group name --}}
             <div class="form-group row">
-                <label for="status_name" class="col-md-4 col-form-label text-md-right">{{ __('status_name') }}</label>
+                <label for="status_name" class="col-md-4 col-form-label text-md-right">{{ __('Quiz Status Name : ') }}</label>
 
                 <div class="col-md-6">
                     <input id="status_name" type="text" class="form-control{{ $errors->has('status_name') ? ' is-invalid' : '' }}"
@@ -59,31 +59,22 @@
              {{-- group name --}}
 
 
-              {{-- mark --}}
-            <div class="form-group row">
-                <label for="marked" class="col-md-4 col-form-label text-md-right">{{ __('marked') }}</label>
-
-                <div class="col-md-6">
-                    <input id="marked" type="text" class="form-control{{ $errors->has('marked') ? ' is-invalid' : '' }}"
-                        name="marked" value="{{$quiz_status->marked}}" required autofocus>
-
-                    @if ($errors->has('marked'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('marked') }}</strong>
-                    </span>
-                    @endif
-                </div>
-            </div>
-              {{-- mark --}}
+            
 
 
             <input type="hidden" name="quizs_status_id_old" value="{{ $quiz_status->quizs_status_id}}">
 
-            <button type="reset" class="btn btn-danger">ยกเลิก</button>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+             {{--  button  --}}
+            <div class="col-md-12 text-center">
+                <a class="btn btn-danger mr-2" href="{{url()->previous()}}">Cancel</a>
+                <button type="submit" class="btn btn-success px-4">Save</button>
+            </div>
+            {{--  button  --}}
 
         </form>
     </div>
+    </div>
+   
 
 
 </div>

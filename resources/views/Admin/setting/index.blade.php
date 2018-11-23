@@ -45,7 +45,7 @@
         </ol>
     </nav>
     {{-- breadcrumb --}}
-
+    
     {{-- Nav-tab --}}
     <ul class="nav nav-tabs mb-3">
         @if(Request::is('Admin/setting') == 'Admin/setting')
@@ -65,10 +65,10 @@
              <li class="nav-item">
                 <a class="nav-link " href="/Admin/setting/indexSubject">Quiz Status</a>
             </li>  
-         
+            <li class="nav-item">
+                <a class="nav-link " href="/Admin/setting/indexStudentGroup">Student Group</a>
+            </li> 
          @endif
-      
-       
     </ul>
    
 
@@ -97,7 +97,7 @@
                         <td style="font-size: 0.8em">{{$subject->subject_name}}</td>
                         <td style="font-size: 0.8em">
 
-                            <a href="{{ URL::to('//Setting/editSubject/'.$subject->subject_id)}}" class="btn btn-warning"
+                            <a href="{{ URL::to('/Setting/editSubject/'.$subject->subject_id)}}" class="btn btn-warning"
                                 style="font-size: 0.8em">Edit</a>
                             <a href="{{ URL::to('/Setting/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger"
                                 style="font-size: 0.8em" Onclick="return ConfirmDelete();">Delete</a>
@@ -137,7 +137,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">User Group</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                       
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -148,7 +148,7 @@
                         <td style="font-size: 0.8em">{{$g->groups_id}}</td>
 
                         <td style="font-size: 0.8em">{{$g->group_name}}</td>
-                        <td style="font-size: 0.8em">{{$g->marked}}</td>
+                       
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editGroup/'.$g->groups_id)}}" class="btn btn-warning" style="font-size: 0.8em">Edit</a>
@@ -166,11 +166,8 @@
                                     required autofocus> </td>
                             <td><input id="group_name" type="text" name="group_name" value="{{ old('group_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td>--}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y'))}}
-                            </td>
+                           
+                           
 
                             <td>
                                 {{-- <a href="{{ URL::route('addSubject') }}" class="btn btn-success float-right">Add
@@ -197,7 +194,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">Type Name</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                       
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -208,7 +205,6 @@
                         <td style="font-size: 0.8em">{{$qt->quizs_types_id}}</td>
 
                         <td style="font-size: 0.8em">{{$qt->type_name}}</td>
-                        <td style="font-size: 0.8em">{{$qt->marked}}</td>
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editQuizType/'.$qt->quizs_types_id)}}" class="btn btn-warning"
@@ -227,11 +223,8 @@
                                     required autofocus> </td>
                             <td><input id="type_name" type="text" name="type_name" value="{{ old('type_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td> --}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y'))}}
-                            </td>
+                
+                            
 
                             <td>
                                 <button type="submit" class="btn btn-success px-4" style="font-size: 0.8em">ADD</button>
@@ -256,7 +249,7 @@
                     <tr>
                         <th style="font-size: 0.8em">ID</th>
                         <th style="font-size: 0.8em">Status Name</th>
-                        <th style="font-size: 0.8em">Marked</th>
+                        
                         <th style="font-size: 0.8em">Action</th>
                     </tr>
                 </thead>
@@ -267,7 +260,7 @@
                         <td style="font-size: 0.8em">{{$qs->quizs_status_id}}</td>
 
                         <td style="font-size: 0.8em">{{$qs->status_name}}</td>
-                        <td style="font-size: 0.8em">{{$qs->marked}}</td>
+                       
                         <td style="font-size: 0.8em">
 
                             <a href="{{ URL::to('/Setting/editQuizStatus/'.$qs->quizs_status_id)}}" class="btn btn-warning"
@@ -286,11 +279,8 @@
                                     required autofocus> </td>
                             <td><input id="status_name" type="text" name="status_name" value="{{ old('status_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td> --}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y' ))}}
-                            </td>
+                           
+                            
 
                             <td>
                                 {{-- <a href="{{ URL::route('addSubject') }}" class="btn btn-success float-right">Add
@@ -305,6 +295,55 @@
             </table>
         </div>
         {{-- Quiz status --}}
+
+           {{-- Student Group --}}
+
+<div class="m-1 ml-3">
+
+ <h5 class="">STUDENT GROUP</h5>
+ <table class="table">
+
+     <thead>
+         <tr>
+             <th style="font-size: 0.8em">Student Group</th>
+             <th style="font-size: 0.8em">Action</th>
+         </tr>
+     </thead>
+
+     <tbody>
+         @foreach($student_group as $sg)
+         <tr>
+            
+             <td style="font-size: 0.8em">{{$sg->student_group_name}}</td>
+             <td style="font-size: 0.8em">
+
+                 <a href="{{ URL::to('/Setting/editStudentGroup/'.$sg->student_group_id)}}" class="btn btn-warning"
+                     style="font-size: 0.8em">Edit</a>
+                 <a href="{{ URL::to('/Setting/deleteStudentGroup/'.$sg->student_group_id)}}" class="btn btn-danger"
+                     style="font-size: 0.8em" onclick="return ConfirmDelete();">Delete</a>
+             </td>
+
+         </tr>
+         @endforeach
+
+         <form action="{{URL::to('/Setting/saveStudentGroup')}}" method="post">
+             @csrf
+             <tr>
+                 <td>
+                     <input id="student_group_name" type="text" name="student_group_name" value="{{ old('student_group_name') }}" required autofocus></td>
+                 </td>
+
+                 <td>
+                     <button type="submit" class="btn btn-success px-4" style="font-size: 0.8em">ADD</button>
+                 </td>
+             </tr>
+         </form>
+
+     </tbody>
+
+ </table>
+</div>
+{{-- Student Group --}}
      
     </div>
     {{-- Row --}}

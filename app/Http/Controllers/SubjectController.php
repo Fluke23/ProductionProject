@@ -50,13 +50,35 @@ class SubjectController extends Controller
         $user = User::where('users.username', '=', $username)->get();
         $userBanned = $user[0]->status_banned;
 
+        $subject = DB::table('Subjects')
+        ->get();
+        
+        $subject_user = Subject::select(DB::raw('count(*) as `studentCount`'))
+        ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+        ->join('users','users.username','=','subjects_user.username')
+        ->join('Group_user','Group_user.username','=','users.username')
+        ->where('Group_user.groups_id','=','STUDENT')
+        ->groupBy('Subjects.subject_id')
+        ->get();
+
+        $subject_user2 = Subject::select(DB::raw('count(*) as `allUser`'))
+        ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+        ->join('users','users.username','=','subjects_user.username')
+        ->join('Group_user','Group_user.username','=','users.username')
+        // ->where('Group_user.groups_id','=','LECTURER')
+        ->groupBy('Subjects.subject_id')
+        ->get();
+
+        
+        
+
     if($userBanned == '0'){    
         if($permission == 'ADMIN'){
-           return view('/Admin/subject/index',compact('subjects','permission'));
+           return view('/Admin/subject/index',compact('subjects','permission','subject_user','subject_user2'));
        }elseif($permission == 'STUDENT'){
-            return view('Student/subject/Studentindex',compact('subjects','permission'));
+            return view('Student/subject/Studentindex',compact('subjects','permission','subject_user','subject_user2'));
         }elseif($permission == 'LECTURER'){
-           return view('lecturer/subject/index',compact('subjects','permission'));
+           return view('lecturer/subject/index',compact('subjects','permission','subject_user','subject_user2'));
         }
     }else{
         return view('/suspension')->with('Suspension','You were Suspension , Please contract to admin of this website.');
