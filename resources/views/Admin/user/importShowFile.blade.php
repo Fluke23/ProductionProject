@@ -33,6 +33,7 @@
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Password</th>
+            <th>Status</th>
         </tr>
 
         @foreach ($data as $row)
