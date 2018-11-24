@@ -324,7 +324,7 @@ class UserController extends Controller
 
                 $group_user = Group_user::insert([
                     'username' => $val['username'],
-                    'groups_id' => $val['group_id'],
+                    'groups_id' => $val['groups_id'],
                 ]);
 
             }
