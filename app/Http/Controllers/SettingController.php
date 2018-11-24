@@ -9,6 +9,7 @@ use App\Quiz;
 use App\Group;
 use App\Quiz_type;
 use App\Quiz_status;
+use App\Student_group;
 
 use Illuminate\Http\Request;
 

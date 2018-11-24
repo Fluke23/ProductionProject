@@ -117,11 +117,7 @@
                                     required autofocus> </td>
                             <td><input id="type_name" type="text" name="type_name" value="{{ old('type_name') }}"
                                     required autofocus></td>
-                            {{-- <td><input id="marked" type="text" name="marked" value="{{ old('marked') }}" required
-                                    autofocus></td> --}}
-                            <td>
-                                {{Form::select('marked', array('N'=>'N' , 'Y'=>'Y'))}}
-                            </td>
+                            
 
                             <td>
                                 <button type="submit" class="btn btn-success px-4" style="font-size: 0.8em">ADD</button>
