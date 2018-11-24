@@ -30,18 +30,24 @@
                     <tr>
                         <th style="font-size: 1em;">subject ID</th>
                         <th>Subject Name</th>
+                        <th>Student</th>
+                        <th>Lecturer</th>
                         <th>Option</th>
                     </tr>
                 </thead>
 
 
                 <tbody>
-                    @foreach($subjects as $subject)
+                    @foreach($subjects as $key => $subject)
                     <tr>
                         <td><a href="{{URL::to('Lecturer/quiz/index/'.$subject->subject_id)}}">{{$subject->subject_id}}</a></td>
 
 
                         <td style="font-size: 0.8em;">{{$subject->subject_name}}</td>
+
+                        <td>{{$subject_user[$key]->studentCount}}</td>
+
+                        <td>{{abs($subject_user2[$key]->allUser - $subject_user[$key]->studentCount)}}</td>
 
                         <td>
                             <a href="{{URL::to('Lecturer/quiz/index/'.$subject->subject_id)}}" class="btn btn-info ">View</a>

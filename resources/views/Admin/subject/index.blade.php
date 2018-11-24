@@ -56,14 +56,14 @@
                         <td>{{abs($subject_user2[$key]->allUser - $subject_user[$key]->studentCount)}}</td>
 
                         <td>
-                            <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info btn-sm">View</a>
 
-                            <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View user</a>
+                            <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary btn-sm">View user</a>
                             
                            <!-- <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning " data-toggle="modal"
                                 data-target="#editSubjectModal1">Edit</a> -->
-                            <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning">Edit</a>
-                            <a href="{{ URL::to('/Admin/subject/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a>
+                            <a href="{{ URL::to('/Admin/subject/editSubject/'.$subject->subject_id)}}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ URL::to('/Admin/subject/deleteSubject/'.$subject->subject_id)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a>
                         </td>
 
                     </tr>
