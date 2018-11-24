@@ -207,7 +207,7 @@ class QuizController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request);
+        
         $permission = $request->get('permission');
 
         $username = Auth::user()->username;
