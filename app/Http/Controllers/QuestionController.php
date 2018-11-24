@@ -32,18 +32,21 @@ class QuestionController extends Controller
            ->where('quizs.quizs_id','=',$quizs_id)
             ->orderby('Questions.number','Asc')
             ->get();
-    foreach ($question as $id) {   
-        $quiz = DB::table('quizs')
-        ->join('Questions','quizs.quizs_id', '=', 'Questions.quizs_id')
-        ->where('Questions.questions_id','=',$id->questions_id)
-        ->get();
-    }
-    foreach ($quiz as $q){
-        $subject = DB::table('Subjects')
-        ->join('quizs','quizs.subject_id','=','Subjects.subject_id')
-        ->where('quizs.quizs_id','=',$q->quizs_id)
-        ->get();
-    }
+
+    // foreach ($question as $id) {   
+    //     $quiz = DB::table('quizs')
+    //     ->join('Questions','quizs.quizs_id', '=', 'Questions.quizs_id')
+    //     ->where('Questions.questions_id','=',$id->questions_id)
+    //     ->get();
+    // }
+    // foreach ($quiz as $q){
+    //     $subject = DB::table('Subjects')
+    //     ->join('quizs','quizs.subject_id','=','Subjects.subject_id')
+    //     ->where('quizs.quizs_id','=',$q->quizs_id)
+    //     ->get();
+    // }
+
+
 // dd($subject);
 
        foreach ($question as $id) {
