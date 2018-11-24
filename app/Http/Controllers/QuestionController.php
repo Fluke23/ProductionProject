@@ -223,6 +223,10 @@ class QuestionController extends Controller
             );
         }
 
+        $quiz = DB::table('quizs')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->get();
+
         //Total Score 
         $total_score = DB::table('Questions')
             ->select(DB::raw('SUM(Questions.score) AS totalScore'))
@@ -236,6 +240,7 @@ class QuestionController extends Controller
             ->select(DB::raw('quizs.quiz_date'))
             ->where('quizs.quizs_id', '=', $quizs_id)
             ->get();
+
         $quiz_date = $date[0]->quiz_date;
         //Date 
 
@@ -251,9 +256,9 @@ class QuestionController extends Controller
         // count of student
 
 
-    
-        $quiz_name = $quiz->title;
-        $quiz_subject = $quiz->subject_id;
+        $quiz_name = $quiz[0]->title;
+        $quiz_subject = $quiz[0]->subject_id;
+
         $quiz_total = $total_score[0]->totalScore;
         
 

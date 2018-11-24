@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mb-2">
         <div class="col-md-6">
-            <h2>Review </h2>
+            <h2>Reviewsss </h2>
 
         </div>
 
@@ -14,21 +14,25 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
             </ol>
-        </nav>
+    </nav>
 
-    <div class="row">
-        <table class="table table-bordered">
-            <tr>
-                <th style="font-size: 1em;">Number</th>
-                <th style="font-size: 1em;"> Username</th>
-                <th>Answer</th>
-                <th style="width:50px;">Score</th>
-                <th style="width:50px;">Type</th>
-                <th></th>
-                
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
 
-            </tr>
+            <table id="table" class="table">
 
+                <thead>
+                    <tr>
+                    <th style="font-size: 1em;">Number</th>
+                    <th style="font-size: 1em;"> Username</th>
+                    <th>Answer</th>
+                    <th style="width:50px;">Score</th>
+                    <th style="width:50px;">Type</th>
+                    <th></th> 
+                    </tr>
+                </thead>
+            
             <tbody>
                     
             
@@ -58,7 +62,9 @@
                     </td>
                         @endforeach
                 </tr>
-                    
-    
+              </tbody>      
+        </div>
+    </div> 
+</div> 
 
     @endsection

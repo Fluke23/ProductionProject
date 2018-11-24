@@ -16,22 +16,27 @@
 
 
         @foreach($question as $key => $q)
-        <ul class="list-group">
+     
             <img src="{{$q->img_url}} ">
 
             <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
            <!-- <li class="list-group">solution: {{$q->solution}}</li> -->
-            <li class="list-group">Question:{{$q->question}}</li>
-            <li class="list-group">Score:{{$q->score}}</li>
+           <div class="col-md-12 mb-3">
+                <strong>Question : </strong>{{$q->question}}
+           </div>
 
-
-
-        </ul>
+           <div class="col-md-12 mb-3">
+           <strong> Score : </strong> {{$q->score}}
+           </div>
+           
+        
         @endforeach
+
+
         <hr>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="col-md-12">
             <br>
             <form action="{{route('AnswerShortQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
@@ -40,7 +45,8 @@
 
                 </div>
                 <div class="form-group">
-                    {{Form::label('Answer', 'Answer')}}
+                    <!-- {{Form::label('Answer', 'Answer')}} -->
+                    <strong>Answer : </strong>
                     {{Form::text('Answer', '',['class'=>'form-control','placeholder'=> 'Enter Answer','id' => 'answer'])}}
 
                 </div>
@@ -54,15 +60,15 @@
                 </div>
 
 
-                <div class="form-group">
-                    <button type="button" class="btn btn-danger">Cencel</button>
+                <div class="text-right">
+                <a class="btn btn-danger px-4 mr-1" href="{{url()->previous()}}">Cancel</a>
                     @if($q->questions_id != $questionMax)
-                        <input class="btn btn-success" type="submit">
-                        <a href="#" onClick="return onClickHandler();" class="btn btn-primary">                      
+                        <input class="btn btn-success px-4" type="submit">
+                        <a href="#" onClick="return onClickHandler();" class="btn btn-primary px-4">                      
                             Next
                         </a>
                     @else
-                        <input class="btn btn-success" type="submit">
+                        <input class="btn btn-success" type="submit px-4">
                     @endif 
                 </div>
                 </div>

@@ -7,37 +7,56 @@
             <h2>Answer Question </h2>
 
         </div>
-
-
     </div>
 
+ 
+  {{-- Breadcrumb --}}
+    <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
 
-    <div class="row">
+            {{--  <li class="breadcrumb-item"><a href="{{URL::to('/Admin/quiz/'.$subject_id)}}">{{$subject_id}}</a></li>  --}}
+        </ol>
+    </nav>
+    {{-- Breadcrumb --}}
 
-
+    <div class="row mt-3">
         @foreach($question4 as $q)
-        <ul class="list-group">
+      
 
-            <!-- <li class="list-group">Number: {{$q->number}}</li> -->
-            <li class="list-group">Question:{{$q->question}} (Please Choose {{$q->answer_row}} Correct Answer)</li>
-            <li class="list-group">Score:{{$q->score}}</li>
+        {{-- Number  --}}
+        <div class="col-md-12 mb-3">
+            <strong>Number : </strong>{{$q->number}}
+        </div>
+        {{-- Number  --}}
 
+        {{--  Question  --}}
+        <div class="col-md-12 mb-3">
+            <strong>Question : </strong> {{$q->question}} (Please Choose {{$q->answer_row}} Correct Answer)
+        </div>
+        {{--  Question  --}}
 
+        {{--  Score  --}}
+        <div class="col-md-12 mb-3">
+            <strong>Score : </strong> {{$q->score}}
+        </div>
 
-        </ul>
+        {{--   Score --}}
+        <div class="col-md-12"></div>
         @endforeach
         <hr>
     </div>
-    <div class="container">
+
+ 
         <div class="row">
             <br>
-            <form action="{{route('AnswerMultipleQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+            <form action="{{route('AnswerMultipleQuestion.file')}}" method="post" class="col-md-12" enctype="multipart/form-data">
                 {{csrf_field()}}
                             @foreach ($question5 as $key => $q2)
                                 @if($q2->answer_row > 1)
                                     <div class="form-group">
-                                        {{$q2->choice}}
-                                        {{Form::checkbox('answer',$q2->choice,['id' => 'answer'])}}
+                                        {{Form::checkbox('answer',$q2->choice,['id' => 'answer','class'=>'w-30'])}}
+                                       &nbsp; &nbsp; <span class="checkboxtext">{{$q2->choice}}</span> 
                                         {{Form::hidden ('choice_id', $q2->choice_id)}}
                                     </div>
                                 @else
@@ -62,22 +81,24 @@
                                 {{Form::hidden('quiz_id',$quiz_id)}}
                             </div>
 
-
-                            <div class="form-group">
-                                <button type="button" class="btn btn-danger">Cancel</button>
+                            <hr>
+                            <div class="col-md-12 text-right">
+                            <a class="btn btn-danger px-4 mr-1" href="{{url()->previous()}}">Cancel</a>
                                 @if($q2->questions_id != $questionMax)
-                                    <input class="btn btn-success" type="submit">
-                                    <a href="#" onClick="return onClickHandler();" class="btn btn-primary"> 
+                                    <input class="btn btn-success px-4" type="submit">
+                                    <a href="#" onClick="return onClickHandler();" class="btn btn-primary px-4"> 
                                         Next
                                     </a>
                                 @else
-                                    <input class="btn btn-success" type="submit">
+                                    <input class="btn btn-success px-4" type="submit">
                                 @endif 
                             </div>
-                            </div>       
-            </form>
-        </div>
+                               </form>
+                    </div>   
+                        {{--  row  --}}
+
     </div>
+    {{--  Container  --}}
 
 @if($next)
     <!-- <script>

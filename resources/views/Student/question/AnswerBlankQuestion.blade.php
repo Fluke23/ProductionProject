@@ -7,44 +7,72 @@
             <h2>Answer Question </h2>
 
         </div>
-
-
     </div>
 
+       {{-- Breadcrumb --}}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
 
-    <div class="row">
-
-
-        @foreach($question as $key => $q)
-        <ul class="list-group">
-            <img src="{{$q->img_url}} ">
-
-            <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
-            <!-- <li class="list-group">solution: {{$q->solution}}</li> -->
-            <li class="list-group">Question:{{$q->question}}</li>
-            <li class="list-group">Score:{{$q->score}}</li>
+            {{--  <li class="breadcrumb-item"><a href="{{URL::to('/Admin/quiz/'.$subject_id)}}">{{$subject_id}}</a></li>  --}}
+        </ol>
+    </nav>
+    {{-- Breadcrumb --}}
 
 
-
-        </ul>
-        @endforeach
-        <hr>
-    </div>
-    <div class="container">
+    
         <div class="row">
-            <br>
+            @foreach($question as $key => $q)
+            
+                <img src="{{$q->img_url}} ">
+
+                {{--  Number  --}}
+                <div class="col-md-12 mb-3">
+                     <strong> Number : </strong>  {{$key + 1}}
+                </div>
+                {{--  Number  --}}
+
+                {{--  Question  --}}
+                <div class="col-md-12 mb-3">
+                 <strong>  Question :</strong>  {{$q->question}}
+                </div>
+                {{--  Question  --}}
+
+                {{--  Solution  --}}
+                <div class="col-md-12 mb-3">
+                   <strong> Solution :</strong>  {{$q->solution}} 
+                </div>
+                {{--  Solution  --}}
+                
+                {{--  Score  --}}
+                <div class="col-md-12 mb-3">
+                 <strong>Score :</strong>  {{$q->score}}
+                </div> 
+                {{--  Score  --}}
+
+            @endforeach
+            <hr>
+        </div>
+
+
+
+    
+        <div class="col-md-12">
             <form action="{{route('AnswerBlankQuestion.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                     
+                        {{--  Hidden  --}}
                         <div class="form-group">
                             {{Form::hidden ('1', '1', ['id' => 'index'])}}
-
                         </div>
+                         {{--  Hidden  --}}
                         
-                        <div class="form-group">
-                            {{Form::label('Answer', 'Answer')}}
+                        <div class="col-md-12">
+                            <strong> Answer : </strong>
                             {{Form::textarea('Answer', '',['class'=>'form-control','placeholder'=> 'Enter Answer', 'id' => 'answer'])}}
                         </div>
+
+
                         <div class="form-group">
                             {{Form::hidden('questions_id',$questions_id, ['id' => 'questions_id'])}}
 
@@ -54,21 +82,21 @@
                         </div>
                         
 
-                        <div class="form-group">
-                            <button type="button" class="btn btn-danger">Cancel</button>
+                        <div class="text-right">
+                            <a class="btn btn-danger px-4 mr-1" href="{{url()->previous()}}">Cancel</a>
                             @if($q->questions_id != $questionMax)
-                                <input class="btn btn-success" type="submit">
-                                <a href="#" onClick="return onClickHandler();" class="btn btn-primary">                      
+                                <input class="btn btn-success px-4 mr-1" type="submit">
+                                <a href="#" onClick="return onClickHandler();" class="btn btn-primary px-4">                      
                                     Next
                                 </a>
                             @else
-                                <input class="btn btn-success" type="submit">
+                                <input class="btn btn-success px-4" type="submit">
                             @endif 
                         </div>
-
             </form>
         </div>
-    </div>
+   </div>
+
 
 @if($next)
     <script>
