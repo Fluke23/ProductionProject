@@ -19,8 +19,10 @@
               <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/question/MultipleChoice')}}">AddQuestion</a></li>
             </ol>
     </nav>
-    <div class="row">
-        <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
+    <div class="card">
+
+        <div class="card-body">
+            <form action="{{route('MultipleChoice.file')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
             {{csrf_field()}}
 
             <div class="form-group">
@@ -29,30 +31,29 @@
             </div>
 
              {{-- <input type="file" name ="fileName[]" multiple>  --}}
-    @for ( $i=1 ;  $i<=$amount ; $i++) 
+             @for ( $i=1 ;  $i<=$amount ; $i++) 
             <div class="form-group">
                 {{Form::hidden ('Multiple'.$i, 'Multiple')}}
             </div>
 
-        <div class="form-group h5">
-            {{Form::label('', 'No.'.$i)}}
-        </div>
+            <div class="badge badge-dark h4 mb-3">
+                {{Form::label('', 'No.'.$i,['class'=>'h4 p-1'])}}
+            </div>
 
             <div class="form-group">
-                {{Form::label('number'.$i, 'number')}}
+              <strong>  {{Form::label('number'.$i, 'Number :')}}</strong>
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
             </div>
 
-            
 
             <div class="form-group">
-                {{Form::label('question'.$i, 'question')}}
+                <strong> {{Form::label('question'.$i, 'Question : ')}}</strong>
                 {{Form::textarea('question'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Question'])}}
             </div>
 
             <div class="form-group">
-                {{Form::label('score'.$i, 'score')}}
-                {{Form::text('score'.$i, '1')}}
+                <strong> {{Form::label('score'.$i, 'Score : ')}}</strong>
+                {{Form::text('score'.$i, '1',['class'=>'form-control col-md-2','placeholder'=> 'Score'])}}
             </div>
 
             <div class="form-group">
@@ -61,24 +62,32 @@
                 
             @for ( $question=1 ;  $question<=4 ; $question++)
             <div class="form-group">
-            {{Form::label('choice_'.$question.$i, 'Choice_'.$question)}}
+             <strong>{{Form::label('choice_'.$question.$i, 'Choice '.$question.'  :   ')}}&nbsp; &nbsp;</strong>
             <!-- {{Form::checkbox('choice_type_id_'.$question,'1')}} -->
             ถูก
             {{Form::radio('choice_type_id_'.$question.$i, '1')}}
+                &nbsp;&nbsp;&nbsp;
             ผิด
             {{Form::radio('choice_type_id_'.$question.$i, '2',true)}}
-            {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice'])}}            
+            {{Form::text('choice_'.$question.$i, '',['class'=>'form-control','placeholder'=> 'Enter Choice '])}}            
             </div>
             @endfor
 
             <br><hr><br>
-    @endfor
-                <button type="reset" class="btn btn-danger">ยกเลิก</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button>
+        @endfor
+           
+            <div class="form-group text-right">
+                <a class="btn btn-danger mr-2 px-5" href="{{url()->previous()}}">Cancel</a>
+                <input type="submit" class = "btn btn-info px-5">
+             </div>
+                {{-- <button type="reset" class="btn btn-danger">ยกเลิก</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> บันทึก</button> --}}
 
     </div>
 
     </form>
+        </div>
+        
 </div>
 </div>
 @endsection
