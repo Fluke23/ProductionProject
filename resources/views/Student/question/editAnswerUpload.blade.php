@@ -16,24 +16,32 @@
 
 
         @foreach($answer as $key => $q)
-        <ul class="list-group">
+        
+            <img src="{{$q->img_url}}" width=" 150" height="150"> 
+            <a href="{{$q->img_url}}"> {{$q->img_url}}</a> <br>
+            <div class="col-md-12 mb-3 mt-3">
+               <strong> Number: </strong>{{$key + 1}}
+            </div>
+            
+             <div class="col-md-12 mb-3">
+               <strong> Solution :  </strong> {{$q->solution}}
+             </div>
+           
+             <div class="col-md-12 mb-3">
+               <strong>Question : </strong>  {{$q->question}}
+             </div>
 
-            <td> <img src="{{$q->img_url}} " "width=" 150" height="150"> </td><br>
-            <a href= "{{$q->img_url}}">{{$q->img_url}}</a> <br>
-            <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
-            <li class="list-group">solution: {{$q->solution}}</li>
-            <li class="list-group">Question:{{$q->question}}</li>
-            <li class="list-group">Score:{{$q->score}}</li>
+            <div class="col-md-12 mb-3">
+               <strong>Score : </strong> {{$q->score}}
+            </div>
 
-
-
-
-        </ul>
         @endforeach
-        <hr>
+
+        
     </div>
+  
     <div class="container">
-        <div class="row">
+        <div class="col-md-12">
             <br>
             <form action="{{route('editAnswerUpload.file', $answer_id)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
@@ -52,11 +60,11 @@
                 <div class="form-group">
                     {{Form::hidden('answer_id',$answer_id)}}
                 </div>
-
+              
                 <div class="form-group">
-                    {{Form::label('Answer', 'Answer')}}<br>
+                    {{--  {{Form::label('Answer', 'Answer')}}<br>  --}}
+                    <strong>Answer : </strong>
                     @foreach($answer as $q)
-
                     <a name="Answer:" cols="120" rows="10" id="Answer:" 
                      style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly href="{{$q->answer}}">   {{$q->answer}}</a><br>
                     
@@ -65,11 +73,12 @@
                 </div>
 
 
+               <hr>
+                <div class="col-md-12 text-right">
+                      <hr>
+                    <a class="btn btn-danger mr-2 px-4" href="{{url()->previous()}}">Cancel</a>
 
-                <div class="form-group">
-                    <button type="button" class="btn btn-danger">Cancel</button>
-
-                    <input class="btn btn-success" type="submit">
+                    <input class="btn btn-success px-4" type="submit">
 
                 </div>
 
