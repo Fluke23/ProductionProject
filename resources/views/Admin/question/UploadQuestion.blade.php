@@ -22,12 +22,12 @@
             <form action="{{route('UploadQuestion.file')}}" method = "post"class="form-horizontal" enctype="multipart/form-data"> 
                     {{csrf_field()}}
                 
-             {{-- Number --}}
+             <!-- {{-- Number --}} 
             <div class="form-group mb-4">
                 {{Form::label('number', 'Number : ')}}
                 {{Form::text('number', '',['class'=>'form-control col-md-3','placeholder'=> 'Enter Number Question'])}}
             </div>  
-            {{-- Number --}} 
+            {{-- Number --}} -->
 
             <input type="file" name ="fileName" multiple>
 

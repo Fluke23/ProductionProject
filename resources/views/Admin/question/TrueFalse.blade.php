@@ -41,10 +41,10 @@
                 {{Form::hidden ('TrueFalse'.$i, 'TrueFalse')}}
 
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <strong>   {{Form::label('number'.$i, 'Number : ')}} </strong>
                 {{Form::text('number'.$i, '',['class'=>'form-control','placeholder'=> 'Enter Number Question'])}}
-            </div>
+            </div> -->
 
 
             <div class="form-group">
