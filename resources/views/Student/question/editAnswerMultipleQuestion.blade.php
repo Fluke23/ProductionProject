@@ -15,11 +15,10 @@
     <div class="row">
 
 
-        @foreach($answer2 as $a)
+        @foreach($answer3 as $a)
         @endforeach
         <ul class="list-group">
-
-            <!-- <li class="list-group">Number: {{$a->number}}</li> -->
+        
             <li class="list-group">Question:{{$a->question}} (Please Choose {{$a->answer_row}} Correct Answer)</li>
             <li class="list-group">Score:{{$a->score}}</li>
 
@@ -34,7 +33,7 @@
             <br>
             <form action="{{route('editAnswerMultiple.file', $answer_id)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
-                            @foreach ($answer2 as $key => $q2)
+                            @foreach ($answer3 as $key => $q2)
                                 @if($q2->answer_row > 1)
                                     <div class="form-group">
                                         {{$q2->choice}}

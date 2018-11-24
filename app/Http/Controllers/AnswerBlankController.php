@@ -322,15 +322,40 @@ class AnswerBlankController extends Controller
                //->where('Questions.questions_id','=',$questions_id)
                ->where('Answer.answer_id','=',$answer_id)
                ->get();
+
+               $answer2 = DB::table('Questions')
+                //->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+               ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+               ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+               //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+               //->where('Questions.questions_id','=',$questions_id)
+               ->where('Answer.answer_id','=',$answer_id)
+               ->get();
+
+               $answer3 = DB::table('Questions')
+                //->join('Question_pictures','Question_pictures.questions_id','=','Questions.questions_id')
+               ->join('Answer','Answer.questions_id','=','Questions.questions_id')
+               ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+               //->join('Comment','Comment.answer_id','=','Answer.answer_id')
+               ->join('Choice','Choice.questions_id','=','Questions.questions_id')
+               //->where('Questions.questions_id','=',$questions_id)
+               ->where('Answer.answer_id','=',$answer_id)
+               ->get();
+
+            //    dd($answer2[0]->questions_types_id);
               //dd($answer);
-              for($i=0 ;$i<count($answer); $i++){
-                if($answer[$i]->questions_types_id == "Blank"){
-                
+              for($i=0 ;$i<count($answer2); $i++){
+                if($answer2[$i]->questions_types_id == "Blank"){
                     return view('/Student/question/editAnswer', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));
-                }else if($answer[$i]->questions_types_id == "Shortanswe"){
+                }else if($answer2[$i]->questions_types_id == "Shortanswe"){
                     return view('/Student/question/editAnswerShort', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));  
-                }else{
+                }else if($answer2[$i]->questions_types_id == "Upload"){
                     return view('/Student/question/editAnswerUpload', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow')); 
+                }else if($answer2[$i]->questions_types_id == "Multiple"){
+                    
+                    return view('/Student/question/editAnswerMultipleQuestion', compact('answer_id','answer','answer3','previous','next','questionMax','questionMin','answerRow'));
+                }else if($answer2[$i]->questions_types_id == "TrueFalse"){
+                    return view('/Student/question/editAnswerTrueFalseQuestion', compact('answer_id','answer','answer2','previous','next','questionMax','questionMin','answerRow'));
                 }
              }
             }

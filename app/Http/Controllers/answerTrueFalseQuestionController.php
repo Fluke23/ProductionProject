@@ -61,6 +61,22 @@ class AnswerTrueFalseQuestionController extends Controller
     //return'yes';
     }
 
+    public function update(request $request){
+        
+        //create new Answer
+        $answer_id =$request->get('answer_id');
+        $Answer = Answer::find($answer_id);
+        $Answer->answer = $request->get('answer');
+        $Answer->answer_date=$request->get('answerDate');
+        //save message
+        $Answer->save();
+        // dd($request->all());
+
+
+        return redirect()->back();
+    //return'yes';
+    }
+
  
 }
 

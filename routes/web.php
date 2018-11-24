@@ -264,6 +264,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/editAnswer/{answer_id}','AnswerBlankController@edit')->name('editAnswer.file'); //name 
     Route::post('/Student/question/editAnswer/{answer_id}','AnswerBlankController@update');
     
+
     //Student/answerShortquestion 
     Route::get('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@index')->name('AnswerShortQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerShortQuestion/{id?}/{quiz_id?}','AnswerShortQuestionController@store'); //name 
@@ -284,15 +285,15 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@index')->name('AnswerMultipleQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerMultipleQuestion/{id?}/{quiz_id?}','answerMultipleQuestionController@store'); //name 
     Route::post('/Student/AnswerMultipleQuestion/submit/{id?}/{quiz_id?}','answerMultipleController@submit');
-    Route::get('/Student/question/editAnswerMultiple/{answer_id}','AnswerBlankController@edit')->name('editAnswerMultiple.file'); //name 
-    Route::post('/Student/question/editAnswerMultiple/{answer_id}','AnswerMultipleQuestionController@update');
+    Route::get('/Student/question/editAnswerMultipleQuestion/{answer_id}','AnswerBlankController@edit')->name('editAnswerMultiple.file'); //name 
+    Route::post('/Student/question/editAnswerMultipleQuestion/{answer_id}','AnswerMultipleQuestionController@update');
     
     //Student/answerTrueFalsequestion 
     Route::get('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}}','AnswerTrueFalseQuestionController@index')->name('AnswerTrueFalseQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerTrueFalseQuestion/{id?}/{quiz_id?}','AnswerTrueFalseQuestionController@store')->name('AnswerStore'); //name edit ล่าสุด
     Route::post('/Student/AnswerTrueFalseQuestion/submit/{id?}/{quiz_id?}','AnswerTrueFalseController@submit');
-    Route::get('/Student/question/editAnswerTrueFalse/{answer_id}','AnswerBlankController@edit')->name('editAnswerTrueFalse.file'); //name 
-    Route::post('/Student/question/editAnswerTrueFalse/{answer_id}','AnswerTrueFalseQuestionController@update');
+    Route::get('/Student/question/editAnswerTrueFalseQuestion/{answer_id}','AnswerBlankController@edit')->name('editAnswerTrueFalse.file'); //name 
+    Route::post('/Student/question/editAnswerTrueFalseQuestion/{answer_id}','AnswerTrueFalseQuestionController@update');
 
 
     //Student/checkScore

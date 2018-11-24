@@ -15,7 +15,7 @@
     <div class="row">
 
 
-        @foreach($question as $a)
+        @foreach($answer2 as $a)
         @endforeach
         <ul class="list-group">
 
