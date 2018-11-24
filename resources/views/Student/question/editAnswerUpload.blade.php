@@ -20,7 +20,7 @@
 
             <td> <img src="{{$q->img_url}} " "width=" 150" height="150"> </td><br>
 
-            <li class="list-group">Number: {{$key + 1}}</li>
+            <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
             <li class="list-group">solution: {{$q->solution}}</li>
             <li class="list-group">Question:{{$q->question}}</li>
             <li class="list-group">Score:{{$q->score}}</li>

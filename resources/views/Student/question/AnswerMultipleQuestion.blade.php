@@ -18,7 +18,7 @@
         @foreach($question4 as $q)
         <ul class="list-group">
 
-            <li class="list-group">Number: {{$q->number}}</li>
+            <!-- <li class="list-group">Number: {{$q->number}}</li> -->
             <li class="list-group">Question:{{$q->question}} (Please Choose {{$q->answer_row}} Correct Answer)</li>
             <li class="list-group">Score:{{$q->score}}</li>
 

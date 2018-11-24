@@ -19,7 +19,7 @@
         <ul class="list-group">
 
 
-            <li class="list-group">Number: {{$key + 1}}</li>
+            <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
             <li class="list-group">Question:{{$q->question}}</li>
             <li class="list-group">Score:{{$q->score}}</li>
 

@@ -19,7 +19,7 @@
         @endforeach
         <ul class="list-group">
 
-            <li class="list-group">Number: {{$a->number}}</li>
+            <!-- <li class="list-group">Number: {{$a->number}}</li> -->
             <li class="list-group">Question:{{$a->question}} (Please Choose {{$a->answer_row}} Correct Answer)</li>
             <li class="list-group">Score:{{$a->score}}</li>
 
