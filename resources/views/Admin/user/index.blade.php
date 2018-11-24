@@ -32,7 +32,37 @@
 
     <div class="row">
     <div class="table col-md-12">
-
+    {{-- breadcrumb --}}
+      {{-- Nav-tab --}}
+    <ul class="nav nav-tabs mb-3">
+        @if(Request::is('Admin/userManager') == 'Admin/userManager')
+            <li class="nav-item">
+                <a class="nav-link active" href="{{URL::to('Admin/userManager/')}}">All</a>
+            </li>
+            @foreach ($group as $g)
+            <li class="nav-item">
+                <a class="nav-link " href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
+            </li>
+            @endforeach
+        
+        @else
+            <li class="nav-item">
+                <a class="nav-link " href="{{URL::to('Admin/userManager/')}}">All</a>
+            </li>
+             @foreach ($group as $g)
+                @if(Request::is('Admin/userManager/'.$g->groups_id) == 'Admin/userManager/'.$g->groups_id)
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
+                    </li>
+                @else
+                     <li class="nav-item">
+                        <a class="nav-link " href="{{URL::to('Admin/userManager/'.$g->groups_id)}}">{{$g->group_name}}</a>
+                    </li>
+                @endif
+            @endforeach    
+        @endif
+    </ul>
+    {{-- Nav-tab --}}
     <form action="{{URL::route('deleteMultiple')}}" method="post">
         {{csrf_field()}}
         <table id="table">
