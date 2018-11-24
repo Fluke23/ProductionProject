@@ -73,7 +73,7 @@
                 </div>
 
 
-               <hr>
+              
                 <div class="col-md-12 text-right">
                       <hr>
                     <a class="btn btn-danger mr-2 px-4" href="{{url()->previous()}}">Cancel</a>
