@@ -45,7 +45,7 @@
 
                         <td>
                             <a href="{{URL::to('Lecturer/quiz/index/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
-                            <a href="{{URL::to('/Admin/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View
+                            <a href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View
                                 user</a>
                         </td>
 

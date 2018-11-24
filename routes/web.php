@@ -390,4 +390,8 @@ Route::get('/Admin/userManager/userInfo/delete/{id?}','UserController@destroyUse
 
 // show each quiz score in userinfo 
 Route::get('Admin/userInfo/showQuizScore/{username?}/{subject_id?}','UserController@viewUserQuizScore')->name('showQuizScore');
+
+// Nav-tab View User
+Route::get('/Admin/subject/viewSubjectUserGroup/{subject_id?}/{groups_id?}', 'UserController@viewtoSubjectUserGroup');
+Route::get('/Lecturer/subject/viewSubjectUserGroup/{subject_id?}/{groups_id?}', 'UserController@viewtoSubjectUserGroup');
    

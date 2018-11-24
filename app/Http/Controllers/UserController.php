@@ -371,20 +371,31 @@ class UserController extends Controller
         // ->join('Group_user','Group_user.username','=','users.username')
         ->where('Subjects.subject_id','=',$subject_id)
         ->get();
+
+        // for show subject name in view vuewSubjectUser.blade.php
+        $subject = Db::table('Subjects')
+        ->select('Subjects.subject_name')
+        ->where('Subjects.subject_id','=',$subject_id)
+        ->get();
+        $subjectName = $subject[0]->subject_name;
+        // for show subject name in view vuewSubjectUser.blade.php
+        $group = DB::table('Groups')->get();
        
+        
 
         
             //  return view('/Admin/subject/index',compact('subjects','permission'));
     if($permission == 'ADMIN'){
-        return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission'));
+        return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission','group','subject','subjectName'));
     }elseif($permission == 'LECTURER'){
-        return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission'));
+return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','group','subject','subjectName'));
     }
         
 
         
 
     }
+
 
     public function viewtoSubjectUserDestroy($id)
     {   
@@ -759,6 +770,50 @@ return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_s
 
 
     }
+
+    public function viewtoSubjectUserGroup(Request $request,$subject_id,$groups_id)
+        {
+           
+            $permission = $request->get('permission');
+            // $subject_user = DB::table('subjects_user')
+            //     ->join('users','users.username','=','subjects_user.username')
+            //     ->join('Subjects','Subjects.subject_id','=','subjects_user.subject_id')
+            //     ->join('Group_user','Group_user.username','=','users.username')
+            //     ->join('Groups','Groups.groups_id','=','Group_user.groups_id')
+            //     ->join('Student_group','Student_group.student_group_id','=','subjects_user.student_group_id')
+            //     // ->join('Group_user','Group_user.username','=','users.username')
+            //     ->where('Subjects.subject_id','=',$subject_id)
+            //     ->where('Groups.groups_id','=',$groups_id)
+            //     ->get();
+             
+            $subject_user = DB::table('Subjects')
+            ->join('subjects_user','subjects_user.subject_id','=','Subjects.subject_id')
+            ->join('users','users.username','=','subjects_user.username')
+            ->join('Group_user','Group_user.username','=','users.username')
+            ->join('Groups','Groups.groups_id','=','Group_user.groups_id')
+            ->where('Subjects.subject_id','=',$subject_id)
+            ->where('Groups.groups_id','=',$groups_id)
+            ->get();
+
+            // for show subject name in view vuewSubjectUser.blade.php
+            $subject = Db::table('Subjects')
+            ->select('Subjects.subject_name')
+            ->where('Subjects.subject_id','=',$subject_id)
+            ->get();
+            $subjectName = $subject[0]->subject_name;
+            // for show subject name in view vuewSubjectUser.blade.php
+         
+
+            $group = DB::table('Groups')
+            ->get();
+
+            // return view('/Admin/subject/index',compact('subjects','permission'));
+            if($permission == 'ADMIN'){
+                return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission'.'groups_id','group','subject','subjectName'));
+            }elseif($permission == 'LECTURER'){
+                return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','groups_id','group','subject','subjectName'));
+            }
+        }
 
     
 

@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row ">
-        <div class="col-md-3">
-            <h2>{{ $subject_id }}  </h2>
+        <div class="col-md-6">
+            <h2>{{ $subject_id }} {{ $subjectName }} </h2>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-6">
             {{--   Export Contact  --}}
              <a href="{{ route('exportSubjectUser',['subject_id'=>$subject_id]) }}" class="btn btn-success float-right">Export List User</a>    
              {{--   Export Contact  --}}            
@@ -15,77 +15,84 @@
 
     <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Subject Manager</a></li>
               <li class="breadcrumb-item active">View User in Subject</li>
             </ol>
     </nav>
-    
 
-    
-    <div class="row mb-4 mt-5">
-        <h5>LECTURER</h5>
-        <table class="table table-bordered">
-            <tr>
+     {{-- Nav-tab --}}
+    <ul class="nav nav-tabs mb-3">
+        @if(Request::is('Admin/subject/viewSubjectUser/'.$subject_id) == 'Admin/subject/viewSubjectUser/'.$subject_id)
+            <li class="nav-item">
+                <a class="nav-link active" href="{{URL::to('Admin/subject/viewSubjectUser/'.$subject_id)}}">All</a>
+            </li>
+              @foreach($group as $g)
+            <li class="nav-item">
+                <a class="nav-link " href="{{URL::to('/Admin/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+            </li> 
+             @endforeach
+            
+        @else
+             <li class="nav-item">
+                <a class="nav-link " href="{{URL::to('Admin/subject/viewSubjectUser/'.$subject_id)}}">All</a>
+            </li>
+            @foreach($group as $g)
+                @if(Request::is('Admin/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id) == 'Admin/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{URL::to('/Admin/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+                </li> 
+                @else
+                 <li class="nav-item">
+                    <a class="nav-link" href="{{URL::to('/Admin/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+                </li> 
+                @endif
+             @endforeach
+         @endif
+    </ul>
+     {{-- Nav-tab --}}
+
+
+ 
+    {{--  ADMIN  --}}
+    <div class="row">
+        <div class="col-md-12">
+            <table id="table">
+            <thead>
+                <tr>
                 <th style="font-size: 1em;">Username</th>
                  <th style="font-size: 1em;">Firstname</th>
                   <th style="font-size: 1em;">Lastname</th>
+                  <th style="font-size: 1em;">Group</th>
                   <th style="">Option</th>
-            </tr>
-
-            <tbody>
-                @foreach($subject_user as $su)
-                <tr>
-                 @if($su->groups_id != 'STUDENT')
-                    <td style="font-size: 0.8em;">{{$su->username}}</td>
-                    <td style="font-size: 0.8em;">{{$su->firstname}}</td>
-                    <td style="font-size: 0.8em;">{{$su->lastname}}</td>
-                    @if($su->groups_id != "ADMIN" )
-                    <td> <a href="{{ URL::to('/Admin/userManager/delete/'.$su->username)}}" class="btn btn-danger btn-sm">Delete</a></td>
-                    @endif
                 </tr>
-                @endif
-
-                @endforeach
-            </tbody>
-
-        </table>
-
-
-        <hr>
-    </div>
-
-     
-    <div class="row ">
-        <h5>STUDENT</h5>
-        <table class="table table-bordered" w>
-            <tr>
-                 <th style="font-size: 1em;">Username</th>
-                 <th style="font-size: 1em;">Firstname</th>
-                  <th style="font-size: 1em;">Lastname</th>
-                  <th>Option</th>
-            </tr>
-
+            </thead>
+            
             <tbody>
                 @foreach($subject_user as $su)
                 <tr>
-                 @if($su->groups_id != 'ADMIN')
-                         @if($su->groups_id != 'LECTURER')
-                    <td style="font-size: 0.8em;">{{$su->username}}</td>
-                    <td style="font-size: 0.8em;">{{$su->firstname}}</td>
-                    <td style="font-size: 0.8em;">{{$su->lastname}}</td>
-                    <td> <a href="{{ URL::to('/Lecturer/subject/viewSubjectUser/delete/'.$su->username)}}" class="btn btn-danger btn-sm">Delete</a></td>
+                 
+                        <td style="font-size: 0.8em;">{{$su->username}}</td>
+                        <td style="font-size: 0.8em;">{{$su->firstname}}</td>
+                        <td style="font-size: 0.8em;">{{$su->lastname}}</td>
+                        <td style="font-size: 0.8em;">{{$su->groups_id}}</td>
+                        @if($su->groups_id != "ADMIN" )
+                        <td> <a href="{{ URL::to('/Admin/userManager/delete/'.$su->username)}}" class="btn btn-danger btn-sm" onclick="return ConfirmDelete();">Delete</a></td>
                         @endif
                 </tr>
-                @endif
 
                 @endforeach
             </tbody>
 
         </table>
-
-
+        </div>
+        
         <hr>
     </div>
+     {{--  ADMIN  --}}
+
+
+
+   
 
 
 </div>
@@ -109,6 +116,20 @@
         });
 </script>
 @endif
+
+{{-- JavaScript --}}
+<script>
+    function ConfirmDelete() {
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+
+</script>
+
+{{-- JavaScript --}}
 
 
 @endsection
