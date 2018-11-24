@@ -21,7 +21,7 @@
 
     <div class="card">
         <div class="card-body">
-             <form action="{{URL::Route('updateUser')}}" method="post">
+             <form action="{{URL::to('Admin/quiz/updateQuiz')}}" method="post">
         @csrf
 
         {{-- title --}}
