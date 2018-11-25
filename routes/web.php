@@ -153,8 +153,8 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Lecturer/subject/deleteSubject/{id?}','SubjectController@destroy');
      // for Lecturer
 
-     Route::get('/lecturer/user/viewSubjectUser/{subject_id?}','UserController@viewtoSubjectUser');
-     Route::get('/lecturer/user/viewSubjectUser/delete/{id?}/{subject_id?}','UserController@viewtoSubjectUserDestroy');
+     Route::get('/lecturer/subject/viewSubjectUser/{subject_id?}','UserController@viewtoSubjectUser');
+     Route::get('/lecturer/subject/viewSubjectUser/delete/{id?}/{subject_id?}','UserController@viewtoSubjectUserDestroy');
 
     //lecturer/quiz
     Route::get('/Lecturer/quiz/index/{subject_id?}','QuizController@index')->name('lec.quiz.quizDetail'); //name use for redirect in update
