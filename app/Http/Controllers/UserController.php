@@ -811,7 +811,7 @@ return view('/Admin/user/showScoreUser',compact('user','quiz','avg_score','max_s
             if($permission == 'ADMIN'){
                 return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission'.'groups_id','group','subject','subjectName'));
             }elseif($permission == 'LECTURER'){
-                return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','groups_id','group','subject','subjectName'));
+                return view('lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','groups_id','group','subject','subjectName'));
             }
         }
 
