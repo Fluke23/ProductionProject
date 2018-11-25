@@ -123,12 +123,14 @@ class SubjectController extends Controller
             
             ]);*/
         $username = Auth::user()->username;
-        // $temp = DB::table('Subjects') ->where('subject_id','=',$request->get('subject_id'))->where('subject_name','=',$request->get('subject_name'))->get();
+        $temp = DB::table('Subjects') ->where('subject_id','=',$request->get('subject_id'))->where('subject_name','=',$request->get('subject_name'))->get();
         $temp = DB::table('Subjects') ->where([
             'subject_id'=>$request->get('subject_id'),
             'subject_name'=>$request->get('subject_name')
-            ])->get();       
+            ])->get(); 
+           // dd($request);      
         //dd($temp);
+       // dd(count($temp));
       
          if(count($temp)===0){
             $subject = Subject::insert([
@@ -141,12 +143,6 @@ class SubjectController extends Controller
              ]);
             return redirect()->route('subject.index');
             }else{
-                
-                //echo "<script>window.alert('Cannot add this Subject becuse this Subject already')</script>";
-               // return view('/Admin/subject');
-                
-                //echo "<script> function myFunction() {alert('I am an alert box!');
-               // }</script>";
                 return redirect()->back()->with('unsuccess','Cannot add this Subject becuse this Subject already' );
                 
            // dd('sum');

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mb-2">
         <div class="col-md-4">
-            <h2>Home(Subject Manager)</h2>
+            <h2>Subject Manager</h2>
         </div>
         <div class="col-md-8">
             <!--   <a href="{{ URL::to('/Admin/subject/addSubject')}}" class="btn btn-success float-right">Add Subject</a> 
