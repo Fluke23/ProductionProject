@@ -116,9 +116,10 @@
                 </div>
 
                 <div class="col-md-12 text-right ">
+                <a class="btn btn-dark px-5" href="{{URL::to('/Admin/question/'.$quiz_id)}}">Back</a>
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                     <!-- <input class="btn btn-primary" type="submit">Submit -->
-                    <a class="btn btn-dark px-5" href="{{URL::to('/Admin/question/'.$quiz_id)}}">Back</a>
+                   
                 </div>
 
             </form>

@@ -49,7 +49,7 @@
                     @if($q->quizs_status_id !='Hide')
                 <tr>
                         <!-- <td style="font-size: 0.8em;">{{$q->title}}</td> -->
-                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id)}}">{{$q->title}}</a></td>
+                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id.'/'.$subject_id)}}">{{$q->title}}</a></td>
                         <td style="font-size: 0.8em;">{{$q->description}}</td>
                         <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
                         <td style="font-size: 0.8em;">{{$q->subject_id}}</td>
@@ -65,7 +65,7 @@
 
                         <td >
                         @if($q->quizs_status_id !='Reviewing')
-                            <a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Student/question/StudentQuestion/'.$q->quizs_id.'/'.$subject_id)}}" class="btn btn-info ">View</a>
                         @endif
                         </td>
                 </tr>

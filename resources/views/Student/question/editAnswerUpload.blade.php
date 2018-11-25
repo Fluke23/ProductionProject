@@ -83,7 +83,7 @@
                <hr>
                 <div class="col-md-12 text-right">
                       <hr>
-                    <a class="btn btn-danger mr-2 px-4" href="{{url()->previous()}}">Cancel</a>
+                    <a class="btn btn-dark mr-2 px-4" href="{{url()->previous()}}">Back</a>
 
                     <input class="btn btn-success px-4" type="submit">
 

@@ -75,7 +75,7 @@
 
 
                         <div class="col-md-12 text-right">
-                         <a class="btn btn-danger  px-4" href="{{url()->previous()}}">Cancel</a>   
+                         <a class="btn btn-dark  px-4" href="{{url()->previous()}}">Back</a>   
                                 <input class="btn btn-success px-4" type="submit">
                         </div>
 

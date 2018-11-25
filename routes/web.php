@@ -52,7 +52,7 @@ Route::group(['middleware' => ['Admin']], function () {
 
 
     //question 
-    Route::get('/Admin/question/{id?}','QuestionController@index')->name('question.index'); //name for reditect in update
+    Route::get('/Admin/question/{id?}/{subject_id?}','QuestionController@index')->name('question.index'); //name for reditect in update
     //Route::get('/question/addQuestion/{id?}','QuestionController@create')->name('question.addQuestion');
     Route::post('/Admin/question/saveQuestion/{id?}','QuestionController@store');
     Route::get('/Admin/question/editQuestion/{subject_id?}','QuestionController@edit');
@@ -165,7 +165,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Lecturer/quiz/deleteQuiz/{id?}/{subject_id?}','QuizController@destroy');
 
      //question 
-     Route::get('/Lecturer/question/{id?}','QuestionController@index')->name('lec.question.index'); //name for reditect in update
+     Route::get('/Lecturer/question/{id?}/{subject_id?}','QuestionController@index')->name('lec.question.index'); //name for reditect in update
      //Route::get('/question/addQuestion/{id?}','QuestionController@create')->name('question.addQuestion');
      Route::post('/Lecturer/question/saveQuestion/{id?}','QuestionController@store');
      Route::get('/Lecturer/question/editQuestion/{subject_id?}','QuestionController@edit');
@@ -256,7 +256,7 @@ Route::group(['middleware' => ['Admin']], function () {
     Route::get('/Student/quiz/StudentquizDetail/{subject_id?}','QuizController@index')->name('quiz.StudentquizDetail'); //name use for redirect in update
     
     //Student/question 
-    Route::get('/Student/question/StudentQuestion/{quiz_id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
+    Route::get('/Student/question/StudentQuestion/{quiz_id?}/{subject_id?}','StudentQuestionController@index')->name('question.StudentQuestion'); //name for reditect in update
     //Student/answerBlankquestion 
     Route::get('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@index')->name('AnswerBlankQuestion.file'); //name for reditect in update
     Route::post('/Student/question/AnswerBlankQuestion/{id?}/{quiz_id?}','AnswerBlankController@store'); //name 

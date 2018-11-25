@@ -10,7 +10,7 @@ use App\Subject;
 
 class StudentQuestionController extends Controller
 {
-    public function index($quizs_id)
+    public function index($quizs_id,$subject_id)
     {       
         $username = Auth::user()->username;
 
@@ -24,18 +24,10 @@ class StudentQuestionController extends Controller
             ->groupBy('Questions.questions_id')
             ->get();
 
-            foreach ($question as $id) {   
-                $quiz = DB::table('quizs')
-                ->join('Questions','quizs.quizs_id', '=', 'Questions.quizs_id')
-                ->where('Questions.questions_id','=',$id->questions_id)
-                ->get();
-            }
-            foreach ($quiz as $q){
-                $subject = DB::table('Subjects')
-                ->join('quizs','quizs.subject_id','=','Subjects.subject_id')
-                ->where('quizs.quizs_id','=',$q->quizs_id)
-                ->get();
-            }
+
+        $quiz = DB::table('quizs')
+        ->where('quizs.quizs_id', '=', $quizs_id)
+        ->get();
 
             foreach ($question as $id) {
                 //dd( $questions_id);
@@ -94,7 +86,7 @@ class StudentQuestionController extends Controller
                 if($quizStatus[$i]->quizs_status_id == "Reviewing"){
                     return redirect()->back()->with('unsuccess','Cannot access because Lecturer still reviewing' );
                 } else{
-                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer','username','subject'));
+                    return view('/Student/question/StudentQuestion',compact('question','quizs_id','quizStatus','questionAnswer','username','subject','subject_id','quiz'));
                 }
                 $i++;
             }

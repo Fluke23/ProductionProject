@@ -22,7 +22,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$quizs_id)
+    public function index(Request $request,$quizs_id,$subject_id)
     {
         $permission = $request->get('permission');
         $username = Auth::user()->username;
@@ -91,11 +91,11 @@ class QuestionController extends Controller
         
            
             if($permission == 'ADMIN'){
-            return view('/Admin/question/index',compact('question','quizs_id','quiz','subject'));
+            return view('/Admin/question/index',compact('question','quizs_id','quiz','subject_id'));
             }elseif($permission == 'STUDENT'){
-            return view('/Student/question/StudentQuestion',compact('question','quizs_id','quiz','subject'));       
+            return view('/Student/question/StudentQuestion',compact('question','quizs_id','quiz','subject_id'));       
             }elseif($permission == 'LECTURER'){       
-            return view('/lecturer/question/index',compact('question','quizs_id','quiz','subject'));           
+            return view('/lecturer/question/index',compact('question','quizs_id','quiz','subject_id'));           
             }
     }
 
