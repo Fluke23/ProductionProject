@@ -29,7 +29,7 @@
             
         @else
              <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
+                <a class="nav-link " href="{{URL::to('lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
             </li>
             @foreach($group as $g)
                 @if(Request::is('Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id) == 'Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)
