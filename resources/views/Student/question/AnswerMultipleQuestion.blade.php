@@ -83,7 +83,7 @@
 
                             <hr>
                             <div class="col-md-12 text-right">
-                            <a class="btn btn-danger px-4 mr-1" href="{{url()->previous()}}">Cancel</a>
+                            <a class="btn btn-dark px-4 mr-1" href="{{url()->previous()}}">Back</a>
                                 @if($q2->questions_id != $questionMax)
                                     <input class="btn btn-success px-4" type="submit">
                                     <a href="#" onClick="return onClickHandler();" class="btn btn-primary px-4"> 
