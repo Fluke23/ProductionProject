@@ -117,6 +117,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
+        
        /* $this->validate($request, [
             'subject_id' => 'required|varchar|max:11',
             'subject_name' => 'required|varchar|max:45',

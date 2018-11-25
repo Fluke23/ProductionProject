@@ -36,14 +36,13 @@
                     <tr>
                         <th style="width: 150px;">Subject ID</th>
                         <th style="width: 400px;">Subject Name</th>
-                        <th>Student</th>
-                        <th>Lecturer</th>
+                    
                         <th >Option</th>
                     </tr>
                 </thead>
                 
                 <tbody>
-                    @foreach($subjects as $key => $subject)
+                    @foreach($subjects as $subject)
                     <tr>
                         <td>
                             <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" >{{$subject->subject_id}}</a>
@@ -51,9 +50,6 @@
 
                         <td >{{$subject->subject_name}}</td>
 
-                        <td>{{$subject_user[$key]->studentCount}}</td>
-
-                        <td>{{abs($subject_user2[$key]->allUser - $subject_user[$key]->studentCount)}}</td>
 
                         <td>
                             <a href="{{URL::to('/Admin/quiz/'.$subject->subject_id)}}" class="btn btn-info btn-sm">View</a>
