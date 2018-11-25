@@ -23,7 +23,7 @@
                
                     <div class="col-md-12">
                         <h4>{{$q->title}}</h4>
-                        <img src="{{$q->img_url}} "width="100%" height="400%">
+                        <img src="{{$q->img_url}} "width="400%" height="100%">
                     
                       
                      </div>
