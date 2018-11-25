@@ -11,6 +11,13 @@
 
     </div>
 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+        </ol>
+    </nav>
+
+
 
     <div class="row">
 
@@ -73,7 +80,7 @@
                 </div>
 
 
-              
+               <hr>
                 <div class="col-md-12 text-right">
                       <hr>
                     <a class="btn btn-danger mr-2 px-4" href="{{url()->previous()}}">Cancel</a>

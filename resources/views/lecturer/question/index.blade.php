@@ -32,7 +32,7 @@
 
     </div>
 
-    <nav aria-label="breadcrumb">
+    <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ URL::to('/Lecturer/quiz/index/'.$subject[0]->subject_id)}}">Quizmanager</a></li>
@@ -40,7 +40,7 @@
             <li class="breadcrumb-item"><a href="{{URL::to('/Lecturer/question/'.$quizs_id)}}">{{$quiz[0]->title}}</a></li>
 
         </ol>
-    </nav>
+    </nav> -->
 
     
     <div class="row">

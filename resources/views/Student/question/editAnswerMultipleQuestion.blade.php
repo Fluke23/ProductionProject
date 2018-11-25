@@ -11,40 +11,53 @@
 
     </div>
 
+     <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+        </ol>
+    </nav>
+
 
     <div class="row">
 
 
         @foreach($answer3 as $a)
         @endforeach
-        <ul class="list-group">
-        
-            <li class="list-group">Question:{{$a->question}} (Please Choose {{$a->answer_row}} Correct Answer)</li>
-            <li class="list-group">Score:{{$a->score}}</li>
+  
+        <div class="col-md-12 my-3">
+        <strong>  Question : </strong>   {{$a->question}} (Please Choose {{$a->answer_row}} Correct Answer)
+        </div>
+            <div class="col-md-12 mb-3">
+                <strong> Score : </strong>     {{$a->score}}
+            </div>
+           
+      
 
 
 
-        </ul>
+ 
         
         <hr>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="col-md-12">
             <br>
             <form action="{{route('editAnswerMultiple.file', $answer_id)}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                 {{csrf_field()}}
                             @foreach ($answer3 as $key => $q2)
                                 @if($q2->answer_row > 1)
                                     <div class="form-group">
-                                        {{$q2->choice}}
                                         {{Form::checkbox('answer',$q2->choice)}}
-                                        {{Form::hidden ('choice_id', $q2->choice_id)}}
+                                        {{Form::hidden ('choice_id', $q2->choice_id)}} &nbsp;&nbsp;
+                                        {{$q2->choice}}
+                                        
                                     </div>
                                 @else
                                     <div class="form-group">
+                                            {{Form::radio('answer',$q2->choice)}}
+                                        {{Form::hidden ('choice_id', $q2->choice_id)}}&nbsp;&nbsp;
                                         {{$q2->choice}}
-                                        {{Form::radio('answer',$q2->choice)}}
-                                        {{Form::hidden ('choice_id', $q2->choice_id)}}
+                                    
                                     </div>
                                 @endif
                             @endforeach
@@ -58,9 +71,9 @@
                                 {{Form::hidden('answer_id',$answer_id)}}
                             </div>
 
-                            <div class="form-group">
-                                <button type="button" class="btn btn-danger">Cancel</button>
-                                <input class="btn btn-success" type="submit">
+                            <div class="col-md-12 text-right"><hr>
+                         <a class="btn btn-danger  px-4" href="{{url()->previous()}}">Cancel</a>
+                                <input class="btn btn-success px-4" type="submit">
                             </div>
                         </div>       
             </form>
