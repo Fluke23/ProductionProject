@@ -17,28 +17,28 @@
     </nav>
      {{-- Nav-tab --}}
    <ul class="nav nav-tabs mb-3">
-        @if(Request::is('Lecturer/subject/viewSubjectUser/'.$subject_id) == 'Lecturer/subject/viewSubjectUser/'.$subject_id)
+        @if(Request::is('lecturer/subject/viewSubjectUser/'.$subject_id) == 'lecturer/subject/viewSubjectUser/'.$subject_id)
             <li class="nav-item">
-                <a class="nav-link active" href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
+                <a class="nav-link active" href="{{URL::to('lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
             </li>
               @foreach($group as $g)
             <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('/Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+                <a class="nav-link " href="{{URL::to('/lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
             </li> 
              @endforeach
             
         @else
              <li class="nav-item">
-                <a class="nav-link " href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
+                <a class="nav-link " href="{{URL::to('lecturer/subject/viewSubjectUser/'.$subject_id)}}">All</a>
             </li>
             @foreach($group as $g)
-                @if(Request::is('Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id) == 'Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)
+                @if(Request::is('lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id) == 'lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{URL::to('/Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+                    <a class="nav-link active" href="{{URL::to('/lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
                 </li> 
                 @else
                  <li class="nav-item">
-                    <a class="nav-link" href="{{URL::to('/Lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
+                    <a class="nav-link" href="{{URL::to('/lecturer/subject/viewSubjectUserGroup/'.$subject_id.'/'.$g->groups_id)}}">{{$g->groups_id}}</a>
                 </li> 
                 @endif
              @endforeach
