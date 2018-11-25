@@ -59,14 +59,14 @@
                     
                      <div class="col-md-12 mt-3">
                      <!-- {{Form::label('Answer:', 'Answer:')}}</br> -->
-                     <Strong>Answer : </Strong>
+                     <Strong>Answer : </Strong> <br>
                      
                      @if($q->questions_types_id =='Upload')
                      <a name="Answer:" cols="120" rows="10" id="Answer:" 
                      style="margin-top: 0px; margin-bottom: 0px; height: 170px;" readonly href="{{$q->answer}}" >   {{$q->answer}}</a>
                      @else
                      <textarea name="Answer:" cols="120" rows="10" id="Answer:" 
-                     style="margin-top: 0px; margin-bottom: 0px; height: 219px;" readonly >   {{$q->answer}}</textarea>
+                     style="margin-top: 0px; margin-bottom: 0px; height: 170px;"  class="form-control" readonly >   {{$q->answer}}</textarea>
                      @endif
                     
                     
@@ -94,7 +94,7 @@
 
                <div class="col-md-4 mt-3">
                      <!-- {{Form::label('Score:', 'Score:')}} --> <strong>Score : </strong>
-                     &nbsp;&nbsp;From:{{$q->score}}</br>
+                     &nbsp;&nbsp; From : {{$q->score}}</br>
                      {{Form::text('Score', '',['class'=>'form-control','placeholder'=> 'Score'])}}
                      
                 </div>
@@ -110,11 +110,18 @@
                      
                 </div>
 
+                <div class="col-md-4">
+                    {{Form::hidden('quiz_id',$quiz_id)}}</br>
+                </div>
+
+
 
                 
                 <div class="col-md-12 text-right ">
+                <a class="btn btn-dark px-5" href="{{URL::to('/Admin/question/'.$quiz_id)}}">Back</a>
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                     <!-- <input class="btn btn-primary" type="submit">Submit -->
+                    
                 </div>
     
 

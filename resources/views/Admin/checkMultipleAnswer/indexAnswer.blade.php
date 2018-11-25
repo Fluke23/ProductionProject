@@ -7,14 +7,21 @@
             <h2>Review </h2>
 
         </div>
-
-
     </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+            
+        </ol>
+    </nav>
 
 
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
+    <div class="col-md-12">
+    <table class="table" id="table">
+    <thead>
+    <tr>
                 <th style="font-size: 1em;">Number</th>
                 <th style="font-size: 1em;"> Username</th>
                 <th>Answer</th>
@@ -24,6 +31,8 @@
 
 
             </tr>
+    </thead>
+           
 
             <tbody>
                 @foreach($question as $q)
@@ -45,16 +54,21 @@
 
 
                     <td>
-                        @if($q->questions_types_id == 'Multiple' || $q->questions_types_id  == 'TrueFalse')
-                        <a href="{{URL::to('/Admin/checkMultipleAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
+                    @if($q->questions_types_id == 'Multiple' || $q->questions_types_id  == 'TrueFalse')
+                        <a href="{{URL::to('/Admin/checkMultipleAnswer/reviewAnswer/'.$q->questions_id.'/'.$q->quizs_id)}}" class="btn btn-info ">Review</a>
                         @else
-                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->questions_id)}}" class="btn btn-info ">Review</a>
+                        <a href="{{URL::to('/Admin/checkAnswer/reviewAnswer/'.$q->answer_id.'/'.$q->quizs_id)}}" class="btn btn-info ">Review</a>
                         @endif
 
                     </td>
 
                     @endforeach
                 </tr>
-
+        </tbody>
+        </table>
+    </div>
+        
+     </div>
+      
 
                 @endsection

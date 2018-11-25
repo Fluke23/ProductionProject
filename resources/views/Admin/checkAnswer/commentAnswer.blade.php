@@ -86,7 +86,7 @@
             <strong> Comment : </strong>
             ( {{$q->usernames}} {{$q->created_at}} )
             <br>
-            <p class="bg-light p-2 border border-primary rounded" "Remark:" cols="120" rows="10" id="Answer:" readonly>
+            <p class="bg-light p-2 border border-primary rounded" name="Remark:" cols="120" rows="10" id="Answer:" readonly>
                 {{$q->comment}}
             </p>
         </div>
@@ -111,9 +111,14 @@
                 </div>
 
 
+                <div class="col-md-4">
+                    {{Form::hidden('quiz_id',$quiz_id)}}</br>
+                </div>
+
                 <div class="col-md-12 text-right ">
                     <button type="submit" class="btn btn-primary px-5">Save</button>
                     <!-- <input class="btn btn-primary" type="submit">Submit -->
+                    <a class="btn btn-dark px-5" href="{{URL::to('/Admin/question/'.$quiz_id)}}">Back</a>
                 </div>
 
             </form>

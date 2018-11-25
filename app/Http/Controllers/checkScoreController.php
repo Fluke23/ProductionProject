@@ -93,7 +93,7 @@ class checkScoreController extends Controller
        
     public function store(request $request){
                     $questions_id= $request->input ('questions_id');
-                
+                    $quiz_id= $request->input ('quiz_id');
                     $currentAnswerId = DB::table('Answer')
                     ->select('answer_id')
                     ->join('Questions','Questions.questions_id','=','Answer.questions_id')

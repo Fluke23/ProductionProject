@@ -39,7 +39,7 @@
             <li class="breadcrumb-item"><a href="{{URL::to('/Lecturer/question/'.$quizs_id)}}">{{$quizs_id}}</a></li>
 
         </ol>
-    </nav> 
+    </nav>
 
     
     <div class="row">

@@ -17,7 +17,7 @@ class reviewAnswerController extends Controller
    
 
     
-    public function indexreview($answer_id){
+    public function indexreview($answer_id,$quiz_id){
         //dd($answer_id);
         $questions_id= DB::table('Questions')
         ->select('Questions.questions_id')
@@ -63,7 +63,7 @@ class reviewAnswerController extends Controller
              }
     }
     
-   public function indexMultiple($questions_id)
+   public function indexMultiple($questions_id,$quiz_id)
     {
         $question = DB::table('Questions')
         // ->join('Choice','Choice.questions_id','=','Questions.questions_id')

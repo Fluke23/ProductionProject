@@ -76,9 +76,9 @@
 
                         <td>
                             @if($q->questions_types_id == 'Multiple' || $q->questions_types_id == 'TrueFalse')
-                            <a href="{{URL::to('/Admin/checkMultipleAnswer/indexAnswer/'.$q->questions_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Admin/checkMultipleAnswer/indexAnswer/'.$q->questions_id.'/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
                             @else
-                            <a href="{{URL::to('/Admin/checkAnswer/indexAnswer/'.$q->questions_id)}}" class="btn btn-info ">View</a>
+                            <a href="{{URL::to('/Admin/checkAnswer/indexAnswer/'.$q->questions_id.'/'.$q->quizs_id)}}" class="btn btn-info ">View</a>
                             @endif
                             {{-- <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
                             --}}
