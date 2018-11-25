@@ -36,13 +36,13 @@
 
     </div>
 
-    // <nav aria-label="breadcrumb">
-    //     <ol class="breadcrumb">
-    //         <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
             
-    //         <li class="breadcrumb-item"><a href="{{URL::to('/Admin/question/'.$quizs_id)}}">{{$quizs_id}}</a></li>
-    //     </ol>
-    // </nav>
+            <li class="breadcrumb-item"><a href="{{URL::to('/Admin/question/'.$quizs_id)}}">{{$quizs_id}}</a></li>
+        </ol>
+    </nav>
 
     <div class="row">
         <div class="col-md-12">

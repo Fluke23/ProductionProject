@@ -50,8 +50,8 @@
                         <td>{{abs($subject_user2[$key]->allUser - $subject_user[$key]->studentCount)}}</td>
 
                         <td>
-                            <a href="{{URL::to('Lecturer/quiz/index/'.$subject->subject_id)}}" class="btn btn-info ">View</a>
-                            <a href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary ">View
+                            <a href="{{URL::to('Lecturer/quiz/index/'.$subject->subject_id)}}" class="btn btn-info btn-sm">View</a>
+                            <a href="{{URL::to('Lecturer/subject/viewSubjectUser/'.$subject->subject_id)}}" class="btn btn-primary btn-sm">View
                                 user</a>
                         </td>
 
@@ -143,7 +143,6 @@
                         else
                             return false;
                     }
-
                 </script>
                 {{-- JavaScript --}}
 
