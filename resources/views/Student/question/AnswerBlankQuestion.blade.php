@@ -24,7 +24,7 @@
         <div class="row">
             @foreach($question as $key => $q)
             
-                <img src="{{$q->img_url}} ">
+                <img src="{{$q->img_url}} "width="100%" height="400%">
 
                 {{--  Number  --}}
                 <div class="col-md-12 mb-3">

@@ -10,7 +10,7 @@ use App\Subject;
 
 class StudentQuestionController extends Controller
 {
-    public function index($quizs_id,$subject_id)
+    public function index($quizs_id)
     {       
         $username = Auth::user()->username;
 

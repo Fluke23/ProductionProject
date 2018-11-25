@@ -76,7 +76,7 @@
                 <tbody>
                     @foreach($quizzes as $q)
                     <tr>
-                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id.'/'.$q->subject_id)}}">{{$q->title}}
+                        <td style="font-size: 0.8em;"><a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}">{{$q->title}}
                             </a></td>
                         <td style="font-size: 0.8em;">{{$q->description}}</td>
                         <td style="font-size: 0.8em;">{{$q->quiz_date}}</td>
@@ -90,7 +90,7 @@
 
 
                         <td>
-                            <a href="{{URL::to('/Admin/question/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-info btn-sm mb-1">View</a>
+                            <a href="{{URL::to('/Admin/question/'.$q->quizs_id)}}" class="btn btn-info btn-sm mb-1">View</a>
                             <a href="{{URL::to('/Admin/showQuizScore/ShowUserScore/'.$q->quizs_id)}}" class="btn btn-primary btn-sm mb-1">Score</a>
 
                             <a href="{{ URL::to('/Admin/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>

@@ -26,7 +26,7 @@
 
 {{--          
         <ul class="list-group">
-            <img src="{{$q->img_url}} ">
+            <img src="{{$q->img_url}} "width="100%" height="400%">
             <a target="_blank" href="{{$q->img_url}}"> {{$q->img_url}} </a>
             <li class="list-group">Number: {{$key + 1}}</li>
             <!--<li class="list-group">solution: {{$q->solution}}</li>-->

@@ -22,7 +22,7 @@
 
         @foreach($answer as $key => $q)
       
-            <img src="{{$q->img_url}}" width="50%" height="50$">
+            <img src="{{$q->img_url}}" width="100%" height="400%">
 
             <!-- <li class="list-group">Number: {{$key + 1}}</li> -->
 

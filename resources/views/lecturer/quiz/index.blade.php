@@ -86,7 +86,7 @@
 
 
                         <td>
-                            <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-info btn-sm mb-1">View</a>
+                            <a href="{{URL::to('/Lecturer/question/'.$q->quizs_id)}}" class="btn btn-info btn-sm mb-1">View</a>
                             <a href="{{URL::to('/Lecturer/ShowStudentScore/'.$q->quizs_id)}}" class="btn btn-primary btn-sm mb-1">Score</a>
                             <a href="{{ URL::to('/lecturer/quiz/editQuiz/'.$q->quizs_id) }}" class="btn btn-warning btn-sm mb-1">Edit</a>
                             <a href="{{ URL::to('/Lecturer/quiz/deleteQuiz/'.$q->quizs_id.'/'.$q->subject_id)}}" class="btn btn-danger btn-sm mb-1"

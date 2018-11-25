@@ -67,6 +67,8 @@
                     {{Form::hidden('quiz_id',$quiz_id)}}
                     </div>
 
+         
+
                     <div class="col-md-12 text-right">
                     <input type="submit" class = "btn btn-info px-5">
                     </div>

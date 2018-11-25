@@ -10,7 +10,7 @@ use App\Quiz;
 
 class blankQuestionController  extends Controller
 {
-    public function showUploadForms($quiz_id){
+    public function showUploadForms($quiz_id,$subject_id){
         // dd($quiz_id);
         return view('blankQuestion');
     }
@@ -54,7 +54,7 @@ class blankQuestionController  extends Controller
                         $blankQuestion1->quizs_id =$request->input('quiz_id');
                         //save message
                         $blankQuestion1->save();
-        
+
 
             /*add file into database */
             $blankQuestion = new blankQuestion;
@@ -68,6 +68,7 @@ class blankQuestionController  extends Controller
                 //$blankQuestion ->size = $size;
                 $blankQuestion -> save();
                 $quiz_id = $request->input('quiz_id');
+                $subject_id = $request->input('subject_id');
             }else{
                 $input['fileName'] = time().'.'.$blankQuestionImg->getClientOriginalExtension();
                 $picPath = public_path('/images/Photo');
@@ -82,7 +83,7 @@ class blankQuestionController  extends Controller
                 $quiz_id = $request->input('quiz_id');
 
             }
-            
+
            
            return redirect()->route('question.index', [$quiz_id]);
            

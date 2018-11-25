@@ -28,7 +28,6 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Student/subject')}}">Home</a></li>
 
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Student/quiz/StudentquizDetail/'.$subject_id)}}">{{$quiz[0]->title}}</a></li>
         </ol>
     </nav>
  

@@ -22,7 +22,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,$quizs_id,$subject_id)
+    public function index(Request $request,$quizs_id)
     {
         $permission = $request->get('permission');
         $username = Auth::user()->username;
