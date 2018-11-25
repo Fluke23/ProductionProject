@@ -388,7 +388,7 @@ class UserController extends Controller
     if($permission == 'ADMIN'){
         return view('Admin/user/viewSubjectUser',compact('subject_user','subject_id','permission','group','subject','subjectName'));
     }elseif($permission == 'LECTURER'){
-return view('Lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','group','subject','subjectName'));
+return view('lecturer/user/viewSubjectUser',compact('subject_user','subject_id','permission','group','subject','subjectName'));
     }
         
 
