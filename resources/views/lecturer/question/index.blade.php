@@ -32,15 +32,14 @@
 
     </div>
 
-    <!-- <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ URL::to('/Admin/subject')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ URL::to('/Lecturer/quiz/index/'.$subject[0]->subject_id)}}">Quizmanager</a></li>
 
-            <li class="breadcrumb-item"><a href="{{URL::to('/Lecturer/question/'.$quizs_id)}}">{{$quiz[0]->title}}</a></li>
+            <li class="breadcrumb-item"><a href="{{URL::to('/Lecturer/question/'.$quizs_id)}}">{{$quizs_id}}</a></li>
 
         </ol>
-    </nav> -->
+    </nav> 
 
     
     <div class="row">
@@ -81,7 +80,7 @@
                             <a href="{{URL::to('/Admin/checkAnswer/indexAnswer/'.$q->questions_id)}}" class="btn btn-info ">View</a>
                             @endif
 
-                            <a href="{{ URL::to('/Lecturer/question/editQuestion/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a>
+                            <!-- <a href="{{ URL::to('/Lecturer/question/editQuestion/'.$q->quizs_id) }}" class="btn btn-warning ">Edit</a> -->
                             <a href="{{ URL::to('/Lecturer/question/deleteQuestion/'.$q->questions_id.'/'.$q->quizs_id)}}"
                                 class="btn btn-danger" onclick="return ConfirmDelete();">Delete</a>
                         </td>
