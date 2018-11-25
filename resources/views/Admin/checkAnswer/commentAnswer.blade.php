@@ -26,7 +26,7 @@
         </div>
 
         <div class="col-md-12">
-            <img src="{{$q->img_url}} ">
+            <img src="{{$q->img_url}} " width="100%" height="60%">
         </div>
 
         {{-- Question --}}
