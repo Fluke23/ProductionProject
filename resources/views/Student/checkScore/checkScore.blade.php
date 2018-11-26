@@ -57,7 +57,7 @@
 
                 
                        <div class="col-md-6">
-                          <strong> Student : </strong>{{$q->username}}
+                          <strong> Student : </strong>{{$q->username}} {{$q->firstname}} {{$q->lastname}}
                        </div>
 
                        

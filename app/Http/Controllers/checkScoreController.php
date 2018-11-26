@@ -22,8 +22,10 @@ class checkScoreController extends Controller
         ->join('Answer','Answer.questions_id','=','Questions.questions_id')
         ->join('Comment','Comment.answer_id','=','Answer.answer_id')
         ->join('quizs','quizs.quizs_id','=','Questions.quizs_id')
+        ->join('users','users.username','=','Answer.username')
         ->where('Questions.questions_id','=',$questions_id)
         ->get();
+       //dd($question);
 
         $data = Question::where('questions_id',$questions_id)->get();
         $questionType = $data[0]->questions_types_id;

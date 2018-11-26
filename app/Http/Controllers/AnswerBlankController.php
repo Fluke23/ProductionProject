@@ -343,8 +343,10 @@ class AnswerBlankController extends Controller
                ->get();
 
             //    dd($answer2[0]->questions_types_id);
-              //dd($answer);
               for($i=0 ;$i<count($answer2); $i++){
+                if($answer2[$i]->quizs_status_id == 'Reviewing') {
+                    return redirect('/Student/subject');
+                }
                 if($answer2[$i]->questions_types_id == "Blank"){
                     return view('/Student/question/editAnswer', compact('answer_id','answer','previous','next','questionMax','questionMin','answerRow'));
                 }else if($answer2[$i]->questions_types_id == "Shortanswe"){
