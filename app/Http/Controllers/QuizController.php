@@ -57,30 +57,58 @@ class QuizController extends Controller
             ->where('Subjects.subject_id','=',$subject_id)
             ->orderby('quizs.quizs_id','desc') //Addition
             ->get();
-            
+
+          
         foreach($quizzes as $id) {
             $quiz_min = DB::table('Questions')
+                ->select(DB::raw('SUM(Answer.Score) AS minScore'))
                 ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
                 ->join('Answer','Answer.questions_id','=','Questions.questions_id')
                  ->where('quizs.quizs_id','=',$id->quizs_id)
-                 ->min('Answer.Score');
+                 ->get()->min();
+
 
             $quiz_max = DB::table('Questions')
+                ->select(DB::raw('SUM(Answer.Score) AS maxScore'))
                 ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
                 ->join('Answer','Answer.questions_id','=','Questions.questions_id')
                 ->where('quizs.quizs_id','=',$id->quizs_id)
-                ->max('Answer.Score');
+               ->get()->max();
                 
-            $quiz_avg = DB::table('Questions')
+            $quiz_average = DB::table('Questions')
+                ->select(DB::raw('SUM(Answer.Score) AS avgSore'))
                 ->join('quizs','quizs.quizs_id', '=', 'Questions.quizs_id')
                 ->join('Answer','Answer.questions_id','=','Questions.questions_id')
                 ->where('quizs.quizs_id','=',$id->quizs_id)
-                ->avg('Answer.Score');
+                ->get('angScore');
+              
+              
 
-            $id->max = $quiz_max;
-            $id->min = $quiz_min;
-            $id->avg = $quiz_avg;
+            $user = DB::table('Answer')
+            ->select(DB::raw('SUM(Answer.Score) AS Score, users.username'))
+            ->join('users', 'users.username', '=', 'Answer.username')
+            ->join('Questions', 'Questions.questions_id', '=', 'Answer.questions_id')
+            ->join('quizs', 'quizs.quizs_id', '=', 'Questions.quizs_id')
+            ->where('quizs.quizs_id', '=', $id->quizs_id)
+            ->whereNotNull('Answer.Score')
+            ->groupBy('users.username')
+            ->get()->count();
+         
+            
+
+            $quiz_avg = $quiz_average[0]->avgSore;
+           
+            if($user != null){
+                $id->avg = $quiz_avg/$user;
+                $id->max = $quiz_max->maxScore;
+                $id->min = $quiz_min->minScore;
+            }else{
+                $id->avg = 0;
+                $id->max = 0;
+                $id->min = 0;
+            }
         }
+          
 
         // $quizs_id=$quiz_id[2]->quizs_id;
 
@@ -99,28 +127,6 @@ class QuizController extends Controller
         }
 
         
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request,$subject_id) 
-    {
-        $permission = $request->get('permission');
-
-        $username = Auth::user()->username;
-
-        $group = Group::all();
-        $quiz_type= DB::table('Quiz_types')->select('quizs_types_id','type_name')->get();
-        $quiz_status= DB::table('Quiz_status')->select('quizs_status_id')->get();
-        $quiz_group= DB::table('Student_group')->select('student_group_name')->get();
-        if($permission == 'ADMIN'){
-        return view('/Admin/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status','quiz_group'));
-        }elseif($permission == 'LECTURER'){
-        return view('/Lecturer/quiz/addQuiz',compact('subject_id','group','quiz_type','quiz_status','quiz_group'));  
-        } 
     }
 
     /**
